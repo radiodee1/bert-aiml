@@ -1,0 +1,11 @@
+tqdm 
+boto3 
+requests 
+regex 
+sentencepiece 
+sacremoses
+
+packaging
+importlib_metadata
+transformers
+huggingface_hub

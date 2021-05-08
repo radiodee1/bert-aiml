@@ -23,6 +23,7 @@ class Kernel:
 
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         self.model = BertForNextSentencePrediction.from_pretrained('bert-base-uncased')
+        #print(self.model.config)
 
     def verbose(self, isverbose):
         #print(isverbose)
@@ -69,6 +70,7 @@ class Kernel:
             input_02 = self.mod_input(i[2], input)
             ii = i[2]['pattern']
             s = self.bert_compare(ii, input_02)
+            print(s)
             self.score.append(s)
             if self.verbose_response: print(num, s)
             num += 1
@@ -108,8 +110,9 @@ class Kernel:
         if not isinstance(prompt1, str): prompt1 = str(prompt1)
         if not isinstance(prompt2, str): prompt2 = str(prompt2)
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt')
-        loss, logits = self.model(**encoding, next_sentence_label=torch.LongTensor([1]))
-        s = logits[0][0].item()
+        outputs = self.model(**encoding, next_sentence_label=torch.LongTensor([1]))
+        logits = outputs.logits
+        s = logits[0][0] #.item()
         return s
 
     def pattern_factory(self, category):
@@ -293,6 +296,6 @@ if __name__ == '__main__':
 
     k = Kernel()
     k.verbose(False)
-    k.learn('startup.xml')
+    k.learn('../aiml/startup.xml')
     while True:
         print(k.respond(input('> ')))
