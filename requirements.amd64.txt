@@ -9,3 +9,5 @@ packaging
 importlib_metadata
 transformers
 huggingface_hub
+
+python-aiml
