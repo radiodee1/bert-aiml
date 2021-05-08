@@ -70,7 +70,7 @@ class Kernel:
             input_02 = self.mod_input(i[2], input)
             ii = i[2]['pattern']
             s = self.bert_compare(ii, input_02)
-            print(s)
+            #print(s)
             self.score.append(s)
             if self.verbose_response: print(num, s)
             num += 1
