@@ -70,7 +70,7 @@ class Kernel:
             input_02 = self.mod_input(i[2], input)
             ii = i[2]['pattern']
             s = self.bert_compare(ii, input_02)
-            #print(s)
+            print(s)
             self.score.append(s)
             if self.verbose_response: print(num, s)
             num += 1
@@ -87,11 +87,11 @@ class Kernel:
             num += 1
         ## update dictionary ##
         self.mod_dict_out(self.l[index][2], input)
-        #print(self.l)
+        print(self.score[index].item())
         #print(self.memory,'<<')
         self.index = index
 
-        if len(self.output) is 0 and index is not -1:
+        if len(self.output) is 0 and index is not -1 and self.score[index].item() > 5.0:
             if self.verbose_response: print(input,'--' ,index, '-- print template --', self.l[index][2]['template'])
             self.output = self.l[index][2]['template']
             #print (ET.tostring(self.output), "???")
