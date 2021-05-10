@@ -90,18 +90,22 @@ class Kernel:
                 index = num
             num += 1
         ## update dictionary ##
-
-        self.mod_dict_out(self.l[index][2], input)
+        #print(self.l[index][2])
+        z = self.mod_dict_out(self.l[index][2], input)
         
-        print(self.score[index].item(), index)
+        print(z, '<<')
+
+        #print(self.score[index].item(), index)
         #print(self.memory,'<<')
         self.index = index
 
-        if len(self.output) is 0 and index is not -1 and self.score[index].item() > 5.0:
+        if z is  None  and len(self.output) is 0 and index is not -1 and self.score[index].item() > 5.0:
             if self.verbose_response: print(input,'--' ,index, '-- print template --', self.l[index][2]['template'])
             self.output = self.l[index][2]['template']
             #print (ET.tostring(self.output), "???")
-            self.output = self.output.text.strip()
+            self.output = self.output.strip()
+        elif z is not None :
+            self.output = z
 
         if self.incomplete == True:
             self.output = ''
@@ -149,60 +153,59 @@ class Kernel:
                     pat_02 = pat
 
             if i.tag == 'template':
-                tem = i
+                tem = i.text
                 tem_02 = i.text 
-                if '<' in tem_02 or '>' in tem_02 or True:
                     
-                    set = i.find('./set')
-                    get = i.find('./get')
-                    z = True
-                    print(set, get)
+                set = i.find('./set')
+                get = i.find('./get')
+                #z = True
+                #print(set, get)
                 pass
                 #print(tem_02, "<-- tem")
 
             
-            wo_start = False
+        wo_start = False
+        wo_end = False
+
+        if (pat_02.startswith('_') or pat_02.startswith('*')) and ( pat_02.endswith('*')):
+            wo_start_end = True # pat_txt
+            pass
+        else:
+            wo_start_end = False # pat_txt
+
+        if  pat_02.endswith('*'):
+            wo_end = True
+        else:
             wo_end = False
 
-            if (pat_02.startswith('_') or pat_02.startswith('*')) and ( pat_02.endswith('*')):
-                wo_start_end = True # pat_txt
-                pass
-            else:
-                wo_start_end = False # pat_txt
+        if pat_02.startswith('_') or pat_02.startswith('*'):
+            wo_start = True
+        else:
+            wo_start = False
 
-            if  pat_02.endswith('*'):
-                wo_end = True
-            else:
-                wo_end = False
+        #pat_02 = ET.XML(pat).text
+        if pat_02 is not None:
+            pat_02 = pat_02.strip()
 
-            if pat_02.startswith('_') or pat_02.startswith('*'):
-                wo_start = True
-            else:
-                wo_start = False
+        d = {
+            'start': start,
+            'end': end,
+            'wo_start': wo_start,
+            'wo_end': wo_end,
+            'wo_start_end': wo_start_end,
+            'pattern': pat, 
+            'template': tem.strip(),
+            'initial_template': tem.strip(),
+            'index': None,
+            'set_exp': set,
+            'get_exp': get,
+            'tem_wo_start':tem_02.startswith('<') or tem_02.startswith('*') or tem_02.startswith("_") ,
+            'tem_wo_end':tem_02.endswith('>') or tem_02.endswith("*") ,
+            'star': None,
+            'original': original
+        }
 
-            #pat_02 = ET.XML(pat).text
-            if pat_02 is not None:
-                pat_02 = pat_02.strip()
-
-            d = {
-                'start': start,
-                'end': end,
-                'wo_start': wo_start,
-                'wo_end': wo_end,
-                'wo_start_end': wo_start_end,
-                'pattern': pat, 
-                'template': tem,
-                'initial_template': tem,
-                'index': None,
-                'set_exp': set,
-                'get_exp': get,
-                'tem_wo_start':tem_02.startswith('<') or tem_02.startswith('*') or tem_02.startswith("_") ,
-                'tem_wo_end':tem_02.endswith('>') or tem_02.endswith("*") ,
-                'star': None,
-                'original': original
-            }
-
-            if i.tag == "template": self.mod_get_set(d)
+        if i.tag == "template": self.mod_get_set(d)
         return d
 
 
@@ -226,10 +229,12 @@ class Kernel:
         if d['wo_start']:
             d['start'] = l[0]
             d['star'] = l[0]
+            return d['star'] + ' ' + d['template']
         if d['wo_end']:
             d['end'] = l[-1]
             d['star'] = l[-1]
-        self.mod_get_set(d)
+            return d['template'] + ' ' + d['star']
+        #self.mod_get_set(d)
         
 
     def mod_get_set(self, d):
@@ -252,13 +257,14 @@ class Kernel:
                     self.incomplete = True
                     n = ET.Element('template')
                     n.text = ''
-                    d['template'] = n #ET.Element('template')
+                    d['template'] = '' #n #ET.Element('template')
                     return
             #print(t,'===', ET.tostring(get))
             star = tem.find('get') ## <---
             tt = ''
             if star is not None:
-                tem.remove(star)
+                #tem.remove(star)
+                pass
             if d['tem_wo_end']:
                 tt = tem.text.strip() + ' ' + t
             if d['tem_wo_start']:
@@ -268,7 +274,7 @@ class Kernel:
             n.text = tt
             tem = n
             #print('>>',ET.tostring(tem), t, self.memory)
-            d['template'] = tem
+            d['template'] = tt #tem
             #exit()
         if sta is not None:
             t = sta
@@ -302,7 +308,7 @@ if __name__ == '__main__':
     while True:
         y = input("> ")
         x = k.kernel.respond(y)
-        
+        x = ''
         if len(x.strip()) == 0 and not k.verbose_response: 
             r = k.respond(y) 
             print(r)
