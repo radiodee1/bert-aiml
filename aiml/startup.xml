@@ -7,18 +7,7 @@
             I'm a bot, silly!
         </template>
     </category>
-    <category>
-        <pattern>TELL ME ABOUT *</pattern>
-        <template>
-            http://find <star/>.
-        </template>
-    </category>
-    <category>
-        <pattern>LETS TALK ABOUT *</pattern>
-        <template>
-            http://find <star/>.
-        </template>
-    </category>
+    
 
     <!-- candy questions start here... -->
     <category>
@@ -30,7 +19,7 @@
     <category>
         <pattern> DO YOU LIKE CANDY </pattern>
         <template>
-            chocolate is my favorite candy.
+            yes
         </template>
     </category>
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-#import aiml as aiml_std
+import aiml as aiml_std
 from transformers import BertTokenizer, BertForNextSentencePrediction
 import torch
 import xml.etree.ElementTree as ET
@@ -45,6 +45,8 @@ class Kernel:
             #tem = None
             pat_dict = self.pattern_factory(child)
             pat_dict['index'] = num
+            
+            #print(pat_dict)
 
             self.l.append([None, None, pat_dict])
 
@@ -297,7 +299,7 @@ class Kernel:
 if __name__ == '__main__':
 
     k = Kernel()
-    k.verbose(False)
+    k.verbose(True)
     k.learn('../aiml/startup.xml')
     while True:
         print(k.respond(input('> ')))
