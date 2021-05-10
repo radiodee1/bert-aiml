@@ -21,9 +21,11 @@ class Kernel:
         self.index = -1
         self.incomplete = False
 
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.model = BertForNextSentencePrediction.from_pretrained('bert-base-uncased')
-        #print(self.model.config)
+        size = [ 'bert-base-uncased', 'bert-large-uncased' ]
+        index = 1
+        self.tokenizer = BertTokenizer.from_pretrained(size[index])
+        self.model = BertForNextSentencePrediction.from_pretrained(size[index])
+        print(self.model.config)
 
     def verbose(self, isverbose):
         #print(isverbose)
