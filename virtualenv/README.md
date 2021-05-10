@@ -7,9 +7,9 @@ Files in this folder:
 
 These files probably work best if run with `source`. Type `deactivate` to exit the virtualenv.
 
-## Building Python3.7
+## Building Python3.6
 
-This formula seems to work for Python3.6 also. Make sure that `~/.local/bin` is on your path variable.
+Make sure that `~/.local/bin` is on your path variable.
 
 ```
 sudo apt-get install libssl-dev libbz2-dev libffi-dev libsqlite3-dev sqlite3 zlib1g-dev python3-pip # other dev packages may be required
@@ -23,12 +23,12 @@ sudo make altinstall
 
 
 ## Setup file:
-This is the contents of the setup python 3.6 file. 
-You may have to run these commands without the `sudo` or `--user` options.
+This is the contents of the setup python 3.6 file. Make sure that `~/.local/bin` is on your path variable.
+Run these commands without the `sudo` or `--user` options.
 
 ```
-sudo pip3 install --user virtualenv
-sudo pip3 install --user virtualenvwrapper
+python3.6 -m pip install virtualenv
+python3.6 -m pip install virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
 mkdir -p $WORKON_HOME
 export VIRTUALENVWRAPPER_PYTHON=$(which python3.6)
