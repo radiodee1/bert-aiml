@@ -12,7 +12,7 @@ class Kernel:
         self.filename = 'name'
         self.verbose_response = True
         self.output = ""
-        #self.kernel = aiml_std.Kernel()
+        self.kernel = aiml_std.Kernel()
         self.tree = None
         self.root = None
         self.l = []
@@ -30,11 +30,11 @@ class Kernel:
     def verbose(self, isverbose):
         #print(isverbose)
         self.verbose_response = isverbose
-        #self.kernel.verbose(isverbose)
+        self.kernel.verbose(isverbose)
 
     def learn(self, file):
         self.filename = file
-        #self.kernel.learn(file)
+        self.kernel.learn(file)
         self.l = []
         self.score = []
         self.tree = ET.parse(file)
@@ -90,8 +90,10 @@ class Kernel:
                 index = num
             num += 1
         ## update dictionary ##
+
         self.mod_dict_out(self.l[index][2], input)
-        print(self.score[index].item())
+        
+        print(self.score[index].item(), index)
         #print(self.memory,'<<')
         self.index = index
 
@@ -125,85 +127,84 @@ class Kernel:
         set = None
         get = None
         z = None
-        tem_02 = None
+        start = ""
+        end = ""
+        tem_02 = ""
+        pat_02 = ""
+        original = ""
         for i in category:
-            #print (i.tag, i, 'iiii')
+            original = i.text
+
             if i.tag == 'pattern':
-                pat = ET.tostring(i)
-                if '*' in pat.decode('utf-8'):
-                    pat = re.sub('\*', '<star/>', pat.decode('utf-8'))
-                    #print (pat)
-                    set = True
-                    get = True
+                pat = i.text
+                original = ET.tostring(i)
+                if '*' in pat:
+                    
+                    pat = i.text 
+                    #print(pat, '<-- pat')
+                    set = i
+                    get = i
+                    start = pat.split(" ")[0]
+                    end = pat.split(" ")[-1]
+                    pat_02 = pat
 
             if i.tag == 'template':
-                tem = i #.text.strip()
-                tem_02 = ET.tostring(i).decode('utf-8').strip()
-                tem_02 = self.strip_right_left('template', tem_02)
-                if '<' in tem_02 or '>' in tem_02:
-                    #print(ET.tostring(tem) ,'here')
+                tem = i
+                tem_02 = i.text 
+                if '<' in tem_02 or '>' in tem_02 or True:
+                    
                     set = i.find('./set')
                     get = i.find('./get')
                     z = True
+                    print(set, get)
                 pass
+                #print(tem_02, "<-- tem")
 
-        pat_02 = self.strip_right_left('pattern', pat)
-
-        start = ''
-        end = ''
-        wo_start = False
-        wo_end = False
-
-        if (pat_02.startswith('<') or pat_02.startswith('*')) and (pat_02.endswith('>') or pat_02.endswith('*')):
-            wo_start_end = True # pat_txt
-            pass
-        else:
-            wo_start_end = False # pat_txt
-
-        if pat_02.endswith('>') or pat_02.endswith('*'):
-            wo_end = True
-        else:
+            
+            wo_start = False
             wo_end = False
 
-        if pat_02.startswith('<') or pat_02.startswith('*'):
-            wo_start = True
-        else:
-            wo_start = False
+            if (pat_02.startswith('_') or pat_02.startswith('*')) and ( pat_02.endswith('*')):
+                wo_start_end = True # pat_txt
+                pass
+            else:
+                wo_start_end = False # pat_txt
 
-        pat_02 = ET.XML(pat).text
-        if pat_02 is not None:
-            pat_02 = pat_02.strip()
+            if  pat_02.endswith('*'):
+                wo_end = True
+            else:
+                wo_end = False
 
-        d = {
-            'start': start,
-            'end': end,
-            'wo_start': wo_start,
-            'wo_end': wo_end,
-            'wo_start_end': wo_start_end,
-            'pattern': pat_02,
-            'template': tem,
-            'initial_template': tem,
-            'index': None,
-            'set_exp': set,
-            'get_exp': get,
-            'tem_wo_start':tem_02.startswith('<') or tem_02.startswith('*') ,
-            'tem_wo_end':tem_02.endswith('>') or tem_02.endswith("*") ,
-            'star': None
-        }
+            if pat_02.startswith('_') or pat_02.startswith('*'):
+                wo_start = True
+            else:
+                wo_start = False
 
-        self.mod_get_set(d)
+            #pat_02 = ET.XML(pat).text
+            if pat_02 is not None:
+                pat_02 = pat_02.strip()
+
+            d = {
+                'start': start,
+                'end': end,
+                'wo_start': wo_start,
+                'wo_end': wo_end,
+                'wo_start_end': wo_start_end,
+                'pattern': pat, 
+                'template': tem,
+                'initial_template': tem,
+                'index': None,
+                'set_exp': set,
+                'get_exp': get,
+                'tem_wo_start':tem_02.startswith('<') or tem_02.startswith('*') or tem_02.startswith("_") ,
+                'tem_wo_end':tem_02.endswith('>') or tem_02.endswith("*") ,
+                'star': None,
+                'original': original
+            }
+
+            if i.tag == "template": self.mod_get_set(d)
         return d
 
-    def strip_right_left(self, tag, pattern):
-        if not isinstance(pattern, str): pattern = pattern.decode('utf-8')
-        tag = tag.strip('>')
-        tag = tag.strip('/')
-        tag = tag.strip('<')
-        pat_02 = re.sub('<'+tag+'>', '', pattern)
-        pat_02 = re.sub('</'+tag+'>', '', pat_02)
-        pat_02 = pat_02.strip()
-        #print('---', pat_02, '---')
-        return pat_02
 
     def mod_input(self, d_list, input):
         d = d_list
@@ -229,23 +230,20 @@ class Kernel:
             d['end'] = l[-1]
             d['star'] = l[-1]
         self.mod_get_set(d)
-        #if d['wo_start'] and len(d['start']) == 0: self.incomplete = True
-        #if d['wo_end'] and len(d['end']) == 0: self.incomplete = True
-
+        
 
     def mod_get_set(self, d):
         set = d['set_exp']
         get = d['get_exp']
         tem = d['initial_template']
         sta = d['star']
-        if set is not None:
+        if set is not None and set.attrib['name']:
             if d['wo_end']:
                 self.memory[set.attrib['name']] = d['end']
-                #if d['end'] == '': self.incomplete = True
+                
             if d['wo_start']:
                 self.memory[set.attrib['name']] = d['start']
-                #if d['start'] == '': self.incomplete = True
-            #if d['end'] is not None and d['start'] is not None:
+                
         elif get is not None:
             t = ''
             if get.attrib['name'] in self.memory:
@@ -257,7 +255,7 @@ class Kernel:
                     d['template'] = n #ET.Element('template')
                     return
             #print(t,'===', ET.tostring(get))
-            star = tem.find('get')
+            star = tem.find('get') ## <---
             tt = ''
             if star is not None:
                 tem.remove(star)
@@ -299,7 +297,14 @@ class Kernel:
 if __name__ == '__main__':
 
     k = Kernel()
-    k.verbose(True)
+    k.verbose(False)
     k.learn('../aiml/startup.xml')
     while True:
-        print(k.respond(input('> ')))
+        y = input("> ")
+        x = k.kernel.respond(y)
+        
+        if len(x.strip()) == 0 and not k.verbose_response: 
+            r = k.respond(y) 
+            print(r)
+        else:
+            print(x)
