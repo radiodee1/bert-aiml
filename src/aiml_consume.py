@@ -96,7 +96,7 @@ class Kernel:
         print(z, '<<')
 
         #print(self.score[index].item(), index)
-        #print(self.memory,'<<')
+        print(self.memory,'<<')
         self.index = index
 
         if z is  None  and len(self.output) is 0 and index is not -1 and self.score[index].item() > 5.0:
@@ -160,7 +160,8 @@ class Kernel:
                 get = i.find('./get')
                 #z = True
                 #print(set, get)
-                pass
+                start = pat.split(" ")[0]
+                end = pat.split(" ")[-1]
                 #print(tem_02, "<-- tem")
 
             
@@ -205,17 +206,20 @@ class Kernel:
             'original': original
         }
 
-        if i.tag == "template": self.mod_get_set(d)
+        #if i.tag == "template": self.mod_get_set(d)
+        self.mod_get_set(d)
         return d
 
 
     def mod_input(self, d_list, input):
         d = d_list
         l = input.split(' ')
+        print (l)
         if d['wo_start']:
+            d['start'] = l[0]
             l = l[1:]
-
         if d['wo_end']:
+            d['end'] = l[-1]
             l = l[:-1]
             #print (l)
             #exit()
@@ -226,6 +230,7 @@ class Kernel:
     def mod_dict_out(self, d_list, input):
         d = d_list
         l = input.split(' ')
+        #self.mod_get_set(d)
         if d['wo_start']:
             d['start'] = l[0]
             d['star'] = l[0]
