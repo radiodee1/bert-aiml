@@ -39,4 +39,18 @@
       </template>
    </category>
     <!-- end name discussion -->
+
+    <category>
+      <pattern>LEARN B</pattern>
+      <template>
+         <learn> special.xml </learn>
+      </template>
+   </category>
+
+   <category>
+      <pattern>ME </pattern>
+      <template>
+         <srai> WHO AM I </srai>
+      </template>
+   </category>
 </aiml>

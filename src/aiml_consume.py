@@ -20,6 +20,8 @@ class Kernel:
         self.memory = {}
         self.index = -1
         self.incomplete = False
+        self.depth_limit = 5
+        self.depth = 0
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
         index = 0
@@ -78,29 +80,27 @@ class Kernel:
             self.score.append(s)
             if self.verbose_response: print(num, s)
             num += 1
+        print('----')
         ## find highest entry ##
         high = 0
-        pat = ''
+        #pat = ''
         num = 0
         index = -1
         for i in self.score:
             if i > high:
                 high = i
-                pat = self.l[num][0]
+                #pat = self.l[num][0]
                 index = num
             num += 1
         ## update dictionary ##
-        #print(self.l[index][2])
-        d = self.mod_respond(self.l[index][2], input)
-        self.l[index][2] = d
-        z = self.mod_dict_out(self.l[index][2], input)
         
-        #print(z, '<< y,z')
-
-        #print(self.score[index].item(), index)
-        #print(self.memory,'<<')
+        d = self.mod_respond_dict(self.l[index][2], input)
+        self.l[index][2] = d
+        z = self.mod_template_out(self.l[index][2], input)
+        
         self.index = index
-
+        self.output = z
+        '''
         if z is  None  and len(self.output) is 0 and index is not -1 and self.score[index].item() > 5.0:
             if self.verbose_response: print(input,'--' ,index, '-- print template --', self.l[index][2]['template'])
             self.output = self.l[index][2]['template']
@@ -108,9 +108,12 @@ class Kernel:
             self.output = self.output.strip()
         elif z is not None :
             self.output = z
-
+        '''
         if self.incomplete == True:
             self.output = ''
+        
+        if len(self.output) > 0: self.depth = 0
+
         return self.output
 
     def bert_score(self):
@@ -133,6 +136,8 @@ class Kernel:
         set = None
         get = None
         z = None
+        srai = None
+        learn = None
         start = ""
         end = ""
         tem_02 = ""
@@ -160,14 +165,14 @@ class Kernel:
                     
                 set = i.find('./set')
                 get = i.find('./get')
-                #z = True
-                #print(set, get)
+                srai = i.find('./srai')
+                learn = i.find('./learn')
+                
                 start = pat.split(" ")[0]
                 end = pat.split(" ")[-1]
-                #print(tem_02, "<-- tem")
+                print(learn, "<-- ")
 
-        #print(pat_02, "==")
-            
+        
         wo_start = False
         wo_end = False
 
@@ -196,11 +201,13 @@ class Kernel:
             'pattern': pat, 
             'template': tem.text.strip(),
             'initial_template': tem, #.strip(),
+            'initial_srai' : srai,
+            'initial_learn' : learn,
             'index': None,
             'set_exp': set,
             'get_exp': get,
-            'tem_wo_start': wo_start, # tem_02.startswith('<') or tem_02.startswith('*') or tem_02.startswith("_") , #or wo_start,
-            'tem_wo_end': wo_end, # tem_02.endswith('>') or tem_02.endswith("*") , #or wo_end,
+            'tem_wo_start': wo_start, 
+            'tem_wo_end': wo_end, 
             'star': None,
             'original': original
         }
@@ -226,11 +233,27 @@ class Kernel:
         input = ' '.join(l)
         return input
 
-    def mod_dict_out(self, d_list, input=None):
+    def mod_template_out(self, d_list, input):
         d = d_list
-        if input is None: input = d['template']
+        #if input is None: input = d['template']
         l = input.split(' ')
         #self.mod_get_set(d)
+        print(d, 'd')
+        if d['initial_srai'] is not None:
+            print(d['initial_srai'])
+            self.depth += 1
+            if self.depth < self.depth_limit:
+                self.index = 0
+                self.output = ''
+                self.incomplete = False
+                x = self.respond(d['initial_srai'].text)
+                return x
+            pass
+        if d['initial_learn'] is not None:
+            print(d['initial_learn'], '<<')
+            
+            return ''
+            pass
         if d['wo_start']:
             d['start'] = l[0]
             d['star'] = l[0]
@@ -255,7 +278,7 @@ class Kernel:
             if d['wo_start']:
                 self.memory[set.attrib['name']] = d['start']
                 
-    def mod_respond(self, d, input):
+    def mod_respond_dict(self, d, input):
         set = d['set_exp']
         get = d['get_exp']
         tem = d['initial_template']
@@ -319,10 +342,7 @@ class Kernel:
             #d['template'] = tem.text
             if t == '':
                 tt = ''
-            #n = ET.Element('template')
-            #n.text = tt
-            #tem = n
-            #print('>>',ET.tostring(tem), t, self.memory)
+            
             d['template'] = tt #n
 
         return d #d['template']
@@ -335,9 +355,9 @@ if __name__ == '__main__':
     k.learn('../aiml/startup.xml')
     while True:
         y = input("> ")
-        k.respond(y)
+        #k.respond(y)
         x = k.kernel.respond(y)
-        
+        x = ''
         if len(x.strip()) == 0 and not k.verbose_response: 
             r = k.respond(y) 
             print(r)
