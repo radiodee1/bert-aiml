@@ -91,12 +91,14 @@ class Kernel:
             num += 1
         ## update dictionary ##
         #print(self.l[index][2])
+        d = self.mod_respond(self.l[index][2], input)
+        self.l[index][2] = d
         z = self.mod_dict_out(self.l[index][2], input)
         
-        print(z, '<<')
+        #print(z, '<< y,z')
 
         #print(self.score[index].item(), index)
-        print(self.memory,'<<')
+        #print(self.memory,'<<')
         self.index = index
 
         if z is  None  and len(self.output) is 0 and index is not -1 and self.score[index].item() > 5.0:
@@ -150,10 +152,10 @@ class Kernel:
                     get = i
                     start = pat.split(" ")[0]
                     end = pat.split(" ")[-1]
-                    pat_02 = pat
+                    pat_02 = pat.strip()
 
             if i.tag == 'template':
-                tem = i.text
+                tem = i #.text
                 tem_02 = i.text 
                     
                 set = i.find('./set')
@@ -164,6 +166,7 @@ class Kernel:
                 end = pat.split(" ")[-1]
                 #print(tem_02, "<-- tem")
 
+        #print(pat_02, "==")
             
         wo_start = False
         wo_end = False
@@ -183,11 +186,7 @@ class Kernel:
             wo_start = True
         else:
             wo_start = False
-
-        #pat_02 = ET.XML(pat).text
-        if pat_02 is not None:
-            pat_02 = pat_02.strip()
-
+        
         d = {
             'start': start,
             'end': end,
@@ -195,13 +194,13 @@ class Kernel:
             'wo_end': wo_end,
             'wo_start_end': wo_start_end,
             'pattern': pat, 
-            'template': tem.strip(),
-            'initial_template': tem.strip(),
+            'template': tem.text.strip(),
+            'initial_template': tem, #.strip(),
             'index': None,
             'set_exp': set,
             'get_exp': get,
-            'tem_wo_start':tem_02.startswith('<') or tem_02.startswith('*') or tem_02.startswith("_") ,
-            'tem_wo_end':tem_02.endswith('>') or tem_02.endswith("*") ,
+            'tem_wo_start': wo_start, # tem_02.startswith('<') or tem_02.startswith('*') or tem_02.startswith("_") , #or wo_start,
+            'tem_wo_end': wo_end, # tem_02.endswith('>') or tem_02.endswith("*") , #or wo_end,
             'star': None,
             'original': original
         }
@@ -214,7 +213,7 @@ class Kernel:
     def mod_input(self, d_list, input):
         d = d_list
         l = input.split(' ')
-        print (l)
+        #print (l)
         if d['wo_start']:
             d['start'] = l[0]
             l = l[1:]
@@ -227,8 +226,9 @@ class Kernel:
         input = ' '.join(l)
         return input
 
-    def mod_dict_out(self, d_list, input):
+    def mod_dict_out(self, d_list, input=None):
         d = d_list
+        if input is None: input = d['template']
         l = input.split(' ')
         #self.mod_get_set(d)
         if d['wo_start']:
@@ -239,6 +239,7 @@ class Kernel:
             d['end'] = l[-1]
             d['star'] = l[-1]
             return d['template'] + ' ' + d['star']
+        return d['template']
         #self.mod_get_set(d)
         
 
@@ -254,16 +255,38 @@ class Kernel:
             if d['wo_start']:
                 self.memory[set.attrib['name']] = d['start']
                 
-        elif get is not None:
+    def mod_respond(self, d, input):
+        set = d['set_exp']
+        get = d['get_exp']
+        tem = d['initial_template']
+        sta = d['star']
+        self.mod_get_set(d)
+        
+        tem_x = str(ET.tostring(tem)).replace('<template>', '', -1).replace('</template>', '', -1)
+        tem_x = tem_x.replace("b'", '').replace("'","")
+        
+        tem_x = tem_x.replace('\\n', '')
+
+        tem_x = str(re.sub(' +', ' ', tem_x).strip())
+        tem_x = str(' '.join(tem_x.split()))
+        tem_x = re.sub('^\s+', 'z', tem_x)
+        tem_x = re.sub('\s+$', 'z', tem_x)
+        
+        #print(tem_x, '= x')
+
+        d['tem_wo_start'] = tem_x.startswith("<") or tem_x.startswith('_') or tem_x.startswith('*')
+        d['tem_wo_end'] = tem_x.endswith("*") or tem_x.endswith(">")
+        #print(z, self.memory)
+        if get is not None:
+            #d['tem_wo_end'] = True
             t = ''
             if get.attrib['name'] in self.memory:
                 t = self.memory[get.attrib['name']]
                 if t is  None or t == '':
                     self.incomplete = True
-                    n = ET.Element('template')
-                    n.text = ''
-                    d['template'] = '' #n #ET.Element('template')
-                    return
+                    
+                    d['template'] = ''
+                    return d #['template']
             #print(t,'===', ET.tostring(get))
             star = tem.find('get') ## <---
             tt = ''
@@ -272,15 +295,12 @@ class Kernel:
                 pass
             if d['tem_wo_end']:
                 tt = tem.text.strip() + ' ' + t
-            if d['tem_wo_start']:
+            elif d['tem_wo_start']:
                 tt = t + ' ' + tem.text.strip()
-            #d['template'] = tem.text
-            n = ET.Element('template')
-            n.text = tt
-            tem = n
-            #print('>>',ET.tostring(tem), t, self.memory)
+            
             d['template'] = tt #tem
-            #exit()
+            #print(d, 'd')
+            return d #['template']
         if sta is not None:
             t = sta
             #print(t,'===') #, ET.tostring(get))
@@ -288,21 +308,24 @@ class Kernel:
             star = tem.find('star')
             tt = ''
             if star is not None:
-                tem.remove(star)
+                #tem.remove(star)
+                pass
             if d['tem_wo_end']:
-                tt = tem.text.strip() + ' ' + t
+                tt = tem.strip() + ' ' + t
                 #print(tt, 'end')
             if d['tem_wo_start']:
-                tt = t + ' ' + tem.text.strip()
+                tt = t + ' ' + tem.strip()
                 #print(tt, 'start')
             #d['template'] = tem.text
             if t == '':
                 tt = ''
-            n = ET.Element('template')
-            n.text = tt
+            #n = ET.Element('template')
+            #n.text = tt
             #tem = n
             #print('>>',ET.tostring(tem), t, self.memory)
-            d['template'] = n
+            d['template'] = tt #n
+
+        return d #d['template']
 
 
 if __name__ == '__main__':
@@ -312,8 +335,9 @@ if __name__ == '__main__':
     k.learn('../aiml/startup.xml')
     while True:
         y = input("> ")
+        k.respond(y)
         x = k.kernel.respond(y)
-        x = ''
+        
         if len(x.strip()) == 0 and not k.verbose_response: 
             r = k.respond(y) 
             print(r)
