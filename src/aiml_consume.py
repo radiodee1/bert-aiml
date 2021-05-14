@@ -136,6 +136,7 @@ class Kernel:
         z = None
         srai = None
         learn = None
+        star_list = []
         start = ""
         end = ""
         tem_02 = ""
@@ -147,15 +148,22 @@ class Kernel:
             if i.tag == 'pattern':
                 pat = i.text
                 original = ET.tostring(i)
+
                 if '*' in pat:
-                    
-                    pat = i.text 
-                    #print(pat, '<-- pat')
-                    set = i
-                    get = i
-                    start = pat.split(" ")[0]
-                    end = pat.split(" ")[-1]
-                    pat_02 = pat.strip()
+                    x = pat.strip().split(' ')
+                    for ii in range(len(x)):
+                        y = x[ii]
+                        if y == "*":
+                            star_list.append(ii )
+                #print(star_list,'<====')
+
+                #pat = i.text 
+                #print(pat, '<-- pat')
+                set = i
+                get = i
+                start = pat.split(" ")[0]
+                end = pat.split(" ")[-1]
+                pat_02 = pat.strip()
 
             if i.tag == 'template':
                 tem = i #.text
@@ -198,7 +206,7 @@ class Kernel:
             'wo_start_end': wo_start_end,
             'pattern': pat, 
             'template': tem.text.strip(),
-            'initial_template': tem, #.strip(),
+            'initial_template': tem, 
             'initial_srai' : srai,
             'initial_learn' : learn,
             'index': None,
@@ -207,27 +215,33 @@ class Kernel:
             'tem_wo_start': wo_start, 
             'tem_wo_end': wo_end, 
             'star': None,
+            'star_list': star_list,
             'original': original
         }
 
-        #if i.tag == "template": self.mod_get_set(d)
-        self.mod_get_set(d)
         return d
 
 
     def mod_input(self, d_list, input):
         d = d_list
         l = input.split(' ')
-        #print (l)
-        if d['wo_start']:
-            d['start'] = l[0]
-            l = l[1:]
-        if d['wo_end']:
-            d['end'] = l[-1]
-            l = l[:-1]
-            #print (l)
-            #exit()
-
+        z = d['star_list']
+        if len(z) is 1:
+            if d['wo_start']:
+                d['start'] = l[0]
+                l = l[1:]
+            if d['wo_end']:
+                d['end'] = l[-1]
+                l = l[:-1]
+        else:
+            if d['wo_start']:
+                d['start'] = l[0]
+                l = l[z[-1]:] # l[1:]
+            if d['wo_end']:
+                d['end'] = l[-1]
+                l = l[:z[0]] # l[:-1]
+            
+        print(l)
         input = ' '.join(l)
         return input
 
@@ -235,7 +249,7 @@ class Kernel:
         d = d_list
         #if input is None: input = d['template']
         l = input.split(' ')
-        #self.mod_get_set(d)
+        
         print(d, 'd')
         if d['initial_srai'] is not None:
             print(d['initial_srai'])
@@ -255,7 +269,7 @@ class Kernel:
                 if not os.path.isfile(x):
                     print('bad file specification')
                     return ''
-            print(x, '<<')
+            #print(x, '<<')
             self.learn(x)            
             return ''
             pass
@@ -268,10 +282,8 @@ class Kernel:
             d['star'] = l[-1]
             return d['template'] + ' ' + d['star']
         return d['template']
-        #self.mod_get_set(d)
         
-
-    def mod_get_set(self, d):
+    def mod_set(self, d):
         set = d['set_exp']
         get = d['get_exp']
         tem = d['initial_template']
@@ -288,7 +300,7 @@ class Kernel:
         get = d['get_exp']
         tem = d['initial_template']
         sta = d['star']
-        self.mod_get_set(d)
+        self.mod_set(d)
         
         tem_x = str(ET.tostring(tem)).replace('<template>', '', -1).replace('</template>', '', -1)
         tem_x = tem_x.replace("b'", '').replace("'","")
@@ -329,28 +341,36 @@ class Kernel:
             d['template'] = tt #tem
             #print(d, 'd')
             return d #['template']
-        if sta is not None:
-            t = sta
-            #print(t,'===') #, ET.tostring(get))
-            #exit()
-            star = tem.find('star')
+
+        return d
+
+    ## NOT USED ##
+    def mod_respond_star(self, d):
+        set = d['set_exp']
+        get = d['get_exp']
+        tem = d['initial_template']
+        star_list = d['star_list']
+        print(star_list,'----')
+        if star_list is not None and len(star_list) > 0:
+            t = star_list[0]
+            x = tem.text.strip().split(' ')
+            if t <= len(x):
+                x = x[t]
+            t = x[0]
+            print(t,'===') 
+            
             tt = ''
-            if star is not None:
-                #tem.remove(star)
-                pass
+            
             if d['tem_wo_end']:
-                tt = tem.strip() + ' ' + t
-                #print(tt, 'end')
+                tt = tem.text.strip() + ' ' + t
             if d['tem_wo_start']:
-                tt = t + ' ' + tem.strip()
-                #print(tt, 'start')
-            #d['template'] = tem.text
+                tt = t + ' ' + tem.text.strip()
             if t == '':
                 tt = ''
             
-            d['template'] = tt #n
+            d['template'] = tt 
 
-        return d #d['template']
+        return d 
 
 
 if __name__ == '__main__':
