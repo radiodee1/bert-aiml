@@ -5,6 +5,7 @@ from transformers import BertTokenizer, BertForNextSentencePrediction
 import torch
 import xml.etree.ElementTree as ET
 import re
+import os
 
 class Kernel:
 
@@ -22,6 +23,7 @@ class Kernel:
         self.incomplete = False
         self.depth_limit = 5
         self.depth = 0
+        self.files = []
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
         index = 0
@@ -36,6 +38,10 @@ class Kernel:
 
     def learn(self, file):
         self.filename = file
+        if self.filename in self.files:
+            return
+        self.files.append(file)
+
         self.kernel.learn(file)
         self.l = []
         self.score = []
@@ -100,15 +106,7 @@ class Kernel:
         
         self.index = index
         self.output = z
-        '''
-        if z is  None  and len(self.output) is 0 and index is not -1 and self.score[index].item() > 5.0:
-            if self.verbose_response: print(input,'--' ,index, '-- print template --', self.l[index][2]['template'])
-            self.output = self.l[index][2]['template']
-            #print (ET.tostring(self.output), "???")
-            self.output = self.output.strip()
-        elif z is not None :
-            self.output = z
-        '''
+        
         if self.incomplete == True:
             self.output = ''
         
@@ -250,8 +248,15 @@ class Kernel:
                 return x
             pass
         if d['initial_learn'] is not None:
-            print(d['initial_learn'], '<<')
-            
+            x = d['initial_learn'].text.strip()
+            if not x.startswith('/'):
+                cwd = os.getcwd() + '/'
+                x = cwd + x
+                if not os.path.isfile(x):
+                    print('bad file specification')
+                    return ''
+            print(x, '<<')
+            self.learn(x)            
             return ''
             pass
         if d['wo_start']:
