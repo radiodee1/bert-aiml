@@ -24,6 +24,7 @@ class Kernel:
         self.depth_limit = 5
         self.depth = 0
         self.files = []
+        self.input = None
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
         index = 0
@@ -68,6 +69,7 @@ class Kernel:
         self.score = []
         self.index = -1
         self.incomplete = False
+        self.input = input
 
         tempout = '' #self.kernel.respond(input)
         ## checkout input and response ##
@@ -84,7 +86,7 @@ class Kernel:
             s = self.bert_compare(ii, input_02)
             print(s, num)
             self.score.append(s)
-            if self.verbose_response: print(num, s)
+            
             num += 1
         print('----')
         ## find highest entry ##
@@ -147,6 +149,7 @@ class Kernel:
 
             if i.tag == 'pattern':
                 pat = i.text
+                pat = ' '.join(pat.split(' ')).strip()
                 original = ET.tostring(i)
 
                 if '*' in pat:
@@ -158,7 +161,7 @@ class Kernel:
                 #print(star_list,'<====')
 
                 #pat = i.text 
-                #print(pat, '<-- pat')
+                print(pat, '<-- pat')
                 set = i
                 get = i
                 start = pat.split(" ")[0]
@@ -225,7 +228,9 @@ class Kernel:
 
     def mod_input(self, d_list, input):
         d = d_list
-        l = input.split(' ')
+        l = input.strip().split(' ')
+        l = ' '.join(l)
+        l = l.split(' ')
         z = d['star_list']
         if len(z) is 1:
             if d['wo_start']:
@@ -253,10 +258,10 @@ class Kernel:
         
         print(d, 'd')
         if d['initial_srai'] is not None:
-            print(d['initial_srai'].text)
+            print(d['initial_srai'].text , "<< srai text")
             xx = self.consume_srai(d['initial_srai'], d)
             xx = ' '.join(xx.split(' '))
-            
+            print(self.depth, "< depth")
             self.depth += 1
             if self.depth < self.depth_limit:
                 self.index = 0
@@ -315,7 +320,7 @@ class Kernel:
         tem_x = tem_x.replace('\\n', '')
 
         tem_x = str(re.sub(' +', ' ', tem_x).strip())
-        tem_x = str(' '.join(tem_x.split()))
+        tem_x = str(' '.join(tem_x.split(' ')))
         tem_x = re.sub('^\s+', 'z', tem_x)
         tem_x = re.sub('\s+$', 'z', tem_x)
         
@@ -327,7 +332,7 @@ class Kernel:
         if get is not None:
             #d['tem_wo_end'] = True
             t = ''
-            if get.attrib['name'] in self.memory:
+            if get.attrib['name'] in self.memory.keys(): # and self.memory.has_key(get.attrib['name']):
                 t = self.memory[get.attrib['name']]
                 if t is  None or t == '':
                     self.incomplete = True
@@ -423,7 +428,7 @@ class Kernel:
         for xx in element.attrib:
             print(xx)
 
-        if 'name' in element.attrib:
+        if 'name' in element.attrib.keys() and element.attrib['name'] in self.memory.keys():
             print(self.memory, '<< memory get')
             y = self.memory[element.attrib['name']]
             print(y)
@@ -435,9 +440,7 @@ class Kernel:
             print(x.tag)
             print(x.text)
             print('---')
-            #if x.tag == "srai" :self.consume_srai(x, d)
-            #if x.tag == "get" : self.consume_get(x, d)
-            #if x.tag == "set" : self.consume_set(x, d)
+            
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
         return z
@@ -446,20 +449,24 @@ class Kernel:
         print('star :', element.text, element.tag, element.attrib)
         if element.text is not None:
             d['template_modified'] += ' ' + element.text
+        s = d['star_list']
         z = element.attrib
-        p = d['pattern']
+        p = self.input.strip()
         p = ' '.join(p.split(' '))
-        z = ''
-        print(z)
+        
+        print(z,'< before')
         if 'index' in z:
-            x = int(z['index'])
+            x = int(z['index']) - 1
+        else: x = 0
+        if len(s) > 0:
+            if x <= len(s) : x = s[x]
             z = p.split(' ')
             if x <= len(z): 
                 z = z[x]
-        print(z)
+        print(s, z,'< after ')
         print('---')
         
-        return z 
+        return z[0]
 
     
 if __name__ == '__main__':
