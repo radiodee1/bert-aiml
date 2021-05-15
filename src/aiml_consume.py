@@ -57,7 +57,7 @@ class Kernel:
             
             #print(pat_dict)
 
-            self.l.append([None, None, pat_dict])
+            self.l.append( pat_dict)
 
             num += 1
             pass
@@ -80,9 +80,9 @@ class Kernel:
         ## compare all aiml input patttern ##
         num = 0
         for i in self.l:
-            i[2]['star'] = None
-            input_02 = self.mod_input(i[2], input)
-            ii = i[2]['pattern']
+            i['star'] = None
+            input_02 = self.mod_input(i, input)
+            ii = i['pattern']
             s = self.bert_compare(ii, input_02)
             print(s, num)
             self.score.append(s)
@@ -97,14 +97,14 @@ class Kernel:
         for i in self.score:
             if i > high:
                 high = i
-                #pat = self.l[num][0]
+                
                 index = num
             num += 1
         ## update dictionary ##
         
-        d = self.mod_respond_dict(self.l[index][2], input)
-        self.l[index][2] = d
-        z = self.mod_template_out(self.l[index][2], input)
+        d = self.mod_respond_dict(self.l[index], input)
+        self.l[index] = d
+        z = self.mod_template_out(self.l[index], input)
         
         self.index = index
         self.output = z
