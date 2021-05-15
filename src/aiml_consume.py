@@ -157,7 +157,7 @@ class Kernel:
                     for ii in range(len(x)):
                         y = x[ii]
                         if y == "*":
-                            star_list.append(ii )
+                            star_list.append(ii + 1 )
                 #print(star_list,'<====')
 
                 #pat = i.text 
@@ -228,9 +228,11 @@ class Kernel:
 
     def mod_input(self, d_list, input):
         d = d_list
-        l = input.strip().split(' ')
-        l = ' '.join(l)
+        l = str(re.sub(' +', ' ', input).strip())
+        #l = l.strip().split(' ')
+        #l = ' '.join(l)
         l = l.split(' ')
+        print(l)
         z = d['star_list']
         if len(z) is 1:
             if d['wo_start']:
@@ -247,8 +249,9 @@ class Kernel:
                 d['end'] = l[-1]
                 l = l[:z[0]] # l[:-1]
             
-        print(l)
+        #print(l)
         input = ' '.join(l)
+        #print(input)
         return input
 
     def mod_template_out(self, d_list, input):
@@ -447,26 +450,28 @@ class Kernel:
 
     def consume_star_tag(self, element, d):
         print('star :', element.text, element.tag, element.attrib)
-        if element.text is not None:
-            d['template_modified'] += ' ' + element.text
+        #if element.text is not None:
+            #d['template_modified'] += ' ' + element.text
+            #pass
         s = d['star_list']
         z = element.attrib
         p = self.input.strip()
         p = ' '.join(p.split(' '))
-        
+        r = ''
         print(z,'< before')
         if 'index' in z:
             x = int(z['index']) - 1
         else: x = 0
+        print(x, '< x')
         if len(s) > 0:
-            if x <= len(s) : x = s[x]
+            if x <= len(s) : x = int(s[x]) -1
             z = p.split(' ')
-            if x <= len(z): 
-                z = z[x]
-        print(s, z,'< after ')
+            if x < len(z): 
+                r = z[x]
+        print(s, r,'< after ')
         print('---')
         
-        return z[0]
+        return r
 
     
 if __name__ == '__main__':
