@@ -254,18 +254,19 @@ class Kernel:
         print(d, 'd')
         if d['initial_srai'] is not None:
             print(d['initial_srai'].text)
-            x = self.consume_srai(d['initial_srai'], d)
-            x = ' '.join(x.split(' '))
-            d['initial_srai'] = x
+            xx = self.consume_srai(d['initial_srai'], d)
+            xx = ' '.join(xx.split(' '))
+            
             self.depth += 1
             if self.depth < self.depth_limit:
                 self.index = 0
                 self.output = ''
                 self.incomplete = False
-                x = self.respond(d['initial_srai'])
+                x = self.respond(xx) 
 
                 print(d, "d2")
                 return x
+            return ''
             pass
         if d['initial_learn'] is not None:
             x = d['initial_learn'].text.strip()
@@ -380,7 +381,10 @@ class Kernel:
                 z = self.consume_get(x, d)
                 d['template_modified'] += " " + z
             if x.tag == "set" : self.consume_set(x, d)
-            if x.tag == "star" : self.consume_star_tag(x, d)
+            if x.tag == "star" : 
+                z = self.consume_star_tag(x, d)
+                if z is not None:
+                    d['template_modified'] += " " + z
         if element[0].tail is not None:
             print(element[0].tail, '<< tail')
             d['template_modified'] += ' ' + element[0].tail
@@ -442,17 +446,20 @@ class Kernel:
         print('star :', element.text, element.tag, element.attrib)
         if element.text is not None:
             d['template_modified'] += ' ' + element.text
+        z = element.attrib
+        p = d['pattern']
+        p = ' '.join(p.split(' '))
+        z = ''
+        print(z)
+        if 'index' in z:
+            x = int(z['index'])
+            z = p.split(' ')
+            if x <= len(z): 
+                z = z[x]
+        print(z)
+        print('---')
         
-        for x in element:
-            print(x.attrib)
-            print(x.tag)
-            print(x.text)
-            print('---')
-            #if x.tag == "srai" :self.consume_srai(x, d)
-            #if x.tag == "get" : self.consume_get(x, d)
-            #if x.tag == "set" : self.consume_set(x, d)
-            #if x.tag == "star" : self.consume_star_tag(x, d)
-        return d['template_modified']
+        return z 
 
     
 if __name__ == '__main__':
