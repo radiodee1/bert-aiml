@@ -267,7 +267,7 @@ class Kernel:
                 cwd = os.getcwd() + '/'
                 x = cwd + x
                 if not os.path.isfile(x):
-                    print('bad file specification')
+                    print(x, ': bad file specification')
                     return ''
             #print(x, '<<')
             self.learn(x)            
