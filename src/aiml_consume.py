@@ -261,11 +261,12 @@ class Kernel:
         
         print(d, 'd')
         if d['initial_template'] is not None:
+            d['template_modified'] = ''
             xx = self.consume_template(d['initial_template'], d)
             xx = ' '.join(xx.split(' '))
             xx = str(re.sub(' +', ' ', xx).strip())
             return xx
-            '''
+        '''
             print(self.depth, "< depth")
             self.depth += 1
             if self.depth < self.depth_limit:
@@ -277,7 +278,7 @@ class Kernel:
                 print(d, "d2")
                 return x
             return ''
-            '''
+            
             
         if d['initial_srai'] is not None:
             print(d['initial_srai'].text , "<< srai text")
@@ -307,6 +308,7 @@ class Kernel:
             self.learn(x)            
             return ''
             pass
+        '''
         if d['wo_start']:
             d['start'] = l[0]
             d['star'] = l[0]
