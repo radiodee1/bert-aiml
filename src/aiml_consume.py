@@ -25,6 +25,7 @@ class Kernel:
         self.depth = 0
         self.files = []
         self.input = None
+        self.target = []
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
         index = 0
@@ -71,8 +72,9 @@ class Kernel:
         self.incomplete = False
         self.input = input
 
-        #batch_pattern = []
-        #batch_input = []
+        batch_pattern = []
+        batch_input = []
+        self.target = []
 
         tempout = '' 
         ## checkout input and response ##
@@ -87,25 +89,27 @@ class Kernel:
             input_02, d = self.mod_input(i, input)
             self.l[num] = d
             ii = i['pattern']
-            s = self.bert_compare(ii, input_02)
-            print(s, num)
-            self.score.append(s)
+            #s = self.bert_compare(ii, input_02)
+            #print(s, num)
+            #self.score.append(s)
             ## batches start
-            #batch_pattern.append(ii)
-            #batch_input.append(input_02)
+            batch_pattern.append(ii)
+            batch_input.append(input_02)
+            self.target.append(1)
             ## batches end
             num += 1
         print('----')
-        #self.bert_batch_compare(batch_pattern, batch_input)
-
+        s = self.bert_batch_compare(batch_pattern, batch_input)
+        self.score = s
+        print(self.score, '< score')
         ## find highest entry ##
         high = 0
         num = 0
         index = -1
         for i in self.score:
+            i = i[0] - i[1]
             if i > high:
                 high = i
-                
                 index = num
             num += 1
         ## update dictionary ##
@@ -141,14 +145,16 @@ class Kernel:
 
     
     def bert_batch_compare(self, prompt1, prompt2):
-        #if not isinstance(prompt1, str): prompt1 = str(prompt1)
-        #if not isinstance(prompt2, str): prompt2 = str(prompt2)
+        
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
         print(encoding)
-        outputs = self.model(**encoding, next_sentence_label=torch.LongTensor([1]), target_batch_size=10)
+        target = torch.LongTensor(self.target)
+        
+        print(target)
+        outputs = self.model(**encoding, next_sentence_label=target)
         logits = outputs.logits
-        #print(logits)
-        s = logits[0][0] #.item()
+        print(logits, '< logits')
+        s = logits #[0][0] #.item()
         return s
     
 
