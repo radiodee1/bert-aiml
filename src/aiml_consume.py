@@ -98,10 +98,10 @@ class Kernel:
             self.target.append(1)
             ## batches end
             num += 1
-        print('----')
+
         s = self.bert_batch_compare(batch_pattern, batch_input)
         self.score = s
-        print(self.score, '< score')
+
         ## find highest entry ##
         high = 0
         num = 0
@@ -147,14 +147,14 @@ class Kernel:
     def bert_batch_compare(self, prompt1, prompt2):
         
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
-        print(encoding)
+        #print(encoding)
         target = torch.LongTensor(self.target)
         
-        print(target)
+        #print(target)
         outputs = self.model(**encoding, next_sentence_label=target)
         logits = outputs.logits
-        print(logits, '< logits')
-        s = logits #[0][0] #.item()
+        #print(logits, '< logits')
+        s = logits 
         return s
     
 
@@ -189,7 +189,7 @@ class Kernel:
                 #print(star_list,'<====')
 
                 #pat = i.text 
-                print(pat, '<-- pat')
+                #print(pat, '<-- pat')
                 set = i
                 get = i
                 start = pat.split(" ")[0]
@@ -260,7 +260,7 @@ class Kernel:
         #l = l.strip().split(' ')
         #l = ' '.join(l)
         l = l.split(' ')
-        print(l)
+        #print(l)
         z = d['star_list']
         if len(z) is 1:
             if d['wo_start']:
@@ -287,7 +287,7 @@ class Kernel:
         #if input is None: input = d['template']
         l = input.split(' ')
         
-        print(d, 'd')
+        #print(d, 'd')
         if d['initial_template'] is not None:
             d['template_modified'] = ''
             xx = self.consume_template(d['initial_template'], d)
