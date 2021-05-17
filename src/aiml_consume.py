@@ -71,7 +71,10 @@ class Kernel:
         self.incomplete = False
         self.input = input
 
-        tempout = '' #self.kernel.respond(input)
+        #batch_pattern = []
+        #batch_input = []
+
+        tempout = '' 
         ## checkout input and response ##
         self.output = tempout
 
@@ -81,17 +84,22 @@ class Kernel:
         num = 0
         for i in self.l:
             i['star'] = None
-            input_02 = self.mod_input(i, input)
+            input_02, d = self.mod_input(i, input)
+            self.l[num] = d
             ii = i['pattern']
             s = self.bert_compare(ii, input_02)
             print(s, num)
             self.score.append(s)
-            
+            ## batches start
+            #batch_pattern.append(ii)
+            #batch_input.append(input_02)
+            ## batches end
             num += 1
         print('----')
+        #self.bert_batch_compare(batch_pattern, batch_input)
+
         ## find highest entry ##
         high = 0
-        #pat = ''
         num = 0
         index = -1
         for i in self.score:
@@ -127,8 +135,22 @@ class Kernel:
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt')
         outputs = self.model(**encoding, next_sentence_label=torch.LongTensor([1]))
         logits = outputs.logits
+        print(logits)
+        s = logits[0][0] - logits[0][1] #.item()
+        return s
+
+    
+    def bert_batch_compare(self, prompt1, prompt2):
+        #if not isinstance(prompt1, str): prompt1 = str(prompt1)
+        #if not isinstance(prompt2, str): prompt2 = str(prompt2)
+        encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
+        print(encoding)
+        outputs = self.model(**encoding, next_sentence_label=torch.LongTensor([1]), target_batch_size=10)
+        logits = outputs.logits
+        #print(logits)
         s = logits[0][0] #.item()
         return s
+    
 
     def pattern_factory(self, category):
         pat = None
@@ -252,7 +274,7 @@ class Kernel:
         #print(l)
         input = ' '.join(l)
         #print(input)
-        return input
+        return input, d
 
     def mod_template_out(self, d_list, input):
         d = d_list
@@ -265,49 +287,9 @@ class Kernel:
             xx = self.consume_template(d['initial_template'], d)
             xx = ' '.join(xx.split(' '))
             xx = str(re.sub(' +', ' ', xx).strip())
+            d['template'] = xx
+            #print(xx, ': d-template')
             return xx
-        '''
-            print(self.depth, "< depth")
-            self.depth += 1
-            if self.depth < self.depth_limit:
-                self.index = 0
-                self.output = ''
-                self.incomplete = False
-                x = self.respond(xx) 
-
-                print(d, "d2")
-                return x
-            return ''
-            
-            
-        if d['initial_srai'] is not None:
-            print(d['initial_srai'].text , "<< srai text")
-            xx = self.consume_srai(d['initial_srai'], d)
-            xx = ' '.join(xx.split(' '))
-            print(self.depth, "< depth")
-            self.depth += 1
-            if self.depth < self.depth_limit:
-                self.index = 0
-                self.output = ''
-                self.incomplete = False
-                x = self.respond(xx) 
-
-                print(d, "d2")
-                return x
-            return ''
-            pass
-        if d['initial_learn'] is not None:
-            x = d['initial_learn'].text.strip()
-            if not x.startswith('/'):
-                cwd = os.getcwd() + '/'
-                x = cwd + x
-                if not os.path.isfile(x):
-                    print(x, ': bad file specification')
-                    return ''
-            #print(x, '<<')
-            self.learn(x)            
-            return ''
-            pass
         '''
         if d['wo_start']:
             d['start'] = l[0]
@@ -318,7 +300,9 @@ class Kernel:
             d['star'] = l[-1]
             return d['template'] + ' ' + d['star']
         return d['template']
-        
+        '''
+        return ''
+
     def mod_set(self, d):
         set = d['set_exp']
         get = d['get_exp']
@@ -394,7 +378,7 @@ class Kernel:
                 d['template_modified'] = ''
                 z = self.consume_srai(x, d)
                 if z is not None and len(z) > 0:
-                    d['template_modified'] += ' ' + z
+                    d['template_modified'] = z ## replace, not concatenate!
                     print(self.depth, "< depth")
                     self.depth += 1
                     if self.depth < self.depth_limit:
@@ -427,6 +411,7 @@ class Kernel:
 
     def consume_srai(self, element, d):
         print('srai :', element.text, element.tag, element.attrib)
+        d['template_modified'] = ''
         if element.text is not None:
             d['template_modified'] += ' ' + element.text
         
@@ -447,6 +432,9 @@ class Kernel:
                 z = self.consume_star_tag(x, d)
                 if z is not None:
                     d['template_modified'] += " " + z
+        
+        print('srai internal :', d['template_modified'])
+
         if element[0].tail is not None:
             print(element[0].tail, '<< tail')
             d['template_modified'] += ' ' + element[0].tail
@@ -461,16 +449,7 @@ class Kernel:
         z = element.text
 
         for x in element:
-            '''
-            print(x.attrib)
-            print(x.tag)
-            print(x.text)
-            print('---')
-            if x.tag == "get" : 
-                z = self.consume_get(x, d)
-                d['template_modified'] += " " + z
-            #if x.tag == "set" : self.consume_set(x, d)
-            '''
+            
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
 
