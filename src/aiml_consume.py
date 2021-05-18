@@ -112,7 +112,7 @@ class Kernel:
         for i in self.score:
             i = i[0] - i[1]
             i = self.mod_that(self.l[num], input, i)
-            print(i)
+            #print(i, self.l[num])
             if i > high:
                 high = i
                 index = num
@@ -131,13 +131,14 @@ class Kernel:
         
         if len(self.output) > 0: self.depth = 0
 
+        self.output = str(re.sub(' +', ' ', self.output).upper().strip())
+        self.output = self.output.translate(str.maketrans('','', string.punctuation))
+
         if self.output not in self.answers:
-            out = self.output
-            out = out.translate(str.maketrans('','', string.punctuation))
-            self.answers.append(out.upper().strip())
+            self.answers.append(self.output.upper().strip())
 
         self.answers = self.answers[- self.answers_length:] ## last few
-        print(self.answers)
+        #print(self.answers)
 
         return self.output
 
@@ -146,23 +147,11 @@ class Kernel:
             return 0
         return self.score[self.index]
 
-    def bert_compare(self, prompt1, prompt2):
-        if not isinstance(prompt1, str): prompt1 = str(prompt1)
-        if not isinstance(prompt2, str): prompt2 = str(prompt2)
-        encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt')
-        outputs = self.model(**encoding, next_sentence_label=torch.LongTensor([1]))
-        logits = outputs.logits
-        print(logits)
-        s = logits[0][0] - logits[0][1] #.item()
-        return s
-
     
     def bert_batch_compare(self, prompt1, prompt2):
-        
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
         #print(encoding)
         target = torch.LongTensor(self.target)
-        
         #print(target)
         outputs = self.model(**encoding, next_sentence_label=target)
         logits = outputs.logits
@@ -179,8 +168,11 @@ class Kernel:
         z = None
         srai = None
         learn = None
-        that = None
+        that = ''
         star_list = []
+        that_star_list = []
+        that_wo_start = None
+        that_wo_end = None
         start = ""
         end = ""
         tem_02 = ""
@@ -200,10 +192,7 @@ class Kernel:
                         y = x[ii]
                         if y == "*":
                             star_list.append(ii + 1 )
-                #print(star_list,'<====')
-
-                #pat = i.text 
-                #print(pat, '<-- pat')
+                
                 set = i
                 get = i
                 start = pat.split(" ")[0]
@@ -229,6 +218,7 @@ class Kernel:
         wo_start = False
         wo_end = False
 
+        ###################
         if (pat_02.startswith('_') or pat_02.startswith('*')) and ( pat_02.endswith('*')):
             wo_start_end = True # pat_txt
             pass
@@ -244,7 +234,17 @@ class Kernel:
             wo_start = True
         else:
             wo_start = False
-        
+        ###################
+        if  that.endswith('*'):
+            that_wo_end = True
+        else:
+            that_wo_end = False
+
+        if that.startswith('_') or that.startswith('*'):
+            that_wo_start = True
+        else:
+            that_wo_start = False
+        ###################
         d = {
             'start': start,
             'end': end,
@@ -263,8 +263,11 @@ class Kernel:
             'get_exp': get,
             'tem_wo_start': wo_start, 
             'tem_wo_end': wo_end, 
+            'that_wo_start': that_wo_start,
+            'that_wo_end': that_wo_end,
             'star': None,
             'star_list': star_list,
+            'that_star_list': that_star_list,
             'original': original
         }
 
@@ -272,14 +275,23 @@ class Kernel:
 
     def mod_that(self, d_list, input, score):
         d = d_list
-        
+        d['that_star_list'] = []
+        #print(d['that_star_list'],'< star list:', input)
         if d['initial_that'] is not None and len(d['initial_that']) > 0:
             out = d['initial_that']
+            out = str(re.sub(' +', ' ', out).strip())
+
+            if d['that_wo_end'] and len(out.split(' ')) > 0:
+                d['that_star_list'].append(len(out.split(' ')) - 1)
+                d['initial_that'] = d['initial_that'][:-1]
+            if d['that_wo_start'] and len(out.split(' ')) > 0:
+                d['that_star_list'].append(0)
+                d['initial_that'] = d['initial_that'][1:]
+
             out = out.translate(str.maketrans('','', string.punctuation))
             if out.upper().strip() not in self.answers:
                 score = 0
         z = score
-        #print(d, z, 'd,z')
         return z
 
     def mod_input(self, d_list, input):
@@ -532,6 +544,31 @@ class Kernel:
             #d['template_modified'] += ' ' + element.text
             #pass
         s = d['star_list']
+        z = element.attrib
+        p = self.input.strip()
+        p = ' '.join(p.split(' '))
+        r = ''
+        print(z,'< before')
+        if 'index' in z:
+            x = int(z['index']) - 1
+        else: x = 0
+        print(x, '< x')
+        if len(s) > 0:
+            if x <= len(s) : x = int(s[x]) -1
+            z = p.split(' ')
+            if x < len(z): 
+                r = z[x]
+        print(s, r,'< after ')
+        print('---')
+        
+        return r
+
+    def consume_thatstar(self, element, d):
+        print('thatstar :', element.text, element.tag, element.attrib)
+        #if element.text is not None:
+            #d['template_modified'] += ' ' + element.text
+            #pass
+        s = d['that_star_list']
         z = element.attrib
         p = self.input.strip()
         p = ' '.join(p.split(' '))

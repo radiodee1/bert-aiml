@@ -105,4 +105,10 @@
       <template>Really? I have a hard time drinking black coffee.</template>
    </category>
 
+   <category>
+      <pattern>I LIKE IT TOO</pattern>
+      <that>I LIKE *</that>
+      <template>What do you like best about <thatstar /></template>
+   </category>
+
 </aiml>
