@@ -563,6 +563,20 @@ class Kernel:
         
         return r
     
+    def consume_think(self, element, d):
+        print('think :', element.text, element.tag, element.attrib)
+        
+        for x in element:
+            print(x.attrib)
+            print(x.tag)
+            print(x.text)
+            print('---')
+
+            if x.tag == "set" : 
+                self.consume_set(x, d)
+                
+        return '' 
+
     
 if __name__ == '__main__':
 
