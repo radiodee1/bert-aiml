@@ -562,32 +562,7 @@ class Kernel:
         print('---')
         
         return r
-
-    def consume_thatstar(self, element, d):
-        print('thatstar :', element.text, element.tag, element.attrib)
-        #if element.text is not None:
-            #d['template_modified'] += ' ' + element.text
-            #pass
-        s = d['that_star_list']
-        z = element.attrib
-        p = self.input.strip()
-        p = ' '.join(p.split(' '))
-        r = ''
-        print(z,'< before')
-        if 'index' in z:
-            x = int(z['index']) - 1
-        else: x = 0
-        print(x, '< x')
-        if len(s) > 0:
-            if x <= len(s) : x = int(s[x]) -1
-            z = p.split(' ')
-            if x < len(z): 
-                r = z[x]
-        print(s, r,'< after ')
-        print('---')
-        
-        return r
-
+    
     
 if __name__ == '__main__':
 
