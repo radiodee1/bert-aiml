@@ -71,4 +71,38 @@
       </template>
    </category>
 
+   <category>
+      <pattern>WHAT ABOUT MOVIES</pattern>
+      <template>Do you like comedy movies</template>  
+   </category>
+   
+   <category>
+      <pattern>YES</pattern>
+      <that>Do you like comedy movies</that>
+      <template>Nice, I like comedy movies too.</template>
+   </category>
+   
+   <category>
+      <pattern>NO</pattern>
+      <that>Do you like comedy movies</that>
+      <template>Ok! But I like comedy movies.</template>
+   </category> 
+
+   <category>
+      <pattern>I LIKE COFFEE</pattern>
+      <template>Do you take cream or sugar in your coffee?</template>
+   </category>
+
+   <category>
+      <pattern>YES</pattern>
+      <that>DO YOU TAKE CREAM OR SUGAR IN YOUR COFFEE</that>
+      <template>I do too.</template>
+   </category>
+
+   <category>
+      <pattern>NO</pattern>
+      <that>DO YOU TAKE CREAM OR SUGAR IN YOUR COFFEE</that>
+      <template>Really? I have a hard time drinking black coffee.</template>
+   </category>
+
 </aiml>

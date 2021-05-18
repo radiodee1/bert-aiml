@@ -6,6 +6,7 @@ import torch
 import xml.etree.ElementTree as ET
 import re
 import os
+import string
 
 class Kernel:
 
@@ -26,6 +27,8 @@ class Kernel:
         self.files = []
         self.input = None
         self.target = []
+        self.answers = []
+        self.answers_length = 5
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
         index = 0
@@ -56,8 +59,6 @@ class Kernel:
             pat_dict = self.pattern_factory(child)
             pat_dict['index'] = num
             
-            #print(pat_dict)
-
             self.l.append( pat_dict)
 
             num += 1
@@ -90,8 +91,10 @@ class Kernel:
             self.l[num] = d
             ii = i['pattern']
             #s = self.bert_compare(ii, input_02)
-            #print(s, num)
-            #self.score.append(s)
+            #print(ii, num)
+            if i['initial_that'] is not None and len(i['initial_that']) > 0:
+                ii += ' ' + i['initial_that']
+            print(ii, num)
             ## batches start
             batch_pattern.append(ii)
             batch_input.append(input_02)
@@ -108,6 +111,8 @@ class Kernel:
         index = -1
         for i in self.score:
             i = i[0] - i[1]
+            i = self.mod_that(self.l[num], input, i)
+            print(i)
             if i > high:
                 high = i
                 index = num
@@ -125,6 +130,14 @@ class Kernel:
             self.output = ''
         
         if len(self.output) > 0: self.depth = 0
+
+        if self.output not in self.answers:
+            out = self.output
+            out = out.translate(str.maketrans('','', string.punctuation))
+            self.answers.append(out.upper().strip())
+
+        self.answers = self.answers[- self.answers_length:] ## last few
+        print(self.answers)
 
         return self.output
 
@@ -166,6 +179,7 @@ class Kernel:
         z = None
         srai = None
         learn = None
+        that = None
         star_list = []
         start = ""
         end = ""
@@ -204,11 +218,13 @@ class Kernel:
                 get = i.find('./get')
                 srai = i.find('./srai')
                 learn = i.find('./learn')
+                #that = i.find('./that')
                 
                 start = pat.split(" ")[0]
                 end = pat.split(" ")[-1]
                 #print(learn, "<-- ")
-
+            if i.tag == "that":
+                that = i.text
         
         wo_start = False
         wo_end = False
@@ -241,6 +257,7 @@ class Kernel:
             'initial_template': tem, 
             'initial_srai' : srai,
             'initial_learn' : learn,
+            'initial_that': that,
             'index': None,
             'set_exp': set,
             'get_exp': get,
@@ -253,6 +270,17 @@ class Kernel:
 
         return d
 
+    def mod_that(self, d_list, input, score):
+        d = d_list
+        
+        if d['initial_that'] is not None and len(d['initial_that']) > 0:
+            out = d['initial_that']
+            out = out.translate(str.maketrans('','', string.punctuation))
+            if out.upper().strip() not in self.answers:
+                score = 0
+        z = score
+        #print(d, z, 'd,z')
+        return z
 
     def mod_input(self, d_list, input):
         d = d_list
@@ -296,17 +324,7 @@ class Kernel:
             d['template'] = xx
             #print(xx, ': d-template')
             return xx
-        '''
-        if d['wo_start']:
-            d['start'] = l[0]
-            d['star'] = l[0]
-            return d['star'] + ' ' + d['template']
-        if d['wo_end']:
-            d['end'] = l[-1]
-            d['star'] = l[-1]
-            return d['template'] + ' ' + d['star']
-        return d['template']
-        '''
+        
         return ''
 
     def mod_set(self, d):
