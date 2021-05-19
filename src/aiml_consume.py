@@ -436,6 +436,8 @@ class Kernel:
                 z = self.consume_star_tag(x, d)
                 if z is not None:
                     d['template_modified'] += " " + z
+            if x.tag == "think":
+                self.consume_think(x, d)
 
         if len(element) > 0 and element[0].tail is not None:
             print(element[0].tail, '<< tail')
