@@ -7,6 +7,7 @@ import xml.etree.ElementTree as ET
 import re
 import os
 import string
+import random
 
 class Kernel:
 
@@ -118,7 +119,8 @@ class Kernel:
         
         self.index = index
         self.output = z
-        
+        self.output = self.choose_output(self.l[index])
+
         if self.incomplete == True:
             self.output = ''
         
@@ -135,12 +137,13 @@ class Kernel:
 
         return self.output
 
-    def bert_score(self):
-        if self.index == -1:
-            return 0
-        return self.score[self.index]
+    def choose_output(self, d):
+        if len(d['random_list']) > 0:
+            return random.choice(d['random_list'])
+        elif True:
+            return d['template_modified'].strip()
+        return ''
 
-    
     def bert_batch_compare(self, prompt1, prompt2):
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
         #print(encoding)
@@ -176,7 +179,7 @@ class Kernel:
                 pat_dict = self.pattern_factory(child)
                 pat_dict['index'] = num
             
-                self.l.append( pat_dict)
+                self.l.append(pat_dict)
 
                 num += 1
         pass
@@ -190,6 +193,8 @@ class Kernel:
         srai = None
         learn = None
         that = ''
+        random = None
+        random_list = []
         star_list = []
         that_star_list = []
         that_wo_start = None
@@ -228,6 +233,7 @@ class Kernel:
                 get = i.find('./get')
                 srai = i.find('./srai')
                 learn = i.find('./learn')
+                random = i.find('./random')
                 #that = i.find('./that')
                 
                 start = pat.split(" ")[0]
@@ -290,10 +296,25 @@ class Kernel:
             'star_list': star_list,
             'that_star_list': that_star_list,
             'original': original,
-            'topic': topic
+            'topic': topic,
+            'random': random,
+            'random_list': random_list
         }
 
+        if random is not None:
+            self.mod_pattern_factory_random_tag(d['random'], d)
+
         return d
+
+    def mod_pattern_factory_random_tag(self, element, d_dict):
+        d = d_dict
+        d['random_list'] = []
+        
+        for x in element:
+            if x.tag == "li" : 
+                d['random_list'].append(x.text)
+                
+        return ''
 
     def mod_that(self, d_list, input, score):
         d = d_list
