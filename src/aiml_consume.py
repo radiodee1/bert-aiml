@@ -55,28 +55,16 @@ class Kernel:
 
         self.pattern_factory_topic(self.root)
 
-        '''
-        num = 0
-        for child in self.root.iter('category'):
-            #pat = None
-            #tem = None
-            pat_dict = self.pattern_factory(child)
-            pat_dict['index'] = num
-            
-            self.l.append( pat_dict)
-
-            num += 1
-            pass
-        if self.verbose_response:
-            print(self.l)
-            print(len(self.l), num)
-        '''
+        
 
     def respond(self, input):
         self.score = []
         self.index = -1
         self.incomplete = False
-        self.input = input
+        self.input = str(re.sub(' +', ' ', input).upper().strip())
+        self.input = self.input.translate(str.maketrans('','', string.punctuation))
+
+        #self.input = input
 
         batch_pattern = []
         batch_input = []
@@ -99,7 +87,7 @@ class Kernel:
             #print(ii, num)
             if i['initial_that'] is not None and len(i['initial_that']) > 0:
                 ii += ' ' + i['initial_that']
-            print(ii, num)
+            #print(ii, num)
             ## batches start
             batch_pattern.append(ii)
             batch_input.append(input_02)
@@ -168,11 +156,11 @@ class Kernel:
         num = 0
         for child in root:
             if child.tag == "topic":
-                print(child.attrib['name'])
+                #print(child.attrib['name'])
                 topic = ''
                 if child.attrib['name'] is not None and len(child.attrib['name'].strip()) > 0:
                     topic = child.attrib['name'].upper().strip()
-                print('change topic', topic)
+                #print('change topic', topic)
                 
                 for ch2 in child:
                     pat_dict = self.pattern_factory(ch2, topic)
@@ -184,7 +172,7 @@ class Kernel:
                     pass
 
             if child.tag == "category":
-                print('do category')
+                #print('do category')
                 pat_dict = self.pattern_factory(child)
                 pat_dict['index'] = num
             
@@ -328,15 +316,14 @@ class Kernel:
         if d['topic'] is not None and 'topic' in self.memory:
             if self.memory['topic'] != d['topic']:
                 score = 0
-                print('here')
-        z = score
-        return z
+        if d['topic'] is not None and len(d['topic']) > 0 and 'topic' not in self.memory:
+            score = 0
+
+        return score
 
     def mod_input(self, d_list, input):
         d = d_list
         l = str(re.sub(' +', ' ', input).strip())
-        #l = l.strip().split(' ')
-        #l = ' '.join(l)
         l = l.split(' ')
         #print(l)
         z = d['star_list']
@@ -357,7 +344,6 @@ class Kernel:
             
         #print(l)
         input = ' '.join(l)
-        #print(input)
         return input, d
 
     def mod_template_out(self, d_list, input):
@@ -438,22 +424,19 @@ class Kernel:
     ## Start consume functions ##
 
     def consume_template(self, element, d):
-        print('template :', element.text, element.tag, element.attrib)
+        #print('template :', element.text, element.tag, element.attrib)
         if element.text is not None:
             t = element.text.strip()
             d['template_modified'] += t
         
         for x in element:
-            print(x.attrib)
-            print(x.tag)
-            print(x.text)
-            print('---')
+            
             if x.tag == "srai" :
                 d['template_modified'] = ''
                 z = self.consume_srai(x, d)
                 if z is not None and len(z) > 0:
                     d['template_modified'] = z ## replace, not concatenate!
-                    print(self.depth, "< depth")
+                    #print(self.depth, "< depth")
                     self.depth += 1
                     if self.depth < self.depth_limit:
                         self.index = 0
@@ -478,7 +461,7 @@ class Kernel:
                 self.consume_think(x, d)
 
         if len(element) > 0 and element[0].tail is not None:
-            print(element[0].tail, '<< tail')
+            #print(element[0].tail, '<< tail')
             t = element[0].tail
             t = t.strip()
             d['template_modified'] += ' ' + t
@@ -486,17 +469,13 @@ class Kernel:
         return d['template_modified']
 
     def consume_srai(self, element, d):
-        print('srai :', element.text, element.tag, element.attrib)
+        #print('srai :', element.text, element.tag, element.attrib)
         d['template_modified'] = ''
         if element.text is not None:
             d['template_modified'] += ' ' + element.text
         
         for x in element:
-            print(x.attrib)
-            print(x.tag)
-            print(x.text)
-            print('---')
-
+            
             if x.tag == "get" : 
                 z = self.consume_get(x, d)
                 d['template_modified'] += " " + z
@@ -512,16 +491,13 @@ class Kernel:
         print('srai internal :', d['template_modified'])
 
         if element[0].tail is not None:
-            print(element[0].tail, '<< tail')
+            #print(element[0].tail, '<< tail')
             d['template_modified'] += ' ' + element[0].tail
 
         return d['template_modified']
 
     def consume_set(self, element, d):
-        print('set :', element.text, element.tag, element.attrib)
-        if element.text is not None:
-            #d['template_modified'] += ' ' + element.text
-            pass
+        #print('set :', element.text, element.tag, element.attrib)
         
         z = element.text
 
@@ -533,11 +509,10 @@ class Kernel:
         if 'name' in element.attrib:
             self.memory[element.attrib['name']] = z.upper().strip()
 
-        print(self.memory, "<<< memory set")
         return z
 
     def consume_learn(self, element, d):
-        print('set :', element.text, element.tag, element.attrib)
+        #print('set :', element.text, element.tag, element.attrib)
         if element.text is not None:
             d['template_modified'] += element.text
         
@@ -556,63 +531,54 @@ class Kernel:
         return ''
 
     def consume_get(self, element, d):
-        print('get :', element.text, element.tag, element.attrib)
+        #print('get :', element.text, element.tag, element.attrib)
         if element.text is not None:
             d['template_modified'] += element.text
         for xx in element.attrib:
-            print(xx)
+            #print(xx)
+            pass
 
         if 'name' in element.attrib.keys() and element.attrib['name'] in self.memory.keys():
-            print(self.memory, '<< memory get')
+            #print(self.memory, '<< memory get')
             y = self.memory[element.attrib['name']]
-            print(y)
+            #print(y)
             return y
 
         z = ''
         for x in element:
-            print(x.attrib)
-            print(x.tag)
-            print(x.text)
-            print('---')
             
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
         return z
 
     def consume_star_tag(self, element, d):
-        print('star :', element.text, element.tag, element.attrib)
-        #if element.text is not None:
-            #d['template_modified'] += ' ' + element.text
-            #pass
+        #print('star :', element.text, element.tag, element.attrib)
+        
         s = d['star_list']
         z = element.attrib
         p = self.input.strip()
         p = ' '.join(p.split(' '))
         r = ''
-        print(z,'< before')
+        #print(z,'< before')
         if 'index' in z:
             x = int(z['index']) - 1
         else: x = 0
-        print(x, '< x')
+        #print(x, '< x')
         if len(s) > 0:
             if x <= len(s) : x = int(s[x]) -1
             z = p.split(' ')
             if x < len(z): 
                 r = z[x]
-        print(s, r,'< after ')
-        print('---')
+        #print(s, r,'< after ')
+        #print('---')
         
         return r
     
     def consume_think(self, element, d):
-        print('think :', element.text, element.tag, element.attrib)
+        #print('think :', element.text, element.tag, element.attrib)
         
         for x in element:
-            print(x.attrib)
-            print(x.tag)
-            print(x.text)
-            print('---')
-
+            
             if x.tag == "set" : 
                 self.consume_set(x, d)
                 
@@ -627,7 +593,7 @@ if __name__ == '__main__':
     while True:
         y = input("> ")
         #k.respond(y)
-        x = k.kernel.respond(y)
+        #x = k.kernel.respond(y)
         x = ''
         if len(x.strip()) == 0 and not k.verbose_response: 
             r = k.respond(y) 
