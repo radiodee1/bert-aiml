@@ -52,6 +52,10 @@ class Kernel:
         self.score = []
         self.tree = ET.parse(file)
         self.root = self.tree.getroot()
+
+        self.pattern_factory_topic(self.root)
+
+        '''
         num = 0
         for child in self.root.iter('category'):
             #pat = None
@@ -66,6 +70,7 @@ class Kernel:
         if self.verbose_response:
             print(self.l)
             print(len(self.l), num)
+        '''
 
     def respond(self, input):
         self.score = []
@@ -112,7 +117,7 @@ class Kernel:
         for i in self.score:
             i = i[0] - i[1]
             i = self.mod_that(self.l[num], input, i)
-            #print(i, self.l[num])
+            print(i, self.l[num]['initial_template'].text.strip())
             if i > high:
                 high = i
                 index = num
@@ -159,8 +164,36 @@ class Kernel:
         s = logits 
         return s
     
+    def pattern_factory_topic(self, root):
+        num = 0
+        for child in root:
+            if child.tag == "topic":
+                print(child.attrib['name'])
+                topic = ''
+                if child.attrib['name'] is not None and len(child.attrib['name'].strip()) > 0:
+                    topic = child.attrib['name'].upper().strip()
+                print('change topic', topic)
+                
+                for ch2 in child:
+                    pat_dict = self.pattern_factory(ch2, topic)
+                    pat_dict['index'] = num
+                    
+                    self.l.append( pat_dict)
 
-    def pattern_factory(self, category):
+                    num += 1
+                    pass
+
+            if child.tag == "category":
+                print('do category')
+                pat_dict = self.pattern_factory(child)
+                pat_dict['index'] = num
+            
+                self.l.append( pat_dict)
+
+                num += 1
+        pass
+
+    def pattern_factory(self, category, topic=None):
         pat = None
         tem = None
         set = None
@@ -268,7 +301,8 @@ class Kernel:
             'star': None,
             'star_list': star_list,
             'that_star_list': that_star_list,
-            'original': original
+            'original': original,
+            'topic': topic
         }
 
         return d
@@ -291,6 +325,10 @@ class Kernel:
             out = out.translate(str.maketrans('','', string.punctuation))
             if out.upper().strip() not in self.answers:
                 score = 0
+        if d['topic'] is not None and 'topic' in self.memory:
+            if self.memory['topic'] != d['topic']:
+                score = 0
+                print('here')
         z = score
         return z
 
@@ -482,7 +520,8 @@ class Kernel:
     def consume_set(self, element, d):
         print('set :', element.text, element.tag, element.attrib)
         if element.text is not None:
-            d['template_modified'] += element.text
+            #d['template_modified'] += ' ' + element.text
+            pass
         
         z = element.text
 
@@ -492,7 +531,7 @@ class Kernel:
                 z = self.consume_star_tag(x, d)
 
         if 'name' in element.attrib:
-            self.memory[element.attrib['name']] = z
+            self.memory[element.attrib['name']] = z.upper().strip()
 
         print(self.memory, "<<< memory set")
         return z

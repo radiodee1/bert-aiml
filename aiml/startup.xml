@@ -119,4 +119,41 @@
       </template>  
    </category>  
 
+   <!-- trigger to set topic to Linux -->
+    <category>
+        <pattern>
+            LETS TALK ABOUT LINUX
+        </pattern>
+        <template>
+            OK, I like to talk about <set name="topic">Linux</set>.
+        </template>
+    </category>
+    <!-- trigger to set topic to Windows -->
+    <category>
+        <pattern>
+            LETS TALK ABOUT WINDOWS
+        </pattern>
+        <template>
+            OK, I like to talk about <set name="topic">Windows</set>.
+        </template>
+    </category>
+    <!-- categories for topic Linux -->
+    <topic name="Linux">
+        <category>
+            <pattern>WHAT IS THE MASCOT</pattern>
+            <template>The Linux mascot is a penguin.</template>
+        </category>
+        <category>
+            <pattern>WHAT IS THE ORIGIN</pattern>
+            <template>The origin of Linux is Unix.</template>
+        </category>
+    </topic>
+    <!-- categories for topic Windows -->
+    <topic name="Windows">
+        <category>
+            <pattern>WHAT IS THE POINT</pattern>
+            <template>The purpose of Windows is to make money for Microsoft.</template>
+        </category>
+    </topic>
+
 </aiml>
