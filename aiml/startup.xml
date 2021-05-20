@@ -43,7 +43,7 @@
     <category>
       <pattern>LEARN B</pattern>
       <template>
-         <learn> ./aiml/special.xml </learn>
+         <learn> ./update1.aiml </learn>
       </template>
    </category>
 

@@ -8,6 +8,12 @@ import re
 import os
 import string
 import random
+from dotenv import load_dotenv
+
+load_dotenv()
+
+print(os.environ['AIML_DIR'])
+AIML_DIR=os.environ['AIML_DIR']
 
 class Kernel:
 
@@ -48,15 +54,13 @@ class Kernel:
             return
         self.files.append(file)
 
-        self.kernel.learn(file)
+        #self.kernel.learn(file)
         self.l = []
         self.score = []
         self.tree = ET.parse(file)
         self.root = self.tree.getroot()
 
         self.pattern_factory_topic(self.root)
-
-        
 
     def respond(self, input):
         self.score = []
@@ -65,7 +69,7 @@ class Kernel:
         self.input = str(re.sub(' +', ' ', input).upper().strip())
         self.input = self.input.translate(str.maketrans('','', string.punctuation))
 
-        #self.input = input
+        print(len(self.l), 'list')
 
         batch_pattern = []
         batch_input = []
@@ -98,7 +102,7 @@ class Kernel:
 
         s = self.bert_batch_compare(batch_pattern, batch_input)
         self.score = s
-
+        print(len(self.score), 'score')
         ## find highest entry ##
         high = 0
         num = 0
@@ -106,7 +110,7 @@ class Kernel:
         for i in self.score:
             i = i[0] - i[1]
             i = self.mod_that(self.l[num], input, i)
-            print(i, self.l[num]['initial_template'].text.strip())
+            print(i, self.l[num]['initial_template'].text.strip(), len(self.score))
             if i > high:
                 high = i
                 index = num
@@ -210,6 +214,7 @@ class Kernel:
 
             if i.tag == 'pattern':
                 pat = i.text
+                if pat is None: pat = ''
                 pat = ' '.join(pat.split(' ')).strip()
                 original = ET.tostring(i)
 
@@ -228,6 +233,7 @@ class Kernel:
 
             if i.tag == 'template':
                 tem = i 
+                if tem.text is None: tem.text = ''
                 tem_02 = i.text 
                     
                 set = i.find('./set')
@@ -354,14 +360,14 @@ class Kernel:
             if d['wo_start']:
                 d['start'] = l[0]
                 l = l[1:]
-            if d['wo_end']:
+            elif d['wo_end']:
                 d['end'] = l[-1]
                 l = l[:-1]
         elif len(z) > 1:
             if d['wo_start']:
                 d['start'] = l[0]
                 l = l[z[-1]:] # l[1:]
-            if d['wo_end']:
+            elif d['wo_end']:
                 d['end'] = l[-1]
                 l = l[:z[0]] # l[:-1]
             
@@ -468,7 +474,9 @@ class Kernel:
                         x = self.respond(d['template_modified'])
                         return x 
 
-            if x.tag == "learn" : self.consume_learn(x, d)
+            if x.tag == "learn" : 
+                self.consume_learn(x, d)
+                return ''
             if x.tag == "get" : 
                 z = self.consume_get(x, d)
                 d['template_modified'] += " " + z
@@ -517,7 +525,7 @@ class Kernel:
         
         #print('srai internal :', d['template_modified'])
 
-        if element[0].tail is not None:
+        if len(element) > 0 and element[0].tail is not None:
             #print(element[0].tail, '<< tail')
             d['template_modified'] += ' ' + element[0].tail
 
@@ -549,11 +557,11 @@ class Kernel:
         x = d['initial_learn'].text.strip()
         if not x.startswith('/'):
             cwd = os.getcwd() + '/'
-            x = cwd + x
+            x = cwd + AIML_DIR + x
             if not os.path.isfile(x):
                 print(x, ': bad file specification')
                 return ''
-        #print(x, '<<')
+        print(x, '<<')
         self.learn(x)            
         return ''
 
