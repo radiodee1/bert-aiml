@@ -35,3 +35,9 @@ typing_extensions==3.10.0.0
 urllib3==1.26.4 
 wheel==0.36.2 
 zipp==3.4.1
+
+## 
+## torch==1.8.1+cpu
+## install torch from url below
+## https://pytorch.org/get-started/locally/
+## 
