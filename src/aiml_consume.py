@@ -613,42 +613,31 @@ class Kernel:
         #print(element.attrib)
         name = ''
         value = ''
+        z = ''
         if element.attrib is not None:
             if 'name' in element.attrib.keys():
                 name = element.attrib['name'].lower().strip()
             if 'value' in element.attrib.keys():
-                value = element.attrib['value'].upper().strip()
+                value = element.attrib['value'].upper().strip()            
 
-            #print(name, value, self.memory)
-            if name in self.memory.keys():
-                if value != self.memory[name]:
-                    return ''
-
-        d['template_modified'] = ''
-        if element.text is not None:
-            d['template_modified'] +=  element.text
-        
         for x in element:
             
-            if x.tag == "get" : 
-                z = self.consume_get(x, d)
-                d['template_modified'] += " " + z
-            if x.tag == "set" : 
-                z = self.consume_set(x, d)
+            if x.tag == "li":
+                z = self.consume_li_tag(x, d)
                 if z is not None:
                     d['template_modified'] += " " + z
-            if x.tag == "star" : 
-                z = self.consume_star_tag(x, d)
-                if z is not None:
-                    d['template_modified'] += " " + z
-        
-        #print('condition internal :', d['template_modified'])
+                pass
 
-        if element is not None and len(element) > 0 and element[0].tail is not None:
-            #print(element[0].tail, '<< tail')
-            d['template_modified'] += ' ' + element[0].tail
+        if name in self.memory.keys() and len(z) == 0:
+            if value.upper() != self.memory[name].upper():
+                return ''
+            elif len(z) is 0:
+                return element.text
+            else:
+                return z
 
-        return d['template_modified']
+    def consume_li_tag(self, element, d):
+        pass
         
     
 if __name__ == '__main__':
