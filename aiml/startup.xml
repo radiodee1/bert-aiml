@@ -187,6 +187,7 @@
    <category>
       <pattern>DO YOU FIND ME ATTRACTIVE</pattern>
          <template>
+         <think><set name = "gender"> male</set></think>
          <condition name="gender">
             <li value="male">I find you very handsome.</li>
             <li value="female">I find you very pretty.</li>

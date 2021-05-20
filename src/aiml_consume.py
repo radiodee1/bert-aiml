@@ -194,6 +194,7 @@ class Kernel:
         learn = None
         that = ''
         random = None
+        condition = None
         random_list = []
         star_list = []
         that_star_list = []
@@ -298,7 +299,8 @@ class Kernel:
             'original': original,
             'topic': topic,
             'random': random,
-            'random_list': random_list
+            'random_list': random_list,
+            'condition': condition
         }
 
         if random is not None:
@@ -483,7 +485,7 @@ class Kernel:
             if x.tag == "condition":
                 z = self.consume_condition(x, d)
                 if z is not None and len(z) > 0:
-                    d['template_modified'] += " " + z
+                    d['template_modified'] = z
 
         if len(element) > 0 and element[0].tail is not None:
             #print(element[0].tail, '<< tail')
@@ -614,19 +616,31 @@ class Kernel:
         name = ''
         value = ''
         z = ''
+        match = False
+        fallback = ''
         if element.attrib is not None:
             if 'name' in element.attrib.keys():
                 name = element.attrib['name'].lower().strip()
+                d['condition'] = name
             if 'value' in element.attrib.keys():
                 value = element.attrib['value'].upper().strip()            
 
         for x in element:
             
             if x.tag == "li":
-                z = self.consume_li_tag(x, d)
+                z, match = self.consume_li_tag(x, d)
                 if z is not None:
-                    d['template_modified'] += " " + z
-                pass
+                    if match is False: 
+                        fallback = z
+                    d['template_modified'] = z
+                    if match is True:
+                        break
+
+        if len(z) > 0:
+            if match is False and len(fallback) > 0:
+                return fallback
+            elif match is True and len(d['template_modified']) > 0:
+                return d['template_modified']
 
         if name in self.memory.keys() and len(z) == 0:
             if value.upper() != self.memory[name].upper():
@@ -635,8 +649,31 @@ class Kernel:
                 return element.text
             else:
                 return z
+        return d['template_modified'].strip()
 
     def consume_li_tag(self, element, d):
+        name = d['condition']
+        value = ''
+        exact_match = False
+        print(element.attrib,name)
+
+        if element.attrib is not None and len(element.attrib) > 0:
+            
+            if 'value' in element.attrib.keys():
+                value = element.attrib['value'].upper().strip()  
+
+            if name is not None and name in self.memory.keys() :
+                if value.upper() != self.memory[name].upper():
+                    return '', exact_match
+                else:
+                    exact_match = True
+                    return element.text, exact_match
+            else:
+                
+                return '', exact_match
+        else:
+            return element.text, exact_match
+
         pass
         
     
