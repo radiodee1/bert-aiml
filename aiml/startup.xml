@@ -168,4 +168,30 @@
       
    </category> 
 
+   <category>
+      <pattern> HOW ARE YOU FEELING TODAY </pattern>
+      
+      <template>
+         <think><set name = "state"> happy</set></think>
+         <condition name = "state" value = "happy">
+            I am happy!
+         </condition>
+         
+         <condition name = "state" value = "sad">
+            I am sad!
+         </condition>
+      </template>
+      
+   </category>
+
+   <category>
+      <pattern>DO YOU FIND ME ATTRACTIVE</pattern>
+         <template>
+         <condition name="gender">
+            <li value="male">I find you very handsome.</li>
+            <li value="female">I find you very pretty.</li>
+            <li>I find you very attractive.</li>
+         </condition>
+         </template>
+      </category>
 </aiml>

@@ -480,6 +480,10 @@ class Kernel:
                     d['template_modified'] += " " + z
             if x.tag == "think":
                 self.consume_think(x, d)
+            if x.tag == "condition":
+                z = self.consume_condition(x, d)
+                if z is not None and len(z) > 0:
+                    d['template_modified'] += " " + z
 
         if len(element) > 0 and element[0].tail is not None:
             #print(element[0].tail, '<< tail')
@@ -509,7 +513,7 @@ class Kernel:
                 if z is not None:
                     d['template_modified'] += " " + z
         
-        print('srai internal :', d['template_modified'])
+        #print('srai internal :', d['template_modified'])
 
         if element[0].tail is not None:
             #print(element[0].tail, '<< tail')
@@ -605,6 +609,47 @@ class Kernel:
                 
         return '' 
 
+    def consume_condition(self, element, d):
+        #print(element.attrib)
+        name = ''
+        value = ''
+        if element.attrib is not None:
+            if 'name' in element.attrib.keys():
+                name = element.attrib['name'].lower().strip()
+            if 'value' in element.attrib.keys():
+                value = element.attrib['value'].upper().strip()
+
+            #print(name, value, self.memory)
+            if name in self.memory.keys():
+                if value != self.memory[name]:
+                    return ''
+
+        d['template_modified'] = ''
+        if element.text is not None:
+            d['template_modified'] +=  element.text
+        
+        for x in element:
+            
+            if x.tag == "get" : 
+                z = self.consume_get(x, d)
+                d['template_modified'] += " " + z
+            if x.tag == "set" : 
+                z = self.consume_set(x, d)
+                if z is not None:
+                    d['template_modified'] += " " + z
+            if x.tag == "star" : 
+                z = self.consume_star_tag(x, d)
+                if z is not None:
+                    d['template_modified'] += " " + z
+        
+        #print('condition internal :', d['template_modified'])
+
+        if element is not None and len(element) > 0 and element[0].tail is not None:
+            #print(element[0].tail, '<< tail')
+            d['template_modified'] += ' ' + element[0].tail
+
+        return d['template_modified']
+        
     
 if __name__ == '__main__':
 
