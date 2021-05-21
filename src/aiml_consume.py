@@ -15,7 +15,7 @@ load_dotenv()
 print(os.environ['AIML_DIR'])
 
 AIML_DIR=os.environ['AIML_DIR']
-BATCH_SIZE=int(os.environ['MAX_BATCH_SIZE'])
+BATCH_SIZE=int(os.environ['BATCH_SIZE'])
 
 class Kernel:
 
