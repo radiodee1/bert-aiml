@@ -36,3 +36,11 @@ source $(which virtualenvwrapper.sh)
 
 mkvirtualenv chatbot36 --python $(which python3.6)
 ```
+
+## Environment File
+This file is called `.env` and the contents are below.
+
+```
+AIML_DIR=../data/aiml-en-us-foundation-alice/
+BATCH_SIZE=256
+```
