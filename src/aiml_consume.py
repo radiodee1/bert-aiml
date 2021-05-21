@@ -13,7 +13,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 print(os.environ['AIML_DIR'])
+
 AIML_DIR=os.environ['AIML_DIR']
+BATCH_SIZE=int(os.environ['MAX_BATCH_SIZE'])
 
 class Kernel:
 
@@ -41,7 +43,7 @@ class Kernel:
         index = 0
         self.tokenizer = BertTokenizer.from_pretrained(name[index])
         self.model = BertForNextSentencePrediction.from_pretrained(name[index])
-        print(self.model.config)
+        #print(self.model.config)
 
     def verbose(self, isverbose):
         #print(isverbose)
@@ -69,7 +71,7 @@ class Kernel:
         self.input = str(re.sub(' +', ' ', input).upper().strip())
         self.input = self.input.translate(str.maketrans('','', string.punctuation))
 
-        print(len(self.l), 'list')
+        #print(len(self.l), 'list')
 
         batch_pattern = []
         batch_input = []
@@ -83,19 +85,19 @@ class Kernel:
             return self.output
 
         ## input pattern batch ##
-        batch_size = 256
+        batch_size = BATCH_SIZE
         num = 0
         for ii in range(0, len(self.l) , batch_size):
-            print(ii, ii+batch_size)
+            #print(ii, ii+batch_size)
             
             if ii + batch_size > len(self.l):
                 batch_size = len(self.l) - ii
-            print(batch_size, '< bs')
+            #print(batch_size, '< bs')
             batch_pattern = []
             batch_input = []
             self.target = []
             for j in range(ii, ii+batch_size):
-                print(j, end=',')
+                #print(j, end=',')
 
                 i = self.l[j]
                 i['star'] = None
@@ -117,16 +119,16 @@ class Kernel:
             
             num = 0
             j = 0
-            print()
-            batch_size = 256
+            #print()
+            batch_size = BATCH_SIZE
             if ii + batch_size > len(self.l):
                 batch_size = len(self.l) - ii
             for j in range(ii, ii + batch_size):
-                print(j, num, end=',')
+                #print(j, num, end=',')
 
                 self.score.append(s[num])
                 num += 1
-            print('< score')
+            #print('< score')
             
         
         ## find highest entry ##
