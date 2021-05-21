@@ -81,28 +81,54 @@ class Kernel:
 
         if len(tempout) > 0:
             return self.output
-        ## compare all aiml input patttern ##
-        num = 0
-        for i in self.l:
-            i['star'] = None
-            input_02, d = self.mod_input(i, input)
-            self.l[num] = d
-            ii = i['pattern']
-            #s = self.bert_compare(ii, input_02)
-            #print(ii, num)
-            if i['initial_that'] is not None and len(i['initial_that']) > 0:
-                ii += ' ' + i['initial_that']
-            #print(ii, num)
-            ## batches start
-            batch_pattern.append(ii)
-            batch_input.append(input_02)
-            self.target.append(1)
-            ## batches end
-            num += 1
 
-        s = self.bert_batch_compare(batch_pattern, batch_input)
-        self.score = s
-        print(len(self.score), 'score')
+        ## input pattern batch ##
+        batch_size = 256
+        num = 0
+        for ii in range(0, len(self.l) , batch_size):
+            print(ii, ii+batch_size)
+            
+            if ii + batch_size > len(self.l):
+                batch_size = len(self.l) - ii
+            print(batch_size, '< bs')
+            batch_pattern = []
+            batch_input = []
+            self.target = []
+            for j in range(ii, ii+batch_size):
+                print(j, end=',')
+
+                i = self.l[j]
+                i['star'] = None
+                input_02, d = self.mod_input(i, input)
+                self.l[num] = d
+                ip = i['pattern']
+                #s = self.bert_compare(ii, input_02)
+                #print(ii, num)
+                if i['initial_that'] is not None and len(i['initial_that']) > 0:
+                    ip += ' ' + i['initial_that']
+                #print(ii, num)
+                ## batches start
+                batch_pattern.append(ip)
+                batch_input.append(input_02)
+                self.target.append(1)
+                ## batches end
+                num += 1
+            s = self.bert_batch_compare(batch_pattern, batch_input)
+            
+            num = 0
+            j = 0
+            print()
+            batch_size = 256
+            if ii + batch_size > len(self.l):
+                batch_size = len(self.l) - ii
+            for j in range(ii, ii + batch_size):
+                print(j, num, end=',')
+
+                self.score.append(s[num])
+                num += 1
+            print('< score')
+            
+        
         ## find highest entry ##
         high = 0
         num = 0

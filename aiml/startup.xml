@@ -50,7 +50,7 @@
    <category>
       <pattern>ME </pattern>
       <template>
-         <srai> WHO AM I NOW <get name="username"/> YOU DONT SEE THIS ! </srai>
+         <srai> WHO AM I  <get name="username"/>  </srai>
       </template>
    </category>
 
