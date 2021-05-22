@@ -57,8 +57,8 @@ class Kernel:
         self.files.append(file)
 
         #self.kernel.learn(file)
-        self.l = []
-        self.score = []
+        #self.l = []
+        #self.score = []
         self.tree = ET.parse(file)
         self.root = self.tree.getroot()
 
