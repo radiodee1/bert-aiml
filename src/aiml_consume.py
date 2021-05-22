@@ -27,6 +27,7 @@ class Kernel:
         self.tree = None
         self.root = None
         self.l = []
+        self.z = []
         self.score = []
         self.memory = {}
         self.index = -1
@@ -71,18 +72,25 @@ class Kernel:
         self.input = str(re.sub(' +', ' ', input).upper().strip())
         self.input = self.input.translate(str.maketrans('','', string.punctuation))
 
+        self.l = []
+        word_factor = 2
+        i_length = len(input.strip().split(' '))
         #print(len(self.l), 'list')
+        for j in range(len(self.z)):
+            p = self.z[j]['pattern']
+            p_len = len(p.strip().split(' '))
+            if i_length > p_len + word_factor:
+                continue
+            if i_length < p_len - word_factor:
+                continue
+            self.l.append(self.z[j])
+            pass
+
+        print(len(self.z), len(self.l))
 
         batch_pattern = []
         batch_input = []
         self.target = []
-
-        tempout = '' 
-        ## checkout input and response ##
-        self.output = tempout
-
-        if len(tempout) > 0:
-            return self.output
 
         ## input pattern batch ##
         batch_size = BATCH_SIZE
@@ -102,7 +110,7 @@ class Kernel:
                 i = self.l[j]
                 i['star'] = None
                 input_02, d = self.mod_input(i, input)
-                self.l[num] = d
+                #self.l[num] = d ## <-- ???
                 ip = i['pattern']
                 #s = self.bert_compare(ii, input_02)
                 #print(ii, num)
@@ -146,7 +154,7 @@ class Kernel:
         ## update dictionary ##
         
         d = self.mod_respond_dict(self.l[index], input)
-        self.l[index] = d
+        #self.l[index] = d
         z = self.mod_template_out(self.l[index], input)
         
         self.index = index
@@ -201,7 +209,8 @@ class Kernel:
                     pat_dict = self.pattern_factory(ch2, topic)
                     pat_dict['index'] = num
                     
-                    self.l.append( pat_dict)
+                    #self.l.append( pat_dict)
+                    self.z.append(pat_dict)
 
                     num += 1
                     pass
@@ -211,7 +220,8 @@ class Kernel:
                 pat_dict = self.pattern_factory(child)
                 pat_dict['index'] = num
             
-                self.l.append(pat_dict)
+                #self.l.append(pat_dict)
+                self.z.append(pat_dict)
 
                 num += 1
         pass
