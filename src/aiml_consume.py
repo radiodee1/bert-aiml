@@ -79,9 +79,9 @@ class Kernel:
         for j in range(len(self.z)):
             p = self.z[j]['pattern']
             p_len = len(p.strip().split(' '))
-            if i_length > p_len + word_factor:
+            if i_length >= p_len + word_factor:
                 continue
-            if i_length < p_len - word_factor:
+            if i_length <= p_len - word_factor:
                 continue
             self.l.append(self.z[j])
             pass
@@ -155,14 +155,16 @@ class Kernel:
         
         d = self.mod_respond_dict(self.l[index], input)
         #self.l[index] = d
-        z = self.mod_template_out(self.l[index], input)
+        z = self.mod_template_out(self.l[index], input) ## includes srai output
         
         self.index = index
-        self.output = z
-        self.output = self.choose_output(self.l[index])
+        
+        r = self.choose_output(self.l[index]) ## random
+        if r == '' and z != '':
+            self.output = z
+        else:
+            self.output = r
 
-        if self.incomplete == True:
-            self.output = ''
         
         if len(self.output) > 0: self.depth = 0
 
@@ -180,8 +182,8 @@ class Kernel:
     def choose_output(self, d):
         if len(d['random_list']) > 0:
             return random.choice(d['random_list'])
-        elif True:
-            return d['template_modified'].strip()
+        #elif True:
+        #return d['template_modified'].strip()
         return ''
 
     def bert_batch_compare(self, prompt1, prompt2):
