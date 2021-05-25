@@ -9,6 +9,7 @@ import os
 import string
 import random
 from dotenv import load_dotenv
+import math
 
 load_dotenv()
 
@@ -63,7 +64,7 @@ class Kernel:
         #self.score = []
         self.tree = ET.parse(file)
         self.root = self.tree.getroot()
-        self.files_size = len(self.root)
+        self.files_size =  len(self.root)
 
         self.pattern_factory_topic(self.root)
 
@@ -146,7 +147,7 @@ class Kernel:
         num = 0
         index = -1
         for i in self.score:
-            i = (i[0] - i[1]) # / float(self.l[num]['div'])
+            i = (i[0] - i[1]) # ** (1/float(self.l[num]['div']))
             i = self.mod_that(self.l[num], input, i)
             print(i, self.l[num]['initial_template'].text.strip(), len(self.score))
             if i > high:
