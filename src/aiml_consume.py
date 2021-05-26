@@ -17,6 +17,7 @@ print(os.environ['AIML_DIR'])
 
 AIML_DIR=os.environ['AIML_DIR']
 BATCH_SIZE=int(os.environ['BATCH_SIZE'])
+WORD_FACTOR=int(os.environ['WORD_FACTOR'])
 
 class Kernel:
 
@@ -76,23 +77,24 @@ class Kernel:
         self.input = self.input.translate(str.maketrans('','', string.punctuation))
 
         self.l = []
-        word_factor = 2
+        word_factor = WORD_FACTOR
         i_length = len(input.strip().split(' '))
         #print(len(self.l), 'list')
         for j in range(len(self.z)):
             p = self.z[j]['pattern']
             p_len = len(p.strip().split(' '))
-            if i_length >= p_len + word_factor:
+            if i_length >= p_len + word_factor and word_factor != -1:
                 continue
-            if i_length <= p_len - word_factor:
+            if i_length <= p_len - word_factor and word_factor != -1:
                 continue
             self.l.append(self.z[j])
             pass
 
-        print(len(self.z), len(self.l))
+        print(len(self.z), len(self.l), 'len')
 
         batch_pattern = []
         batch_input = []
+        batch_template = []
         self.target = []
 
         ## input pattern batch ##
@@ -105,6 +107,7 @@ class Kernel:
                 batch_size = len(self.l) - ii
             #print(batch_size, '< bs')
             batch_pattern = []
+            batch_template = []
             batch_input = []
             self.target = []
             for j in range(ii, ii+batch_size):
@@ -117,16 +120,20 @@ class Kernel:
                 ip = i['pattern']
                 #s = self.bert_compare(ii, input_02)
                 #print(ii, num)
+                it = i['initial_template'].text if i['initial_template'] is not None else ''
+                print(it, num, 'it')
                 if i['initial_that'] is not None and len(i['initial_that']) > 0:
                     ip += ' ' + i['initial_that']
                 #print(ii, num)
                 ## batches start
                 batch_pattern.append(ip)
+                batch_template.append(it)
                 batch_input.append(input_02)
                 self.target.append(1)
                 ## batches end
                 num += 1
             s = self.bert_batch_compare(batch_pattern, batch_input)
+            si = self.bert_batch_compare(batch_template, batch_input)
             
             num = 0
             j = 0
@@ -137,7 +144,8 @@ class Kernel:
             for j in range(ii, ii + batch_size):
                 #print(j, num, end=',')
 
-                self.score.append(s[num])
+                self.score.append((*s[num], *si[num]))
+                print(self.score[num], num, 'score')
                 num += 1
             #print('< score')
             
@@ -147,7 +155,7 @@ class Kernel:
         num = 0
         index = -1
         for i in self.score:
-            i = (i[0] - i[1]) # ** (1/float(self.l[num]['div']))
+            i = (i[0] - i[1]) + (i[2] - i[3])  # ** (1/float(self.l[num]['div']))
             i = self.mod_that(self.l[num], input, i)
             print(i, self.l[num]['initial_template'].text.strip(), len(self.score))
             if i > high:
