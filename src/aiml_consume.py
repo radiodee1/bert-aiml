@@ -18,6 +18,7 @@ print(os.environ['AIML_DIR'])
 AIML_DIR=os.environ['AIML_DIR']
 BATCH_SIZE=int(os.environ['BATCH_SIZE'])
 WORD_FACTOR=int(os.environ['WORD_FACTOR'])
+DOUBLE_COMPARE=int(os.environ['DOUBLE_COMPARE'])
 
 class Kernel:
 
@@ -127,7 +128,7 @@ class Kernel:
                 #print(ii, num)
                 ## batches start
                 batch_pattern.append(ip)
-                batch_template.append(it)
+                if DOUBLE_COMPARE == 1: batch_template.append(it)
                 batch_input.append(input_02)
                 #self.target.append(1)
                 ## batches end
@@ -136,8 +137,9 @@ class Kernel:
 
             s = self.bert_batch_compare(batch_pattern, batch_input)
             batch_pattern = []
-            si = self.bert_batch_compare(batch_input, batch_template)
-            batch_template = []
+            if DOUBLE_COMPARE == 1:
+                si = self.bert_batch_compare(batch_input, batch_template)
+                batch_template = []
             batch_input = []
 
             num_s = 0
@@ -148,8 +150,10 @@ class Kernel:
                 batch_size = len(self.l) - ii
             for j in range(ii, ii + batch_size):
                 #print(j, num, end=',')
-
-                self.score.append((*s[num_s], *si[num_s]))
+                score = [*s[num_s]]
+                if DOUBLE_COMPARE == 1:
+                    score.extend(si[num_s])
+                self.score.append( score ) # ((*s[num_s], *si[num_s]))
                 #print(self.score[num_s], num_s, 'score')
                 num_s += 1
             #print('< score')
@@ -161,7 +165,11 @@ class Kernel:
         index = -1
         for _ in self.score:
             i = self.score[num]
-            i = (i[0] - i[1]) + (i[2] - i[3])  # ** (1/float(self.l[num]['div']))
+            #i = (i[0] - i[1])   
+            if DOUBLE_COMPARE == 1:
+                i = (i[0] - i[1]) + (i[2] - i[3])
+            else:
+                i = (i[0] - i[1])
             i = self.mod_that(self.l[num], input, i)
             #print(i, self.l[num]['initial_template'].text.strip(), len(self.score), num, 'tem')
             if i > high:
