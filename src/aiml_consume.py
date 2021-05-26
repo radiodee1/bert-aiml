@@ -297,6 +297,9 @@ class Kernel:
                 start = pat.split(" ")[0]
                 end = pat.split(" ")[-1]
                 #print(learn, "<-- ")
+
+                if learn is not None: tem.text += learn.text
+
             if i.tag == "that":
                 that = i.text
         
