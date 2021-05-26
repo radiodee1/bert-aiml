@@ -34,7 +34,7 @@ class Kernel:
         self.memory = {}
         self.index = -1
         self.incomplete = False
-        self.depth_limit = 5
+        self.depth_limit = 2
         self.depth = 0
         self.files = []
         self.files_size = 0
@@ -199,12 +199,13 @@ class Kernel:
 
     def bert_batch_compare(self, prompt1, prompt2):
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
-        #print(encoding)
-        target = torch.LongTensor(self.target)
-        #print(target)
+        print(encoding)
+        #target = torch.LongTensor(self.target)
+        target = torch.ones((len(prompt1),1), dtype=torch.long)
+        print(target)
         outputs = self.model(**encoding, next_sentence_label=target)
         logits = outputs.logits
-        #print(logits, '< logits')
+        print(logits, '< logits')
         s = logits 
         return s
     
@@ -610,6 +611,7 @@ class Kernel:
 
         #d['initial_learn'] = x.strip()
         x = d['initial_learn'].text.strip()
+        d['initial_learn'] = ''
         if not x.startswith('/'):
             cwd = os.getcwd() + '/'
             x = cwd + AIML_DIR + x
