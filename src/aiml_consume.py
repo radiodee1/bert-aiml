@@ -612,8 +612,10 @@ class Kernel:
         #x = element.text
 
         #d['initial_learn'] = x.strip()
-        x = d['initial_learn'].text.strip()
-        d['initial_learn'] = ''
+        x = ''
+        if d['initial_learn'] is not None:
+            x = d['initial_learn'].text.strip()
+            d['initial_learn'].text = ''
         if not x.startswith('/'):
             cwd = os.getcwd() + '/'
             x = cwd + AIML_DIR + x
