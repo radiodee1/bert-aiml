@@ -39,7 +39,7 @@ class Kernel:
         self.files = []
         self.files_size = 0
         self.input = None
-        self.target = []
+        #self.target = []
         self.answers = []
         self.answers_length = 5
 
@@ -95,7 +95,7 @@ class Kernel:
         batch_pattern = []
         batch_input = []
         batch_template = []
-        self.target = []
+        #self.target = []
 
         ## input pattern batch ##
         batch_size = BATCH_SIZE
@@ -109,7 +109,7 @@ class Kernel:
             batch_pattern = []
             batch_template = []
             batch_input = []
-            self.target = []
+            #self.target = []
             for j in range(ii, ii+batch_size):
                 #print(j, end=',')
 
@@ -129,8 +129,9 @@ class Kernel:
                 batch_pattern.append(ip)
                 batch_template.append(it)
                 batch_input.append(input_02)
-                self.target.append(1)
+                #self.target.append(1)
                 ## batches end
+                print(len(batch_template), len(batch_input), len(batch_pattern), 'len 123')
                 num += 1
             s = self.bert_batch_compare(batch_pattern, batch_input)
             si = self.bert_batch_compare(batch_template, batch_input)
@@ -199,13 +200,13 @@ class Kernel:
 
     def bert_batch_compare(self, prompt1, prompt2):
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
-        print(encoding)
+        #print(encoding)
         #target = torch.LongTensor(self.target)
         target = torch.ones((len(prompt1),1), dtype=torch.long)
-        print(target)
+        #print(target)
         outputs = self.model(**encoding, next_sentence_label=target)
         logits = outputs.logits
-        print(logits, '< logits')
+        #print(outputs, '< logits')
         s = logits 
         return s
     
