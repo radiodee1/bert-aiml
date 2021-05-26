@@ -90,7 +90,7 @@ class Kernel:
             self.l.append(self.z[j])
             pass
 
-        print(len(self.z), len(self.l), 'len')
+        #print(len(self.z), len(self.l), 'len')
 
         batch_pattern = []
         batch_input = []
@@ -121,7 +121,7 @@ class Kernel:
                 #s = self.bert_compare(ii, input_02)
                 #print(ii, num)
                 it = i['initial_template'].text if i['initial_template'] is not None else ''
-                print(it, num, 'it')
+                #print(it, num, 'it')
                 if i['initial_that'] is not None and len(i['initial_that']) > 0:
                     ip += ' ' + i['initial_that']
                 #print(ii, num)
@@ -131,11 +131,15 @@ class Kernel:
                 batch_input.append(input_02)
                 #self.target.append(1)
                 ## batches end
-                print(len(batch_template), len(batch_input), len(batch_pattern), 'len 123')
+                #print(len(batch_template), len(batch_input), len(batch_pattern), 'len 123')
                 num += 1
+
             s = self.bert_batch_compare(batch_pattern, batch_input)
-            si = self.bert_batch_compare(batch_template, batch_input)
-            
+            batch_pattern = []
+            si = self.bert_batch_compare(batch_input, batch_template)
+            batch_template = []
+            batch_input = []
+
             num_s = 0
             j = 0
             #print()
@@ -146,7 +150,7 @@ class Kernel:
                 #print(j, num, end=',')
 
                 self.score.append((*s[num_s], *si[num_s]))
-                print(self.score[num_s], num_s, 'score')
+                #print(self.score[num_s], num_s, 'score')
                 num_s += 1
             #print('< score')
             
@@ -159,7 +163,7 @@ class Kernel:
             i = self.score[num]
             i = (i[0] - i[1]) + (i[2] - i[3])  # ** (1/float(self.l[num]['div']))
             i = self.mod_that(self.l[num], input, i)
-            print(i, self.l[num]['initial_template'].text.strip(), len(self.score), num, 'tem')
+            #print(i, self.l[num]['initial_template'].text.strip(), len(self.score), num, 'tem')
             if i > high:
                 high = i
                 index = num
