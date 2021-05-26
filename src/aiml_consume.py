@@ -136,7 +136,7 @@ class Kernel:
             s = self.bert_batch_compare(batch_pattern, batch_input)
             si = self.bert_batch_compare(batch_template, batch_input)
             
-            num = 0
+            num_s = 0
             j = 0
             #print()
             batch_size = BATCH_SIZE
@@ -145,9 +145,9 @@ class Kernel:
             for j in range(ii, ii + batch_size):
                 #print(j, num, end=',')
 
-                self.score.append((*s[num], *si[num]))
-                print(self.score[num], num, 'score')
-                num += 1
+                self.score.append((*s[num_s], *si[num_s]))
+                print(self.score[num_s], num_s, 'score')
+                num_s += 1
             #print('< score')
             
         
@@ -155,10 +155,11 @@ class Kernel:
         high = 0
         num = 0
         index = -1
-        for i in self.score:
+        for _ in self.score:
+            i = self.score[num]
             i = (i[0] - i[1]) + (i[2] - i[3])  # ** (1/float(self.l[num]['div']))
             i = self.mod_that(self.l[num], input, i)
-            print(i, self.l[num]['initial_template'].text.strip(), len(self.score))
+            print(i, self.l[num]['initial_template'].text.strip(), len(self.score), num, 'tem')
             if i > high:
                 high = i
                 index = num
