@@ -167,7 +167,7 @@ class Kernel:
             i = self.score[num]
             #i = (i[0] - i[1])   
             if DOUBLE_COMPARE == 1:
-                i = (i[0] - i[1]) + (i[2] - i[3])
+                i = (i[0] - i[1]) + (i[2] - i[3]) / 2.0
             else:
                 i = (i[0] - i[1])
             i = self.mod_that(self.l[num], input, i)
