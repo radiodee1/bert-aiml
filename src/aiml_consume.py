@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import aiml as aiml_std
+#import aiml as aiml_std
 from transformers import BertTokenizer, BertForNextSentencePrediction
 import torch
 import xml.etree.ElementTree as ET
@@ -26,7 +26,7 @@ class Kernel:
         self.filename = 'name'
         self.verbose_response = True
         self.output = ""
-        self.kernel = aiml_std.Kernel()
+        #self.kernel = aiml_std.Kernel()
         self.tree = None
         self.root = None
         self.l = []
@@ -53,7 +53,7 @@ class Kernel:
     def verbose(self, isverbose):
         #print(isverbose)
         self.verbose_response = isverbose
-        self.kernel.verbose(isverbose)
+        #self.kernel.verbose(isverbose)
 
     def learn(self, file):
         self.filename = file
