@@ -10,6 +10,9 @@ import string
 import random
 from dotenv import load_dotenv
 import math
+import tracemalloc
+
+tracemalloc.start(5)
 
 load_dotenv()
 
@@ -43,12 +46,15 @@ class Kernel:
         #self.target = []
         self.answers = []
         self.answers_length = 5
+        self.time1 = None
+        self.time2 = None
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
         index = 0
         self.tokenizer = BertTokenizer.from_pretrained(name[index])
         self.model = BertForNextSentencePrediction.from_pretrained(name[index])
         #print(self.model.config)
+        self.time1 = tracemalloc.take_snapshot()
 
     def verbose(self, isverbose):
         #print(isverbose)
@@ -64,11 +70,11 @@ class Kernel:
         #self.kernel.learn(file)
         #self.l = []
         #self.score = []
-        self.tree = ET.parse(file)
-        self.root = self.tree.getroot()
-        self.files_size =  len(self.root)
+        tree = ET.parse(file)
+        root = tree.getroot()
+        self.files_size =  len(root)
 
-        self.pattern_factory_topic(self.root)
+        self.pattern_factory_topic(root)
 
     def respond(self, input):
         self.score = []
@@ -91,7 +97,7 @@ class Kernel:
             self.l.append(self.z[j])
             pass
 
-        #print(len(self.z), len(self.l), 'len')
+        print(len(self.z), len(self.l), 'len')
 
         batch_pattern = []
         batch_input = []
@@ -130,17 +136,19 @@ class Kernel:
                 batch_pattern.append(ip)
                 if DOUBLE_COMPARE == 1: batch_template.append(it)
                 batch_input.append(input_02)
-                #self.target.append(1)
-                ## batches end
-                #print(len(batch_template), len(batch_input), len(batch_pattern), 'len 123')
+                print(num, 'num respond')
+                self.mem_look()
+
                 num += 1
 
             s = self.bert_batch_compare(batch_pattern, batch_input)
-            batch_pattern = []
+            self.mem_look()
+            batch_pattern = None #[]
             if DOUBLE_COMPARE == 1:
                 si = self.bert_batch_compare(batch_input, batch_template)
-                batch_template = []
-            batch_input = []
+                self.mem_look()
+                batch_template = None #[]
+            batch_input = None #[]
 
             num_s = 0
             j = 0
@@ -213,45 +221,47 @@ class Kernel:
 
     def bert_batch_compare(self, prompt1, prompt2):
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
-        #print(encoding)
+        print(len(prompt1), len(prompt2), 'prompt')
         #target = torch.LongTensor(self.target)
-        target = torch.ones((len(prompt1),1), dtype=torch.long)
-        #print(target)
+        target = torch.ones((1,len(prompt1)), dtype=torch.long)
+        print(target)
         outputs = self.model(**encoding, next_sentence_label=target)
-        logits = outputs.logits
+        logits = outputs.logits.detach()
         #print(outputs, '< logits')
-        s = logits 
-        return s
+        return logits
     
+    def mem_look(self):
+        self.time2 = tracemalloc.take_snapshot()
+        stats = self.time2.compare_to(self.time1, 'lineno')
+        for stat in stats[:3]:
+            print(stat)
+
+
     def pattern_factory_topic(self, root):
         num = 0
         for child in root:
             if child.tag == "topic":
-                #print(child.attrib['name'])
                 topic = ''
                 if child.attrib['name'] is not None and len(child.attrib['name'].strip()) > 0:
                     topic = child.attrib['name'].upper().strip()
-                #print('change topic', topic)
                 
                 for ch2 in child:
                     pat_dict = self.pattern_factory(ch2, topic)
                     pat_dict['index'] = num
                     
-                    #self.l.append( pat_dict)
                     self.z.append(pat_dict)
 
                     num += 1
                     pass
 
             if child.tag == "category":
-                #print('do category')
                 pat_dict = self.pattern_factory(child)
                 pat_dict['index'] = num
             
-                #self.l.append(pat_dict)
                 self.z.append(pat_dict)
 
                 num += 1
+        print(num, 'num')
         pass
 
     def pattern_factory(self, category, topic=None):
@@ -276,13 +286,13 @@ class Kernel:
         pat_02 = ""
         original = ""
         for i in category:
-            original = i.text
+            #original = i.text
 
             if i.tag == 'pattern':
                 pat = i.text
                 if pat is None: pat = ''
                 pat = ' '.join(pat.split(' ')).strip()
-                original = ET.tostring(i)
+                #original = ET.tostring(i)
 
                 if '*' in pat:
                     x = pat.strip().split(' ')
