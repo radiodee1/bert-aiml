@@ -10,9 +10,7 @@ import string
 import random
 from dotenv import load_dotenv
 import math
-import tracemalloc
 
-tracemalloc.start(5)
 
 load_dotenv()
 
@@ -22,6 +20,7 @@ AIML_DIR=os.environ['AIML_DIR']
 BATCH_SIZE=int(os.environ['BATCH_SIZE'])
 WORD_FACTOR=int(os.environ['WORD_FACTOR'])
 DOUBLE_COMPARE=int(os.environ['DOUBLE_COMPARE'])
+MAX_LENGTH=int(os.environ['MAX_LENGTH'])
 
 class Kernel:
 
@@ -54,7 +53,6 @@ class Kernel:
         self.tokenizer = BertTokenizer.from_pretrained(name[index])
         self.model = BertForNextSentencePrediction.from_pretrained(name[index])
         #print(self.model.config)
-        self.time1 = tracemalloc.take_snapshot()
 
     def verbose(self, isverbose):
         #print(isverbose)
@@ -97,7 +95,7 @@ class Kernel:
             self.l.append(self.z[j])
             pass
 
-        print(len(self.z), len(self.l), 'len')
+        #print(len(self.z), len(self.l), 'len')
 
         batch_pattern = []
         batch_input = []
@@ -136,17 +134,13 @@ class Kernel:
                 batch_pattern.append(ip)
                 if DOUBLE_COMPARE == 1: batch_template.append(it)
                 batch_input.append(input_02)
-                print(num, 'num respond')
-                self.mem_look()
 
                 num += 1
 
             s = self.bert_batch_compare(batch_pattern, batch_input)
-            self.mem_look()
             batch_pattern = None #[]
             if DOUBLE_COMPARE == 1:
                 si = self.bert_batch_compare(batch_input, batch_template)
-                self.mem_look()
                 batch_template = None #[]
             batch_input = None #[]
 
@@ -220,22 +214,13 @@ class Kernel:
         return ''
 
     def bert_batch_compare(self, prompt1, prompt2):
-        encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True)
-        print(len(prompt1), len(prompt2), 'prompt')
+        encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True, max_length=MAX_LENGTH)
         #target = torch.LongTensor(self.target)
         target = torch.ones((1,len(prompt1)), dtype=torch.long)
-        print(target)
         outputs = self.model(**encoding, next_sentence_label=target)
         logits = outputs.logits.detach()
         #print(outputs, '< logits')
         return logits
-    
-    def mem_look(self):
-        self.time2 = tracemalloc.take_snapshot()
-        stats = self.time2.compare_to(self.time1, 'lineno')
-        for stat in stats[:3]:
-            print(stat)
-
 
     def pattern_factory_topic(self, root):
         num = 0
@@ -261,7 +246,6 @@ class Kernel:
                 self.z.append(pat_dict)
 
                 num += 1
-        print(num, 'num')
         pass
 
     def pattern_factory(self, category, topic=None):
