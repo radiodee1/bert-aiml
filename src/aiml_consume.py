@@ -366,7 +366,7 @@ class Kernel:
             'star': None,
             'star_list': star_list,
             'that_star_list': that_star_list,
-            'original': original,
+            #'original': original,
             'topic': topic,
             'random': random,
             'random_list': random_list,
