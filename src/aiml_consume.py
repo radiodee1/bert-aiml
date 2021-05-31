@@ -131,15 +131,16 @@ class Kernel:
                     ip += ' ' + i['initial_that']
                 #print(ii, num)
                 ## batches start
-                batch_pattern.append(ip)
-                if DOUBLE_COMPARE == 1: batch_template.append(it)
+                if DOUBLE_COMPARE <  2: batch_pattern.append(ip)
+                if DOUBLE_COMPARE >= 1: batch_template.append(it)
                 batch_input.append(input_02)
 
                 num += 1
 
-            s = self.bert_batch_compare(batch_pattern, batch_input)
-            batch_pattern = None #[]
-            if DOUBLE_COMPARE == 1:
+            if DOUBLE_COMPARE < 2:
+                s = self.bert_batch_compare(batch_pattern, batch_input)
+                batch_pattern = None #[]
+            if DOUBLE_COMPARE >= 1:
                 si = self.bert_batch_compare(batch_input, batch_template)
                 batch_template = None #[]
             batch_input = None #[]
@@ -152,8 +153,11 @@ class Kernel:
                 batch_size = len(self.l) - ii
             for j in range(ii, ii + batch_size):
                 #print(j, num, end=',')
-                score = [*s[num_s]]
-                if DOUBLE_COMPARE == 1:
+                score = []
+                if DOUBLE_COMPARE < 2:
+                    score.extend(s[num_s])
+                    pass
+                if DOUBLE_COMPARE >= 1:
                     score.extend(si[num_s])
                 self.score.append( score ) # ((*s[num_s], *si[num_s]))
                 #print(self.score[num_s], num_s, 'score')
@@ -173,7 +177,7 @@ class Kernel:
             else:
                 i = (i[0] - i[1])
             i = self.mod_that(self.l[num], input, i)
-            #print(i, self.l[num]['initial_template'].text.strip(), len(self.score), num, 'tem')
+
             if i > high:
                 high = i
                 index = num
@@ -375,6 +379,7 @@ class Kernel:
 
         if random is not None:
             self.mod_pattern_factory_random_tag(d['random'], d)
+            #print(d)
 
         return d
 
