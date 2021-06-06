@@ -125,11 +125,20 @@ class Kernel:
                 ip = i['pattern']
                 #s = self.bert_compare(ii, input_02)
                 #print(ii, num)
-                it = i['initial_template'].text if i['initial_template'] is not None else ''
+                it = i['template']
+
+                if DOUBLE_COMPARE >= 1:
+                    if len(it.strip()) == 0 and i['initial_template'] is not None:
+                        it = i['initial_template'].text 
+                    if len(it.strip()) == 0 and i['initial_srai'] is not None:
+                        it = i['initial_srai'].text 
+                    
+
                 #print(it, num, 'it')
                 if i['initial_that'] is not None and len(i['initial_that']) > 0:
                     ip += ' ' + i['initial_that']
                 #print(ii, num)
+                
                 ## batches start
                 if DOUBLE_COMPARE <  2: batch_pattern.append(ip)
                 if DOUBLE_COMPARE >= 1: batch_template.append(it)
