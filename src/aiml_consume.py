@@ -14,13 +14,36 @@ import math
 
 load_dotenv()
 
-print(os.environ['AIML_DIR'])
+try:
+    AIML_DIR=os.environ['AIML_DIR'] 
+except:
+    AIML_DIR=''
 
-AIML_DIR=os.environ['AIML_DIR']
-BATCH_SIZE=int(os.environ['BATCH_SIZE'])
-WORD_FACTOR=int(os.environ['WORD_FACTOR'])
-DOUBLE_COMPARE=int(os.environ['DOUBLE_COMPARE'])
-MAX_LENGTH=int(os.environ['MAX_LENGTH'])
+try:
+    BATCH_SIZE=int(os.environ['BATCH_SIZE']) 
+except:
+    BATCH_SIZE = 32
+
+try:
+    WORD_FACTOR=int(os.environ['WORD_FACTOR']) 
+except:
+    WORD_FACTOR = -1
+
+try:
+    DOUBLE_COMPARE=int(os.environ['DOUBLE_COMPARE']) 
+except:
+    DOUBLE_COMPARE = 0
+
+try:
+    MAX_LENGTH=int(os.environ['MAX_LENGTH']) 
+except:
+    MAX_LENGTH = 16
+
+try:
+    CUDA=int(os.environ['CUDA']) 
+except:
+    CUDA = 0
+
 
 class Kernel:
 
@@ -52,6 +75,8 @@ class Kernel:
         index = 0
         self.tokenizer = BertTokenizer.from_pretrained(name[index])
         self.model = BertForNextSentencePrediction.from_pretrained(name[index])
+        if CUDA == 1:
+            self.model = self.model.to('cuda')
         #print(self.model.config)
 
     def verbose(self, isverbose):
@@ -230,6 +255,10 @@ class Kernel:
         encoding = self.tokenizer(prompt1, prompt2, return_tensors='pt', padding=True, truncation=True, add_special_tokens=True, max_length=MAX_LENGTH)
         #target = torch.LongTensor(self.target)
         target = torch.ones((1,len(prompt1)), dtype=torch.long)
+        if CUDA == 1:
+            encoding = encoding.to('cuda')
+            target = target.to('cuda')
+
         outputs = self.model(**encoding, next_sentence_label=target)
         logits = outputs.logits.detach()
         #print(outputs, '< logits')
