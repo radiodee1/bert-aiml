@@ -22,6 +22,13 @@ DOUBLE_COMPARE=1
 ## CUDA can be 0 or 1 ##
 
 CUDA=1
+
+## BERT_MODEL can be 0 or 1
+
+# 0 == bert-base-uncased
+# 1 == bert-large-uncased
+
+BERT_MODEL=0
 ```
 
 It should go in the `src` folder.

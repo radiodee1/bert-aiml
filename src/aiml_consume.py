@@ -44,6 +44,10 @@ try:
 except:
     CUDA = 0
 
+try:
+    BERT_MODEL=int(os.environ['BERT_MODEL'])
+except:
+    BERT_MODEL = 0
 
 class Kernel:
 
@@ -72,7 +76,7 @@ class Kernel:
         self.time2 = None
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
-        index = 0
+        index = BERT_MODEL
         self.tokenizer = BertTokenizer.from_pretrained(name[index])
         self.model = BertForNextSentencePrediction.from_pretrained(name[index])
         if CUDA == 1:
@@ -171,6 +175,7 @@ class Kernel:
 
                 num += 1
 
+            
             if DOUBLE_COMPARE < 2:
                 s = self.bert_batch_compare(batch_pattern, batch_input)
                 batch_pattern = None #[]
@@ -197,7 +202,8 @@ class Kernel:
                 #print(self.score[num_s], num_s, 'score')
                 num_s += 1
             #print('< score')
-            
+        if self.verbose_response:
+            print(len(self.l) // batch_size, 'batches')    
         
         ## find highest entry ##
         high = 0

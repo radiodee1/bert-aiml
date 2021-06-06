@@ -39,11 +39,11 @@
       </template>
    </category>
     <!-- end name discussion -->
-
+    <!-- ai.aiml -->
     <category>
       <pattern>LEARN B</pattern>
       <template>
-         <learn> ./ai.aiml </learn>
+         <learn> ./bot.aiml </learn>
       </template>
    </category>
 
