@@ -1,6 +1,12 @@
 # bert-aiml
 
-The general purpose of this repository is to use BERT and AIML together. Possibly this would allow for the continued use of aiml files in a circumstance where machine learning is most prevalent and proves to be the best tool.
+This is a poorly worded list of reasons for using or working on this project.
+
+* The general purpose of this repository is to use BERT and AIML together. 
+
+* Possibly this would allow for the continued use of aiml files in a circumstance where they are considered old or inflexible. 
+
+* Machine learning is most prevalent and proves to be the best tool but aiml files are defined and easily available.
 
 # env
 The `.env` file should look like this:
@@ -33,4 +39,4 @@ BERT_MODEL=0
 
 It should go in the `src` folder.
 
-Using CUDA, the BATCH_SIZE was 32. This worked fast on a modest gpu. Without the gpu the BATCH_SIZE can be higher. This ends up being slower.
+Using CUDA, and 'bert-base-uncased', the BATCH_SIZE was 32. This worked fast on a modest gpu. Without the gpu the BATCH_SIZE can be higher. This ends up being slower.
