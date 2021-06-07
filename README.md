@@ -10,7 +10,7 @@ This is a poorly worded list of reasons for using or working on this project.
 
 * No training should be done to make this project work.
 
-* The `./src/aiml_consume.py` implements a simple version of aiml 1.0. This file is meant to work on python 3.6. See the `virtualenv` folder for details on installing the python language.
+* The `./src/aiml_consume.py` implements a simple version of aiml 1.0. This file is meant to work on python 3.6. See the `virtualenv` folder for details on installing the python language. This file uses bert to decide which response from the aiml files to use.
 
 * The `./src/aiml_run_example.py` file is used for comparrison, and does not employ bert. It uses the `python-aiml` library.
 
