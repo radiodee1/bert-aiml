@@ -1,6 +1,6 @@
 # bert-aiml
 
-This is a poorly worded list of reasons for using or working on this project.
+This is a poorly worded list of reasons for using or working on this project. Ubuntu 21.04 is the development environment.
 
 * The general purpose of this repository is to use BERT and AIML together. 
 
