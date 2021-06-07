@@ -8,6 +8,12 @@ This is a poorly worded list of reasons for using or working on this project.
 
 * Machine learning is most prevalent and proves to be the best tool but aiml files are defined and easily available.
 
+* No training should be done to make this project work.
+
+* The `./src/aiml_consume.py` implements a simple version of aiml 1.0. This file is meant to work on python 3.6. See the `virtualenv` folder for details on installing the python language.
+
+* The `./src/aiml_run_example.py` file is used for comparrison, and does not employ bert. It uses the `python-aiml` library.
+
 # env
 The `.env` file should look like this:
 
@@ -15,7 +21,7 @@ The `.env` file should look like this:
 AIML_DIR=../data/aiml-en-us-foundation-alice/
 BATCH_SIZE=32
 WORD_FACTOR=-1
-MAX_LENGTH=96
+MAX_LENGTH=32
 
 ## DOUBLE_COMPARE can be 2, 1, or 0 ##
 

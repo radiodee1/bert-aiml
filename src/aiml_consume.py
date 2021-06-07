@@ -202,8 +202,8 @@ class Kernel:
                 #print(self.score[num_s], num_s, 'score')
                 num_s += 1
             #print('< score')
-        if self.verbose_response:
-            print(len(self.l) // batch_size, 'batches')    
+        
+        print(len(self.l) // BATCH_SIZE, 'batches')    
         
         ## find highest entry ##
         high = 0
