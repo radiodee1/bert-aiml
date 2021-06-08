@@ -50,4 +50,4 @@ Using CUDA, and 'bert-base-uncased', the BATCH_SIZE was 32. This worked fast on 
 
 # aiml wildcards
 
-Aiml wildcards work, but are limited to the first or last single word in the sentence in question. This is because the number of words in a sentence could possibly not match the number of words in the `pattern` tag.
+Aiml wildcards are represented by an asterisk. They work, but are limited to the first or last single word in the sentence in question. This is because the number of words in a sentence could possibly not match the number of words in the `pattern` tag.
