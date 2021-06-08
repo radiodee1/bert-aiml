@@ -14,6 +14,8 @@ This is a poorly worded list of reasons for using or working on this project. Ub
 
 * The `./src/aiml_run_example.py` file is used for comparrison, and does not employ bert. It uses the `python-aiml` library.
 
+* Aiml wildcards have been greatly simplified. See below.
+
 # `.env`
 The `.env` file should look like this:
 
