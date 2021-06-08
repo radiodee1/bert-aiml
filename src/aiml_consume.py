@@ -49,6 +49,16 @@ try:
 except:
     BERT_MODEL = 0
 
+try:
+    WEIGHT_TEMPLATE=float(os.environ['WEIGHT_TEMPLATE'])
+except:
+    WEIGHT_TEMPLATE= 1.0
+
+try:
+    WEIGHT_PATTERN=float(os.environ['WEIGHT_PATTERN'])
+except:
+    WEIGHT_PATTERN= 1.0
+
 class Kernel:
 
     def __init__(self):
@@ -213,7 +223,7 @@ class Kernel:
             i = self.score[num]
             #i = (i[0] - i[1])   
             if DOUBLE_COMPARE == 1:
-                i = (i[0] - i[1]) + (i[2] - i[3]) / 2.0
+                i = (i[0] - i[1]) * WEIGHT_PATTERN + (i[2] - i[3]) * WEIGHT_TEMPLATE
             else:
                 i = (i[0] - i[1])
             i = self.mod_that(self.l[num], input, i)
