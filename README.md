@@ -14,7 +14,7 @@ This is a poorly worded list of reasons for using or working on this project. Ub
 
 * The `./src/aiml_run_example.py` file is used for comparrison, and does not employ bert. It uses the `python-aiml` library.
 
-# env
+# `.env`
 The `.env` file should look like this:
 
 ```
@@ -35,7 +35,7 @@ DOUBLE_COMPARE=1
 
 CUDA=1
 
-## BERT_MODEL can be 0 or 1
+## BERT_MODEL can be 0 or 1 ##
 
 # 0 == bert-base-uncased
 # 1 == bert-large-uncased
@@ -46,3 +46,8 @@ BERT_MODEL=0
 It should go in the `src` folder.
 
 Using CUDA, and 'bert-base-uncased', the BATCH_SIZE was 32. This worked fast on a modest gpu. Without the gpu the BATCH_SIZE can be higher. This ends up being slower.
+
+
+# aiml wildcards
+
+Aiml wildcards work, but are limited to the first or last single word in the sentence in question. This is because the number of words in a sentence could possibly not match the number of words in the `pattern` tag.
