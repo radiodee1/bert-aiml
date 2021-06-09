@@ -28,7 +28,7 @@ MAX_LENGTH=32
 ## DOUBLE_COMPARE can be 2, 1, or 0 ##
 
 # 2 == just do template comparison
-# 1 == do double comparison
+# 1 == do double comparison, include weights
 # 0 == just do pattern comparison
 
 DOUBLE_COMPARE=1
@@ -43,6 +43,10 @@ CUDA=1
 # 1 == bert-large-uncased
 
 BERT_MODEL=0
+
+WEIGHT_PATTERN=1.0
+
+WEIGHT_TEMPLATE=0.5
 ```
 
 It should go in the `src` folder.

@@ -428,7 +428,8 @@ class Kernel:
             'topic': topic,
             'random': random,
             'random_list': random_list,
-            'condition': condition
+            'condition': condition,
+            'encounter_think': False
         }
 
         if random is not None:
@@ -660,11 +661,15 @@ class Kernel:
         z = element.text
 
         for x in element:
-            
+            if x.tag == "set" : 
+                z = self.consume_set(x, d)
+                if z is not None and not d['encounter_think']:
+                    d['template_modified'] += " " + z
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
 
         if 'name' in element.attrib:
+            #print(element.attrib,'attrib', d)
             self.memory[element.attrib['name']] = z.upper().strip()
 
         return z
@@ -737,12 +742,14 @@ class Kernel:
     
     def consume_think(self, element, d):
         #print('think :', element.text, element.tag, element.attrib)
-        
+        d['encounter_think'] = True
+
         for x in element:
             
             if x.tag == "set" : 
                 self.consume_set(x, d)
                 
+        d['encounter_think'] = False
         return '' 
 
     def consume_condition(self, element, d):
