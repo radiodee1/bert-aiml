@@ -5,8 +5,8 @@ import aiml
 
 # Create the kernel and learn AIML files
 kernel = aiml.Kernel()
-kernel.verbose(False)
-kernel.learn("../aiml/startup.xml")
+kernel.verbose(True)
+kernel.learn("../aiml/maze.xml")
 #kernel.respond("load aiml b")
 
 # Press CTRL-C to break this loop
