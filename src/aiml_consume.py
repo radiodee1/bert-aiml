@@ -85,7 +85,8 @@ class Kernel:
         self.files = []
         self.files_size = 0
         self.input = None
-        #self.target = []
+        self.used = []
+        self.used_num = 0
         self.answers = []
         self.answers_length = 5
         self.time1 = None
@@ -269,6 +270,7 @@ class Kernel:
 
         self.answers = self.answers[- self.answers_length:] ## last few
         #print(self.answers)
+        if self.args.count: self.count_output(self.output)
 
         return self.output
 
@@ -325,6 +327,12 @@ class Kernel:
             if self.verbose_response: print(i['pattern'])
             t.write(i['pattern'] + '\n')
         t.close()
+        pass
+
+    def count_output(self, output):
+        self.used_num += 1
+        if output not in self.used:
+            self.used.append(output)
         pass
 
     def pattern_factory(self, category, topic=None):
@@ -863,6 +871,14 @@ if __name__ == '__main__':
         try:
             y = input("> ")
         except EOFError:
+            if not k.args.count: exit()
+
+            print(len(k.z), len(k.used), 'ratio', k.used_num, 'attempts')
+            z = open('ratio.txt', 'w')
+            z.write(str(len(k.z)) + ' total categories\n' )
+            z.write(str(len(k.used)) + ' total used\n')
+            z.write(str(k.used_num) + ' number of attempts\n')
+            z.close()
             exit()    
         x = ''
         if len(x.strip()) == 0 : 
