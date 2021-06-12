@@ -860,11 +860,12 @@ if __name__ == '__main__':
         k.raw_pattern()
         exit()
     while True:
-        y = input("> ")
-        #k.respond(y)
-        #x = k.kernel.respond(y)
+        try:
+            y = input("> ")
+        except EOFError:
+            exit()    
         x = ''
-        if len(x.strip()) == 0 and not k.verbose_response: 
+        if len(x.strip()) == 0 : 
             r = k.respond(y) 
             print(r)
         else:
