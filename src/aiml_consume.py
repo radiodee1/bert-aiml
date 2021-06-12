@@ -10,6 +10,7 @@ import string
 import random
 from dotenv import load_dotenv
 import math
+import argparse
 
 
 load_dotenv()
@@ -89,6 +90,12 @@ class Kernel:
         self.answers_length = 5
         self.time1 = None
         self.time2 = None
+        self.args = None
+
+        parser = argparse.ArgumentParser(description="Bert Aiml", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        parser.add_argument('--raw-templates', action='store_true', help='output all raw templates.')
+        parser.add_argument('--count', action='store_true', help='count number of responses.')
+        self.args = parser.parse_args()
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
         index = BERT_MODEL
