@@ -877,7 +877,7 @@ if __name__ == '__main__':
             z = open('ratio.txt', 'w')
             z.write(str(len(k.z)) + ' total categories\n' )
             z.write(str(len(k.used)) + ' total used\n')
-            z.write(str(k.used_num) + ' number of attempts\n')
+            z.write(str(k.used_num) + ' total number of attempts\n')
             z.close()
             exit()    
         x = ''
