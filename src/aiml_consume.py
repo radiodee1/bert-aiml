@@ -93,7 +93,7 @@ class Kernel:
         self.args = None
 
         parser = argparse.ArgumentParser(description="Bert Aiml", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-        parser.add_argument('--raw-templates', action='store_true', help='output all raw templates.')
+        parser.add_argument('--raw-pattern', action='store_true', help='output all raw patterns.')
         parser.add_argument('--count', action='store_true', help='count number of responses.')
         self.args = parser.parse_args()
 
@@ -316,6 +316,15 @@ class Kernel:
                 self.z.append(pat_dict)
 
                 num += 1
+        pass
+    
+    def raw_pattern(self):
+        print('raw patterns')
+        t = open('output.txt', 'w')
+        for i in self.z:
+            if self.verbose_response: print(i['pattern'])
+            t.write(i['pattern'] + '\n')
+        t.close()
         pass
 
     def pattern_factory(self, category, topic=None):
@@ -846,6 +855,10 @@ if __name__ == '__main__':
             else:
                 print('bad file specification')
                 exit()
+    print(k.args)
+    if k.args.raw_pattern:
+        k.raw_pattern()
+        exit()
     while True:
         y = input("> ")
         #k.respond(y)
