@@ -5,9 +5,10 @@
         MAZE
     </pattern>
     <template>
-        
+        <!-- starting room -->
         <think><set name="topic">ROOM01</set></think>
 
+        <!-- one think block for every room -->
         <think><set name="seen01">unseen</set></think>
         <think><set name="seen02">unseen</set></think>
 
@@ -18,7 +19,7 @@
 
 
 
-<!-- room01 -->
+<!-- ROOM01 -->
 
 <!-- direction statements here -->
     <category>
@@ -49,7 +50,7 @@
 
 
 
-<!-- room02 -->
+<!-- ROOM02 -->
 
 <!-- direction statements here -->
     <category>
@@ -78,17 +79,20 @@
 
     </category>
 
+<!-- simple look command -->
     <category>
         <pattern>
             LOOK
         </pattern>
         <template>
+            <!-- one condition block for every room -->
             <condition name="topic" value="ROOM01">
                 <think><set name="seen01">unseen</set></think>
             </condition>
             <condition name="topic" value="ROOM02">
                 <think><set name="seen02">unseen</set></think>
             </condition>
+            
             <srai> INTERNALLOOK <get name="topic" /></srai>
         </template>
     </category>
