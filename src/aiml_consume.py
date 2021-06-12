@@ -676,7 +676,7 @@ class Kernel:
                 if z is not None:
                     d['template_modified'] += " " + z
         
-        #print('srai internal :', d['template_modified'])
+        print('srai internal :', d['template_modified'])
 
         if len(element) > 0 and element[0].tail is not None:
             #print(element[0].tail, '<< tail')
@@ -698,7 +698,7 @@ class Kernel:
                 z = self.consume_star_tag(x, d)
 
         if 'name' in element.attrib:
-            #print(element.attrib,'attrib', d)
+            #print(element.attrib,'attrib', self.memory)
             self.memory[element.attrib['name']] = z.upper().strip()
 
         return z
