@@ -59,6 +59,11 @@ try:
 except:
     WEIGHT_PATTERN= 1.0
 
+try:
+    AIML_FILE=str(os.environ['AIML_FILE'])
+except:
+    AIML_FILE = ''
+
 class Kernel:
 
     def __init__(self):
@@ -823,6 +828,17 @@ if __name__ == '__main__':
     k = Kernel()
     k.verbose(False)
     k.learn('../aiml/startup.xml')
+    if len(AIML_FILE) > 0:
+        if AIML_FILE.startswith('/'):
+            k.learn(AIML_FILE)
+        else:
+            x = os.getcwd() + '/' + AIML_DIR + AIML_FILE
+            if os.path.isfile(x):
+                k.learn(x)
+                print(x,'<<')
+            else:
+                print('bad file specification')
+                exit()
     while True:
         y = input("> ")
         #k.respond(y)

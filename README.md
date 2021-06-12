@@ -21,6 +21,7 @@ The `.env` file should look like this:
 
 ```
 AIML_DIR=../data/aiml-en-us-foundation-alice/
+AIML_FILE=./bot.aiml
 BATCH_SIZE=32
 WORD_FACTOR=-1
 MAX_LENGTH=32
