@@ -21,10 +21,14 @@ The `.env` file should look like this:
 
 ```
 AIML_DIR=../data/aiml-en-us-foundation-alice/
-AIML_FILE=./bot.aiml
+AIML_FILE=${HOME}/workspace/bert-aiml/src/../aiml/maze.xml
 BATCH_SIZE=32
 WORD_FACTOR=-1
 MAX_LENGTH=32
+
+## SRAI_LITERAL can be 0 or 1 ##
+
+SRAI_LITERAL=1
 
 ## DOUBLE_COMPARE can be 2, 1, or 0 ##
 
@@ -32,7 +36,7 @@ MAX_LENGTH=32
 # 1 == do double comparison, include weights
 # 0 == just do pattern comparison
 
-DOUBLE_COMPARE=1
+DOUBLE_COMPARE=0
 
 ## CUDA can be 0 or 1 ##
 
