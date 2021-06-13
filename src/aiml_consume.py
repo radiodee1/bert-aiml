@@ -65,6 +65,11 @@ try:
 except:
     AIML_FILE = ''
 
+try:
+    SRAI_LITERAL=int(os.environ['SRAI_LITERAL'])
+except:
+    SRAI_LITERAL = 1
+
 class Kernel:
 
     def __init__(self):
@@ -125,6 +130,25 @@ class Kernel:
         self.files_size =  len(root)
 
         self.pattern_factory_topic(root)
+
+    def respond_srai(self, input):
+        self.l = []
+        num = 0
+        input = str(re.sub(' +', ' ', input).upper().strip())
+        input = input.translate(str.maketrans('','', string.punctuation))
+
+        for j in range(len(self.z)):
+            self.l.append(self.z[j])
+            i = self.z[j]
+            ii = str(re.sub(' +', ' ', i['pattern']).upper().strip())
+            ii = ii.translate(str.maketrans('','', string.punctuation))
+            #print(ii)
+            if input.strip().upper() == ii.strip().upper():
+                num = j
+                #print(i['template'],'found')
+                #return i['template']
+
+        return self.update_dictionary(num, input)
 
     def respond(self, input):
         self.score = []
@@ -245,10 +269,13 @@ class Kernel:
                 high = i
                 index = num
             num += 1
+        return self.update_dictionary(index, input)
+        
+    def update_dictionary(self, index, input):
         ## update dictionary ##
         
         d = self.mod_respond_dict(self.l[index], input)
-        #self.l[index] = d
+        
         z = self.mod_template_out(self.l[index], input) ## includes srai output
         
         self.index = index
@@ -259,6 +286,7 @@ class Kernel:
         else:
             self.output = r
 
+        pre_output = self.output.strip()
         
         if len(self.output) > 0: self.depth = 0
 
@@ -271,6 +299,8 @@ class Kernel:
         self.answers = self.answers[- self.answers_length:] ## last few
         #print(self.answers)
         if self.args.count: self.count_output(self.output)
+
+        self.output = pre_output
 
         return self.output
 
@@ -552,10 +582,10 @@ class Kernel:
         sta = d['star']
         if set is not None and set.attrib['name']:
             if d['wo_end']:
-                self.memory[set.attrib['name']] = d['end']
+                self.memory[set.attrib['name'].upper()] = d['end']
                 
             if d['wo_start']:
-                self.memory[set.attrib['name']] = d['start']
+                self.memory[set.attrib['name'].upper()] = d['start']
                 
     def mod_respond_dict(self, d, input):
         set = d['set_exp']
@@ -582,8 +612,8 @@ class Kernel:
         if get is not None:
             #d['tem_wo_end'] = True
             t = ''
-            if get.attrib['name'] in self.memory.keys(): # and self.memory.has_key(get.attrib['name']):
-                t = self.memory[get.attrib['name']]
+            if get.attrib['name'].upper() in self.memory.keys(): # and self.memory.has_key(get.attrib['name']):
+                t = self.memory[get.attrib['name'].upper()]
                 if t is  None or t == '':
                     self.incomplete = True
                     
@@ -624,7 +654,10 @@ class Kernel:
                         self.index = 0
                         self.output = ''
                         self.incomplete = False
-                        x = self.respond(d['template_modified'])
+                        if SRAI_LITERAL == 1 or True:
+                            x = self.respond_srai(d['template_modified'])
+                        else:
+                            x = self.respond(d['template_modified'])
                         return x 
 
             if x.tag == "learn" : 
@@ -676,7 +709,7 @@ class Kernel:
                 if z is not None:
                     d['template_modified'] += " " + z
         
-        print('srai internal :', d['template_modified'])
+        #print('srai internal :', d['template_modified'])
 
         if len(element) > 0 and element[0].tail is not None:
             #print(element[0].tail, '<< tail')
@@ -699,8 +732,8 @@ class Kernel:
 
         if 'name' in element.attrib:
             #print(element.attrib,'attrib', self.memory)
-            self.memory[element.attrib['name']] = z.upper().strip()
-
+            self.memory[element.attrib['name'].upper()] = z.upper().strip()
+            print(self.memory, 'memory')
         return z
 
     def consume_learn(self, element, d):
@@ -733,9 +766,9 @@ class Kernel:
             #print(xx)
             pass
 
-        if 'name' in element.attrib.keys() and element.attrib['name'] in self.memory.keys():
+        if 'name' in element.attrib.keys() and element.attrib['name'].upper() in self.memory.keys():
             #print(self.memory, '<< memory get')
-            y = self.memory[element.attrib['name']]
+            y = self.memory[element.attrib['name'].upper()]
             #print(y)
             return y
 
@@ -790,13 +823,15 @@ class Kernel:
         fallback = ''
         if element.attrib is not None:
             if 'name' in element.attrib.keys():
-                name = element.attrib['name'].lower().strip()
+                name = element.attrib['name'].upper().strip()
                 d['condition'] = name
             if 'value' in element.attrib.keys():
                 value = element.attrib['value'].upper().strip()            
 
         for x in element:
-            
+            if x.tag == "think":
+                self.consume_think(x, d)
+
             if x.tag == "li":
                 z, match = self.consume_li_tag(x, d)
                 if z is not None:
@@ -812,7 +847,7 @@ class Kernel:
             elif match is True and len(d['template_modified']) > 0:
                 return d['template_modified']
 
-        if name in self.memory.keys() and len(z) == 0:
+        if name.upper() in self.memory.keys() and len(z) == 0:
             if value.upper() != self.memory[name].upper():
                 return ''
             elif len(z) is 0:
@@ -822,7 +857,7 @@ class Kernel:
         return d['template_modified'].strip()
 
     def consume_li_tag(self, element, d):
-        name = d['condition']
+        name = d['condition'].upper()
         value = ''
         exact_match = False
         print(element.attrib,name)
