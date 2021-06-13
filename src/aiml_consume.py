@@ -828,18 +828,19 @@ class Kernel:
             if 'value' in element.attrib.keys():
                 value = element.attrib['value'].upper().strip()            
 
-        for x in element:
-            if x.tag == "think":
-                self.consume_think(x, d)
+        if True:
+            for x in element:
+                if x.tag == "think" and name.upper() in self.memory.keys() and value.upper() == self.memory[name.upper()].upper():
+                    self.consume_think(x, d)
 
-            if x.tag == "li":
-                z, match = self.consume_li_tag(x, d)
-                if z is not None:
-                    if match is False: 
-                        fallback = z
-                    d['template_modified'] = z
-                    if match is True:
-                        break
+                if x.tag == "li":
+                    z, match = self.consume_li_tag(x, d)
+                    if z is not None:
+                        if match is False: 
+                            fallback = z
+                        d['template_modified'] = z
+                        if match is True:
+                            break
 
         if len(z) > 0:
             if match is False and len(fallback) > 0:
@@ -848,7 +849,7 @@ class Kernel:
                 return d['template_modified']
 
         if name.upper() in self.memory.keys() and len(z) == 0:
-            if value.upper() != self.memory[name].upper():
+            if value.upper() != self.memory[name.upper()].upper():
                 return ''
             elif len(z) is 0:
                 return element.text

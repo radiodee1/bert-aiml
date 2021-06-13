@@ -43,7 +43,7 @@
     <category>
       <pattern>LEARN B</pattern>
       <template>
-         <learn> xx./bot.aiml </learn>
+         <learn>./bot.aiml </learn>
       </template>
    </category>
 
