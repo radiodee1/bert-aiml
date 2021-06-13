@@ -733,7 +733,7 @@ class Kernel:
         if 'name' in element.attrib:
             #print(element.attrib,'attrib', self.memory)
             self.memory[element.attrib['name'].upper()] = z.upper().strip()
-            print(self.memory, 'memory')
+
         return z
 
     def consume_learn(self, element, d):
