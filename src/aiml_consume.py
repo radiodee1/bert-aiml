@@ -199,8 +199,8 @@ class Kernel:
                 input_02, d = self.mod_input(i, input)
                 #self.l[num] = d ## <-- ???
                 ip = i['pattern']
-                #s = self.bert_compare(ii, input_02)
-                #print(ii, num)
+                ip = str(re.sub('\*', '', ip).upper().strip())
+                
                 it = i['template']
 
                 if DOUBLE_COMPARE >= 1:
@@ -386,6 +386,11 @@ class Kernel:
         tem_02 = ""
         pat_02 = ""
         original = ""
+
+        star_list_start = []
+        star_list_end = []
+        star_list_mem = {}
+
         for i in category:
             #original = i.text
 
@@ -431,7 +436,26 @@ class Kernel:
         
         wo_start = False
         wo_end = False
+        ###################
+        max_list_len = 2
+        if pat_02.strip().endswith('*'):
+            max_list_len = 1
 
+        if "*" in pat_02:
+            xx = pat_02.split(' ')
+            #tem_02 = tem_02.split(' ')
+            star_list_start = [ None for _ in range(min( len(xx) // 2 , max_list_len))]
+            star_list_end = [ None for _ in range(min(len(xx) // 2, max_list_len))]
+
+            for ii in range(len(star_list_start)):
+                if xx[ii] == "*" : 
+                    star_list_start[ii] = '*' 
+
+            start_of_xx = len(xx) - len(star_list_end) 
+            for ii in range(len(star_list_end)):
+                if xx[start_of_xx + ii] == "*" : 
+                    star_list_end[ ii] = '*' 
+            
         ###################
         if (pat_02.startswith('_') or pat_02.startswith('*')) and ( pat_02.endswith('*')):
             wo_start_end = True # pat_txt
@@ -482,6 +506,9 @@ class Kernel:
             'that_wo_end': that_wo_end,
             'star': None,
             'star_list': star_list,
+            'star_list_start': star_list_start,
+            'star_list_end': star_list_end,
+            'star_list_mem': star_list_mem,
             'that_star_list': that_star_list,
             #'original': original,
             'topic': topic,
@@ -537,7 +564,11 @@ class Kernel:
         d = d_list
         l = str(re.sub(' +', ' ', input).strip())
         l = l.split(' ')
+        d['star_list_mem'] = {}
         #print(l)
+        ll = str(re.sub(' +', ' ',input).strip())
+        ll = ll.split(' ')
+        
         z = d['star_list']
         if len(z) is 1:
             if d['wo_start']:
@@ -549,12 +580,32 @@ class Kernel:
         elif len(z) > 1:
             if d['wo_start']:
                 d['start'] = l[0]
-                l = l[z[-1]:] # l[1:]
+                l = l[z[-1]:] 
             elif d['wo_end']:
                 d['end'] = l[-1]
-                l = l[:z[0]] # l[:-1]
+                l = l[:z[0]] 
+        
+
+        num = 0
+        if len(d['star_list_start']) > 0 or len(d['star_list_end']) > 0 and len(d['star_list_start']) >= len(ll):
             
-        #print(l)
+
+            for ii in range(len(d['star_list_start'])):
+                if d['star_list_start'][ii] is not None and ii < len(ll):
+                    d['star_list_mem'][num] = ll[ii]
+                    num += 1
+                    pass
+
+            start_of_xx = len(ll) - len(d['star_list_end'])
+            start_of_xx = max(start_of_xx, 0)
+            for ii in range(len(d['star_list_end'])):
+                if d['star_list_end'][ii] is not None and ii < len(ll):
+                    d['star_list_mem'][num] = ll[start_of_xx + ii]
+                    num += 1
+                pass
+            #print(d)
+            #print(ll)
+
         input = ' '.join(l)
         return input, d
 
@@ -577,16 +628,36 @@ class Kernel:
 
     def mod_set(self, d):
         set = d['set_exp']
+        '''
         get = d['get_exp']
         tem = d['initial_template']
         sta = d['star']
+        '''
+
+        if set is None: return
+        t = ''
+        for x in set:
+            if x.tag == "star":
+                if 'index' in x.attrib.keys() and int(x.attrib['index']) > 0:
+                    t = d['star_list_mem'][int(x.attrib['index'])]
+                else:
+                    t = d['star_list_mem'][0]
+                pass
+            else:
+                t = set.text.strip()
+
+        self.memory[set.attrib['name'].upper()] = t
+
+        
+        '''
         if set is not None and set.attrib['name']:
             if d['wo_end']:
                 self.memory[set.attrib['name'].upper()] = d['end']
                 
             if d['wo_start']:
                 self.memory[set.attrib['name'].upper()] = d['start']
-                
+        '''
+
     def mod_respond_dict(self, d, input):
         set = d['set_exp']
         get = d['get_exp']
@@ -609,19 +680,21 @@ class Kernel:
         d['tem_wo_start'] = tem_x.startswith("<") or tem_x.startswith('_') or tem_x.startswith('*')
         d['tem_wo_end'] = tem_x.endswith("*") or tem_x.endswith(">")
         #print(z, self.memory)
+        t = ''
         if get is not None:
-            #d['tem_wo_end'] = True
-            t = ''
-            if get.attrib['name'].upper() in self.memory.keys(): # and self.memory.has_key(get.attrib['name']):
+            
+            #t = ''
+            if get.attrib['name'].upper() in self.memory.keys(): 
                 t = self.memory[get.attrib['name'].upper()]
                 if t is  None or t == '':
                     self.incomplete = True
                     
                     d['template'] = ''
                     return d #['template']
-            #### 
+        #### 
+        if t is not None and t != '':
             tt = ''
-            
+
             if d['tem_wo_end']:
                 tt = tem.text.strip() + ' ' + t
             elif d['tem_wo_start']:
@@ -629,7 +702,7 @@ class Kernel:
             
             d['template'] = tt #tem
             #print(d, 'd')
-            return d #['template']
+            return d 
 
         return d
 
