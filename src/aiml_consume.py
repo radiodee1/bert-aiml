@@ -608,10 +608,10 @@ class Kernel:
             #print(d)
             #print(ll)
 
-        input = ' '.join(l)
-        if len(l) > len(ll):
-            print(ll)
-            input = ' '.join(ll)
+        #input = ' '.join(l)
+        #if len(l) > len(ll):
+        #    print(ll)
+        input = ' '.join(ll)
 
         return input, d
 
