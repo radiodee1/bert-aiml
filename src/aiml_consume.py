@@ -805,7 +805,7 @@ class Kernel:
             if x.tag == "set" : 
                 z = self.consume_set(x, d)
                 if z is not None and not d['encounter_think']:
-                    d['template_modified'] += " " + z
+                    d['template_modified']  += ' ' + z
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
 
