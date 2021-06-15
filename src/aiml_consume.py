@@ -568,7 +568,7 @@ class Kernel:
         #print(l)
         ll = str(re.sub(' +', ' ',input).strip())
         ll = ll.split(' ')
-        
+        '''
         z = d['star_list']
         if len(z) is 1:
             if d['wo_start']:
@@ -584,7 +584,7 @@ class Kernel:
             elif d['wo_end']:
                 d['end'] = l[-1]
                 l = l[:z[0]] 
-        
+        '''
 
         num = 0
         if len(d['star_list_start']) > 0 or len(d['star_list_end']) > 0 and len(d['star_list_start']) >= len(ll):
@@ -593,6 +593,7 @@ class Kernel:
             for ii in range(len(d['star_list_start'])):
                 if d['star_list_start'][ii] is not None and ii < len(ll):
                     d['star_list_mem'][num] = ll[ii]
+                    ll.pop(ii)
                     num += 1
                     pass
 
@@ -601,12 +602,17 @@ class Kernel:
             for ii in range(len(d['star_list_end'])):
                 if d['star_list_end'][ii] is not None and ii < len(ll):
                     d['star_list_mem'][num] = ll[start_of_xx + ii]
+                    ll.pop(start_of_xx + ii)
                     num += 1
                 pass
             #print(d)
             #print(ll)
 
         input = ' '.join(l)
+        if len(l) > len(ll):
+            print(ll)
+            input = ' '.join(ll)
+
         return input, d
 
     def mod_template_out(self, d_list, input):
