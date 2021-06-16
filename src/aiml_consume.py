@@ -181,6 +181,7 @@ class Kernel:
         ## input pattern batch ##
         batch_size = BATCH_SIZE
         num = 0
+        replacements = 0
         for ii in range(0, len(self.l) , batch_size):
             #print(ii, ii+batch_size)
             
@@ -208,7 +209,10 @@ class Kernel:
                         it = i['initial_template'].text 
                     if len(it.strip()) == 0 and i['initial_srai'] is not None:
                         it = i['initial_srai'].text 
-                    
+                    if len(it.strip()) == 0 :
+                        it = i['pattern']
+                        replacements += 1
+                        #print('empty input template', it, j)
 
                 #print(it, num, 'it')
                 if i['initial_that'] is not None and len(i['initial_that']) > 0:
@@ -250,7 +254,8 @@ class Kernel:
                 num_s += 1
             #print('< score')
         
-        print(len(self.l) // BATCH_SIZE, 'batches')    
+        print(len(self.l) // BATCH_SIZE, 'batches') 
+        if replacements > 0: print(replacements, 'replacements', len(self.l), 'total')   
         
         ## find highest entry ##
         high = 0
