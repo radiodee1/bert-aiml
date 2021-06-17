@@ -626,6 +626,8 @@ class Kernel:
         l = input.split(' ')
         
         #print(d, 'd')
+        d['template_modified'] = ''
+
         if d['initial_template'] is not None:
             d['template_modified'] = ''
             xx = self.consume_template(d['initial_template'], d)
