@@ -1,4 +1,4 @@
-0
+00
 
 Room 0 - some short text here
 
@@ -6,5 +6,6 @@ This is the longer text that fills the screen when the room is visited for the f
 @ Go east;1
 @ Go west;2
 @ go south; 3
+
 
 # hash is for comments.
