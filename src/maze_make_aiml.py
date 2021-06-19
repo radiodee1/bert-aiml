@@ -24,6 +24,7 @@ class Maze:
         w.write('<aiml version="1.0.1" encoding="UTF-8">\n')
         self.entry_category(w)
         self.direction_statements(w)
+        self.simple_look(w)
         w.write('</aiml>\n')
         pass
     
@@ -105,23 +106,68 @@ class Maze:
             </category>\n''')
         pass
 
-    def reused_seen(self, file, num):
+    def reused_seen(self, file, num, val='unseen'):
         num = '000' + str(num)
         num = num[-2:]
-        file.write('''<think><set name="seen''' + num + '''">unseen</set></think>''')
+        file.write('''            <think><set name="seen''' + num + '''">''' + val + '''</set></think>''')
         pass
 
     def direction_statements(self, file):
         for i in range(len(self.rooms)):
             num = self.rooms[i]['number']
-            file.write('<!-- ROOM' + num + ' -->')
-
+            file.write('<!-- ROOM' + str(num) + ' -->\n')
+            for ii in self.rooms[i]['phrases'].keys():
+                numx = '000' + str(self.rooms[i]['phrases'][ii])
+                numx = numx[-2:]
+                file.write('''        <category>
+                <pattern>''' + ii + '''</pattern>
+                <template>
+                    <think><set name="topic">ROOM''' + numx + '''</set></think>
+                    <srai> INTERNALLOOK <get name="topic" /></srai>
+                </template>
+                </category>\n''')
+            self.internal_look(file, num)
         pass
 
     def internal_look(self, file, num):
+        numx = '000' + str(num)
+        numx = numx[-2:]
+        file.write('''        <category>
+        <pattern>INTERNALLOOK ROOM''' + numx + '''</pattern>
+            <template>
+                <condition name="seen''' + numx + '''" value="unseen">
+                    room02 - long description here - go west if you want to.
+                </condition>
+
+                <condition name="seen''' + numx + '''" value="seen">
+                    room02 - short description here.
+                </condition>
+
+                <think><set name="seen''' + numx + '''">seen</set></think>
+            </template>
+
+        </category>\n''')
         pass
 
     def simple_look(self, file):
+        file.write('''<!-- simple look command -->\n''')
+        file.write('''        <category>
+        <pattern>
+            LOOK
+        </pattern>
+        <template>
+            <!-- one condition block for every room -->\n''')
+
+        for i in range(len(self.rooms)):
+            num = self.rooms[i]['number']
+            numx = '000' + str(num)
+            numx = numx[-2:]
+            file.write('''            <condition name="topic" value="ROOM''' + numx + '''">
+                <think><set name="seen''' + numx + '''">unseen</set></think>
+            </condition>\n''')
+        file.write('''            <srai> INTERNALLOOK <get name="topic" /></srai>
+            </template>
+            </category>\n''')
         pass
 
 if __name__ == '__main__':

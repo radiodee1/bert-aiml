@@ -7,7 +7,57 @@ try maze
             </pattern>
             <template>
             <!-- starting room -->
-<think><set name="seen00">unseen</set></think>
+            <think><set name="seen00">unseen</set></think>
+            <srai> INTERNALLOOK <get name="topic" /></srai>
+            </template>
+            </category>
+<!-- ROOM0 -->
+        <category>
+                <pattern>go east</pattern>
+                <template>
+                    <think><set name="topic">ROOM01</set></think>
+                    <srai> INTERNALLOOK <get name="topic" /></srai>
+                </template>
+                </category>
+        <category>
+                <pattern>go west</pattern>
+                <template>
+                    <think><set name="topic">ROOM02</set></think>
+                    <srai> INTERNALLOOK <get name="topic" /></srai>
+                </template>
+                </category>
+        <category>
+                <pattern>go south</pattern>
+                <template>
+                    <think><set name="topic">ROOM03</set></think>
+                    <srai> INTERNALLOOK <get name="topic" /></srai>
+                </template>
+                </category>
+        <category>
+        <pattern>INTERNALLOOK ROOM00</pattern>
+            <template>
+                <condition name="seen00" value="unseen">
+                    room02 - long description here - go west if you want to.
+                </condition>
+
+                <condition name="seen00" value="seen">
+                    room02 - short description here.
+                </condition>
+
+                <think><set name="seen00">seen</set></think>
+            </template>
+
+        </category>
+<!-- simple look command -->
+        <category>
+        <pattern>
+            LOOK
+        </pattern>
+        <template>
+            <!-- one condition block for every room -->
+            <condition name="topic" value="ROOM00">
+                <think><set name="seen00">unseen</set></think>
+            </condition>
             <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
