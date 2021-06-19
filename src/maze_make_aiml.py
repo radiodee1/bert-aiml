@@ -138,15 +138,17 @@ class Maze:
     def internal_look(self, file, num):
         numx = '000' + str(num)
         numx = numx[-2:]
+        long = self.rooms[num]['description']
+        short = self.rooms[num]['title']
         file.write('''        <category>
         <pattern>INTERNALLOOK ROOM''' + numx + '''</pattern>
             <template>
                 <condition name="seen''' + numx + '''" value="unseen">
-                    room02 - long description here - go west if you want to.
+                    ''' + long + '''
                 </condition>
 
                 <condition name="seen''' + numx + '''" value="seen">
-                    room02 - short description here.
+                    ''' + short + '''
                 </condition>
 
                 <think><set name="seen''' + numx + '''">seen</set></think>

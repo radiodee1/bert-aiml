@@ -29,11 +29,11 @@ TRY MAZE
         <pattern>INTERNALLOOK ROOM01</pattern>
             <template>
                 <condition name="seen01" value="unseen">
-                    room02 - long description here - go west if you want to.
+                    Go east. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen01" value="seen">
-                    room02 - short description here.
+                    Room 2 - west room
                 </condition>
 
                 <think><set name="seen01">seen</set></think>
@@ -52,11 +52,11 @@ TRY MAZE
         <pattern>INTERNALLOOK ROOM02</pattern>
             <template>
                 <condition name="seen02" value="unseen">
-                    room02 - long description here - go west if you want to.
+                    go north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen02" value="seen">
-                    room02 - short description here.
+                    Room 3 - South room
                 </condition>
 
                 <think><set name="seen02">seen</set></think>
@@ -75,11 +75,11 @@ TRY MAZE
         <pattern>INTERNALLOOK ROOM03</pattern>
             <template>
                 <condition name="seen03" value="unseen">
-                    room02 - long description here - go west if you want to.
+                    Go east, west, or south. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen03" value="seen">
-                    room02 - short description here.
+                    Room 0 - Start room
                 </condition>
 
                 <think><set name="seen03">seen</set></think>
@@ -112,11 +112,11 @@ TRY MAZE
         <pattern>INTERNALLOOK ROOM00</pattern>
             <template>
                 <condition name="seen00" value="unseen">
-                    room02 - long description here - go west if you want to.
+                    Go west. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen00" value="seen">
-                    room02 - short description here.
+                    Room 1 - East room
                 </condition>
 
                 <think><set name="seen00">seen</set></think>
