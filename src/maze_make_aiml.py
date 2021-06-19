@@ -93,10 +93,9 @@ class Maze:
     def entry_category(self, file):
         file.write('''
             <category>
-            <pattern>\n''')
-        file.write(self.entry_pattern.upper() + '\n')
-        file.write('''
-            </pattern>
+            <pattern>''')
+        file.write(self.entry_pattern.upper() )
+        file.write('''</pattern>
             <template>
             <!-- starting room -->\n''')
         # insert think here
@@ -117,13 +116,17 @@ class Maze:
     def reused_seen(self, file, num, val='unseen'):
         num = '000' + str(num)
         num = num[-2:]
-        file.write('''            <think><set name="seen''' + num + '''">''' + val + '''</set></think>\n''')
+        file.write('''
+            <think><set name="seen''' + num + '''">''' + val + '''</set></think>\n''')
         pass
 
     def direction_statements(self, file):
         for i in range(len(self.rooms)):
             num = self.rooms[i]['number']
             file.write('<!-- ROOM' + str(num) + ' -->\n')
+            numx = '000' + str(num)
+            numx = numx[-2:]
+            #file.write('<topic = ROOM' + numx + '>\n')
             for ii in self.rooms[i]['phrases'].keys():
                 print(ii, self.rooms[i]['phrases'][ii])
                 
@@ -131,12 +134,15 @@ class Maze:
                 numx = numx[-2:]
                 file.write('''
                 <category>
-                <pattern>''' + ii.upper() + '''</pattern>
+                <pattern>
+                ''' + ii.upper() + '''
+                </pattern>
                 <template>
                     <think><set name="topic">ROOM''' + numx + '''</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
                 </template>
                 </category>\n''')
+            #file.write('</topic>\n')
             self.internal_look(file, num)
         pass
 

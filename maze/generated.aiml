@@ -1,17 +1,18 @@
 <aiml version="1.0.1" encoding="UTF-8">
 
             <category>
-            <pattern>
-TRY MAZE
-
-            </pattern>
+            <pattern>TRY MAZE</pattern>
             <template>
             <!-- starting room -->
 
             <think><set name="topic">ROOM00</set></think>
+
             <think><set name="seen00">unseen</set></think>
+
             <think><set name="seen01">unseen</set></think>
+
             <think><set name="seen02">unseen</set></think>
+
             <think><set name="seen03">unseen</set></think>
 
             <srai> INTERNALLOOK <get name="topic" /></srai>
@@ -20,7 +21,9 @@ TRY MAZE
 <!-- ROOM0 -->
 
                 <category>
-                <pattern>GO EAST</pattern>
+                <pattern>
+                GO EAST
+                </pattern>
                 <template>
                     <think><set name="topic">ROOM01</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
@@ -28,7 +31,9 @@ TRY MAZE
                 </category>
 
                 <category>
-                <pattern>GO WEST</pattern>
+                <pattern>
+                GO WEST
+                </pattern>
                 <template>
                     <think><set name="topic">ROOM02</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
@@ -36,7 +41,9 @@ TRY MAZE
                 </category>
 
                 <category>
-                <pattern>GO SOUTH</pattern>
+                <pattern>
+                GO SOUTH
+                </pattern>
                 <template>
                     <think><set name="topic">ROOM03</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
@@ -60,7 +67,9 @@ TRY MAZE
 <!-- ROOM1 -->
 
                 <category>
-                <pattern>GO WEST</pattern>
+                <pattern>
+                GO WEST
+                </pattern>
                 <template>
                     <think><set name="topic">ROOM00</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
@@ -84,7 +93,9 @@ TRY MAZE
 <!-- ROOM2 -->
 
                 <category>
-                <pattern>GO EAST</pattern>
+                <pattern>
+                GO EAST
+                </pattern>
                 <template>
                     <think><set name="topic">ROOM00</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
@@ -108,7 +119,9 @@ TRY MAZE
 <!-- ROOM3 -->
 
                 <category>
-                <pattern>GO NORTH</pattern>
+                <pattern>
+                GO NORTH
+                </pattern>
                 <template>
                     <think><set name="topic">ROOM00</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
