@@ -15,9 +15,11 @@ class Maze:
 
     def read_files(self):
         g = glob.glob(self.dir + self.name)
+        g.sort()
         print(g)
         for i in g:
             self.rooms.append(self.room_factory(room=i))
+        
         pass
 
     def write_xml(self):
@@ -123,10 +125,13 @@ class Maze:
             num = self.rooms[i]['number']
             file.write('<!-- ROOM' + str(num) + ' -->\n')
             for ii in self.rooms[i]['phrases'].keys():
+                print(ii, self.rooms[i]['phrases'][ii])
+                
                 numx = '000' + str(self.rooms[i]['phrases'][ii])
                 numx = numx[-2:]
-                file.write('''        <category>
-                <pattern>''' + ii + '''</pattern>
+                file.write('''
+                <category>
+                <pattern>''' + ii.upper() + '''</pattern>
                 <template>
                     <think><set name="topic">ROOM''' + numx + '''</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
