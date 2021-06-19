@@ -9,6 +9,8 @@ class Maze:
         self.rooms = []
         self.name = 'room*.maze'
         self.dir = './../maze/'
+        self.entry_pattern = 'try maze'
+        self.out_aiml = 'generated.aiml'
 
     def read_files(self):
         g = glob.glob(self.dir + self.name)
@@ -18,6 +20,11 @@ class Maze:
         pass
 
     def write_xml(self):
+        w = open(self.dir + self.out_aiml, 'w')
+        w.write('<aiml version="1.0.1" encoding="UTF-8">\n')
+        self.entry_category(w)
+        self.direction_statements(w)
+        w.write('</aiml>\n')
         pass
     
     def room_factory(self, room=''):
@@ -79,8 +86,46 @@ class Maze:
         #print(x)
         return x
     
+    def entry_category(self, file):
+        file.write('''
+            <category>
+            <pattern>\n''')
+        file.write(self.entry_pattern + '\n')
+        file.write('''
+            </pattern>
+            <template>
+            <!-- starting room -->\n''')
+        # insert think here
+        for i in range(len(self.rooms)):
+            self.reused_seen(file, self.rooms[i]['number'])
+
+        file.write('''
+            <srai> INTERNALLOOK <get name="topic" /></srai>
+            </template>
+            </category>\n''')
+        pass
+
+    def reused_seen(self, file, num):
+        num = '000' + str(num)
+        num = num[-2:]
+        file.write('''<think><set name="seen''' + num + '''">unseen</set></think>''')
+        pass
+
+    def direction_statements(self, file):
+        for i in range(len(self.rooms)):
+            num = self.rooms[i]['number']
+            file.write('<!-- ROOM' + num + ' -->')
+
+        pass
+
+    def internal_look(self, file, num):
+        pass
+
+    def simple_look(self, file):
+        pass
 
 if __name__ == '__main__':
     m = Maze()
     m.read_files()
     print(m.rooms)
+    m.write_xml()

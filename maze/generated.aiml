@@ -1,0 +1,14 @@
+<aiml version="1.0.1" encoding="UTF-8">
+
+            <category>
+            <pattern>
+try maze
+
+            </pattern>
+            <template>
+            <!-- starting room -->
+<think><set name="seen00">unseen</set></think>
+            <srai> INTERNALLOOK <get name="topic" /></srai>
+            </template>
+            </category>
+</aiml>
