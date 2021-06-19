@@ -10,6 +10,7 @@ class Maze:
         self.name = 'room*.maze'
         self.dir = './../maze/'
         self.entry_pattern = 'try maze'
+        self.entry_room_num = 0
         self.out_aiml = 'generated.aiml'
 
     def read_files(self):
@@ -91,12 +92,17 @@ class Maze:
         file.write('''
             <category>
             <pattern>\n''')
-        file.write(self.entry_pattern + '\n')
+        file.write(self.entry_pattern.upper() + '\n')
         file.write('''
             </pattern>
             <template>
             <!-- starting room -->\n''')
         # insert think here
+        num = str(self.entry_room_num)
+        num = '000' + num
+        num = num[-2:]
+        file.write('''
+            <think><set name="topic">ROOM''' + num + '''</set></think>\n''')
         for i in range(len(self.rooms)):
             self.reused_seen(file, self.rooms[i]['number'])
 
@@ -109,7 +115,7 @@ class Maze:
     def reused_seen(self, file, num, val='unseen'):
         num = '000' + str(num)
         num = num[-2:]
-        file.write('''            <think><set name="seen''' + num + '''">''' + val + '''</set></think>''')
+        file.write('''            <think><set name="seen''' + num + '''">''' + val + '''</set></think>\n''')
         pass
 
     def direction_statements(self, file):

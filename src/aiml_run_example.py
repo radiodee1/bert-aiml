@@ -6,7 +6,7 @@ import aiml
 # Create the kernel and learn AIML files
 kernel = aiml.Kernel()
 kernel.verbose(True)
-kernel.learn("../aiml/maze.xml")
+kernel.learn("../maze/generated.aiml")
 #kernel.respond("load aiml b")
 
 # Press CTRL-C to break this loop

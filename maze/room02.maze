@@ -1,0 +1,9 @@
+2
+
+Room 2 - west room
+
+Go east. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+@ Go east;0
+
+
+# hash is for comments.

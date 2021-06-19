@@ -1,0 +1,9 @@
+3
+
+Room 3 - South room
+
+go north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+@ Go north;0
+
+
+# hash is for comments.
