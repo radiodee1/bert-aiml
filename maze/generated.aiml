@@ -18,11 +18,181 @@
             <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
+<category>
+<pattern>GO NORTH</pattern>
+<template><condition name="topic" value="ROOM00">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    <srai>INTERNAL ROOM00 GO NORTH</srai>
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO SOUTH</pattern>
+<template><condition name="topic" value="ROOM00">
+    <srai>INTERNAL ROOM03 GO SOUTH</srai>
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO WEST</pattern>
+<template><condition name="topic" value="ROOM00">
+    <srai>INTERNAL ROOM02 GO WEST</srai>
+</condition>
+<condition name="topic" value="ROOM01">
+    <srai>INTERNAL ROOM00 GO WEST</srai>
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO EAST</pattern>
+<template><condition name="topic" value="ROOM00">
+    <srai>INTERNAL ROOM01 GO EAST</srai>
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    <srai>INTERNAL ROOM00 GO EAST</srai>
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO UP</pattern>
+<template><condition name="topic" value="ROOM00">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO DOWN</pattern>
+<template><condition name="topic" value="ROOM00">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO NORTHEAST</pattern>
+<template><condition name="topic" value="ROOM00">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO SOUTHEAST</pattern>
+<template><condition name="topic" value="ROOM00">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO NORTHWEST</pattern>
+<template><condition name="topic" value="ROOM00">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>GO SOUTHWEST</pattern>
+<template><condition name="topic" value="ROOM00">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM01">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM02">
+    You cannot do that here.
+</condition>
+<condition name="topic" value="ROOM03">
+    You cannot do that here.
+</condition>
+</template>
+</category>
+
 <!-- ROOM0 -->
 
                 <category>
                 <pattern>
-                GO EAST
+                INTERNAL ROOM01 GO EAST
                 </pattern>
                 <template>
                     <think><set name="topic">ROOM01</set></think>
@@ -32,7 +202,7 @@
 
                 <category>
                 <pattern>
-                GO WEST
+                INTERNAL ROOM02 GO WEST
                 </pattern>
                 <template>
                     <think><set name="topic">ROOM02</set></think>
@@ -42,7 +212,7 @@
 
                 <category>
                 <pattern>
-                GO SOUTH
+                INTERNAL ROOM03 GO SOUTH
                 </pattern>
                 <template>
                     <think><set name="topic">ROOM03</set></think>
@@ -68,7 +238,7 @@
 
                 <category>
                 <pattern>
-                GO WEST
+                INTERNAL ROOM00 GO WEST
                 </pattern>
                 <template>
                     <think><set name="topic">ROOM00</set></think>
@@ -94,7 +264,7 @@
 
                 <category>
                 <pattern>
-                GO EAST
+                INTERNAL ROOM00 GO EAST
                 </pattern>
                 <template>
                     <think><set name="topic">ROOM00</set></think>
@@ -120,7 +290,7 @@
 
                 <category>
                 <pattern>
-                GO NORTH
+                INTERNAL ROOM00 GO NORTH
                 </pattern>
                 <template>
                     <think><set name="topic">ROOM00</set></think>

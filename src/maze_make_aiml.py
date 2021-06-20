@@ -12,6 +12,18 @@ class Maze:
         self.entry_pattern = 'try maze'
         self.entry_room_num = 0
         self.out_aiml = 'generated.aiml'
+        self.moves = [
+            'go north',
+            'go south',
+            'go west',
+            'go east',
+            'go up',
+            'go down',
+            'go northeast',
+            'go southeast',
+            'go northwest',
+            'go southwest'
+        ]
 
     def read_files(self):
         g = glob.glob(self.dir + self.name)
@@ -26,6 +38,7 @@ class Maze:
         w = open(self.dir + self.out_aiml, 'w')
         w.write('<aiml version="1.0.1" encoding="UTF-8">\n')
         self.entry_category(w)
+        self.entry_moves(w)
         self.direction_statements(w)
         self.simple_look(w)
         w.write('</aiml>\n')
@@ -89,6 +102,28 @@ class Maze:
         }
         #print(x)
         return x
+
+    def entry_moves(self, file):
+        for i in self.moves:
+            file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
+            file.write('<template>')
+            for ii in self.rooms:
+                num = '000' + str(ii['number'])
+                num = num[-2:]
+                file.write('<condition name="topic" value="ROOM'+ num +'">\n')
+                if i in ii['phrases'].keys():
+                    z = ii['phrases'][i]
+                    numx = '000' + str(z)
+                    numx = numx[-2:]
+                    file.write('    <srai>INTERNAL ROOM' + numx + ' ' + i.upper() +'</srai>\n')
+                    pass
+                else:
+                    file.write('    You cannot do that here.\n')
+                    pass
+                file.write('</condition>\n')
+            file.write('</template>\n')
+            file.write('</category>\n\n')
+        pass
     
     def entry_category(self, file):
         file.write('''
@@ -126,7 +161,7 @@ class Maze:
             file.write('<!-- ROOM' + str(num) + ' -->\n')
             numx = '000' + str(num)
             numx = numx[-2:]
-            #file.write('<topic = ROOM' + numx + '>\n')
+
             for ii in self.rooms[i]['phrases'].keys():
                 print(ii, self.rooms[i]['phrases'][ii])
                 
@@ -135,14 +170,14 @@ class Maze:
                 file.write('''
                 <category>
                 <pattern>
-                ''' + ii.upper() + '''
+                INTERNAL ROOM'''+ numx + ''' ''' + ii.upper() + '''
                 </pattern>
                 <template>
                     <think><set name="topic">ROOM''' + numx + '''</set></think>
                     <srai> INTERNALLOOK <get name="topic" /></srai>
                 </template>
                 </category>\n''')
-            #file.write('</topic>\n')
+            
             self.internal_look(file, num)
         pass
 
