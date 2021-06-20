@@ -7,13 +7,13 @@
 
             <think><set name="topic">ROOM00</set></think>
 
-            <think><set name="seen00">unseen</set></think>
+            <think><set name="seen00">UNSEEN</set></think>
 
-            <think><set name="seen01">unseen</set></think>
+            <think><set name="seen01">UNSEEN</set></think>
 
-            <think><set name="seen02">unseen</set></think>
+            <think><set name="seen02">UNSEEN</set></think>
 
-            <think><set name="seen03">unseen</set></think>
+            <think><set name="seen03">UNSEEN</set></think>
 
             <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
@@ -312,15 +312,15 @@
         <category>
         <pattern>INTERNALLOOK ROOM00</pattern>
             <template>
-                <condition name="seen00" value="unseen">
+                <condition name="seen00" value="UNSEEN">
                     Go east, west, or south. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
-                <condition name="seen00" value="seen">
+                <condition name="seen00" value="SEEN">
                     Room 0 - Start room
                 </condition>
 
-                <think><set name="seen00">seen</set></think>
+                <think><set name="seen00">SEEN</set></think>
             </template>
 
         </category>
@@ -328,15 +328,15 @@
         <category>
         <pattern>INTERNALLOOK ROOM01</pattern>
             <template>
-                <condition name="seen01" value="unseen">
+                <condition name="seen01" value="UNSEEN">
                     Go west. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
-                <condition name="seen01" value="seen">
+                <condition name="seen01" value="SEEN">
                     Room 1 - East room
                 </condition>
 
-                <think><set name="seen01">seen</set></think>
+                <think><set name="seen01">SEEN</set></think>
             </template>
 
         </category>
@@ -344,15 +344,15 @@
         <category>
         <pattern>INTERNALLOOK ROOM02</pattern>
             <template>
-                <condition name="seen02" value="unseen">
+                <condition name="seen02" value="UNSEEN">
                     Go east. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
-                <condition name="seen02" value="seen">
+                <condition name="seen02" value="SEEN">
                     Room 2 - west room
                 </condition>
 
-                <think><set name="seen02">seen</set></think>
+                <think><set name="seen02">SEEN</set></think>
             </template>
 
         </category>
@@ -360,15 +360,15 @@
         <category>
         <pattern>INTERNALLOOK ROOM03</pattern>
             <template>
-                <condition name="seen03" value="unseen">
+                <condition name="seen03" value="UNSEEN">
                     go north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
-                <condition name="seen03" value="seen">
+                <condition name="seen03" value="SEEN">
                     Room 3 - South room
                 </condition>
 
-                <think><set name="seen03">seen</set></think>
+                <think><set name="seen03">SEEN</set></think>
             </template>
 
         </category>
@@ -380,16 +380,16 @@
         <template>
             <!-- one condition block for every room -->
             <condition name="topic" value="ROOM00">
-                <think><set name="seen00">unseen</set></think>
+                <think><set name="seen00">UNSEEN</set></think>
             </condition>
             <condition name="topic" value="ROOM01">
-                <think><set name="seen01">unseen</set></think>
+                <think><set name="seen01">UNSEEN</set></think>
             </condition>
             <condition name="topic" value="ROOM02">
-                <think><set name="seen02">unseen</set></think>
+                <think><set name="seen02">UNSEEN</set></think>
             </condition>
             <condition name="topic" value="ROOM03">
-                <think><set name="seen03">unseen</set></think>
+                <think><set name="seen03">UNSEEN</set></think>
             </condition>
             <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>

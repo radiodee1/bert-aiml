@@ -178,7 +178,7 @@ class Maze:
             </category>\n''')
         pass
 
-    def reused_seen(self, file, num, val='unseen'):
+    def reused_seen(self, file, num, val='UNSEEN'):
         num = '000' + str(num)
         num = num[-2:]
         file.write('''
@@ -203,15 +203,15 @@ class Maze:
         file.write('''        <category>
         <pattern>INTERNALLOOK ROOM''' + numx + '''</pattern>
             <template>
-                <condition name="seen''' + numx + '''" value="unseen">
+                <condition name="seen''' + numx + '''" value="UNSEEN">
                     ''' + long + '''
                 </condition>
 
-                <condition name="seen''' + numx + '''" value="seen">
+                <condition name="seen''' + numx + '''" value="SEEN">
                     ''' + short + '''
                 </condition>
 
-                <think><set name="seen''' + numx + '''">seen</set></think>
+                <think><set name="seen''' + numx + '''">SEEN</set></think>
             </template>
 
         </category>\n''')
@@ -231,7 +231,7 @@ class Maze:
             numx = '000' + str(num)
             numx = numx[-2:]
             file.write('''            <condition name="topic" value="ROOM''' + numx + '''">
-                <think><set name="seen''' + numx + '''">unseen</set></think>
+                <think><set name="seen''' + numx + '''">UNSEEN</set></think>
             </condition>\n''')
         file.write('''            <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
