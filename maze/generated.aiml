@@ -20,205 +20,295 @@
             </category>
 <category>
 <pattern>GO NORTH</pattern>
-<template><condition name="topic" value="ROOM00">
-    You cannot do that here.
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+<srai>INTERNALLOOK ROOM00</srai>
+                                <think><set name="move">FALSE</set></think>
+ </condition>
+<condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    <srai>INTERNAL ROOM00 GO NORTH</srai>
+<think><set name="topic">ROOM00</set></think>
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO SOUTH</pattern>
-<template><condition name="topic" value="ROOM00">
-    <srai>INTERNAL ROOM03 GO SOUTH</srai>
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+<srai>INTERNALLOOK ROOM03</srai>
+                                <think><set name="move">FALSE</set></think>
+ </condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
+<think><set name="topic">ROOM03</set></think>
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO WEST</pattern>
-<template><condition name="topic" value="ROOM00">
-    <srai>INTERNAL ROOM02 GO WEST</srai>
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+<srai>INTERNALLOOK ROOM02</srai>
+                                <think><set name="move">FALSE</set></think>
+ </condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+<srai>INTERNALLOOK ROOM00</srai>
+                                <think><set name="move">FALSE</set></think>
+ </condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
+<think><set name="topic">ROOM02</set></think>
 </condition>
 <condition name="topic" value="ROOM01">
-    <srai>INTERNAL ROOM00 GO WEST</srai>
+<think><set name="topic">ROOM00</set></think>
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO EAST</pattern>
-<template><condition name="topic" value="ROOM00">
-    <srai>INTERNAL ROOM01 GO EAST</srai>
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+<srai>INTERNALLOOK ROOM01</srai>
+                                <think><set name="move">FALSE</set></think>
+ </condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+<srai>INTERNALLOOK ROOM00</srai>
+                                <think><set name="move">FALSE</set></think>
+ </condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
+<think><set name="topic">ROOM01</set></think>
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    <srai>INTERNAL ROOM00 GO EAST</srai>
+<think><set name="topic">ROOM00</set></think>
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO UP</pattern>
-<template><condition name="topic" value="ROOM00">
-    You cannot do that here.
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO DOWN</pattern>
-<template><condition name="topic" value="ROOM00">
-    You cannot do that here.
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO NORTHEAST</pattern>
-<template><condition name="topic" value="ROOM00">
-    You cannot do that here.
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO SOUTHEAST</pattern>
-<template><condition name="topic" value="ROOM00">
-    You cannot do that here.
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO NORTHWEST</pattern>
-<template><condition name="topic" value="ROOM00">
-    You cannot do that here.
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
 <category>
 <pattern>GO SOUTHWEST</pattern>
-<template><condition name="topic" value="ROOM00">
-    You cannot do that here.
+<template>
+<condition name="topic" value="ROOM00">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM01">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM02">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM03">
+<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai></condition>
+<condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM02">
-    You cannot do that here.
 </condition>
 <condition name="topic" value="ROOM03">
-    You cannot do that here.
 </condition>
 </template>
 </category>
 
-<!-- ROOM0 -->
+<category>
+            <pattern>
+            INTERNAL REJECT
+            </pattern>
+            <template>
+                <condition name="move" value="TRUE">
+                You cannot do that here.
+                <think><set name="move">FALSE</set></think>
+                </condition>
+            </template>
+            </category>
 
-                <category>
-                <pattern>
-                INTERNAL ROOM01 GO EAST
-                </pattern>
-                <template>
-                    <think><set name="topic">ROOM01</set></think>
-                    <srai> INTERNALLOOK <get name="topic" /></srai>
-                </template>
-                </category>
-
-                <category>
-                <pattern>
-                INTERNAL ROOM02 GO WEST
-                </pattern>
-                <template>
-                    <think><set name="topic">ROOM02</set></think>
-                    <srai> INTERNALLOOK <get name="topic" /></srai>
-                </template>
-                </category>
-
-                <category>
-                <pattern>
-                INTERNAL ROOM03 GO SOUTH
-                </pattern>
-                <template>
-                    <think><set name="topic">ROOM03</set></think>
-                    <srai> INTERNALLOOK <get name="topic" /></srai>
-                </template>
-                </category>
+<!-- ROOM00 -->
         <category>
         <pattern>INTERNALLOOK ROOM00</pattern>
             <template>
@@ -234,17 +324,7 @@
             </template>
 
         </category>
-<!-- ROOM1 -->
-
-                <category>
-                <pattern>
-                INTERNAL ROOM00 GO WEST
-                </pattern>
-                <template>
-                    <think><set name="topic">ROOM00</set></think>
-                    <srai> INTERNALLOOK <get name="topic" /></srai>
-                </template>
-                </category>
+<!-- ROOM01 -->
         <category>
         <pattern>INTERNALLOOK ROOM01</pattern>
             <template>
@@ -260,17 +340,7 @@
             </template>
 
         </category>
-<!-- ROOM2 -->
-
-                <category>
-                <pattern>
-                INTERNAL ROOM00 GO EAST
-                </pattern>
-                <template>
-                    <think><set name="topic">ROOM00</set></think>
-                    <srai> INTERNALLOOK <get name="topic" /></srai>
-                </template>
-                </category>
+<!-- ROOM02 -->
         <category>
         <pattern>INTERNALLOOK ROOM02</pattern>
             <template>
@@ -286,17 +356,7 @@
             </template>
 
         </category>
-<!-- ROOM3 -->
-
-                <category>
-                <pattern>
-                INTERNAL ROOM00 GO NORTH
-                </pattern>
-                <template>
-                    <think><set name="topic">ROOM00</set></think>
-                    <srai> INTERNALLOOK <get name="topic" /></srai>
-                </template>
-                </category>
+<!-- ROOM03 -->
         <category>
         <pattern>INTERNALLOOK ROOM03</pattern>
             <template>

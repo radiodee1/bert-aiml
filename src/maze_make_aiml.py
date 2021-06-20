@@ -106,7 +106,8 @@ class Maze:
     def entry_moves(self, file):
         for i in self.moves:
             file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
-            file.write('<template>')
+            file.write('<template>\n')
+            
             for ii in self.rooms:
                 num = '000' + str(ii['number'])
                 num = num[-2:]
@@ -115,14 +116,43 @@ class Maze:
                     z = ii['phrases'][i]
                     numx = '000' + str(z)
                     numx = numx[-2:]
-                    file.write('    <srai>INTERNAL ROOM' + numx + ' ' + i.upper() +'</srai>\n')
+                    file.write('''<think><set name="move">TRUE</set></think>\n''')
+                    file.write('''<srai>INTERNALLOOK ROOM''' + numx + '''</srai>
+                                <think><set name="move">FALSE</set></think>\n ''')
                     pass
                 else:
-                    file.write('    You cannot do that here.\n')
-                    pass
+                    file.write('''<think><set name="move">TRUE</set></think>
+                        <srai>INTERNAL REJECT</srai>''')
+
+                    
+                file.write('</condition>\n')
+
+            for ii in self.rooms:
+                num = '000' + str(ii['number'])
+                num = num[-2:]
+                file.write('<condition name="topic" value="ROOM'+ num +'">\n')
+                if i in ii['phrases'].keys():
+                    z = ii['phrases'][i]
+                    numx = '000' + str(z)
+                    numx = numx[-2:]
+                    file.write('''<think><set name="topic">ROOM''' + numx + '''</set></think>\n''')
+                    
+                    
                 file.write('</condition>\n')
             file.write('</template>\n')
             file.write('</category>\n\n')
+
+        file.write('''<category>
+            <pattern>
+            INTERNAL REJECT
+            </pattern>
+            <template>
+                <condition name="move" value="TRUE">
+                You cannot do that here.
+                <think><set name="move">FALSE</set></think>
+                </condition>
+            </template>
+            </category>\n\n''')
         pass
     
     def entry_category(self, file):
@@ -158,25 +188,9 @@ class Maze:
     def direction_statements(self, file):
         for i in range(len(self.rooms)):
             num = self.rooms[i]['number']
-            file.write('<!-- ROOM' + str(num) + ' -->\n')
             numx = '000' + str(num)
             numx = numx[-2:]
-
-            for ii in self.rooms[i]['phrases'].keys():
-                print(ii, self.rooms[i]['phrases'][ii])
-                
-                numx = '000' + str(self.rooms[i]['phrases'][ii])
-                numx = numx[-2:]
-                file.write('''
-                <category>
-                <pattern>
-                INTERNAL ROOM'''+ numx + ''' ''' + ii.upper() + '''
-                </pattern>
-                <template>
-                    <think><set name="topic">ROOM''' + numx + '''</set></think>
-                    <srai> INTERNALLOOK <get name="topic" /></srai>
-                </template>
-                </category>\n''')
+            file.write('<!-- ROOM' + str(numx) + ' -->\n')
             
             self.internal_look(file, num)
         pass
