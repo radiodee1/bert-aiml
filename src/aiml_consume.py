@@ -625,7 +625,7 @@ class Kernel:
 
         if d['initial_template'] is not None or True:
             #d['template_modified'] = ''
-            print(d['initial_template'], 'nothing?')
+            #print(d['initial_template'], 'nothing?')
             xx = self.consume_template(d['initial_template'], d)
             xx = ' '.join(xx.split(' '))
             xx = str(re.sub(' +', ' ', xx).strip())
@@ -718,16 +718,16 @@ class Kernel:
             #l.append(t)
         
         for x in element:
-            print(x.tag, 'tag')
+            #print(x.tag, 'tag')
             if x.tag == "srai" :
                 #d['template_modified'] = ''
                 #d['srai_completion'] = True
                 self.srai_completion = True
-                print('srai')
+                #print('srai')
                 z = self.consume_srai(x, d)
                 if z is not None and len(z) > 0:
                     #d['template_modified'] =  z ## replace, not concatenate!
-                    print(self.depth, "< depth", self.depth_limit)
+                    #print(self.depth, "< depth", self.depth_limit)
                     self.depth += 1
                     if self.depth < self.depth_limit:
                         self.index = 0
@@ -742,7 +742,7 @@ class Kernel:
                             r = self.respond(z) #d['template_modified'])
                             self.srai_list.append(r)
                         #l.append(r)
-                        print(r, '<<<r')
+                        #print(r, '<<<r')
 
             if x.tag == "learn" : 
                 self.consume_learn(x, d)
@@ -808,7 +808,7 @@ class Kernel:
                 z = self.consume_get(x, d)
                 d['template_modified'] += " " + z
                 local_text += ' ' + z
-                print(local_text)
+                #print(local_text)
             if x.tag == "set" : 
                 z = self.consume_set(x, d)
                 if z is not None:
@@ -890,7 +890,7 @@ class Kernel:
         if 'name' in element.attrib.keys() and element.attrib['name'].upper() in self.memory.keys():
             #print(self.memory, '<< memory get')
             y = self.memory[element.attrib['name'].upper()]
-            print(y)
+            #print(y)
             return y
 
         z = ''
