@@ -177,7 +177,7 @@ class Maze:
                     pass
                 else:
                     file.write('''<think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai>''')
+                        <srai>INTERNALREJECT</srai>''')
 
                     
                 file.write('</condition>\n')
@@ -199,7 +199,7 @@ class Maze:
 
         file.write('''<category>
             <pattern>
-            INTERNAL REJECT
+            INTERNALREJECT
             </pattern>
             <template>
                 <condition name="move" value="TRUE">
@@ -234,7 +234,7 @@ class Maze:
             <think><set name="''' + j['item'].upper() + '''">ROOM''' + location + '''</set></think>\n''')
 
         file.write('''
-            <srai> INTERNALLOOK <get name="topic" /></srai>
+            <srai> INTERNALLOOK<get name="topic" /></srai>
             </template>
             </category>\n''')
         pass
@@ -271,7 +271,7 @@ class Maze:
                 <condition name="seen''' + numx + '''" value="SEEN">
                     ''' + short + '''
                 </condition>
-                <srai> INTERNALVIEW ROOM''' + numx + '''</srai>
+                <srai> INTERNALLISTROOM''' + numx + '''</srai>
 
                 <think><set name="seen''' + numx + '''">SEEN</set></think>
             </template>
@@ -295,7 +295,7 @@ class Maze:
             file.write('''            <condition name="topic" value="ROOM''' + numx + '''">
                 <think><set name="seen''' + numx + '''">UNSEEN</set></think>
             </condition>\n''')
-        file.write('''            <srai> INTERNALLOOK <get name="topic" /></srai>
+        file.write('''            <srai> INTERNALLOOK<get name="topic" /></srai>
             </template>
             </category>\n''')
         pass
@@ -309,7 +309,7 @@ class Maze:
             file.write('GET ' + i['item'].upper() +'\n')
             file.write('</pattern>\n')
             file.write('<template>\n')
-            file.write('<srai>INTERNAL GET ' + i['item'].upper() + ' <get name="topic" /></srai>\n')
+            file.write('<srai>INTERNALGET' + i['item'].upper() + ' <get name="topic" /></srai>\n')
             file.write('</template>\n')
             file.write('</category>\n\n')
 
@@ -318,7 +318,7 @@ class Maze:
                 numj = '00' + str(numj)
                 numj = numj[-2:]
                 file.write('<category><pattern>\n')
-                file.write('INTERNAL GET ' + i['item'].upper() + ' ROOM' + numj + '\n')
+                file.write('INTERNALGET' + i['item'].upper() + ' ROOM' + numj + '\n')
                 file.write('</pattern>\n')
                 file.write('<template>\n')
                 file.write('<condition name="'+ i['item'].upper() +'" value="ROOM' + numj + '" >')
@@ -348,7 +348,7 @@ class Maze:
             numi = '00' + str(ii['number'])
             numi = numi[-2:]
             file.write('\n<category><pattern>\n')
-            file.write('INTERNALVIEW ROOM' + numi)
+            file.write('INTERNALLISTROOM' + numi)
             file.write('</pattern>\n')
             file.write('<template>\n')
             for i in self.items:

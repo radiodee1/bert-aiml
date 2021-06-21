@@ -17,7 +17,7 @@
 
             <think><set name="LAMP">ROOM00</set></think>
 
-            <srai> INTERNALLOOK <get name="topic" /></srai>
+            <srai> INTERNALLOOK<get name="topic" /></srai>
             </template>
             </category>
 <category>
@@ -25,13 +25,13 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
 <srai>INTERNALLOOK ROOM00</srai>
@@ -59,13 +59,13 @@
  </condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 <think><set name="topic">ROOM03</set></think>
 </condition>
@@ -93,10 +93,10 @@
  </condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 <think><set name="topic">ROOM02</set></think>
 </condition>
@@ -120,7 +120,7 @@
  </condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
 <srai>INTERNALLOOK ROOM00</srai>
@@ -128,7 +128,7 @@
  </condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 <think><set name="topic">ROOM01</set></think>
 </condition>
@@ -147,16 +147,16 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
@@ -173,16 +173,16 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
@@ -199,16 +199,16 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
@@ -225,16 +225,16 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
@@ -251,16 +251,16 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
@@ -277,16 +277,16 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-                        <srai>INTERNAL REJECT</srai></condition>
+                        <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM00">
 </condition>
 <condition name="topic" value="ROOM01">
@@ -300,7 +300,7 @@
 
 <category>
             <pattern>
-            INTERNAL REJECT
+            INTERNALREJECT
             </pattern>
             <template>
                 <condition name="move" value="TRUE">
@@ -321,7 +321,7 @@
                 <condition name="seen00" value="SEEN">
                     Room 0 - Start room
                 </condition>
-                <srai> INTERNALVIEW ROOM00</srai>
+                <srai> INTERNALLISTROOM00</srai>
 
                 <think><set name="seen00">SEEN</set></think>
             </template>
@@ -338,7 +338,7 @@
                 <condition name="seen01" value="SEEN">
                     Room 1 - East room
                 </condition>
-                <srai> INTERNALVIEW ROOM01</srai>
+                <srai> INTERNALLISTROOM01</srai>
 
                 <think><set name="seen01">SEEN</set></think>
             </template>
@@ -355,7 +355,7 @@
                 <condition name="seen02" value="SEEN">
                     Room 2 - west room
                 </condition>
-                <srai> INTERNALVIEW ROOM02</srai>
+                <srai> INTERNALLISTROOM02</srai>
 
                 <think><set name="seen02">SEEN</set></think>
             </template>
@@ -372,7 +372,7 @@
                 <condition name="seen03" value="SEEN">
                     Room 3 - South room
                 </condition>
-                <srai> INTERNALVIEW ROOM03</srai>
+                <srai> INTERNALLISTROOM03</srai>
 
                 <think><set name="seen03">SEEN</set></think>
             </template>
@@ -397,7 +397,7 @@
             <condition name="topic" value="ROOM03">
                 <think><set name="seen03">UNSEEN</set></think>
             </condition>
-            <srai> INTERNALLOOK <get name="topic" /></srai>
+            <srai> INTERNALLOOK<get name="topic" /></srai>
             </template>
             </category>
 
@@ -407,12 +407,12 @@
 GET LAMP
 </pattern>
 <template>
-<srai>INTERNAL GET LAMP <get name="topic" /></srai>
+<srai>INTERNALGETLAMP <get name="topic" /></srai>
 </template>
 </category>
 
 <category><pattern>
-INTERNAL GET LAMP ROOM00
+INTERNALGETLAMP ROOM00
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM00" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -420,7 +420,7 @@ INTERNAL GET LAMP ROOM00
 </category>
 
 <category><pattern>
-INTERNAL GET LAMP ROOM01
+INTERNALGETLAMP ROOM01
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM01" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -428,7 +428,7 @@ INTERNAL GET LAMP ROOM01
 </category>
 
 <category><pattern>
-INTERNAL GET LAMP ROOM02
+INTERNALGETLAMP ROOM02
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM02" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -436,7 +436,7 @@ INTERNAL GET LAMP ROOM02
 </category>
 
 <category><pattern>
-INTERNAL GET LAMP ROOM03
+INTERNALGETLAMP ROOM03
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM03" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -456,28 +456,28 @@ DROP LAMP
 
 
 <category><pattern>
-INTERNALVIEW ROOM00</pattern>
+INTERNALLISTROOM00</pattern>
 <template>
 <condition name="LAMP" value="ROOM00" >LAMP</condition>
 </template>
 </category>
 
 <category><pattern>
-INTERNALVIEW ROOM01</pattern>
+INTERNALLISTROOM01</pattern>
 <template>
 <condition name="LAMP" value="ROOM01" >LAMP</condition>
 </template>
 </category>
 
 <category><pattern>
-INTERNALVIEW ROOM02</pattern>
+INTERNALLISTROOM02</pattern>
 <template>
 <condition name="LAMP" value="ROOM02" >LAMP</condition>
 </template>
 </category>
 
 <category><pattern>
-INTERNALVIEW ROOM03</pattern>
+INTERNALLISTROOM03</pattern>
 <template>
 <condition name="LAMP" value="ROOM03" >LAMP</condition>
 </template>

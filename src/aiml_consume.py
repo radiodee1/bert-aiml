@@ -76,6 +76,9 @@ class Kernel:
         self.filename = 'name'
         self.verbose_response = True
         self.output = ""
+        self.srai_list = []
+        self.num = 0
+        self.srai_completion = False
         #self.kernel = aiml_std.Kernel()
         self.tree = None
         self.root = None
@@ -130,6 +133,17 @@ class Kernel:
         self.files_size =  len(root)
 
         self.pattern_factory_topic(root)
+
+    def respond_both(self, input):
+        x = self.respond(input)
+        
+        if len(self.srai_list) > 0:
+            self.srai_list.reverse()
+            x = ' '.join(self.srai_list)
+            
+        self.output = x
+        return self.output
+        
 
     def respond_srai(self, input):
         self.l = []
@@ -306,7 +320,7 @@ class Kernel:
         if self.args.count: self.count_output(self.output)
 
         self.output = pre_output
-
+ 
         return self.output
 
     def choose_output(self, d):
@@ -489,7 +503,6 @@ class Kernel:
             that_wo_start = False
         ###################
         d = {
-            'div': int(self.files_size),
             'start': start,
             'end': end,
             'wo_start': wo_start,
@@ -573,23 +586,7 @@ class Kernel:
         #print(l)
         ll = str(re.sub(' +', ' ',input).strip())
         ll = ll.split(' ')
-        '''
-        z = d['star_list']
-        if len(z) is 1:
-            if d['wo_start']:
-                d['start'] = l[0]
-                l = l[1:]
-            elif d['wo_end']:
-                d['end'] = l[-1]
-                l = l[:-1]
-        elif len(z) > 1:
-            if d['wo_start']:
-                d['start'] = l[0]
-                l = l[z[-1]:] 
-            elif d['wo_end']:
-                d['end'] = l[-1]
-                l = l[:z[0]] 
-        '''
+        
 
         num = 0
         if len(d['star_list_start']) > 0 or len(d['star_list_end']) > 0 and len(d['star_list_start']) >= len(ll):
@@ -610,12 +607,7 @@ class Kernel:
                     ll.pop(start_of_xx + ii)
                     num += 1
                 pass
-            #print(d)
-            #print(ll)
-
-        #input = ' '.join(l)
-        #if len(l) > len(ll):
-        #    print(ll)
+            
         input = ' '.join(ll)
 
         return input, d
@@ -626,26 +618,28 @@ class Kernel:
         l = input.split(' ')
         
         #print(d, 'd')
-        d['template_modified'] = ''
-
-        if d['initial_template'] is not None:
+        if not self.srai_completion:
             d['template_modified'] = ''
+        else:
+            self.srai_list = []
+
+        if d['initial_template'] is not None or True:
+            #d['template_modified'] = ''
+            print(d['initial_template'], 'nothing?')
             xx = self.consume_template(d['initial_template'], d)
             xx = ' '.join(xx.split(' '))
             xx = str(re.sub(' +', ' ', xx).strip())
             d['template'] = xx
             #print(xx, ': d-template')
+            #d['srai_completion'] = False
             return xx
-        
+
+        #d['srai_completion'] = False
         return ''
 
     def mod_set(self, d):
         set = d['set_exp']
-        '''
-        get = d['get_exp']
-        tem = d['initial_template']
-        sta = d['star']
-        '''
+        
 
         if set is None: return
         t = ''
@@ -661,15 +655,6 @@ class Kernel:
 
         self.memory[set.attrib['name'].upper()] = t
 
-        
-        '''
-        if set is not None and set.attrib['name']:
-            if d['wo_end']:
-                self.memory[set.attrib['name'].upper()] = d['end']
-                
-            if d['wo_start']:
-                self.memory[set.attrib['name'].upper()] = d['start']
-        '''
 
     def mod_respond_dict(self, d, input):
         set = d['set_exp']
@@ -725,97 +710,132 @@ class Kernel:
         #print('template :', element.text, element.tag, element.attrib)
         r = ''
         l = []
-
+        local_text = ''
         if element.text is not None:
             t = element.text.strip()
-            d['template_modified'] += t
+            #d['template_modified'] += t
+            local_text += t
+            #l.append(t)
         
         for x in element:
-            
+            print(x.tag, 'tag')
             if x.tag == "srai" :
-                d['template_modified'] = ''
+                #d['template_modified'] = ''
+                #d['srai_completion'] = True
+                self.srai_completion = True
+                print('srai')
                 z = self.consume_srai(x, d)
                 if z is not None and len(z) > 0:
-                    d['template_modified'] = z ## replace, not concatenate!
-                    #print(self.depth, "< depth")
+                    #d['template_modified'] =  z ## replace, not concatenate!
+                    print(self.depth, "< depth", self.depth_limit)
                     self.depth += 1
                     if self.depth < self.depth_limit:
                         self.index = 0
                         self.output = ''
                         self.incomplete = False
+                        #d['srai_completion'] = True
                         if SRAI_LITERAL == 1:
-                            r = self.respond_srai(d['template_modified'])
-                            #d['template_modified'] = ''
+                            r = self.respond_srai(z) #d['template_modified'])
+                            self.srai_list.append(r)
+                            #d['template_modified'] = r
                         else:
-                            r = self.respond(d['template_modified'])
-                        return r 
+                            r = self.respond(z) #d['template_modified'])
+                            self.srai_list.append(r)
+                        #l.append(r)
+                        print(r, '<<<r')
 
             if x.tag == "learn" : 
                 self.consume_learn(x, d)
                 return ''
             if x.tag == "get" : 
                 z = self.consume_get(x, d)
-                d['template_modified'] += " " + z
+                #d['template_modified'] += " " + z
+                local_text += ' ' + z
             if x.tag == "set" : 
                 z = self.consume_set(x, d)
                 if z is not None:
-                    d['template_modified'] += " " + z
+                    #d['template_modified'] += " " + z
+                    local_text += ' ' + z
+
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
                 if z is not None:
-                    d['template_modified'] += " " + z
+                    #d['template_modified'] += " " + z
+                    local_text += ' ' + z
+
             if x.tag == "think":
                 self.consume_think(x, d)
             if x.tag == "condition":
                 z = self.consume_condition(x, d)
                 if z is not None and len(z.strip()) > 0:
                     l.append(z)
-                    d['template_modified'] = z 
+                    #d['template_modified'] += ' ' + z 
 
+        #print(l, '<<<')
         if len(element) > 0 and element[0].tail is not None:
             #print(element[0].tail, '<< tail')
             t = element[0].tail
             t = t.strip()
-            d['template_modified'] += ' ' + t
+            local_text += ' ' + t
+
+            #d['template_modified'] += ' ' + t
+
+        if len(r) > 0:
+            #d['template_modified'] += ' ' + r
+            local_text += ' ' + r
+
 
         if len(l) > 0:
-            l = [x for x in l if len(x.strip()) > 0]
-            d['template_modified'] = l[0]
+            l = [x.strip() for x in l if len(x.strip()) > 0]
+            
+            local_text  = ' ' + ' '.join(l)
         
-        return d['template_modified']
+        #print(d['template_modified'], '<<<')
+        return local_text #'' # d['template_modified']
 
     def consume_srai(self, element, d):
         #print('srai :', element.text, element.tag, element.attrib, d['template_modified'])
-        d['template_modified'] = ''
-        if element.text is not None:
-            d['template_modified'] += ' ' + element.text
+        
+        local_text = ''
+        if element.text is not None and len(element.text.strip()) > 0:
+            #print(element.text)
+            #return element.text
+            local_text  += ' ' + element.text
         
         for x in element:
             
             if x.tag == "get" : 
                 z = self.consume_get(x, d)
                 d['template_modified'] += " " + z
+                local_text += ' ' + z
+                print(local_text)
             if x.tag == "set" : 
                 z = self.consume_set(x, d)
                 if z is not None:
                     d['template_modified'] += " " + z
+                    local_text += ' ' + z
+
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
                 if z is not None:
                     d['template_modified'] += " " + z
+                    local_text += ' ' + z
+
         
-        #print('srai internal :', d['template_modified'])
 
         if len(element) > 0 and element[0].tail is not None:
             #print(element[0].tail, '<< tail')
-            d['template_modified'] += ' ' + element[0].tail
+            local_text += ' ' + element[0].tail
+        
+        #print('srai internal :', d['template_modified'])
 
-        return d['template_modified']
+        return local_text # d['template_modified']
 
     def consume_set(self, element, d):
         #print('set :', element.text, element.tag, element.attrib)
-        
-        z = element.text
+        z = ''
+        if element.text is not None:
+            z = element.text.strip()
 
         for x in element:
             if x.tag == "set" : 
@@ -825,11 +845,17 @@ class Kernel:
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
 
+            if x.tag == "get" : 
+                z = self.consume_get(x, d)
+                #d['template_modified'] += " " + z
+                #local_text += ' ' + z
+                #print(local_text)
+
         if 'name' in element.attrib:
             #print(element.attrib,'attrib', self.memory)
             self.memory[element.attrib['name'].upper()] = z.upper().strip()
 
-        return z
+        return z.upper().strip()
 
     def consume_learn(self, element, d):
         #print('set :', element.text, element.tag, element.attrib)
@@ -856,7 +882,7 @@ class Kernel:
     def consume_get(self, element, d):
         #print('get :', element.text, element.tag, element.attrib)
         if element.text is not None:
-            d['template_modified'] += ' ' +element.text
+            d['template_modified'] += ' ' + element.text
         for xx in element.attrib:
             #print(xx)
             pass
@@ -864,7 +890,7 @@ class Kernel:
         if 'name' in element.attrib.keys() and element.attrib['name'].upper() in self.memory.keys():
             #print(self.memory, '<< memory get')
             y = self.memory[element.attrib['name'].upper()]
-            #print(y)
+            print(y)
             return y
 
         z = ''
@@ -907,7 +933,7 @@ class Kernel:
                 self.consume_set(x, d)
                 
         d['encounter_think'] = False
-        return '' 
+        return '' # d['template_modified']
 
     def consume_condition(self, element, d):
         #print(element.attrib)
@@ -917,6 +943,7 @@ class Kernel:
         z = ''
         match = False
         fallback = ''
+        local_text = ''
         if element.attrib is not None:
             if 'name' in element.attrib.keys():
                 name = element.attrib['name'].upper().strip()
@@ -924,65 +951,46 @@ class Kernel:
             if 'value' in element.attrib.keys():
                 value = element.attrib['value'].upper().strip()            
 
-
         present = ((name.upper() in self.memory.keys() or name in self.memory.keys()) and 
             (value.upper() == self.memory[name.upper()].upper() or value.upper() == self.memory[name].upper()
             or value == self.memory[name]))
 
-        if True:
-            for x in element:
-                if x.tag == "think" and present: 
-                    self.consume_think(x, d)
-                    d['template_modified'] = ''
+        if present and element.text is not None and len(element.text) > 0:
+            local_text += ' ' + element.text
+            #d['template_modified'] += ' '+ element.text
 
+        #if True:
+        for x in element:
+            if x.tag == "think" and present: 
+                self.consume_think(x, d)
+                #d['template_modified'] = ''
 
-                if x.tag == "li":
-                    z, match = self.consume_li_tag(x, d)
-                    if z is not None:
-                        if match is False: 
-                            fallback = z
-                        d['template_modified'] = z
-                        if match is True:
-                            break
-                
-                if x.tag == "srai" and present:
-                    d['template_modified'] = ''
-                    z = self.consume_srai(x, d)
-                    if z is not None and len(z) > 0:
-                        d['template_modified'] = z ## replace, not concatenate!
-                        #print(self.depth, "< depth")
-                        self.depth += 1
-                        if self.depth < self.depth_limit:
-                            self.index = 0
-                            self.output = ''
-                            self.incomplete = False
-                            if SRAI_LITERAL == 1 :
-                                r = self.respond_srai(d['template_modified'])
-                                
-                            else:
-                                r = self.respond(d['template_modified'])
-        
-                            
+            if x.tag == "srai" and present:
+                #d['template_modified'] = ''
+                z = self.consume_srai(x, d)
+                if z is not None and len(z) > 0:
+                    d['template_modified'] = z ## replace, not concatenate!
+                    #print(self.depth, "< depth")
+                    self.depth += 1
+                    if self.depth < self.depth_limit:
+                        self.index = 0
+                        self.output = ''
+                        self.incomplete = False
+                        if SRAI_LITERAL == 1 :
+                            r = self.respond_srai(z) #d['template_modified'])
+                            self.srai_list.append(r)
+                        else:
+                            r = self.respond(z) #d['template_modified'])  
+                            self.srai_list.append(r)   
 
-        if len(r) > 0:
+        if len(r.strip()) > 0 and len(element.text) == 0:
             return r
 
-        if len(z) > 0:
-            if match is False and len(fallback) > 0:
-                return fallback
-            elif match is True and len(d['template_modified']) > 0:
-                return d['template_modified']
+        
 
-        if name.upper() in self.memory.keys() and len(z) == 0:
-            if value.upper() != self.memory[name.upper()].upper():
-                return ''
-            elif len(z) is 0:
-                return element.text
-            else:
-                return z
+        return local_text #d['template_modified'].strip()
 
-        return d['template_modified'].strip()
-
+    '''
     def consume_li_tag(self, element, d):
         name = d['condition'].upper()
         value = ''
@@ -1007,7 +1015,7 @@ class Kernel:
             return element.text, exact_match
 
         pass
-        
+    '''   
     
 if __name__ == '__main__':
 
@@ -1044,7 +1052,7 @@ if __name__ == '__main__':
             exit()    
         x = ''
         if len(x.strip()) == 0 : 
-            r = k.respond(y) 
+            r = k.respond_both(y) 
             print(r)
         else:
             print(x)
