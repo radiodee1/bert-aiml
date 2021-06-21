@@ -7,11 +7,15 @@ class Maze:
 
     def __init__(self):
         self.rooms = []
+        self.items = []
+
         self.name = 'room*.maze'
         self.dir = './../maze/'
         self.entry_pattern = 'try maze'
         self.entry_room_num = 0
         self.out_aiml = 'generated.aiml'
+        self.item_name = 'thing*.item'
+        
         self.moves = [
             'go north',
             'go south',
@@ -32,6 +36,11 @@ class Maze:
         for i in g:
             self.rooms.append(self.room_factory(room=i))
         
+        g = glob.glob(self.dir + self.item_name)
+        g.sort()
+        for i in g:
+            self.items.append(self.item_factory(item_file=i))
+        print(self.items)
         pass
 
     def write_xml(self):
@@ -41,6 +50,8 @@ class Maze:
         self.entry_moves(w)
         self.direction_statements(w)
         self.simple_look(w)
+        self.item_statements(w)
+        self.item_list(w)
         w.write('</aiml>\n')
         pass
     
@@ -94,13 +105,57 @@ class Maze:
         
         pass
         #z.close()
+        destination = 0
+        number = number.split()
+        if len(number) > 1:
+            destination = int(number[1])
+            number = str(number[0])
+        else:
+            number = str(number[0])
         x = {
             'number': int(number.strip()),
             'title': title,
             'description': description,
+            'destination': destination,
             'phrases': phrases
         }
         #print(x)
+        return x
+
+    def item_factory(self, item_file=''):
+        z = open(item_file, 'r')
+        zz = z.readlines()
+        zz = [x for x in zz if not x.startswith('#')]
+        z.close()
+        pass
+
+        name = ''
+        num = 0
+        phrases = {}
+
+        index = 0
+        for i in zz:
+            if index == 0:
+                num = int(i.strip())
+            if index == 2:
+                name = str(i.strip())
+
+            if index >=3 and i.startswith('@'):
+                i = i[1:]
+                p = i.split(';')
+                if len(p) > 1:
+                    v = int(p[1].strip())
+                p = p[0].strip()
+                phrases[p] = v
+                
+            index += 1
+            pass
+
+        x = {
+            'item': name,
+            'location': num,
+            'phrases': phrases
+        }
         return x
 
     def entry_moves(self, file):
@@ -172,6 +227,12 @@ class Maze:
         for i in range(len(self.rooms)):
             self.reused_seen(file, self.rooms[i]['number'])
 
+        for j in self.items:
+            location = '000' + str(j['location'])
+            location = location[-2:]
+            file.write('''
+            <think><set name="''' + j['item'].upper() + '''">ROOM''' + location + '''</set></think>\n''')
+
         file.write('''
             <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
@@ -210,6 +271,7 @@ class Maze:
                 <condition name="seen''' + numx + '''" value="SEEN">
                     ''' + short + '''
                 </condition>
+                <srai> INTERNALVIEW ROOM''' + numx + '''</srai>
 
                 <think><set name="seen''' + numx + '''">SEEN</set></think>
             </template>
@@ -237,6 +299,64 @@ class Maze:
             </template>
             </category>\n''')
         pass
+
+    def item_statements(self, file):
+        ## get
+        file.write('\n<!-- get and drop -->\n\n')
+
+        for i in self.items:
+            file.write('<category><pattern>\n')
+            file.write('GET ' + i['item'].upper() +'\n')
+            file.write('</pattern>\n')
+            file.write('<template>\n')
+            file.write('<srai>INTERNAL GET ' + i['item'].upper() + ' <get name="topic" /></srai>\n')
+            file.write('</template>\n')
+            file.write('</category>\n\n')
+
+            for j in self.rooms:
+                numj = j['number']
+                numj = '00' + str(numj)
+                numj = numj[-2:]
+                file.write('<category><pattern>\n')
+                file.write('INTERNAL GET ' + i['item'].upper() + ' ROOM' + numj + '\n')
+                file.write('</pattern>\n')
+                file.write('<template>\n')
+                file.write('<condition name="'+ i['item'].upper() +'" value="ROOM' + numj + '" >')
+                file.write('<think><set name="' + i['item'].upper() + '">ROOM-1</set></think></condition>\n')
+                file.write('</template>\n')
+                file.write('</category>\n\n')
+                pass
+
+        ## drop
+        for i in self.items:
+            file.write('\n<category><pattern>\n')
+            file.write('DROP ' + i['item'].upper() +'\n')
+            file.write('</pattern>\n')
+            file.write('<template>\n')
+
+            file.write('<condition name="'+ i['item'].upper() +'" value="ROOM-1" >')
+            file.write('<think><set name="' + i['item'].upper() + '"><get name="topic" /></set></think></condition>\n')
+            file.write('</template>\n')
+            file.write('</category>\n')
+
+        pass
+
+    def item_list(self, file):
+        file.write('\n<!-- list items in room -->\n\n')
+
+        for ii in self.rooms:
+            numi = '00' + str(ii['number'])
+            numi = numi[-2:]
+            file.write('\n<category><pattern>\n')
+            file.write('INTERNALVIEW ROOM' + numi)
+            file.write('</pattern>\n')
+            file.write('<template>\n')
+            for i in self.items:
+                file.write('<condition name="'+ i['item'].upper() +'" value="ROOM' + numi + '" >')
+                file.write(i['item'].upper() + '</condition>\n')
+            file.write('</template>\n')
+            file.write('</category>\n')
+            pass
 
 if __name__ == '__main__':
     m = Maze()

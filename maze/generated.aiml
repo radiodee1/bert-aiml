@@ -15,6 +15,8 @@
 
             <think><set name="seen03">UNSEEN</set></think>
 
+            <think><set name="LAMP">ROOM00</set></think>
+
             <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
@@ -319,6 +321,7 @@
                 <condition name="seen00" value="SEEN">
                     Room 0 - Start room
                 </condition>
+                <srai> INTERNALVIEW ROOM00</srai>
 
                 <think><set name="seen00">SEEN</set></think>
             </template>
@@ -335,6 +338,7 @@
                 <condition name="seen01" value="SEEN">
                     Room 1 - East room
                 </condition>
+                <srai> INTERNALVIEW ROOM01</srai>
 
                 <think><set name="seen01">SEEN</set></think>
             </template>
@@ -351,6 +355,7 @@
                 <condition name="seen02" value="SEEN">
                     Room 2 - west room
                 </condition>
+                <srai> INTERNALVIEW ROOM02</srai>
 
                 <think><set name="seen02">SEEN</set></think>
             </template>
@@ -367,6 +372,7 @@
                 <condition name="seen03" value="SEEN">
                     Room 3 - South room
                 </condition>
+                <srai> INTERNALVIEW ROOM03</srai>
 
                 <think><set name="seen03">SEEN</set></think>
             </template>
@@ -394,4 +400,86 @@
             <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
+
+<!-- get and drop -->
+
+<category><pattern>
+GET LAMP
+</pattern>
+<template>
+<srai>INTERNAL GET LAMP <get name="topic" /></srai>
+</template>
+</category>
+
+<category><pattern>
+INTERNAL GET LAMP ROOM00
+</pattern>
+<template>
+<condition name="LAMP" value="ROOM00" ><think><set name="LAMP">ROOM-1</set></think></condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNAL GET LAMP ROOM01
+</pattern>
+<template>
+<condition name="LAMP" value="ROOM01" ><think><set name="LAMP">ROOM-1</set></think></condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNAL GET LAMP ROOM02
+</pattern>
+<template>
+<condition name="LAMP" value="ROOM02" ><think><set name="LAMP">ROOM-1</set></think></condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNAL GET LAMP ROOM03
+</pattern>
+<template>
+<condition name="LAMP" value="ROOM03" ><think><set name="LAMP">ROOM-1</set></think></condition>
+</template>
+</category>
+
+
+<category><pattern>
+DROP LAMP
+</pattern>
+<template>
+<condition name="LAMP" value="ROOM-1" ><think><set name="LAMP"><get name="topic" /></set></think></condition>
+</template>
+</category>
+
+<!-- list items in room -->
+
+
+<category><pattern>
+INTERNALVIEW ROOM00</pattern>
+<template>
+<condition name="LAMP" value="ROOM00" >LAMP</condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNALVIEW ROOM01</pattern>
+<template>
+<condition name="LAMP" value="ROOM01" >LAMP</condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNALVIEW ROOM02</pattern>
+<template>
+<condition name="LAMP" value="ROOM02" >LAMP</condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNALVIEW ROOM03</pattern>
+<template>
+<condition name="LAMP" value="ROOM03" >LAMP</condition>
+</template>
+</category>
 </aiml>
