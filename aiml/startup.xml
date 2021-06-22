@@ -43,7 +43,7 @@
     <category>
       <pattern>LEARN B</pattern>
       <template>
-         <learn>./bot.aiml </learn>
+         <learn>../../maze/generated.aiml </learn>
       </template>
    </category>
 
