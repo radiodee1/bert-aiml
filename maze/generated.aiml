@@ -17,6 +17,8 @@
 
             <think><set name="LAMP">ROOM00</set></think>
 
+            <think><set name="PIZZA">ROOM01</set></think>
+
             <srai> INTERNALLOOK<get name="topic" /></srai>
             </template>
             </category>
@@ -443,12 +445,60 @@ INTERNALGETLAMP ROOM03
 </template>
 </category>
 
+<category><pattern>
+GET PIZZA
+</pattern>
+<template>
+<srai>INTERNALGETPIZZA <get name="topic" /></srai>
+</template>
+</category>
+
+<category><pattern>
+INTERNALGETPIZZA ROOM00
+</pattern>
+<template>
+<condition name="PIZZA" value="ROOM00" ><think><set name="PIZZA">ROOM-1</set></think></condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNALGETPIZZA ROOM01
+</pattern>
+<template>
+<condition name="PIZZA" value="ROOM01" ><think><set name="PIZZA">ROOM-1</set></think></condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNALGETPIZZA ROOM02
+</pattern>
+<template>
+<condition name="PIZZA" value="ROOM02" ><think><set name="PIZZA">ROOM-1</set></think></condition>
+</template>
+</category>
+
+<category><pattern>
+INTERNALGETPIZZA ROOM03
+</pattern>
+<template>
+<condition name="PIZZA" value="ROOM03" ><think><set name="PIZZA">ROOM-1</set></think></condition>
+</template>
+</category>
+
 
 <category><pattern>
 DROP LAMP
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM-1" ><think><set name="LAMP"><get name="topic" /></set></think></condition>
+</template>
+</category>
+
+<category><pattern>
+DROP PIZZA
+</pattern>
+<template>
+<condition name="PIZZA" value="ROOM-1" ><think><set name="PIZZA"><get name="topic" /></set></think></condition>
 </template>
 </category>
 
@@ -459,6 +509,7 @@ DROP LAMP
 INTERNALLISTROOM00</pattern>
 <template>
 <condition name="LAMP" value="ROOM00" >LAMP</condition>
+<condition name="PIZZA" value="ROOM00" >PIZZA</condition>
 </template>
 </category>
 
@@ -466,6 +517,7 @@ INTERNALLISTROOM00</pattern>
 INTERNALLISTROOM01</pattern>
 <template>
 <condition name="LAMP" value="ROOM01" >LAMP</condition>
+<condition name="PIZZA" value="ROOM01" >PIZZA</condition>
 </template>
 </category>
 
@@ -473,6 +525,7 @@ INTERNALLISTROOM01</pattern>
 INTERNALLISTROOM02</pattern>
 <template>
 <condition name="LAMP" value="ROOM02" >LAMP</condition>
+<condition name="PIZZA" value="ROOM02" >PIZZA</condition>
 </template>
 </category>
 
@@ -480,6 +533,7 @@ INTERNALLISTROOM02</pattern>
 INTERNALLISTROOM03</pattern>
 <template>
 <condition name="LAMP" value="ROOM03" >LAMP</condition>
+<condition name="PIZZA" value="ROOM03" >PIZZA</condition>
 </template>
 </category>
 </aiml>
