@@ -136,7 +136,10 @@ class Kernel:
 
     def respond(self, input):
         x = self.respond_bert(input)
-        
+
+        if x not in self.srai_list:
+            self.srai_list.append(x)
+
         if len(self.srai_list) > 0:
             self.srai_list.reverse()
             x = ' '.join(self.srai_list)
@@ -730,7 +733,7 @@ class Kernel:
                 z = self.consume_srai(x, d)
                 if z is not None and len(z) > 0:
                     #d['template_modified'] =  z ## replace, not concatenate!
-                    print(z,'z')
+                    #print(z,'z')
                     self.depth += 1
                     if self.depth < self.depth_limit:
                         self.index = 0
