@@ -19,7 +19,7 @@
 
             <think><set name="PIZZA">ROOM01</set></think>
 
-            <srai> INTERNALLOOK<get name="topic" /></srai>
+            <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
 <category>
@@ -399,7 +399,7 @@
             <condition name="topic" value="ROOM03">
                 <think><set name="seen03">UNSEEN</set></think>
             </condition>
-            <srai> INTERNALLOOK<get name="topic" /></srai>
+            <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
 

@@ -234,7 +234,7 @@ class Maze:
             <think><set name="''' + j['item'].upper() + '''">ROOM''' + location + '''</set></think>\n''')
 
         file.write('''
-            <srai> INTERNALLOOK<get name="topic" /></srai>
+            <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>\n''')
         pass
@@ -295,7 +295,7 @@ class Maze:
             file.write('''            <condition name="topic" value="ROOM''' + numx + '''">
                 <think><set name="seen''' + numx + '''">UNSEEN</set></think>
             </condition>\n''')
-        file.write('''            <srai> INTERNALLOOK<get name="topic" /></srai>
+        file.write('''            <srai> INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>\n''')
         pass
