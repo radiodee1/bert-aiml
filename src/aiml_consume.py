@@ -134,12 +134,13 @@ class Kernel:
 
         self.pattern_factory_topic(root)
 
-    def respond_both(self, input):
-        x = self.respond(input)
+    def respond(self, input):
+        x = self.respond_bert(input)
         
         if len(self.srai_list) > 0:
             self.srai_list.reverse()
             x = ' '.join(self.srai_list)
+            #print(self.srai_list,'x')
             
         self.output = x
         return self.output
@@ -164,7 +165,7 @@ class Kernel:
 
         return self.update_dictionary(num, input)
 
-    def respond(self, input):
+    def respond_bert(self, input):
         self.score = []
         self.index = -1
         self.incomplete = False
@@ -620,11 +621,12 @@ class Kernel:
         #print(d, 'd')
         if not self.srai_completion:
             d['template_modified'] = ''
+            pass
         else:
             self.srai_list = []
 
         if d['initial_template'] is not None or True:
-            #d['template_modified'] = ''
+            d['template_modified'] = ''
             #print(d['initial_template'], 'nothing?')
             xx = self.consume_template(d['initial_template'], d)
             xx = ' '.join(xx.split(' '))
@@ -718,7 +720,8 @@ class Kernel:
             #l.append(t)
         
         for x in element:
-            #print(x.tag, 'tag')
+            #print(x.tag, 'tag', local_text)
+            
             if x.tag == "srai" :
                 #d['template_modified'] = ''
                 #d['srai_completion'] = True
@@ -727,7 +730,7 @@ class Kernel:
                 z = self.consume_srai(x, d)
                 if z is not None and len(z) > 0:
                     #d['template_modified'] =  z ## replace, not concatenate!
-                    #print(self.depth, "< depth", self.depth_limit)
+                    print(z,'z')
                     self.depth += 1
                     if self.depth < self.depth_limit:
                         self.index = 0
@@ -735,11 +738,11 @@ class Kernel:
                         self.incomplete = False
                         #d['srai_completion'] = True
                         if SRAI_LITERAL == 1:
-                            r = self.respond_srai(z) #d['template_modified'])
+                            r = self.respond_srai(z) 
                             self.srai_list.append(r)
                             #d['template_modified'] = r
                         else:
-                            r = self.respond(z) #d['template_modified'])
+                            r = self.respond_bert(z) 
                             self.srai_list.append(r)
                         #l.append(r)
                         #print(r, '<<<r')
@@ -769,7 +772,8 @@ class Kernel:
                 z = self.consume_condition(x, d)
                 if z is not None and len(z.strip()) > 0:
                     l.append(z)
-                    #d['template_modified'] += ' ' + z 
+                    #d['template_modified'] =z #+= ' ' + z 
+                    pass
 
         #print(l, '<<<')
         if len(element) > 0 and element[0].tail is not None:
@@ -784,12 +788,13 @@ class Kernel:
             #d['template_modified'] += ' ' + r
             local_text += ' ' + r
 
-
+        
         if len(l) > 0:
             l = [x.strip() for x in l if len(x.strip()) > 0]
             
             local_text  = ' ' + ' '.join(l)
         
+
         #print(d['template_modified'], '<<<')
         return local_text #'' # d['template_modified']
 
@@ -957,7 +962,7 @@ class Kernel:
 
         if present and element.text is not None and len(element.text) > 0:
             local_text += ' ' + element.text
-            #d['template_modified'] += ' '+ element.text
+            d['template_modified'] += ' '+ element.text
 
         #if True:
         for x in element:
@@ -980,7 +985,7 @@ class Kernel:
                             r = self.respond_srai(z) #d['template_modified'])
                             self.srai_list.append(r)
                         else:
-                            r = self.respond(z) #d['template_modified'])  
+                            r = self.respond_bert(z) #d['template_modified'])  
                             self.srai_list.append(r)   
 
         if len(r.strip()) > 0 and len(element.text) == 0:
@@ -990,32 +995,7 @@ class Kernel:
 
         return local_text #d['template_modified'].strip()
 
-    '''
-    def consume_li_tag(self, element, d):
-        name = d['condition'].upper()
-        value = ''
-        exact_match = False
-        print(element.attrib,name)
-
-        if element.attrib is not None and len(element.attrib) > 0:
-            
-            if 'value' in element.attrib.keys():
-                value = element.attrib['value'].upper().strip()  
-
-            if name is not None and name in self.memory.keys() :
-                if value.upper() != self.memory[name].upper():
-                    return '', exact_match
-                else:
-                    exact_match = True
-                    return element.text, exact_match
-            else:
-                
-                return '', exact_match
-        else:
-            return element.text, exact_match
-
-        pass
-    '''   
+    
     
 if __name__ == '__main__':
 
@@ -1052,7 +1032,7 @@ if __name__ == '__main__':
             exit()    
         x = ''
         if len(x.strip()) == 0 : 
-            r = k.respond_both(y) 
+            r = k.respond(y) 
             print(r)
         else:
             print(x)

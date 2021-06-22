@@ -16,6 +16,8 @@ class Maze:
         self.out_aiml = 'generated.aiml'
         self.item_name = 'thing*.item'
         
+        self.confuse_text = "XYZABCCONFUSEME"
+
         self.moves = [
             'go north',
             'go south',
@@ -172,7 +174,7 @@ class Maze:
                     numx = '000' + str(z)
                     numx = numx[-2:]
                     file.write('''<think><set name="move">TRUE</set></think>\n''')
-                    file.write('''<srai>INTERNALLOOK ROOM''' + numx + '''</srai>
+                    file.write('''<srai> ''' + self.confuse_text + ''' INTERNALLOOK ROOM''' + numx + '''</srai>
                                 <think><set name="move">FALSE</set></think>\n ''')
                     pass
                 else:
@@ -234,7 +236,7 @@ class Maze:
             <think><set name="''' + j['item'].upper() + '''">ROOM''' + location + '''</set></think>\n''')
 
         file.write('''
-            <srai> INTERNALLOOK <get name="topic" /></srai>
+            <srai>''' + self.confuse_text + ''' INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>\n''')
         pass
@@ -262,7 +264,7 @@ class Maze:
         long = self.rooms[num]['description']
         short = self.rooms[num]['title']
         file.write('''        <category>
-        <pattern>INTERNALLOOK ROOM''' + numx + '''</pattern>
+        <pattern>''' + self.confuse_text + ''' INTERNALLOOK ROOM''' + numx + '''</pattern>
             <template>
                 <condition name="seen''' + numx + '''" value="UNSEEN">
                     ''' + long + '''
@@ -295,7 +297,7 @@ class Maze:
             file.write('''            <condition name="topic" value="ROOM''' + numx + '''">
                 <think><set name="seen''' + numx + '''">UNSEEN</set></think>
             </condition>\n''')
-        file.write('''            <srai> INTERNALLOOK <get name="topic" /></srai>
+        file.write('''            <srai>''' + self.confuse_text + ''' INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>\n''')
         pass
@@ -309,7 +311,8 @@ class Maze:
             file.write('GET ' + i['item'].upper() +'\n')
             file.write('</pattern>\n')
             file.write('<template>\n')
-            file.write('<srai>INTERNALGET' + i['item'].upper() + ' <get name="topic" /></srai>\n')
+            file.write('GET ' + i['item'].upper() +'\n')
+            file.write('<srai>' +self.confuse_text + ' INTERNALGET' + i['item'].upper() + ' <get name="topic" /></srai>\n')
             file.write('</template>\n')
             file.write('</category>\n\n')
 
@@ -318,7 +321,7 @@ class Maze:
                 numj = '00' + str(numj)
                 numj = numj[-2:]
                 file.write('<category><pattern>\n')
-                file.write('INTERNALGET' + i['item'].upper() + ' ROOM' + numj + '\n')
+                file.write(self.confuse_text + ' INTERNALGET' + i['item'].upper() + ' ROOM' + numj + '\n')
                 file.write('</pattern>\n')
                 file.write('<template>\n')
                 file.write('<condition name="'+ i['item'].upper() +'" value="ROOM' + numj + '" >')
@@ -333,7 +336,7 @@ class Maze:
             file.write('DROP ' + i['item'].upper() +'\n')
             file.write('</pattern>\n')
             file.write('<template>\n')
-
+            file.write('DROP ' + i['item'].upper() +'\n')
             file.write('<condition name="'+ i['item'].upper() +'" value="ROOM-1" >')
             file.write('<think><set name="' + i['item'].upper() + '"><get name="topic" /></set></think></condition>\n')
             file.write('</template>\n')

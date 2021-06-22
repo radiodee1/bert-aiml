@@ -19,7 +19,7 @@
 
             <think><set name="PIZZA">ROOM01</set></think>
 
-            <srai> INTERNALLOOK <get name="topic" /></srai>
+            <srai>XYZABCCONFUSEME INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
 <category>
@@ -36,7 +36,7 @@
                         <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM03">
 <think><set name="move">TRUE</set></think>
-<srai>INTERNALLOOK ROOM00</srai>
+<srai> XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
                                 <think><set name="move">FALSE</set></think>
  </condition>
 <condition name="topic" value="ROOM00">
@@ -56,7 +56,7 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-<srai>INTERNALLOOK ROOM03</srai>
+<srai> XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
                                 <think><set name="move">FALSE</set></think>
  </condition>
 <condition name="topic" value="ROOM01">
@@ -85,12 +85,12 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-<srai>INTERNALLOOK ROOM02</srai>
+<srai> XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
                                 <think><set name="move">FALSE</set></think>
  </condition>
 <condition name="topic" value="ROOM01">
 <think><set name="move">TRUE</set></think>
-<srai>INTERNALLOOK ROOM00</srai>
+<srai> XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
                                 <think><set name="move">FALSE</set></think>
  </condition>
 <condition name="topic" value="ROOM02">
@@ -117,7 +117,7 @@
 <template>
 <condition name="topic" value="ROOM00">
 <think><set name="move">TRUE</set></think>
-<srai>INTERNALLOOK ROOM01</srai>
+<srai> XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
                                 <think><set name="move">FALSE</set></think>
  </condition>
 <condition name="topic" value="ROOM01">
@@ -125,7 +125,7 @@
                         <srai>INTERNALREJECT</srai></condition>
 <condition name="topic" value="ROOM02">
 <think><set name="move">TRUE</set></think>
-<srai>INTERNALLOOK ROOM00</srai>
+<srai> XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
                                 <think><set name="move">FALSE</set></think>
  </condition>
 <condition name="topic" value="ROOM03">
@@ -314,7 +314,7 @@
 
 <!-- ROOM00 -->
         <category>
-        <pattern>INTERNALLOOK ROOM00</pattern>
+        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM00</pattern>
             <template>
                 <condition name="seen00" value="UNSEEN">
                     Go east, west, or south. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
@@ -331,7 +331,7 @@
         </category>
 <!-- ROOM01 -->
         <category>
-        <pattern>INTERNALLOOK ROOM01</pattern>
+        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM01</pattern>
             <template>
                 <condition name="seen01" value="UNSEEN">
                     Go west. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
@@ -348,7 +348,7 @@
         </category>
 <!-- ROOM02 -->
         <category>
-        <pattern>INTERNALLOOK ROOM02</pattern>
+        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM02</pattern>
             <template>
                 <condition name="seen02" value="UNSEEN">
                     Go east. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
@@ -365,7 +365,7 @@
         </category>
 <!-- ROOM03 -->
         <category>
-        <pattern>INTERNALLOOK ROOM03</pattern>
+        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM03</pattern>
             <template>
                 <condition name="seen03" value="UNSEEN">
                     go north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
@@ -399,7 +399,7 @@
             <condition name="topic" value="ROOM03">
                 <think><set name="seen03">UNSEEN</set></think>
             </condition>
-            <srai> INTERNALLOOK <get name="topic" /></srai>
+            <srai>XYZABCCONFUSEME INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
 
@@ -409,12 +409,13 @@
 GET LAMP
 </pattern>
 <template>
-<srai>INTERNALGETLAMP <get name="topic" /></srai>
+GET LAMP
+<srai>XYZABCCONFUSEME INTERNALGETLAMP <get name="topic" /></srai>
 </template>
 </category>
 
 <category><pattern>
-INTERNALGETLAMP ROOM00
+XYZABCCONFUSEME INTERNALGETLAMP ROOM00
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM00" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -422,7 +423,7 @@ INTERNALGETLAMP ROOM00
 </category>
 
 <category><pattern>
-INTERNALGETLAMP ROOM01
+XYZABCCONFUSEME INTERNALGETLAMP ROOM01
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM01" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -430,7 +431,7 @@ INTERNALGETLAMP ROOM01
 </category>
 
 <category><pattern>
-INTERNALGETLAMP ROOM02
+XYZABCCONFUSEME INTERNALGETLAMP ROOM02
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM02" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -438,7 +439,7 @@ INTERNALGETLAMP ROOM02
 </category>
 
 <category><pattern>
-INTERNALGETLAMP ROOM03
+XYZABCCONFUSEME INTERNALGETLAMP ROOM03
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM03" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -449,12 +450,13 @@ INTERNALGETLAMP ROOM03
 GET PIZZA
 </pattern>
 <template>
-<srai>INTERNALGETPIZZA <get name="topic" /></srai>
+GET PIZZA
+<srai>XYZABCCONFUSEME INTERNALGETPIZZA <get name="topic" /></srai>
 </template>
 </category>
 
 <category><pattern>
-INTERNALGETPIZZA ROOM00
+XYZABCCONFUSEME INTERNALGETPIZZA ROOM00
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM00" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -462,7 +464,7 @@ INTERNALGETPIZZA ROOM00
 </category>
 
 <category><pattern>
-INTERNALGETPIZZA ROOM01
+XYZABCCONFUSEME INTERNALGETPIZZA ROOM01
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM01" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -470,7 +472,7 @@ INTERNALGETPIZZA ROOM01
 </category>
 
 <category><pattern>
-INTERNALGETPIZZA ROOM02
+XYZABCCONFUSEME INTERNALGETPIZZA ROOM02
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM02" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -478,7 +480,7 @@ INTERNALGETPIZZA ROOM02
 </category>
 
 <category><pattern>
-INTERNALGETPIZZA ROOM03
+XYZABCCONFUSEME INTERNALGETPIZZA ROOM03
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM03" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -490,6 +492,7 @@ INTERNALGETPIZZA ROOM03
 DROP LAMP
 </pattern>
 <template>
+DROP LAMP
 <condition name="LAMP" value="ROOM-1" ><think><set name="LAMP"><get name="topic" /></set></think></condition>
 </template>
 </category>
@@ -498,6 +501,7 @@ DROP LAMP
 DROP PIZZA
 </pattern>
 <template>
+DROP PIZZA
 <condition name="PIZZA" value="ROOM-1" ><think><set name="PIZZA"><get name="topic" /></set></think></condition>
 </template>
 </category>
