@@ -1,5 +1,5 @@
-0
+0 # item can be found at this room number when the maze loads
 
-lamp
+lamp # this is the name of the item
 
-@ light the lamp ; 99
+@ light the lamp ; 99 # this is currently not used
