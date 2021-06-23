@@ -1,6 +1,6 @@
-0
+0 # Internally saved room number. May be different from filename.
 
-Room 0 - Start room
+Room 0 - Start room 
 
 Go east, west, or south. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
 @ Go east;1

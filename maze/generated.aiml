@@ -321,7 +321,7 @@
                 </condition>
 
                 <condition name="seen00" value="SEEN">
-                    Room 0 - Start room
+                    Room 0 - Start room 
                 </condition>
                 <srai> INTERNALLISTROOM00</srai>
 

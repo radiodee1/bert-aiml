@@ -31,6 +31,22 @@ class Maze:
             'go southwest'
         ]
 
+    def strip_comments(self, list_of_strings):
+        z = []
+        for i in list_of_strings:
+            end = False
+            l = ''
+            for ii in i:
+                if ii == '#':
+                    end = True
+                    l += '\n'
+                if end == False:
+                    l += ii
+                pass
+            z.append(l)
+            
+        return z
+
     def read_files(self):
         g = glob.glob(self.dir + self.name)
         g.sort()
@@ -61,6 +77,7 @@ class Maze:
         z = open(room, 'r')
         zz = z.readlines()
         zz = [x for x in zz if not x.startswith('#')]
+        zz = self.strip_comments(zz)
         zz = ''.join( zz)
         z.close()
         number = ''
@@ -128,6 +145,7 @@ class Maze:
         z = open(item_file, 'r')
         zz = z.readlines()
         zz = [x for x in zz if not x.startswith('#')]
+        zz = self.strip_comments(zz)
         z.close()
         pass
 
