@@ -284,13 +284,15 @@ class Maze:
         file.write('''        <category>
         <pattern>''' + self.confuse_text + ''' INTERNALLOOK ROOM''' + numx + '''</pattern>
             <template>
+                <!-- ''' + short + ''' -->
+
                 <condition name="seen''' + numx + '''" value="UNSEEN">
                     ''' + long + '''
                 </condition>
 
                 <condition name="seen''' + numx + '''" value="SEEN">
                     ''' + short + '''
-                </condition>
+                </condition >
                 <srai> INTERNALLISTROOM''' + numx + '''</srai>
 
                 <think><set name="seen''' + numx + '''">SEEN</set></think>

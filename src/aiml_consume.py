@@ -994,9 +994,7 @@ class Kernel:
         if len(r.strip()) > 0 and len(element.text) == 0:
             return r
 
-        
-
-        return local_text #d['template_modified'].strip()
+        return local_text 
 
     
     

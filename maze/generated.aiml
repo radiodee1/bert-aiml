@@ -316,13 +316,15 @@
         <category>
         <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM00</pattern>
             <template>
+                <!-- Room 0 - Start room  -->
+
                 <condition name="seen00" value="UNSEEN">
                     Go east, west, or south. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen00" value="SEEN">
                     Room 0 - Start room 
-                </condition>
+                </condition >
                 <srai> INTERNALLISTROOM00</srai>
 
                 <think><set name="seen00">SEEN</set></think>
@@ -333,13 +335,15 @@
         <category>
         <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM01</pattern>
             <template>
+                <!-- Room 1 - East room -->
+
                 <condition name="seen01" value="UNSEEN">
                     Go west. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen01" value="SEEN">
                     Room 1 - East room
-                </condition>
+                </condition >
                 <srai> INTERNALLISTROOM01</srai>
 
                 <think><set name="seen01">SEEN</set></think>
@@ -350,13 +354,15 @@
         <category>
         <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM02</pattern>
             <template>
+                <!-- Room 2 - west room -->
+
                 <condition name="seen02" value="UNSEEN">
                     Go east. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen02" value="SEEN">
                     Room 2 - west room
-                </condition>
+                </condition >
                 <srai> INTERNALLISTROOM02</srai>
 
                 <think><set name="seen02">SEEN</set></think>
@@ -367,13 +373,15 @@
         <category>
         <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM03</pattern>
             <template>
+                <!-- Room 3 - South room -->
+
                 <condition name="seen03" value="UNSEEN">
                     go north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen03" value="SEEN">
                     Room 3 - South room
-                </condition>
+                </condition >
                 <srai> INTERNALLISTROOM03</srai>
 
                 <think><set name="seen03">SEEN</set></think>
