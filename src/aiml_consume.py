@@ -145,6 +145,8 @@ class Kernel:
             x = ' '.join(self.srai_list)
             #print(self.srai_list,'x')
             
+        if len(self.srai_list) == 1:
+            self.srai_list = []
         self.output = x
         return self.output
         
@@ -1027,7 +1029,7 @@ if __name__ == '__main__':
             if DOUBLE_COMPARE == 0: name = '.pat'
             if DOUBLE_COMPARE == 1: name = '.pat.tem'
             if DOUBLE_COMPARE == 2: name = '.tem'
-            print(len(k.z), len(k.used), 'ratio', k.used_num, 'attempts')
+            print(len(k.z), len(k.used), 'used', k.used_num, 'attempts')
             z = open('ratio' + name + '.txt', 'w')
             z.write(str(len(k.z)) + ' total categories\n' )
             z.write(str(len(k.used)) + ' total used\n')
