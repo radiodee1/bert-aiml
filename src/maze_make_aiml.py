@@ -8,6 +8,7 @@ class Maze:
     def __init__(self):
         self.rooms = []
         self.items = []
+        self.revisions = []
 
         self.name = 'room*.maze'
         self.dir = './../maze/'
@@ -50,15 +51,18 @@ class Maze:
     def read_files(self):
         g = glob.glob(self.dir + self.name)
         g.sort()
-        print(g)
+        
         for i in g:
-            self.rooms.append(self.room_factory(room=i))
+            x, y = self.room_factory(room=i)
+            self.rooms.append(x)
+            self.revisions.append(y)
         
         g = glob.glob(self.dir + self.item_name)
         g.sort()
         for i in g:
             self.items.append(self.item_factory(item_file=i))
         print(self.items)
+        print(self.revisions)
         pass
 
     def write_xml(self):
@@ -68,6 +72,7 @@ class Maze:
         self.entry_moves(w)
         self.direction_statements(w)
         self.simple_look(w)
+        self.revision_list(w)
         self.item_statements(w)
         self.item_list(w)
         w.write('</aiml>\n')
@@ -92,6 +97,8 @@ class Maze:
         state = ''
         phrase = ''
         destination = '0'
+        revision = '0'
+        moves = []
         for i in zz:
             
             if num == 0 + zzz and i != '\n':
@@ -103,27 +110,41 @@ class Maze:
             elif num == 4 + zzz and i != '\n':
                 description += str(i)
                 #print(description)
+            elif num > 4 + zzz and i == "*":
+                remember = num
+                state = "revision"
             elif num > 4 + zzz and i == "@":
                 remember = num
                 state = "phrase"
             elif num > 4 + zzz and i == ";":
                 state = "number"
-            elif num > 4 + zzz and i not in "@;":
+            elif num > 4 + zzz and i not in "@;*":
                 if remember != num: continue
                 if state == "phrase":
                     phrase += str(i)
                 if state == "number" and i != ' ':
                     destination += str(i)
+                if state == "revision" and i != ' ':
+                    revision += str(i) ## this is the room num location for the revision
                 if i == '\n':
-                    phrases[str(phrase).strip().lower()] = int(destination.strip())
-                    phrase = ''
-                    destination = '0'
+                    if revision.strip() == '0'  and len(phrase.strip()) > 0:
+                        phrases[str(phrase).strip().lower()] = int(destination.strip())
+                        phrase = ''
+                        destination = '0'
+                    elif revision.strip() != '0' and len(phrase.strip()) > 0:
+                        moves.append( [int(revision), str(phrase).strip().lower(), int(destination.strip())])
+                        #print(revision, phrase, destination,'<<', sep='-')
+
+                        revision = '0'
+                        phrase = ''
+                        destination = '0'
+                        pass
                 pass  
             if i == '\n':
                 num += 1
         
-        pass
-        #z.close()
+        #print(moves)
+        
         destination = 0
         number = number.split()
         if len(number) > 1:
@@ -131,6 +152,7 @@ class Maze:
             number = str(number[0])
         else:
             number = str(number[0])
+
         x = {
             'number': int(number.strip()),
             'title': title,
@@ -138,8 +160,16 @@ class Maze:
             'destination': destination,
             'phrases': phrases
         }
-        #print(x)
-        return x
+        
+        if revision.strip() != '' :
+            y = {
+                'number': int(number.strip()),
+                'moves': moves
+            }
+        else:
+            y = {}
+
+        return x, y
 
     def item_factory(self, item_file=''):
         z = open(item_file, 'r')
@@ -212,8 +242,8 @@ class Maze:
                     numx = numx[-2:]
                     file.write('''<think><set name="topic">ROOM''' + numx + '''</set></think>\n''')
                     
-                    
                 file.write('</condition>\n')
+
             file.write('</template>\n')
             file.write('</category>\n\n')
 
@@ -246,6 +276,7 @@ class Maze:
             <think><set name="topic">ROOM''' + num + '''</set></think>\n''')
         for i in range(len(self.rooms)):
             self.reused_seen(file, self.rooms[i]['number'])
+            self.reused_revision(file, self.revisions[i]['number'])
 
         for j in self.items:
             location = '000' + str(j['location'])
@@ -264,6 +295,13 @@ class Maze:
         num = num[-2:]
         file.write('''
             <think><set name="seen''' + num + '''">''' + val + '''</set></think>\n''')
+        pass
+
+    def reused_revision(self, file, num, val='FALSE'):
+        num = '000' + str(num)
+        num = num[-2:]
+        file.write('''
+            <think><set name="revision''' + num + '''">''' + val + '''</set></think>\n''')
         pass
 
     def direction_statements(self, file):
@@ -380,6 +418,37 @@ class Maze:
             file.write('</template>\n')
             file.write('</category>\n')
             pass
+
+    def revision_list(self, file):
+        file.write('\n<!-- list items for revision -->\n\n')
+
+        for i in range(len(self.revisions)):
+            num = self.revisions[i]['number']
+            pass
+            numx = '000' + str(num)
+            numx = numx[-2:]
+            long = '' #self.rooms[num]['description']
+            #short = self.rooms[num]['title']
+            file.write('''        <category>
+            <pattern>''' + self.confuse_text + ''' INTERNALREVISION ROOM''' + numx + '''</pattern>
+                <template>
+                    
+                    <!-- condition name="revision''' + numx + '''" value="TRUE">
+                    </condition -->
+
+                    
+                    <srai>''' + self.confuse_text + ''' INTERNALLOOK ROOM''' + numx )
+            
+
+            file.write('''</srai>
+
+                    <!-- think><set name="revision''' + numx + '''">TRUE</set></think -->
+                </template>
+
+            </category>\n''')
+            pass
+
+
 
 if __name__ == '__main__':
     m = Maze()

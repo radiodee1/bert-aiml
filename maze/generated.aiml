@@ -9,11 +9,19 @@
 
             <think><set name="seen00">UNSEEN</set></think>
 
+            <think><set name="revision00">FALSE</set></think>
+
             <think><set name="seen01">UNSEEN</set></think>
+
+            <think><set name="revision01">FALSE</set></think>
 
             <think><set name="seen02">UNSEEN</set></think>
 
+            <think><set name="revision02">FALSE</set></think>
+
             <think><set name="seen03">UNSEEN</set></think>
+
+            <think><set name="revision03">FALSE</set></think>
 
             <think><set name="LAMP">ROOM00</set></think>
 
@@ -409,6 +417,65 @@
             </condition>
             <srai>XYZABCCONFUSEME INTERNALLOOK <get name="topic" /></srai>
             </template>
+            </category>
+
+<!-- list items for revision -->
+
+        <category>
+            <pattern>XYZABCCONFUSEME INTERNALREVISION ROOM00</pattern>
+                <template>
+                    
+                    <!-- condition name="revision00" value="TRUE">
+                    </condition -->
+
+                    
+                    <srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+
+                    <!-- think><set name="revision00">TRUE</set></think -->
+                </template>
+
+            </category>
+        <category>
+            <pattern>XYZABCCONFUSEME INTERNALREVISION ROOM01</pattern>
+                <template>
+                    
+                    <!-- condition name="revision01" value="TRUE">
+                    </condition -->
+
+                    
+                    <srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+
+                    <!-- think><set name="revision01">TRUE</set></think -->
+                </template>
+
+            </category>
+        <category>
+            <pattern>XYZABCCONFUSEME INTERNALREVISION ROOM02</pattern>
+                <template>
+                    
+                    <!-- condition name="revision02" value="TRUE">
+                    </condition -->
+
+                    
+                    <srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+
+                    <!-- think><set name="revision02">TRUE</set></think -->
+                </template>
+
+            </category>
+        <category>
+            <pattern>XYZABCCONFUSEME INTERNALREVISION ROOM03</pattern>
+                <template>
+                    
+                    <!-- condition name="revision03" value="TRUE">
+                    </condition -->
+
+                    
+                    <srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+
+                    <!-- think><set name="revision03">TRUE</set></think -->
+                </template>
+
             </category>
 
 <!-- get and drop -->

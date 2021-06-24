@@ -6,6 +6,8 @@ Go east, west, or south. This is the longer text that fills the screen when the 
 @ Go east;1
 @ Go west;2
 @ go south; 3
+* 100 @ go to the west; 0
 
+* 22 @ go to the south; 05
 
 # hash is for comments.
