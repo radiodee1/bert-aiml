@@ -469,7 +469,7 @@ class Maze:
     
                      
             for y in range(len(self.revisions)):
-                num = '000' + str(y)
+                num = '000' + str(y - 1)
                 num = num[-2:]
                 z = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num)
                 
@@ -509,7 +509,7 @@ class Maze:
                     #file.write('<template> INTERNALREJECT </template>\n')
 
                     
-                    file.write('<template> INTERNALLOOK ROOM' + numx + '</template>\n')
+                    file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai></template>\n')
                     file.write('</category>\n')
                     n += 1
 
