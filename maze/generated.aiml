@@ -30,296 +30,6 @@
             <srai>XYZABCCONFUSEME INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
-<category>
-<pattern>GO NORTH</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-<srai> XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
-                                <think><set name="move">FALSE</set></think>
- </condition>
-<condition name="topic" value="ROOM00">
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-<think><set name="topic">ROOM00</set></think>
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO SOUTH</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-<srai> XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
-                                <think><set name="move">FALSE</set></think>
- </condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-<think><set name="topic">ROOM03</set></think>
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO WEST</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-<srai> XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
-                                <think><set name="move">FALSE</set></think>
- </condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-<srai> XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
-                                <think><set name="move">FALSE</set></think>
- </condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-<think><set name="topic">ROOM02</set></think>
-</condition>
-<condition name="topic" value="ROOM01">
-<think><set name="topic">ROOM00</set></think>
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO EAST</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-<srai> XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
-                                <think><set name="move">FALSE</set></think>
- </condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-<srai> XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
-                                <think><set name="move">FALSE</set></think>
- </condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-<think><set name="topic">ROOM01</set></think>
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-<think><set name="topic">ROOM00</set></think>
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO UP</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO DOWN</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO NORTHEAST</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO SOUTHEAST</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO NORTHWEST</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-<pattern>GO SOUTHWEST</pattern>
-<template>
-<condition name="topic" value="ROOM00">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM01">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM02">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM03">
-<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai></condition>
-<condition name="topic" value="ROOM00">
-</condition>
-<condition name="topic" value="ROOM01">
-</condition>
-<condition name="topic" value="ROOM02">
-</condition>
-<condition name="topic" value="ROOM03">
-</condition>
-</template>
-</category>
-
-<category>
-            <pattern>
-            INTERNALREJECT
-            </pattern>
-            <template>
-                <condition name="move" value="TRUE">
-                You cannot do that here.
-                <think><set name="move">FALSE</set></think>
-                </condition>
-            </template>
-            </category>
-
 <!-- ROOM00 -->
         <category>
         <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM00</pattern>
@@ -396,6 +106,18 @@
             </template>
 
         </category>
+<category>
+            <pattern>
+            INTERNALREJECT
+            </pattern>
+            <template>
+                <condition name="move" value="TRUE">
+                You cannot do that here.
+                <think><set name="move">FALSE</set></think>
+                </condition>
+            </template>
+            </category>
+
 <!-- simple look command -->
         <category>
         <pattern>
@@ -418,65 +140,354 @@
             <srai>XYZABCCONFUSEME INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
-
-<!-- list items for revision -->
-
-        <category>
-            <pattern>XYZABCCONFUSEME INTERNALREVISION ROOM00</pattern>
-                <template>
-                    
-                    <!-- condition name="revision00" value="TRUE">
-                    </condition -->
-
-                    
-                    <srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
-
-                    <!-- think><set name="revision00">TRUE</set></think -->
-                </template>
-
-            </category>
-        <category>
-            <pattern>XYZABCCONFUSEME INTERNALREVISION ROOM01</pattern>
-                <template>
-                    
-                    <!-- condition name="revision01" value="TRUE">
-                    </condition -->
-
-                    
-                    <srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
-
-                    <!-- think><set name="revision01">TRUE</set></think -->
-                </template>
-
-            </category>
-        <category>
-            <pattern>XYZABCCONFUSEME INTERNALREVISION ROOM02</pattern>
-                <template>
-                    
-                    <!-- condition name="revision02" value="TRUE">
-                    </condition -->
-
-                    
-                    <srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
-
-                    <!-- think><set name="revision02">TRUE</set></think -->
-                </template>
-
-            </category>
-        <category>
-            <pattern>XYZABCCONFUSEME INTERNALREVISION ROOM03</pattern>
-                <template>
-                    
-                    <!-- condition name="revision03" value="TRUE">
-                    </condition -->
-
-                    
-                    <srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
-
-                    <!-- think><set name="revision03">TRUE</set></think -->
-                </template>
-
-            </category>
+<category>
+<pattern>GO NORTH</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO SOUTH</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO WEST</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO EAST</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO UP</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO DOWN</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO NORTHEAST</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO SOUTHEAST</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO NORTHWEST</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>GO SOUTHWEST</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
+<condition name="revision0" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision0" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision1" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision1" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision2" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision2" value="FALSE" >
+FALSE
+</condition>
+<condition name="revision3" value="TRUE" >
+TRUE
+</condition>
+<condition name="revision3" value="FALSE" >
+FALSE
+</condition>
+</srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 FALSE FALSE FALSE FALSE</pattern>
+<template> INTERNALLOOK ROOM00</template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 FALSE FALSE FALSE FALSE</pattern>
+<template> INTERNALLOOK ROOM00</template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 FALSE FALSE FALSE FALSE</pattern>
+<template> INTERNALLOOK ROOM00</template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 FALSE FALSE FALSE TRUE</pattern>
+<template> INTERNALLOOK ROOM01</template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 FALSE FALSE TRUE FALSE</pattern>
+<template> INTERNALLOOK ROOM02</template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 FALSE FALSE TRUE TRUE</pattern>
+<template> INTERNALLOOK ROOM03</template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 FALSE TRUE FALSE TRUE</pattern>
+<template> INTERNALLOOK ROOM05</template>
+</category>
 
 <!-- get and drop -->
 
@@ -613,6 +624,16 @@ INTERNALLISTROOM03</pattern>
 <template>
 <condition name="LAMP" value="ROOM03" >LAMP</condition>
 <condition name="PIZZA" value="ROOM03" >PIZZA</condition>
+</template>
+</category>
+
+
+<category>
+<pattern>TRY</pattern>
+<template>
+<think><set name="test">1</set></think>
+<condition name="test" value="1"> here1 </condition>
+<condition name="test" value="1"> here2 </condition>
 </template>
 </category>
 </aiml>

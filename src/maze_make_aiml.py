@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from os import write
 import xml.etree.ElementTree as ET
 import glob
 
@@ -69,12 +70,14 @@ class Maze:
         w = open(self.dir + self.out_aiml, 'w')
         w.write('<aiml version="1.0.1" encoding="UTF-8">\n')
         self.entry_category(w)
-        self.entry_moves(w)
+        #self.entry_moves(w)
         self.direction_statements(w)
+        self.internal_reject(w)
         self.simple_look(w)
         self.revision_list(w)
         self.item_statements(w)
         self.item_list(w)
+        self.test_condition(w)
         w.write('</aiml>\n')
         pass
     
@@ -164,7 +167,8 @@ class Maze:
         if revision.strip() != '' :
             y = {
                 'number': int(number.strip()),
-                'moves': moves
+                'moves': moves,
+                'active': False ## this is not used!!
             }
         else:
             y = {}
@@ -247,6 +251,7 @@ class Maze:
             file.write('</template>\n')
             file.write('</category>\n\n')
 
+    def internal_reject(self, file):
         file.write('''<category>
             <pattern>
             INTERNALREJECT
@@ -314,7 +319,7 @@ class Maze:
             self.internal_look(file, num)
         pass
 
-    def internal_look(self, file, num):
+    def internal_look(self, file, num): ### keep this 
         numx = '000' + str(num)
         numx = numx[-2:]
         long = self.rooms[num]['description']
@@ -420,34 +425,107 @@ class Maze:
             pass
 
     def revision_list(self, file):
-        file.write('\n<!-- list items for revision -->\n\n')
+        nn = 0
+        for i in self.moves:
+            file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
+            file.write('<template>\n<!-- think><set name="move">TRUE</set></think -->\n<srai>\n')
+            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" />\n''')
+            #<think><set name="move">FALSE</set></think>\n ''')
+            n = 0
+            #for ii in [self.rooms[0]]:
+                
+            for j in self.revisions:
+                
+                file.write('<condition name="revision' + str(n) + '" value="TRUE" >\n')
+                file.write('TRUE\n')
+                file.write('</condition>\n')
 
-        for i in range(len(self.revisions)):
-            num = self.revisions[i]['number']
-            pass
-            numx = '000' + str(num)
-            numx = numx[-2:]
-            long = '' #self.rooms[num]['description']
-            #short = self.rooms[num]['title']
-            file.write('''        <category>
-            <pattern>''' + self.confuse_text + ''' INTERNALREVISION ROOM''' + numx + '''</pattern>
-                <template>
+                file.write('<condition name="revision' + str(n) + '" value="FALSE" >\n')
+                file.write('FALSE\n')
+                file.write('</condition>\n')
+                pass
+                                
+                n += 1
+                nn += 1
+
+            file.write('</srai>\n</template></category>\n')
+        print(nn, "nn num")
+        
+        #################################
+        
+        pass
+        xx = len(self.revisions) * len(self.revisions) 
+        zz = ''
+        #print(xx)
+        n = 0
+
+        for i in range(1, len(format(xx, 'b'))):
+            zz = zz + '0'
+        for i in range(0, xx):
+            l = format(i, 'b')
+            l = zz + l
+            l = l[-len(zz):]
+    
+                     
+            for y in range(len(self.revisions)):
+                num = '000' + str(y)
+                num = num[-2:]
+                z = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num)
+                
+                for x in range(len(l)):
+                    # print(x) # <---
                     
-                    <!-- condition name="revision''' + numx + '''" value="TRUE">
-                    </condition -->
+                    j = l[x]
+                    if j == '0':
+                        z += ' ' + 'FALSE'
+                    if j == '1':
+                        z += ' ' + 'TRUE'
+                    
+                ## make list here
+                print(self.rooms[y]['phrases'], 'y list')
+                local_moves = {}
+                for k, v in self.rooms[y]['phrases'].items():
+                    if v == i:
+                        local_moves[k] = v
+                        print(k,v, '---')
+                    pass
+                
+                for zzz in self.revisions:
+                    for move in zzz['moves']:
+                        
+                        if move[0] == y and move[2] == i:
+                            local_moves[move[1]] = i
+                            print(move, '---')
+                        pass
+                print(local_moves,'lm')
+                #if len(local_moves) > 0: exit()
+                for k,v in local_moves.items():
+
+                    numx = '000' + str(v)
+                    numx = numx[-2:]
+                    
+                    file.write('<category>\n<pattern>' + z + '</pattern>\n')
+                    #file.write('<template> INTERNALREJECT </template>\n')
 
                     
-                    <srai>''' + self.confuse_text + ''' INTERNALLOOK ROOM''' + numx )
-            
+                    file.write('<template> INTERNALLOOK ROOM' + numx + '</template>\n')
+                    file.write('</category>\n')
+                    n += 1
 
-            file.write('''</srai>
+        print(n, 'n num')
 
-                    <!-- think><set name="revision''' + numx + '''">TRUE</set></think -->
-                </template>
+    def test_condition(self, file):
+        z = 'TRY'
+        file.write('\n\n')
+        file.write('<category>\n<pattern>' + z + '</pattern>\n')
+        file.write('<template>\n')
+        file.write('<think><set name="test">1</set></think>\n')
 
-            </category>\n''')
-            pass
-
+        file.write('<condition name="test" value="1"> here1 </condition>\n')
+        file.write('<condition name="test" value="1"> here2 </condition>\n')
+        
+        file.write('</template>\n')
+        file.write('</category>\n')
 
 
 if __name__ == '__main__':
