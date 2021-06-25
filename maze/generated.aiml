@@ -9,19 +9,19 @@
 
             <think><set name="seen00">UNSEEN</set></think>
 
-            <think><set name="revision00">FALSE</set></think>
+            <think><set name="revision0">FALSE</set></think>
 
             <think><set name="seen01">UNSEEN</set></think>
 
-            <think><set name="revision01">FALSE</set></think>
+            <think><set name="revision1">FALSE</set></think>
 
             <think><set name="seen02">UNSEEN</set></think>
 
-            <think><set name="revision02">FALSE</set></think>
+            <think><set name="revision2">FALSE</set></think>
 
             <think><set name="seen03">UNSEEN</set></think>
 
-            <think><set name="revision03">FALSE</set></think>
+            <think><set name="revision3">FALSE</set></think>
 
             <think><set name="LAMP">ROOM00</set></think>
 
@@ -145,31 +145,15 @@
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -177,31 +161,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -209,31 +177,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -241,31 +193,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -273,31 +209,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -305,31 +225,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -337,31 +241,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -369,31 +257,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -401,31 +273,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>
@@ -433,31 +289,15 @@ FALSE
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" />
-<condition name="revision0" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision0" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision1" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision1" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision2" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision2" value="FALSE" >
-FALSE
-</condition>
-<condition name="revision3" value="TRUE" >
-TRUE
-</condition>
-<condition name="revision3" value="FALSE" >
-FALSE
-</condition>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+<condition name="revision0" value="TRUE" >TRUE</condition>
+<condition name="revision0" value="FALSE" >FALSE</condition>
+<condition name="revision1" value="TRUE" >TRUE</condition>
+<condition name="revision1" value="FALSE" >FALSE</condition>
+<condition name="revision2" value="TRUE" >TRUE</condition>
+<condition name="revision2" value="FALSE" >FALSE</condition>
+<condition name="revision3" value="TRUE" >TRUE</condition>
+<condition name="revision3" value="FALSE" >FALSE</condition>
 </srai>
 </template></category>
 <category>

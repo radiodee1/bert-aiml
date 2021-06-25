@@ -303,8 +303,9 @@ class Maze:
         pass
 
     def reused_revision(self, file, num, val='FALSE'):
-        num = '000' + str(num)
-        num = num[-2:]
+        #num = '000' + str(num)
+        #num = num[-2:]
+        num = str(num)
         file.write('''
             <think><set name="revision''' + num + '''">''' + val + '''</set></think>\n''')
         pass
@@ -429,19 +430,19 @@ class Maze:
         for i in self.moves:
             file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
             file.write('<template>\n<!-- think><set name="move">TRUE</set></think -->\n<srai>\n')
-            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" />\n''')
-            #<think><set name="move">FALSE</set></think>\n ''')
+            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" />''')
+            file.write('''<think><set name="move">FALSE</set></think>\n''')
             n = 0
             #for ii in [self.rooms[0]]:
                 
             for j in self.revisions:
                 
-                file.write('<condition name="revision' + str(n) + '" value="TRUE" >\n')
-                file.write('TRUE\n')
+                file.write('<condition name="revision' + str(n) + '" value="TRUE" >')
+                file.write('TRUE')
                 file.write('</condition>\n')
 
-                file.write('<condition name="revision' + str(n) + '" value="FALSE" >\n')
-                file.write('FALSE\n')
+                file.write('<condition name="revision' + str(n) + '" value="FALSE" >')
+                file.write('FALSE')
                 file.write('</condition>\n')
                 pass
                                 
