@@ -430,7 +430,7 @@ class Maze:
         for i in self.moves:
             file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
             file.write('<template>\n<!-- think><set name="move">TRUE</set></think -->\n<srai>\n')
-            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" />''')
+            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" /> ''' + i.upper() )
             file.write('''<think><set name="move">FALSE</set></think>\n''')
             n = 0
             #for ii in [self.rooms[0]]:
@@ -456,62 +456,68 @@ class Maze:
         
         pass
         xx = len(self.revisions) * len(self.revisions) 
-        zz = ''
+        
         #print(xx)
         n = 0
 
-        for i in range(1, len(format(xx, 'b'))):
-            zz = zz + '0'
-        for i in range(0, xx):
-            l = format(i, 'b')
-            l = zz + l
-            l = l[-len(zz):]
-    
-                     
-            for y in range(len(self.revisions)):
-                num = '000' + str(y - 1)
-                num = num[-2:]
-                z = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num)
-                
-                for x in range(len(l)):
-                    # print(x) # <---
-                    
-                    j = l[x]
-                    if j == '0':
-                        z += ' ' + 'FALSE'
-                    if j == '1':
-                        z += ' ' + 'TRUE'
-                    
-                ## make list here
-                print(self.rooms[y]['phrases'], 'y list')
-                local_moves = {}
-                for k, v in self.rooms[y]['phrases'].items():
-                    if v == i:
-                        local_moves[k] = v
-                        print(k,v, '---')
-                    pass
-                
-                for zzz in self.revisions:
-                    for move in zzz['moves']:
+        for direction in self.moves:
+            zz = ''
+            for i in range(1, len(format(xx, 'b'))):
+                zz = zz + '0'
+            for i in range(0, xx):
+                l = format(i, 'b')
+                l = zz + l
+                l = l[-len(zz):]
+        
                         
-                        if move[0] == y and move[2] == i:
-                            local_moves[move[1]] = i
-                            print(move, '---')
+                for y in range(len(self.revisions)):
+                    num = '000' + str(y)
+                    num = num[-2:]
+                    z = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + direction.upper().strip()
+                    
+                    for x in range(len(l)):
+                        # print(x) # <---
+                        
+                        j = l[x]
+                        if j == '0':
+                            z += ' ' + 'FALSE'
+                        if j == '1':
+                            z += ' ' + 'TRUE'
+                        
+                    ## make list here
+                    print(self.rooms[y]['phrases'], 'y list')
+                    local_moves = {}
+                    for k, v in self.rooms[y]['phrases'].items():
+                        if k == direction: #and v == i:
+                            local_moves[k] = v
+                            print(k,v, '---')
                         pass
-                print(local_moves,'lm')
-                #if len(local_moves) > 0: exit()
-                for k,v in local_moves.items():
-
-                    numx = '000' + str(v)
-                    numx = numx[-2:]
                     
-                    file.write('<category>\n<pattern>' + z + '</pattern>\n')
-                    #file.write('<template> INTERNALREJECT </template>\n')
+                    for zzz in self.revisions:
+                        for move in zzz['moves']:
+                            
+                            if move[0] == y and move[2] == i:
+                                local_moves[move[1]] = i
+                                print(move, '---')
+                            pass
+                    print(local_moves,'lm')
+                    #if len(local_moves) > 0: exit()
+                    for k,v in local_moves.items():
 
-                    
-                    file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai></template>\n')
-                    file.write('</category>\n')
-                    n += 1
+                        if k.lower() == direction.lower():
+
+                            numx = '000' + str(v)
+                            numx = numx[-2:]
+                            
+                            file.write('<category>\n<pattern>' + z + '</pattern>\n')
+                            #file.write('<template> INTERNALREJECT </template>\n')
+
+                            
+                            file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
+                            file.write('<think><set name="topic">ROOM'  + numx + '</set></think></template>\n')
+                            
+                            file.write('</category>\n')
+                            n += 1
 
         print(n, 'n num')
 

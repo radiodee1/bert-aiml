@@ -145,7 +145,7 @@
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO NORTH<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -161,7 +161,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTH<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -177,7 +177,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO WEST<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -193,7 +193,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO EAST<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -209,7 +209,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO UP<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -225,7 +225,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO DOWN<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -241,7 +241,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO NORTHEAST<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -257,7 +257,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTHEAST<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -273,7 +273,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO NORTHWEST<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -289,7 +289,7 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move">FALSE</set></think>
+XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTHWEST<think><set name="move">FALSE</set></think>
 <condition name="revision0" value="TRUE" >TRUE</condition>
 <condition name="revision0" value="FALSE" >FALSE</condition>
 <condition name="revision1" value="TRUE" >TRUE</condition>
@@ -301,32 +301,484 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /><think><set name="move
 </srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 FALSE FALSE FALSE FALSE</pattern>
-<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai></template>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH FALSE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 FALSE FALSE FALSE FALSE</pattern>
-<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai></template>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH FALSE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 FALSE FALSE FALSE FALSE</pattern>
-<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai></template>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH FALSE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM-1 FALSE FALSE FALSE TRUE</pattern>
-<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai></template>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH FALSE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM-1 FALSE FALSE TRUE FALSE</pattern>
-<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai></template>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH FALSE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM-1 FALSE FALSE TRUE TRUE</pattern>
-<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai></template>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH FALSE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 FALSE TRUE FALSE TRUE</pattern>
-<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM05</srai></template>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH FALSE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH FALSE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH TRUE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH TRUE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH TRUE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH TRUE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH TRUE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH TRUE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH TRUE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH TRUE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH FALSE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH FALSE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH FALSE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH FALSE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH FALSE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH FALSE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH FALSE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH FALSE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH TRUE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH TRUE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH TRUE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH TRUE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH TRUE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH TRUE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH TRUE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH TRUE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<think><set name="topic">ROOM03</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST FALSE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST FALSE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST FALSE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST FALSE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST FALSE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST FALSE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST FALSE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST FALSE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST TRUE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST TRUE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST TRUE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST TRUE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST TRUE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST TRUE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST TRUE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST TRUE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST TRUE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST TRUE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST TRUE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST TRUE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST TRUE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST TRUE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST TRUE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<think><set name="topic">ROOM02</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST TRUE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST FALSE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST FALSE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST FALSE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST FALSE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST FALSE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST FALSE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST FALSE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST FALSE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST FALSE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST FALSE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST FALSE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST FALSE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST FALSE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST FALSE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST FALSE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST FALSE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST TRUE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST TRUE FALSE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST TRUE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST TRUE FALSE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST TRUE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST TRUE FALSE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST TRUE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST TRUE FALSE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST TRUE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST TRUE TRUE FALSE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST TRUE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST TRUE TRUE FALSE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST TRUE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST TRUE TRUE TRUE FALSE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST TRUE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<think><set name="topic">ROOM01</set></think></template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST TRUE TRUE TRUE TRUE</pattern>
+<template><srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+<think><set name="topic">ROOM00</set></think></template>
 </category>
 
 <!-- get and drop -->
