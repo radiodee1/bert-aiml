@@ -2,12 +2,9 @@
 
 Room 0 - Start room 
 
-Go east, west, or south. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+Go east, west, or south. If you have visited the Meta room, you can go north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
 @ Go east;1
 @ Go west;2
 @ go south; 3
-#* 1 @ go west; 0
-#
-#* 2 @ go south; 05
 
 # hash is for comments.

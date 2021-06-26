@@ -1,0 +1,11 @@
+4 # Internally saved room number. May be different from filename.
+
+Room 4 - Meta room 
+
+Go south or north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+@ Go north;3
+@ go south; 0
+* 0 @ go north; 4
+
+
+# hash is for comments.
