@@ -3,6 +3,7 @@
 from os import write
 import xml.etree.ElementTree as ET
 import glob
+import math
 
 class Maze:
 
@@ -430,20 +431,20 @@ class Maze:
         for i in self.moves:
             file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
             file.write('<template>\n<!-- think><set name="move">TRUE</set></think -->\n<srai>\n')
-            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" /> ''' + i.upper() )
-            file.write('''<think><set name="move">FALSE</set></think>\n''')
+            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" /> ''' + i.upper()+ ' ' )
+            file.write('''<think><set name="move">FALSE</set></think>''')
             n = 0
             #for ii in [self.rooms[0]]:
                 
             for j in self.revisions:
                 
                 file.write('<condition name="revision' + str(n) + '" value="TRUE" >')
-                file.write('TRUE')
-                file.write('</condition>\n')
+                file.write('TRUE ')
+                file.write('</condition>')
 
                 file.write('<condition name="revision' + str(n) + '" value="FALSE" >')
-                file.write('FALSE')
-                file.write('</condition>\n')
+                file.write('FALSE ')
+                file.write('</condition>')
                 pass
                                 
                 n += 1
@@ -459,67 +460,107 @@ class Maze:
         
         #print(xx)
         n = 0
+        local_moves = []
 
         for direction in self.moves:
-            zz = ''
-            for i in range(1, len(format(xx, 'b'))):
-                zz = zz + '0'
-            for i in range(0, xx):
-                l = format(i, 'b')
-                l = zz + l
-                l = l[-len(zz):]
-        
-                        
+            #zz = ''
+
+            #z = self.string_from_int(i, xx, direction)
+            #for i in range(0, len(format(xx, 'b'))):
+                #zz = zz + '0'
+            for i in range(0, len(format(xx,'b'))):
+
                 for y in range(len(self.revisions)):
                     num = '000' + str(y)
                     num = num[-2:]
-                    z = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + direction.upper().strip()
-                    
-                    for x in range(len(l)):
-                        # print(x) # <---
-                        
-                        j = l[x]
-                        if j == '0':
-                            z += ' ' + 'FALSE'
-                        if j == '1':
-                            z += ' ' + 'TRUE'
-                        
+                    z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + direction.upper().strip()
+                    z = self.string_from_int(i, xx, z_input)
+   
                     ## make list here
-                    print(self.rooms[y]['phrases'], 'y list')
-                    local_moves = {}
+                    #print(self.rooms[y]['phrases'], 'y list')
+                    #local_moves = []
                     for k, v in self.rooms[y]['phrases'].items():
                         if k == direction: #and v == i:
-                            local_moves[k] = v
-                            print(k,v, '---')
+                            #local_moves[k] = v
+                            if [y,k,v,0] not in local_moves:
+                                local_moves.append([y,k,v,0])
+                                #print(k,v, 'kv')
                         pass
-                    
+                    #print(local_moves, 'lmkv')
+                    for local in local_moves:
+                        #print(bin(local[3]), bin(y), bin(local[3] & y))
+
+                        if local[1].lower() == direction.lower(): # and local[3] == y :
+                            numx = '000' + str(local[2])
+                            numx = numx[-2:]
+                            #z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numx) + ' ' + direction.upper().strip()
+                            
+                            
+                            file.write('<category>\n<pattern>' + z + '</pattern>\n')
+                            
+                            file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
+                            file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
+                            if len(self.revisions[y]['moves']) > 0 and False:
+                                file.write('<think><set name="revision'+ str(y) +'">TRUE</set></think>\n')
+                            file.write('</template>\n')
+                            file.write('</category>\n')
+                            n += 1
+                    inner_num = 0
+                    local_moves = []
                     for zzz in self.revisions:
+                        #print(inner_num)
                         for move in zzz['moves']:
                             
                             if move[0] == y and move[2] == i:
-                                local_moves[move[1]] = i
-                                print(move, '---')
+                                #local_moves[move[1]] = i
+                                if [y ,move[1], i, inner_num] not in local_moves:
+                                    
+                                    local_moves.append([y, move[1], i, inner_num])
+                                    print(local_moves[0], 'zmove', len(local_moves))
                             pass
-                    print(local_moves,'lm')
-                    #if len(local_moves) > 0: exit()
-                    for k,v in local_moves.items():
+                        inner_num += 1
+                    
+                    for local in local_moves:
 
-                        if k.lower() == direction.lower():
-
-                            numx = '000' + str(v)
+                        if local[1].lower() == direction.lower(): # and local[0] == y :
+                            numx = '000' + str(local[0])
                             numx = numx[-2:]
-                            
+                            z = self.string_from_int(local[3], xx, z_input)
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
-                            #file.write('<template> INTERNALREJECT </template>\n')
-
                             
                             file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
-                            file.write('<think><set name="topic">ROOM'  + numx + '</set></think></template>\n')
-                            
+                            file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
+                            file.write('<think><set name="revision'+ str(local[3]) +'">TRUE</set></think>\n')
+                            file.write('</template>\n')
                             file.write('</category>\n')
                             n += 1
 
+                            #print(z, local[0])
+                            #exit()
         print(n, 'n num')
+
+    def string_from_int(self, input, largest, starting_str):
+        zz = ''
+        xx = largest
+        
+        for i in range(0, len(format(xx, 'b'))):
+            zz = zz + '0'
+        
+        i = input
+        l = format(i, 'b')
+        l = zz + l
+        l = l[-len(zz):]
+
+        z = starting_str 
+        
+        for x in range(len(l)):
+            j = l[x]
+            if j == '0':
+                z += ' ' + 'FALSE'
+            if j == '1':
+                z += ' ' + 'TRUE'
+        return z
+        
 
     def test_condition(self, file):
         z = 'TRY'
