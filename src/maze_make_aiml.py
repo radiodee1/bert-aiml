@@ -460,7 +460,7 @@ class Maze:
         
         #print(xx)
         n = 0
-        local_moves = []
+        local_moves_simple = []
 
         for direction in self.moves:
             
@@ -473,16 +473,14 @@ class Maze:
                     z = self.string_from_int(i, xx, z_input)
 
                     for k, v in self.rooms[y]['phrases'].items():
-                        if k == direction: #and v == i:
-                            #local_moves[k] = v
-                            if [y,k,v,0] not in local_moves:
-                                local_moves.append([y,k,v,0])
-                                #print(k,v, 'kv')
+                        if k == direction: 
+                            if [y,k,v,0] not in local_moves_simple:
+                                local_moves_simple.append([y,k,v,0])
+                                
                         pass
                     
-                    for local in local_moves:
+                    for local in local_moves_simple:
                         
-
                         if local[1].lower() == direction.lower(): 
                             numx = '000' + str(local[2])
                             numx = numx[-2:]                            
@@ -491,30 +489,31 @@ class Maze:
                             print(z)
                             file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
                             file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
-                            if len(self.revisions[y]['moves']) > 0:
+                            if len(self.revisions[y]['moves']) > 0 and local[1].lower() == direction.lower() :
                                 file.write('<think><set name="revision'+ str(y) +'">TRUE</set></think>\n')
                             file.write('</template>\n')
                             file.write('</category>\n')
                             n += 1
+
+                    local_moves_revisions = []
+                    
                     inner_num = 0
-                    local_moves = []
                     for zzz in self.revisions:
-                        #print(inner_num)
                         for move in zzz['moves']:
                             
                             if move[0] == y and move[2] == i:
-                                #local_moves[move[1]] = i
-                                if [y ,move[1], i, inner_num] not in local_moves:
-                                    
-                                    local_moves.append([y, move[1], i, inner_num])
+                                if [y ,move[1], i, inner_num] not in local_moves_revisions:
+                                    local_moves_revisions.append([y, move[1], i, inner_num])
                             pass
                         inner_num += 1
                     
-                    for local in local_moves:
+                    for local in local_moves_revisions:
 
-                        if local[1].lower() == direction.lower():
+                        if local[1].lower() == direction.lower() :
                             
                             for a in range(xx):
+
+                                #if local[1].lower() == direction.lower():
 
                                 numx = '000' + str(local[0])
                                 numx = numx[-2:]
@@ -526,13 +525,12 @@ class Maze:
                                 print(a,z)
                                 file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
                                 file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
-                                file.write('<think><set name="revision'+ str(local[0]) +'">TRUE</set></think>\n')
+                                #file.write('<think><set name="revision'+ str(local[0]) +'">TRUE</set></think>\n')
                                 file.write('</template>\n')
                                 file.write('</category>\n')
                                 n += 1
 
-                            #print(z, local[0])
-                            #exit()
+                            
         print(n, 'n num')
 
     def string_from_int(self, input, largest, starting_str='', const_for_slice=-1, reverse=False):
