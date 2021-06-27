@@ -463,11 +463,7 @@ class Maze:
         local_moves = []
 
         for direction in self.moves:
-            #zz = ''
-
-            #z = self.string_from_int(i, xx, direction)
-            #for i in range(0, len(format(xx, 'b'))):
-                #zz = zz + '0'
+            
             for i in range(0, len(format(xx,'b'))):
 
                 for y in range(len(self.revisions)):
@@ -475,10 +471,7 @@ class Maze:
                     num = num[-2:]
                     z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + direction.upper().strip()
                     z = self.string_from_int(i, xx, z_input)
-   
-                    ## make list here
-                    #print(self.rooms[y]['phrases'], 'y list')
-                    #local_moves = []
+
                     for k, v in self.rooms[y]['phrases'].items():
                         if k == direction: #and v == i:
                             #local_moves[k] = v
@@ -486,21 +479,19 @@ class Maze:
                                 local_moves.append([y,k,v,0])
                                 #print(k,v, 'kv')
                         pass
-                    #print(local_moves, 'lmkv')
+                    
                     for local in local_moves:
-                        #print(bin(local[3]), bin(y), bin(local[3] & y))
+                        
 
-                        if local[1].lower() == direction.lower(): # and local[3] == y :
+                        if local[1].lower() == direction.lower(): 
                             numx = '000' + str(local[2])
-                            numx = numx[-2:]
-                            #z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numx) + ' ' + direction.upper().strip()
-                            
+                            numx = numx[-2:]                            
                             
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
-                            
+                            print(z)
                             file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
                             file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
-                            if len(self.revisions[y]['moves']) > 0 and False:
+                            if len(self.revisions[y]['moves']) > 0:
                                 file.write('<think><set name="revision'+ str(y) +'">TRUE</set></think>\n')
                             file.write('</template>\n')
                             file.write('</category>\n')
@@ -516,30 +507,35 @@ class Maze:
                                 if [y ,move[1], i, inner_num] not in local_moves:
                                     
                                     local_moves.append([y, move[1], i, inner_num])
-                                    print(local_moves[0], 'zmove', len(local_moves))
                             pass
                         inner_num += 1
                     
                     for local in local_moves:
 
-                        if local[1].lower() == direction.lower(): # and local[0] == y :
-                            numx = '000' + str(local[0])
-                            numx = numx[-2:]
-                            z = self.string_from_int(local[3], xx, z_input)
-                            file.write('<category>\n<pattern>' + z + '</pattern>\n')
+                        if local[1].lower() == direction.lower():
                             
-                            file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
-                            file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
-                            file.write('<think><set name="revision'+ str(local[3]) +'">TRUE</set></think>\n')
-                            file.write('</template>\n')
-                            file.write('</category>\n')
-                            n += 1
+                            for a in range(xx):
+
+                                numx = '000' + str(local[0])
+                                numx = numx[-2:]
+                                numy = '000' + str(local[2])
+                                numy = numy[-2:]
+
+                                z = self.string_from_int(a, len(self.revisions) *2, z_input, local[0], reverse=True)
+                                file.write('<category>\n<pattern>' + z + '</pattern>\n')
+                                print(a,z)
+                                file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
+                                file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
+                                file.write('<think><set name="revision'+ str(local[0]) +'">TRUE</set></think>\n')
+                                file.write('</template>\n')
+                                file.write('</category>\n')
+                                n += 1
 
                             #print(z, local[0])
                             #exit()
         print(n, 'n num')
 
-    def string_from_int(self, input, largest, starting_str):
+    def string_from_int(self, input, largest, starting_str='', const_for_slice=-1, reverse=False):
         zz = ''
         xx = largest
         
@@ -550,6 +546,11 @@ class Maze:
         l = format(i, 'b')
         l = zz + l
         l = l[-len(zz):]
+        if const_for_slice > -1:
+            l = l[:const_for_slice] + '1' + l[const_for_slice:]
+
+        if reverse:
+            l = l[::-1]
 
         z = starting_str 
         
@@ -561,6 +562,30 @@ class Maze:
                 z += ' ' + 'TRUE'
         return z
         
+    '''
+    def set_bit(self, input, largest, starting_str='', const_for_slice=-1):
+        zz = ''
+        xx = largest
+        
+        for i in range(0, len(format(xx, 'b'))):
+            zz = zz + '0'
+        
+        l = zz 
+        l = l[-len(zz):]
+        if const_for_slice > -1:
+            l = l[:const_for_slice] + '1' + l[const_for_slice:]
+        z = starting_str
+        
+        for x in range(len(l), 0, -1):
+            j = '0'
+            if x == input:
+                j = '1'
+            if j == '0':
+                z += ' ' + 'FALSE'
+            if j == '1':
+                z += ' ' + 'TRUE'
+        return z
+    '''
 
     def test_condition(self, file):
         z = 'TRY'
