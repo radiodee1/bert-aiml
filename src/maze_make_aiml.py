@@ -14,7 +14,7 @@ class Maze:
 
         self.name = 'room*.maze'
         self.dir = './../maze/'
-        self.entry_pattern = 'try maze'
+        self.entry_pattern = 'maze'
         self.entry_room_num = 0
         self.out_aiml = 'generated.aiml'
         self.item_name = 'thing*.item'
@@ -78,7 +78,7 @@ class Maze:
         self.revision_list(w)
         self.item_statements(w)
         self.item_list(w)
-        self.test_condition(w)
+        #self.test_condition(w)
         w.write('</aiml>\n')
         pass
     
@@ -470,33 +470,13 @@ class Maze:
                     num = '000' + str(y)
                     num = num[-2:]
                     z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + direction.upper().strip()
-                    z = self.string_from_int(i, xx, z_input)
-
+                    z = self.string_from_int(i, xx, z_input, reverse=False)
+                    
                     for k, v in self.rooms[y]['phrases'].items():
                         if k == direction: 
                             if [y,k,v,0] not in local_moves_simple:
                                 local_moves_simple.append([y,k,v,0])
-                                
-                        pass
-                    
-                    for local in local_moves_simple:
-                        
-                        if local[1].lower() == direction.lower(): 
-                            numx = '000' + str(local[2])
-                            numx = numx[-2:]                            
-                            
-                            file.write('<category>\n<pattern>' + z + '</pattern>\n')
-                            print(z)
-                            file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
-                            file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
-                            if len(self.revisions[y]['moves']) > 0 and local[1].lower() == direction.lower() :
-                                file.write('<think><set name="revision'+ str(y) +'">TRUE</set></think>\n')
-                            file.write('</template>\n')
-                            file.write('</category>\n')
-                            n += 1
-
                     local_moves_revisions = []
-                    
                     inner_num = 0
                     for zzz in self.revisions:
                         for move in zzz['moves']:
@@ -506,6 +486,29 @@ class Maze:
                                     local_moves_revisions.append([y, move[1], i, inner_num])
                             pass
                         inner_num += 1
+                    if len(local_moves_revisions) > 0: print(local_moves_revisions)
+                    
+                    for local in local_moves_simple:
+                        
+                        if local[1].lower() == direction.lower() and y == local[0]: 
+                            numx = '000' + str(local[2])
+                            numx = numx[-2:]                            
+                            
+                            file.write('<category>\n<pattern>' + z + '</pattern>\n')
+                            #print(i) #format(xx,'b'))
+                            #print(y, local)
+                            file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
+                            file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
+                            if len(self.revisions[local[2]]['moves']) > 0 : 
+                                print(local[2], local)
+                                file.write('<think><set name="revision'+ str(local[2]) +'">TRUE</set></think>\n')
+                            file.write('</template>\n')
+                            file.write('</category>\n')
+
+                            print(z)
+                            print('---')
+                            n += 1
+
                     
                     for local in local_moves_revisions:
 
@@ -513,23 +516,25 @@ class Maze:
                             
                             for a in range(xx):
 
-                                #if local[1].lower() == direction.lower():
+                                
+                                if  a == local[2] or True:
+                                    numx = '000' + str(local[0])
+                                    numx = numx[-2:]
+                                    numy = '000' + str(local[2])
+                                    numy = numy[-2:]
 
-                                numx = '000' + str(local[0])
-                                numx = numx[-2:]
-                                numy = '000' + str(local[2])
-                                numy = numy[-2:]
-
-                                z = self.string_from_int(a, len(self.revisions) *2, z_input, local[0], reverse=True)
-                                file.write('<category>\n<pattern>' + z + '</pattern>\n')
-                                print(a,z)
-                                file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
-                                file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
-                                #file.write('<think><set name="revision'+ str(local[0]) +'">TRUE</set></think>\n')
-                                file.write('</template>\n')
-                                file.write('</category>\n')
-                                n += 1
-
+                                    z = self.string_from_int(a, len(self.revisions) *2, z_input, local[0], reverse=False) # + ' x'
+                                    file.write('<category>\n<pattern>' + z + '</pattern>\n')
+                                    print(a,z,numy, direction, 'az2')
+                                    file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
+                                    file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
+                                    
+                                    #file.write('<think><set name="revision'+ str(local[0]) +'">TRUE</set></think>\n')
+                                    
+                                    file.write('</template>\n')
+                                    file.write('</category>\n')
+                                    n += 1
+                                
                             
         print(n, 'n num')
 
@@ -560,33 +565,10 @@ class Maze:
                 z += ' ' + 'TRUE'
         return z
         
-    '''
-    def set_bit(self, input, largest, starting_str='', const_for_slice=-1):
-        zz = ''
-        xx = largest
-        
-        for i in range(0, len(format(xx, 'b'))):
-            zz = zz + '0'
-        
-        l = zz 
-        l = l[-len(zz):]
-        if const_for_slice > -1:
-            l = l[:const_for_slice] + '1' + l[const_for_slice:]
-        z = starting_str
-        
-        for x in range(len(l), 0, -1):
-            j = '0'
-            if x == input:
-                j = '1'
-            if j == '0':
-                z += ' ' + 'FALSE'
-            if j == '1':
-                z += ' ' + 'TRUE'
-        return z
-    '''
+    
 
     def test_condition(self, file):
-        z = 'TRY'
+        z = self.entry_pattern.upper()
         file.write('\n\n')
         file.write('<category>\n<pattern>' + z + '</pattern>\n')
         file.write('<template>\n')
