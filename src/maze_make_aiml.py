@@ -470,7 +470,7 @@ class Maze:
                     num = '000' + str(y)
                     num = num[-2:]
                     z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + direction.upper().strip()
-                    z = self.string_from_int(i, xx, z_input, reverse=False)
+                    
                     
                     for k, v in self.rooms[y]['phrases'].items():
                         if k == direction: 
@@ -486,27 +486,29 @@ class Maze:
                                     local_moves_revisions.append([y, move[1], i, inner_num])
                             pass
                         inner_num += 1
-                    if len(local_moves_revisions) > 0: print(local_moves_revisions)
+                    #if len(local_moves_revisions) > 0: print(local_moves_revisions)
                     
                     for local in local_moves_simple:
                         
                         if local[1].lower() == direction.lower() and y == local[0]: 
-                            numx = '000' + str(local[2])
+                            numx = '000' + str(local[0])
                             numx = numx[-2:]                            
-                            
+                            numy = '000' + str(local[2])
+                            numy = numy[-2:]
+                            z , _ = self.string_from_int(i, xx, z_input, reverse=False)
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
                             #print(i) #format(xx,'b'))
                             #print(y, local)
-                            file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
-                            file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
-                            if len(self.revisions[local[2]]['moves']) > 0 : 
-                                print(local[2], local)
-                                file.write('<think><set name="revision'+ str(local[2]) +'">TRUE</set></think>\n')
+                            file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
+                            file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
+                            if len(self.revisions[local[2]]['moves']) > 0 : #or True : 
+                                #print(local[2], local)
+                                file.write('<think><set name="revision'+ str(local[3]) +'">TRUE</set></think>\n')
                             file.write('</template>\n')
                             file.write('</category>\n')
 
-                            print(z)
-                            print('---')
+                            #print(z)
+                            #print('---')
                             n += 1
 
                     
@@ -514,22 +516,27 @@ class Maze:
 
                         if local[1].lower() == direction.lower() :
                             
-                            for a in range(xx):
-
+                            for a in range(len(format(xx,'b'))): #xx):
+                                #a = i
                                 
-                                if  a == local[2] or True:
+                                if  a == local[3] : #or True :
                                     numx = '000' + str(local[0])
                                     numx = numx[-2:]
                                     numy = '000' + str(local[2])
                                     numy = numy[-2:]
+                                    numz = a# local[2] ## a??
+                                    replacement = 1
+                                    if local[3] == 0:
+                                        replacement = 0
 
-                                    z = self.string_from_int(a, len(self.revisions) *2, z_input, local[0], reverse=False) # + ' x'
+                                    print(a,z,numy, direction, 'az2', local)
+
+                                    z, _ = self.string_from_int(numz, len(self.revisions) *2, z_input, local[0], reverse=True, set_symbol=replacement)  #+ ' x'
                                     file.write('<category>\n<pattern>' + z + '</pattern>\n')
-                                    print(a,z,numy, direction, 'az2')
-                                    file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
+                                    file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
                                     file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
                                     
-                                    #file.write('<think><set name="revision'+ str(local[0]) +'">TRUE</set></think>\n')
+                                    file.write('<think><set name="revision'+ str(local[3]) +'">TRUE</set></think>\n')
                                     
                                     file.write('</template>\n')
                                     file.write('</category>\n')
@@ -538,7 +545,7 @@ class Maze:
                             
         print(n, 'n num')
 
-    def string_from_int(self, input, largest, starting_str='', const_for_slice=-1, reverse=False):
+    def string_from_int(self, input, largest, starting_str='', const_for_slice=-1, reverse=False, set_symbol=1):
         zz = ''
         xx = largest
         
@@ -550,10 +557,16 @@ class Maze:
         l = zz + l
         l = l[-len(zz):]
         if const_for_slice > -1:
-            l = l[:const_for_slice] + '1' + l[const_for_slice:]
+            l = l[:const_for_slice] + str(set_symbol) + l[const_for_slice:]
 
-        if reverse:
+        if reverse == True:
+            print(l, end=' ')
             l = l[::-1]
+            print(l)
+
+        if l in ['00001','00100', '10000']: 
+            print(l)
+            #exit()
 
         z = starting_str 
         
@@ -563,7 +576,7 @@ class Maze:
                 z += ' ' + 'FALSE'
             if j == '1':
                 z += ' ' + 'TRUE'
-        return z
+        return z, l
         
     
 
