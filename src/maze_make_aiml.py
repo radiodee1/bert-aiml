@@ -454,13 +454,38 @@ class Maze:
         print(nn, "nn num")
         
         #################################
+        local_moves_simple = []
+        local_moves_revisions = []
+        local_moves_combined = []
+        for y in range(len(self.revisions)):
+            for k, v in self.rooms[y]['phrases'].items():
+                if k in self.moves: #== direction: 
+                    if [y,k,v,0] not in local_moves_simple:
+                        local_moves_simple.append([y,k,v,0])
+            #local_moves_revisions = []
+            inner_num = 0
+            for i in range(0, len(self.revisions)):
+
+                for zzz in self.revisions:
+                    for move in zzz['moves']:
+                        
+                        if move[0] == y and move[2] == i:
+                            if [y ,move[1], i, inner_num] not in local_moves_revisions:
+                                local_moves_revisions.append([y, move[1], i, inner_num])
+                        pass
+                    inner_num += 1
+                #if len(local_moves_revisions) > 0: print(local_moves_revisions)
+                    
+        #################################
         
         pass
         xx = len(self.revisions) * len(self.revisions) 
         
         #print(xx)
         n = 0
-        local_moves_simple = []
+        #local_moves_simple = []
+        #local_moves_revisions = []
+        #local_moves_combined = []
 
         for direction in self.moves:
             
@@ -471,22 +496,6 @@ class Maze:
                     num = num[-2:]
                     z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + direction.upper().strip()
                     
-                    
-                    for k, v in self.rooms[y]['phrases'].items():
-                        if k == direction: 
-                            if [y,k,v,0] not in local_moves_simple:
-                                local_moves_simple.append([y,k,v,0])
-                    local_moves_revisions = []
-                    inner_num = 0
-                    for zzz in self.revisions:
-                        for move in zzz['moves']:
-                            
-                            if move[0] == y and move[2] == i:
-                                if [y ,move[1], i, inner_num] not in local_moves_revisions:
-                                    local_moves_revisions.append([y, move[1], i, inner_num])
-                            pass
-                        inner_num += 1
-                    #if len(local_moves_revisions) > 0: print(local_moves_revisions)
                     
                     for local in local_moves_simple:
                         
@@ -511,8 +520,26 @@ class Maze:
                             #print('---')
                             n += 1
 
-                    
-                    for local in local_moves_revisions:
+                    #local_moves_combined = []
+
+                    if y == 0 and i == 0 and direction == self.moves[0]:
+                        
+                        local_moves_simple = [[local[0], local[1], local[2], local[3] + y] for local in local_moves_simple]
+                        #print(local_moves_simple)
+                        b = len(format(xx,'b'))
+                        print(local_moves_revisions, 'revisions1')
+
+                        local_moves_combined = [[local[0] + local[3] * b, local[1], local[2] + local[3] * b, local[3]] for local in local_moves_simple]
+                        local_moves_revisions = [[local[0] + local[3] * b, local[1], local[2] + local[3] * b, local[3]] for local in local_moves_revisions]
+                        
+                        #local_moves_combined.extend(local_moves_simple)
+                        local_moves_combined.extend(local_moves_revisions)
+
+                        print(local_moves_combined, 'combined')
+                        #print(local_moves_simple, 'simple')
+                        print(local_moves_revisions, 'revisions2')
+
+                    for local in local_moves_combined:
 
                         if local[1].lower() == direction.lower() :
                             
@@ -525,13 +552,10 @@ class Maze:
                                     numy = '000' + str(local[2])
                                     numy = numy[-2:]
                                     numz = a# local[2] ## a??
-                                    replacement = 1
-                                    if local[3] == 0:
-                                        replacement = 0
+                                    
+                                    #print(a,z,numy, direction, 'az2', local)
 
-                                    print(a,z,numy, direction, 'az2', local)
-
-                                    z, _ = self.string_from_int(numz, len(self.revisions) *2, z_input, local[0], reverse=True, set_symbol=replacement)  #+ ' x'
+                                    z, _ = self.string_from_int(numz, len(self.revisions) *2, z_input, local[0], reverse=True)  #+ ' x'
                                     file.write('<category>\n<pattern>' + z + '</pattern>\n')
                                     file.write('<template><srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
                                     file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
@@ -560,12 +584,13 @@ class Maze:
             l = l[:const_for_slice] + str(set_symbol) + l[const_for_slice:]
 
         if reverse == True:
-            print(l, end=' ')
+            #print(l, end=' ')
             l = l[::-1]
-            print(l)
+            #print(l)
 
         if l in ['00001','00100', '10000']: 
-            print(l)
+            #print(l)
+            pass
             #exit()
 
         z = starting_str 
