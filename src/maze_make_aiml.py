@@ -474,17 +474,16 @@ class Maze:
             #inner_num = 0
             for move in zzz['moves']:
                 inner = inner_num
-                '''
                 for g in range(len(local_moves_simple)): # local_moves_simple:
                     simple_moves = local_moves_simple[g]
-                    #inner = inner_num
-                    if move[0] == simple_moves[0] and move[1] != simple_moves[1]: 
+                    if move[0] == simple_moves[0] and simple_moves[3] != 0:
                         inner = simple_moves[3]
-                        print(inner, inner_num, simple_moves, g)
-                '''
+                        print(move,simple_moves)
+                        pass
+                
                         #if True: 
-                if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
-                    local_moves_revisions.append([move[0], move[1], move[2], inner])
+                    if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
+                        local_moves_revisions.append([move[0], move[1], move[2], inner])
                 pass
             inner_num += 1
 
@@ -509,7 +508,7 @@ class Maze:
 
         print(local_moves_combined, 'combined')
         print(local_moves_simple_out, 'simple')
-        #print(moves, 'moves')
+        print(local_moves_revisions_out, 'rev')
         #################################
         
         n = 0
