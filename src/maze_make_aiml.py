@@ -475,9 +475,9 @@ class Maze:
             #inner_num = 0
             for move in zzz['moves']:
                 inner = inner_num
-                for g in range(len(local_moves_simple)): # local_moves_simple:
+                for g in range(len(local_moves_simple)): 
                     simple_moves = local_moves_simple[g]
-                    if move[0] % b == simple_moves[0]: # and move[1] == simple_moves[1]: 
+                    if move[0] % b == simple_moves[0]: 
                         inner = 0 
                         
                         pass
