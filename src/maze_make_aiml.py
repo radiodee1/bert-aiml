@@ -455,6 +455,7 @@ class Maze:
         
         #################################
         xx = len(self.revisions) * len(self.revisions) 
+        b = len(format(xx,'b'))
 
         local_moves_simple = []
         local_moves_revisions = []
@@ -476,9 +477,9 @@ class Maze:
                 inner = inner_num
                 for g in range(len(local_moves_simple)): # local_moves_simple:
                     simple_moves = local_moves_simple[g]
-                    if move[0] == simple_moves[0] and simple_moves[3] != 0:
+                    if move[0] % b == simple_moves[0] and simple_moves[3] != 0:
                         inner = simple_moves[3]
-                        print(move,simple_moves)
+                        print(move,simple_moves, 'simple vs rev')
                         pass
                 
                         #if True: 
@@ -487,28 +488,29 @@ class Maze:
                 pass
             inner_num += 1
 
-        b = len(format(xx,'b'))
-        #moves = []
-        #for i in range(len(self.revisions)):
+        moves = []
+        local_moves_combined = []
+        for i in range(len(self.revisions)):
         #if len(self.revisions[i]['moves']) > 0 or True:
-        i = 0
-        local_moves_simple_out = [[local[0], local[1], local[2], i ] for local in local_moves_simple]
-        print(local_moves_simple, 'simple start')
-        
-        print(local_moves_revisions, 'revisions1')
+            
+            local_moves_simple_out = [[local[0], local[1], local[2], i ] for local in local_moves_simple]
+            print(local_moves_simple, 'simple start')
+            
+            print(local_moves_revisions, 'revisions1')
 
-        local_moves_combined = [[local[0] + local[3] * b, local[1], local[2] + local[3] * b, local[3]] for local in local_moves_simple_out]
-        
-        #if len(self.revisions[i]['moves']) > 0:
-        local_moves_revisions_out = [[local[0] + local[3] * b, local[1], local[2] + local[3] * b , local[3]] for local in local_moves_revisions]# if local[3] == i]
-        
-        #local_moves_combined.extend(local_moves_simple)
-        local_moves_combined.extend(local_moves_revisions_out)
-        #moves.extend(local_moves_combined)
+            local_moves_combined = [[local[0] + local[3] * b, local[1], local[2] + local[3] * b, local[3]] for local in local_moves_simple_out]
+            
+            #if len(self.revisions[i]['moves']) > 0:
+            local_moves_revisions_out = [[local[0] + local[3] * b, local[1], local[2] + local[3] * b , local[3]] for local in local_moves_revisions]# if local[3] == i]
+            
+            #local_moves_combined.extend(local_moves_simple)
+            local_moves_combined.extend(local_moves_revisions_out)
+            moves.extend(local_moves_combined)
 
-        print(local_moves_combined, 'combined')
-        print(local_moves_simple_out, 'simple')
-        print(local_moves_revisions_out, 'rev')
+        #print(local_moves_combined, 'combined')
+        #print(local_moves_simple_out, 'simple')
+        #print(local_moves_revisions_out, 'rev')
+        print(moves, 'moves')
         #################################
         
         n = 0
@@ -530,15 +532,15 @@ class Maze:
                             numx = numx[-2:]                            
                             numy = '000' + str(local[2])
                             numy = numy[-2:]
-                            z , _ = self.string_from_int(y, xx, z_input, reverse=False)
+                            z , _ = self.string_from_int(y % b, xx, z_input, reverse=False)
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
                             
                             file.write('<template>')
                             file.write(str(local[3]) + ' base rev')
                             file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
                             #print(local[0], len(self.revisions))
-                            if len(self.revisions[local[0] % b ]['moves']) > 0  : 
-                                revision = str(local[3])
+                            if len(self.revisions[y % b ]['moves']) > 0  : 
+                                revision = str(local[3] % b)
                                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
 
@@ -550,7 +552,7 @@ class Maze:
                             n += 1
 
                     
-                    for local in local_moves_combined:
+                    for local in moves: #local_moves_combined:
 
                         if local[1].lower() == direction.lower() :
                             
