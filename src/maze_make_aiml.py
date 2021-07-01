@@ -478,8 +478,8 @@ class Maze:
                 for g in range(len(local_moves_simple)): # local_moves_simple:
                     simple_moves = local_moves_simple[g]
                     if move[0] % b == simple_moves[0]: # and move[1] == simple_moves[1]: 
-                        inner = 0 #simple_moves[3]
-                        #print(move,simple_moves, 'simple vs rev')
+                        inner = 0 
+                        
                         pass
                 
                         #if True: 
@@ -495,9 +495,9 @@ class Maze:
         #if len(self.revisions[i]['moves']) > 0 or True:
             
             local_moves_simple_out = [[local[0], local[1], local[2], i ] for local in local_moves_simple]
-            print(local_moves_simple, 'simple start')
+            #print(local_moves_simple, 'simple start')
             
-            print(local_moves_revisions, 'revisions1')
+            #print(local_moves_revisions, 'revisions1')
 
             local_moves_combined = [[local[0] + local[3] * b, local[1], local[2] + local[3] * b, local[3]] for local in local_moves_simple_out]
             
@@ -553,7 +553,7 @@ class Maze:
                             n += 1
 
                     
-                    for local in moves: #local_moves_combined:
+                    for local in local_moves_combined: ## moves <-- ??
 
                         if local[1].lower() == direction.lower() :
                             
@@ -565,7 +565,7 @@ class Maze:
                             numz = numz[-2:]
                             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + direction.upper().strip()
 
-                            z , p = self.string_from_int(y % b, xx, z_input, reverse=False) ## y + 1
+                            z , p = self.string_from_int(y % b, xx, z_input, reverse=False) ## y % b
                             #if a == 1: print(p, z, local)
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
                             file.write('<template>')
@@ -639,4 +639,5 @@ if __name__ == '__main__':
     m.read_files()
     print(m.rooms)
     m.write_xml()
+    
     
