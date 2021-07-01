@@ -521,7 +521,6 @@ class Maze:
 
                 for y in range(len(self.revisions)):
                     
-                    
                     for local in local_moves_simple:
                         
                         if local[1].lower() == direction.lower(): # and False:# and y == local[0]: 
@@ -542,12 +541,13 @@ class Maze:
                             #print(local[0], len(self.revisions))
                             if len(self.revisions[y % b ]['moves']) > 0 : 
                                 revision = str(local[3] % b)
+                                #print(revision,'rev')
                                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
 
                             file.write('</template>\n')
                             file.write('</category>\n')
-
+                            
                             #print(z)
                             #print('---')
                             n += 1
@@ -574,7 +574,7 @@ class Maze:
                             if len(self.revisions[y % b ]['moves']) > 0 : 
                                 revision = str(local[3] % b)
                                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
-                            #file.write('<think><set name="revision'+ str(local[3]) +'">TRUE</set></think>\n')
+
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
                             
                             file.write('</template>\n')
