@@ -477,14 +477,15 @@ class Maze:
                 inner = inner_num
                 for g in range(len(local_moves_simple)): # local_moves_simple:
                     simple_moves = local_moves_simple[g]
-                    if move[0] % b == simple_moves[0] and simple_moves[3] != 0:
-                        inner = simple_moves[3]
-                        print(move,simple_moves, 'simple vs rev')
+                    if move[0] % b == simple_moves[0]: # and move[1] == simple_moves[1]: 
+                        inner = 0 #simple_moves[3]
+                        #print(move,simple_moves, 'simple vs rev')
                         pass
                 
                         #if True: 
-                    if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
-                        local_moves_revisions.append([move[0], move[1], move[2], inner])
+                if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
+                    local_moves_revisions.append([move[0], move[1], move[2], inner])
+                print(local_moves_revisions[-1], 'last')
                 pass
             inner_num += 1
 
@@ -539,7 +540,7 @@ class Maze:
                             file.write(str(local[3]) + ' base rev')
                             file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
                             #print(local[0], len(self.revisions))
-                            if len(self.revisions[y % b ]['moves']) > 0  : 
+                            if len(self.revisions[y % b ]['moves']) > 0 : 
                                 revision = str(local[3] % b)
                                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
@@ -566,14 +567,16 @@ class Maze:
 
                             #print(a,numx, numy, direction, 'az2', local)
 
-                            z , p = self.string_from_int(i + 0, xx, z_input, reverse=False) ## y + 1
+                            z , p = self.string_from_int(y % b, xx, z_input, reverse=False) ## y + 1
                             #if a == 1: print(p, z, local)
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
                             file.write('<template>')
                             file.write(str(local[3]) + ' rev')
                             file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
-                            
-                            file.write('<think><set name="revision'+ str(local[3]) +'">TRUE</set></think>\n')
+                            if len(self.revisions[y % b ]['moves']) > 0 : 
+                                revision = str(local[3] % b)
+                                file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
+                            #file.write('<think><set name="revision'+ str(local[3]) +'">TRUE</set></think>\n')
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
                             
                             file.write('</template>\n')
