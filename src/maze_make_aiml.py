@@ -479,10 +479,10 @@ class Maze:
                     simple_moves = local_moves_simple[g]
                     if move[0] % b == simple_moves[0]: 
                         inner = 0 
-                        
+                        ## do not change
                         pass
-                
-                        #if True: 
+                print(simple_moves, 'simple moves')
+                print(move,inner_num, 'move')
                 if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
                     local_moves_revisions.append([move[0], move[1], move[2], inner])
                 print(local_moves_revisions[-1], 'last')
@@ -523,7 +523,7 @@ class Maze:
                     
                     for local in local_moves_simple:
                         
-                        if local[1].lower() == direction.lower(): # and False:# and y == local[0]: 
+                        if local[1].lower() == direction.lower(): 
                             num = '000' + str(local[0])
                             num = num[-2:]
                             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + direction.upper().strip()
@@ -532,18 +532,20 @@ class Maze:
                             numx = numx[-2:]                            
                             numy = '000' + str(local[2])
                             numy = numy[-2:]
-                            z , _ = self.string_from_int(y % b, xx, z_input, reverse=False)
+                            z , _ = self.string_from_int( y , xx, z_input, reverse=False) # y % b
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
                             
                             file.write('<template>')
-                            file.write(str(local[3]) + ' base rev')
+                            file.write(str(local[3]) + ' base rev ')
+                            file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
+
                             file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
-                            #print(local[0], len(self.revisions))
-                            if len(self.revisions[y % b ]['moves']) > 0 : 
-                                revision = str(local[3] % b)
+                            
+                            if len(self.revisions[y % b ]['moves']) > 0 : #and local[3] != 0: 
+                                revision = str(local[3] )
                                 #print(revision,'rev')
                                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
-                            file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
+
 
                             file.write('</template>\n')
                             file.write('</category>\n')
@@ -565,16 +567,17 @@ class Maze:
                             numz = numz[-2:]
                             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + direction.upper().strip()
 
-                            z , p = self.string_from_int(y % b, xx, z_input, reverse=False) ## y % b
-                            #if a == 1: print(p, z, local)
+                            z , p = self.string_from_int(y % b , xx, z_input, reverse=False) ## y % b
+                            
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
                             file.write('<template>')
-                            file.write(str(local[3]) + ' rev')
+                            file.write(str(local[3]) + ' rev ' + str(local[0]))
                             file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
                             if len(self.revisions[y % b ]['moves']) > 0 : 
-                                revision = str(local[3] % b)
-                                file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
+                                revision = str(local[3] )
 
+                                file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
+                                file.write('text here... ')
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
                             
                             file.write('</template>\n')
