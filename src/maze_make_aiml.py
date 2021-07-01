@@ -565,8 +565,6 @@ class Maze:
                             numz = numz[-2:]
                             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + direction.upper().strip()
 
-                            #print(a,numx, numy, direction, 'az2', local)
-
                             z , p = self.string_from_int(y % b, xx, z_input, reverse=False) ## y + 1
                             #if a == 1: print(p, z, local)
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
@@ -577,7 +575,7 @@ class Maze:
                                 revision = str(local[3] % b)
                                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
                             #file.write('<think><set name="revision'+ str(local[3]) +'">TRUE</set></think>\n')
-                            file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
+                            file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numy + '</srai>\n')
                             
                             file.write('</template>\n')
                             file.write('</category>\n')
@@ -641,3 +639,4 @@ if __name__ == '__main__':
     m.read_files()
     print(m.rooms)
     m.write_xml()
+    
