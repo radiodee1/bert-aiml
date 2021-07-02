@@ -436,9 +436,8 @@ class Maze:
             file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" /> ''' + i.upper()+ ' ' )
             file.write('''<think><set name="move">FALSE</set></think>''')
             n = 1 #0
-            #for ii in [self.rooms[0]]:
                 
-            for _ in range(len(self.revisions) -1 ) : #self.revisions:
+            for _ in range(len(self.revisions)  ) : #self.revisions:
                 
                 file.write('<condition name="revision' + str(n) + '" value="TRUE" >')
                 file.write('TRUE ')
@@ -476,7 +475,6 @@ class Maze:
         
         inner_num = 0
         for zzz in self.revisions:
-            #inner_num = 0
             for move in zzz['moves']:
                 inner = inner_num
                 for g in range(len(local_moves_simple)): 
@@ -484,10 +482,8 @@ class Maze:
                     if move[0] % b == simple_moves[0]: 
                         inner = 0 
                         ## ^^ do not change
+                        print(g, move, simple_moves)
                         pass
-                #print(simple_moves, 'simple moves')
-                
-                #print(move,inner_num, 'move')
                 
                 if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
                     local_moves_revisions.append([move[0], move[1], move[2], inner])
@@ -495,28 +491,23 @@ class Maze:
                 pass
             inner_num += 1
 
-        moves = []
+        #moves = []
         local_moves_combined = []
         local_moves_simple_out = []
-        for i in range(0,len(self.revisions)+ 1):
-        #if len(self.revisions[i]['moves']) > 0 or True:
+        for i in range(0,len(self.revisions) ):
             
-            local_moves_simple_out.extend( [[local[0], local[1], local[2], i ] for local in local_moves_simple] )
-            #print(local_moves_simple, 'simple start')
+            local_moves_simple_out += [[local[0], local[1], local[2], i ] for local in local_moves_simple ] 
+            #print(local_moves_simple_out, 'simple start')
             
-            #print(local_moves_revisions, 'revisions1')
-
         local_moves_combined = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old, local[3]] for local in local_moves_simple_out]
         
         #local_moves_revisions_out = local_moves_revisions
         local_moves_revisions_out = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old , local[3]] for local in local_moves_revisions]# if local[3] == i]
         
-        #local_moves_combined.extend(local_moves_simple)
         local_moves_combined.extend(local_moves_revisions_out)
-        moves.extend(local_moves_combined)
 
-        #print(local_moves_combined, 'combined')
-        print(local_moves_simple_out, 'simple')
+        print(local_moves_combined, 'combined')
+        #print(local_moves_simple_out, 'simple')
         #print(local_moves_revisions_out, 'rev')
         #print(moves, 'moves')
         #################################
@@ -535,8 +526,8 @@ class Maze:
                             y_out = local[3] # 0 #y
                             revision = str(0)
                             flag_revision = False
-                            if len(self.revisions[local[0] ]['moves']) > 0 : 
-                                revision = str(local[3]  )
+                            if local[3] != 0: 
+                                revision = str(local[3])
                                 y_out = local[3]
                                 flag_revision = True
                                 #print(local)
@@ -562,7 +553,7 @@ class Maze:
                             if flag_revision:
                                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
-                            file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numz + '</srai>\n')
+                            file.write('<srai>' + self.confuse_text  + ' INTERNALLOOK ROOM' + numz + '</srai>\n')
 
                             file.write('</template>\n')
                             file.write('</category>\n')
@@ -577,18 +568,18 @@ class Maze:
 
                         if local[1].lower() == direction.lower()  :
                             y_out =  y 
-                            revision = str(local[3] % b) 
+                            revision = str(local[3]) 
                             flag_revision = False
-                            if len(self.revisions[local[0] % b_old]['moves']) > 0  : 
-                                revision = str(local[3]  )
-                                y_out = local[3] 
+                            if local[3] > 0:  
+                                revision = str(local[3] % b )
+                                y_out = local[3] % b_old 
                                 flag_revision = True
 
                             numx = '000' + str(local[2] % len(self.revisions) )
                             numx = numx[-2:]
                             numy = '000' + str(local[2]  )
                             numy = numy[-2:]
-                            numz = '000' + str(local[0] )
+                            numz = '000' + str(local[0] - 1 )
                             numz = numz[-2:]
                             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + local[1].upper().strip()
 
@@ -601,6 +592,7 @@ class Maze:
                             #if len(self.revisions[y % b ]['moves']) > 0 : 
                             #    revision = str(local[3] )
                             if flag_revision:
+                                print(z)
                                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
