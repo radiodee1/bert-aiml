@@ -437,7 +437,7 @@ class Maze:
             file.write('''<think><set name="move">FALSE</set></think>''')
             n = 1 #0
                 
-            for _ in range(len(self.revisions)  ) : #self.revisions:
+            for _ in range(len(self.revisions) -1 ) : #self.revisions:
                 
                 file.write('<condition name="revision' + str(n) + '" value="TRUE" >')
                 file.write('TRUE ')
@@ -473,14 +473,14 @@ class Maze:
                     if [y,k,v,z] not in local_moves_simple:
                         local_moves_simple.append([y,k,v,z])
         
-        inner_num = 0
+        inner_num = 1
         for zzz in self.revisions:
             for move in zzz['moves']:
                 inner = inner_num
                 for g in range(len(local_moves_simple)): 
                     simple_moves = local_moves_simple[g]
                     if move[0] % b_old == simple_moves[0]: 
-                        inner = 0 
+                        #inner = 0 
                         ## ^^ do not change
                         #print(g, move, simple_moves)
                         pass
@@ -567,11 +567,11 @@ class Maze:
                             pass
 
                         if local[1].lower() == direction.lower()  :
-                            y_out =  y 
+                            y_out =  local[3] % b_old
                             revision = str(local[3]) 
                             flag_revision = False
                             if local[3] > 0:  
-                                revision = str(local[3] % b )
+                                revision = str(local[3]  )
                                 y_out = local[3] % b_old 
                                 flag_revision = True
 
