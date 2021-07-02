@@ -479,10 +479,10 @@ class Maze:
                 inner = inner_num
                 for g in range(len(local_moves_simple)): 
                     simple_moves = local_moves_simple[g]
-                    if move[0] % b == simple_moves[0]: 
+                    if move[0] % b_old == simple_moves[0]: 
                         inner = 0 
                         ## ^^ do not change
-                        print(g, move, simple_moves)
+                        #print(g, move, simple_moves)
                         pass
                 
                 if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
@@ -499,10 +499,10 @@ class Maze:
             local_moves_simple_out += [[local[0], local[1], local[2], i ] for local in local_moves_simple ] 
             #print(local_moves_simple_out, 'simple start')
             
-        local_moves_combined = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old, local[3]] for local in local_moves_simple_out]
+        local_moves_combined = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old, local[3] * b_old ] for local in local_moves_simple_out]
         
         #local_moves_revisions_out = local_moves_revisions
-        local_moves_revisions_out = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old , local[3]] for local in local_moves_revisions]# if local[3] == i]
+        local_moves_revisions_out = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old , local[3] ] for local in local_moves_revisions]# if local[3] == i]
         
         local_moves_combined.extend(local_moves_revisions_out)
 
@@ -575,7 +575,7 @@ class Maze:
                                 y_out = local[3] % b_old 
                                 flag_revision = True
 
-                            numx = '000' + str(local[2] % len(self.revisions) )
+                            numx = '000' + str(local[2] % b )
                             numx = numx[-2:]
                             numy = '000' + str(local[2]  )
                             numy = numy[-2:]
@@ -587,7 +587,7 @@ class Maze:
                             #print(numx, numy, direction)
                             file.write('<category>\n<pattern>' + z + '</pattern>\n')
                             file.write('<template>')
-                            file.write(str(local[3]) + ' rev ' + str(local))
+                            file.write(str(local[3]) + ' rev ' + str(local) + ' ' + z)
                             file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
                             #if len(self.revisions[y % b ]['moves']) > 0 : 
                             #    revision = str(local[3] )
