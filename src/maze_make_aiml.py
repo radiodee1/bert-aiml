@@ -482,14 +482,16 @@ class Maze:
                 for g in range(len(local_moves_simple)): 
                     simple_moves = local_moves_simple[g]
                     if move[0] % b == simple_moves[0]: 
-                        #inner = 0 
+                        inner = 0 
                         ## ^^ do not change
                         pass
-                print(simple_moves, 'simple moves')
-                print(move,inner_num, 'move')
+                #print(simple_moves, 'simple moves')
+                
+                #print(move,inner_num, 'move')
+                
                 if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
                     local_moves_revisions.append([move[0], move[1], move[2], inner])
-                print(local_moves_revisions[-1], 'last')
+                #print(local_moves_revisions[-1], 'last')
                 pass
             inner_num += 1
 
@@ -532,9 +534,11 @@ class Maze:
                             #print(xx, 'xx')
                             y_out = local[3] # 0 #y
                             revision = str(0)
+                            flag_revision = False
                             if len(self.revisions[local[0] ]['moves']) > 0 : 
                                 revision = str(local[3]  )
                                 y_out = local[3]
+                                flag_revision = True
                                 #print(local)
 
                             num = '000' + str(local[0])
@@ -553,35 +557,32 @@ class Maze:
                             file.write('<template>')
                             file.write(str(local[3]) + ' base rev ')
 
-
                             file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
                             
-                            #if len(self.revisions[local[0] % b ]['moves']) > 0 :
-                                #revision = str(local[3]  )
-
-                            file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
+                            if flag_revision:
+                                file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numz + '</srai>\n')
 
                             file.write('</template>\n')
                             file.write('</category>\n')
                             
-                            #print(z)
-                            #print('---')
                             n += 1
 
                     
                     for local in local_moves_combined: ## moves <-- ??
-                        if local in local_moves_simple:
+                        if local in local_moves_simple_out:
                             continue
                             pass
 
                         if local[1].lower() == direction.lower()  :
                             y_out =  y 
                             revision = str(local[3] % b) 
+                            flag_revision = False
                             if len(self.revisions[local[0] % b_old]['moves']) > 0  : 
                                 revision = str(local[3]  )
                                 y_out = local[3] 
+                                flag_revision = True
 
                             numx = '000' + str(local[2] % len(self.revisions) )
                             numx = numx[-2:]
@@ -599,8 +600,8 @@ class Maze:
                             file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
                             #if len(self.revisions[y % b ]['moves']) > 0 : 
                             #    revision = str(local[3] )
-
-                            file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
+                            if flag_revision:
+                                file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
                             file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')
                             
