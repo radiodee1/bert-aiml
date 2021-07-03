@@ -2,9 +2,10 @@
 
 Room 1 - East room
 
-Go west. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+Go west. Go East. Meta Room B. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
 @ Go west;0
 
-
+* 1 @ go east; 2
+* 2 @ go west; 1
 
 # hash is for comments.

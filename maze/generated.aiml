@@ -60,7 +60,7 @@
                 <!-- Room 1 - East room -->
                 
                 <condition name="seen01" value="UNSEEN">
-                    Go west. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+                    Go west. Go East. Meta Room B. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen01" value="SEEN">
@@ -79,7 +79,7 @@
                 <!-- Room 2 - west room -->
                 
                 <condition name="seen02" value="UNSEEN">
-                    Go east. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+                    Go east. Go west if passage is unlocked. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
                 </condition>
 
                 <condition name="seen02" value="SEEN">
@@ -733,16 +733,30 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTHWEST <think><
 </template>
 </category>
 <category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM10 GO EAST FALSE FALSE TRUE FALSE</pattern>
+<template>2 rev [11, 'go east', 12, 2] XYZABCCONFUSEME INTERNALLOOK REVISION ROOM10 GO EAST FALSE FALSE TRUE FALSE<think><set name="topic">ROOM00</set></think>
+<think><set name="revision2">TRUE</set></think>
+<srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
+</template>
+</category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM11 GO WEST FALSE FALSE TRUE FALSE</pattern>
+<template>2 rev [12, 'go west', 11, 2] XYZABCCONFUSEME INTERNALLOOK REVISION ROOM11 GO WEST FALSE FALSE TRUE FALSE<think><set name="topic">ROOM03</set></think>
+<think><set name="revision2">TRUE</set></think>
+<srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+</template>
+</category>
+<category>
 <pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM28 GO SOUTH FALSE FALSE FALSE FALSE</pattern>
-<template>25 rev [29, 'go south', 25, 25] XYZABCCONFUSEME INTERNALLOOK REVISION ROOM28 GO SOUTH FALSE FALSE FALSE FALSE<think><set name="topic">ROOM01</set></think>
-<think><set name="revision25">TRUE</set></think>
+<template>5 rev [29, 'go south', 25, 5] XYZABCCONFUSEME INTERNALLOOK REVISION ROOM28 GO SOUTH FALSE FALSE FALSE FALSE<think><set name="topic">ROOM01</set></think>
+<think><set name="revision5">TRUE</set></think>
 <srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
 </template>
 </category>
 <category>
 <pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM24 GO NORTH FALSE FALSE FALSE FALSE</pattern>
-<template>25 rev [25, 'go north', 29, 25] XYZABCCONFUSEME INTERNALLOOK REVISION ROOM24 GO NORTH FALSE FALSE FALSE FALSE<think><set name="topic">ROOM01</set></think>
-<think><set name="revision25">TRUE</set></think>
+<template>5 rev [25, 'go north', 29, 5] XYZABCCONFUSEME INTERNALLOOK REVISION ROOM24 GO NORTH FALSE FALSE FALSE FALSE<think><set name="topic">ROOM01</set></think>
+<think><set name="revision5">TRUE</set></think>
 <srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
 </template>
 </category>
