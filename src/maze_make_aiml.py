@@ -552,7 +552,7 @@ class Maze:
             n += 1
 
         
-        for g in range(len(local_moves_combined)): # local in  local_moves_combined: 
+        for g in range(len(local_moves_combined)): 
 
             local = local_moves_combined[g]
 
@@ -564,11 +564,7 @@ class Maze:
             revision = str(local[3]) 
             flag_revision = False
 
-            #match_num = local[0]
-            #match = [local for local in local_moves_combined if local[0] == match_num]
-            #print(local, match)
-            
-            if local[3] > 0 : #or match[0][3] > 0:  
+            if local[3] > 0 : 
                 revision = str(local[3]  )
                 y_out = local[3] % b_old 
                 flag_revision = True
