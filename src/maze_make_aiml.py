@@ -170,7 +170,7 @@ class Maze:
             y = {
                 'number': int(number.strip()),
                 'moves': moves,
-                'active': False ## this is not used!!
+                'active': True if len(moves) > 0 else False 
             }
         else:
             y = {}
@@ -468,8 +468,7 @@ class Maze:
             for k, v in self.rooms[y]['phrases'].items():
                 if True: 
                     z = 0
-                    if len(self.revisions[y]['moves']) > 0:
-                        z = y
+                    
                     if [y,k,v,z] not in local_moves_simple:
                         local_moves_simple.append([y,k,v,z])
         

@@ -255,10 +255,9 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTHWEST <think><
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE FALSE FALSE TRUE</pattern>
-<template>1 base rev [1, 'go west', 0, 1]<think><set name="topic">ROOM00</set></think>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST FALSE FALSE FALSE FALSE</pattern>
+<template>0 base rev [1, 'go west', 0, 0]<think><set name="topic">ROOM00</set></think>
 <srai>XYZABCCONFUSEME INTERNALLOOK ROOM00</srai>
-<think><set name="revision1">TRUE</set></think>
 </template>
 </category>
 <category>
@@ -280,10 +279,9 @@ XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTHWEST <think><
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO NORTH FALSE TRUE FALSE FALSE</pattern>
-<template>4 base rev [4, 'go north', 3, 4]<think><set name="topic">ROOM03</set></think>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO NORTH FALSE FALSE FALSE FALSE</pattern>
+<template>0 base rev [4, 'go north', 3, 0]<think><set name="topic">ROOM03</set></think>
 <srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
-<think><set name="revision4">TRUE</set></think>
 </template>
 </category>
 <category>
