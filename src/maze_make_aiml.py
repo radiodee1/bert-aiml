@@ -490,13 +490,13 @@ class Maze:
                 pass
             inner_num += 1
 
-        #moves = []
+        
         local_moves_combined = []
         local_moves_simple_out = []
         local_moves_revisions_out = []
-        for i in range(0,len(self.revisions) ):
+        for i in range(0, len(self.revisions) ):
             pass
-            local_moves_simple_out += [[local[0], local[1], local[2], i ] for local in local_moves_simple ] 
+            local_moves_simple_out += [[local[0], local[1], local[2], i  ] for local in local_moves_simple ] 
             
         #local_moves_simple_out = local_moves_simple
         local_moves_combined = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old, local[3] * b_old ] for local in local_moves_simple_out]
@@ -518,8 +518,6 @@ class Maze:
                     
         for local in local_moves_simple_out:
             
-            
-            #print(xx, 'xx')
             y_out = local[3] 
             revision = str(0)
             flag_revision = False
@@ -559,16 +557,23 @@ class Maze:
             n += 1
 
         
-        for local in  local_moves_combined: ## moves <-- ??
+        for g in range(len(local_moves_combined)): # local in  local_moves_combined: 
+
+            local = local_moves_combined[g]
+
             if local in local_moves_simple_out:
                 continue
                 pass
             
-            
             y_out =  local[3] % b_old
             revision = str(local[3]) 
             flag_revision = False
-            if local[3] > 0 :  
+
+            #match_num = local[0]
+            #match = [local for local in local_moves_combined if local[0] == match_num]
+            #print(local, match)
+            
+            if local[3] > 0 : #or match[0][3] > 0:  
                 revision = str(local[3]  )
                 y_out = local[3] % b_old 
                 flag_revision = True
@@ -582,7 +587,7 @@ class Maze:
             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + local[1].upper().strip()
 
             z , p = self.string_from_int(y_out , xx, z_input, reverse=False, mult_input=1) ## y % b
-            #print(numx, numy, direction)
+
             file.write('<category>\n<pattern>' + z + '</pattern>\n')
             file.write('<template>')
             file.write(str(local[3]) + ' rev ' + str(local) + ' ' + z)
