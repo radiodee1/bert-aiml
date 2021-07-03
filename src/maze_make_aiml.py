@@ -496,14 +496,16 @@ class Maze:
         local_moves_revisions_out = []
         for i in range(0, len(self.revisions) ):
             pass
-            local_moves_simple_out += [[local[0], local[1], local[2], i   ] for local in local_moves_simple ] 
-            
-        #local_moves_simple_out = local_moves_simple
-        local_moves_combined = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old, local[3] * b_old ] for local in local_moves_simple_out]
+            #local_moves_simple_out += [[local[0], local[1], local[2], i   ] for local in local_moves_simple ] 
+
+        local_moves_simple_out = local_moves_simple
+        #local_moves_combined = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old, local[3] * b_old ] for local in local_moves_simple_out]
         
-        #local_moves_revisions_out = local_moves_revisions
-        #for i in range(0, len(self.revisions)):
-        local_moves_revisions_out += [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old ,  local[3]  ] for local in local_moves_revisions]
+        local_moves_combined = [[local[0] , local[1], local[2] , local[3] ] for local in local_moves_simple_out]
+
+        #local_moves_revisions_out += [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old ,  local[3] * b_old ] for local in local_moves_revisions]
+        
+        local_moves_revisions_out += [[local[0] , local[1], local[2]  ,  local[3]  ] for local in local_moves_revisions]
         pass
         local_moves_combined.extend(local_moves_revisions_out)
 
@@ -582,7 +584,7 @@ class Maze:
             numx = numx[-2:]
             numy = '000' + str(local[2]  )
             numy = numy[-2:]
-            numz = '000' + str(local[0] - 1 )
+            numz = '000' + str(local[0]  )
             numz = numz[-2:]
             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + local[1].upper().strip()
 
