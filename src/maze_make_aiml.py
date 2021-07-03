@@ -496,7 +496,7 @@ class Maze:
         local_moves_revisions_out = []
         for i in range(0, len(self.revisions) ):
             pass
-            local_moves_simple_out += [[local[0], local[1], local[2], i  ] for local in local_moves_simple ] 
+            local_moves_simple_out += [[local[0], local[1], local[2], i   ] for local in local_moves_simple ] 
             
         #local_moves_simple_out = local_moves_simple
         local_moves_combined = [[local[0] + local[3] * b_old, local[1], local[2] + local[3] * b_old, local[3] * b_old ] for local in local_moves_simple_out]
