@@ -489,7 +489,7 @@ class Maze:
                 pass
             inner_num += 1
 
-        
+        ## move and rename lists ##
         local_moves_combined = []
         local_moves_simple_out = []
         local_moves_revisions_out = []
@@ -503,9 +503,7 @@ class Maze:
         local_moves_combined += local_moves_revisions_out
 
         print(local_moves_combined, 'combined')
-        #print(local_moves_simple_out, 'simple')
-        #print(local_moves_revisions_out, 'rev')
-        #print(moves, 'moves')
+        
         #################################
         
         n = 0
@@ -513,12 +511,12 @@ class Maze:
                     
         for local in local_moves_simple_out:
             
-            y_out = local[3] 
+            y_out = 0# local[3] 
             revision = str(0)
             flag_revision = False
-            if local[3] != 0 : 
+            if local[3] != 0  or local[3] == local[0]: 
                 revision = str(local[3])
-                y_out = local[3]
+                y_out = local[3] % b_old
                 flag_revision = True
                 #print(local)
 
@@ -560,11 +558,11 @@ class Maze:
                 continue
                 pass
             
-            y_out =  local[3] % b_old
+            y_out = 0# local[3] % b_old
             revision = str(local[3]) 
             flag_revision = False
 
-            if local[3] > 0 : 
+            if local[3] > 0 or local[3] == local[0]: 
                 revision = str(local[3]  )
                 y_out = local[3] % b_old 
                 flag_revision = True
@@ -573,7 +571,7 @@ class Maze:
             numx = numx[-2:]
             numy = '000' + str(local[2]  )
             numy = numy[-2:]
-            numz = '000' + str(local[0]  )
+            numz = '000' + str(local[0] % b_old )
             numz = numz[-2:]
             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + local[1].upper().strip()
 
