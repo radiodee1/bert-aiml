@@ -4,8 +4,8 @@ Room 4 - Meta room
 
 Go south or north. Meta Room A. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
 @ Go north;3
-* 4 @ go south; 0
-* 0 @ go north; 4
+* 4 @ go south; 5
+* 5 @ go north; 4
 
 
 # hash is for comments.

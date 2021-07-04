@@ -15,7 +15,7 @@ class Maze:
         self.name = 'room*.maze'
         self.dir = './../maze/'
         self.entry_pattern = 'maze'
-        self.entry_room_num = 0
+        self.entry_room_num = 5
         self.out_aiml = 'generated.aiml'
         self.item_name = 'thing*.item'
         
@@ -281,7 +281,7 @@ class Maze:
         num = num[-2:]
         file.write('''
             <think><set name="topic">ROOM''' + num + '''</set></think>\n''')
-        for i in range(len(self.rooms)):
+        for i in range( len(self.rooms)):
             self.reused_seen(file, self.rooms[i]['number'])
             self.reused_revision(file, self.revisions[i]['number'], 'FALSE' if i != 0 else 'TRUE')
 
@@ -537,8 +537,9 @@ class Maze:
             file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numz + '</pattern>\n')
             file.write('<template>')
             file.write(str(local[3]) + ' hop base ' + str(local) + ' ' + str(z_input))
+            #if local[3] == 0: local[3] = -1
             file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
-            file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
+            file.write('<think><set name="topic">ROOM'  + numz + '</set></think>\n')
 
             file.write('TRUE ' + str(local[3]))
 
@@ -595,7 +596,7 @@ class Maze:
             file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numx + '</pattern>\n')
             file.write('<template>')
             file.write(str(local[3]) + ' hop ' + str(local) + ' ' )            
-
+            #if local[3] == 0: local[3] = -1
             file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
             file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
 

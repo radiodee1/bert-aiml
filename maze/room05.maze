@@ -1,6 +1,6 @@
-0 # Internally saved room number. May not be different from filename.
+5 # Internally saved room number. May not be different from filename.
 
-Room 0 - Start room 
+Room 5 - Start room 
 
 Go east, west, or south. If you have visited the Meta room, you can go north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
 @ Go east;1
