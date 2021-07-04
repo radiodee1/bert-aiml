@@ -519,14 +519,10 @@ class Maze:
             
             file.write('<template>')
             file.write(str(local[3]) + ' base rev ' + str(local))
-
-            #file.write('<think><set name="topic">ROOM'  + numy + '</set></think>\n')
             
             if flag_revision:
-                print('===', z_input)
+                
                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
-            else:
-                print('+++', z_input)
 
             file.write('<srai>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numz + '</srai>\n')
             
@@ -538,11 +534,9 @@ class Maze:
                 file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numz + '</pattern>\n')
                 file.write('<template>')
                 file.write(str(local[3]) + ' hop base ' + str(local) + ' ' + str(z_input))
-                #if local[3] == 0: local[3] = -1
+
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
                 file.write('<think><set name="topic">ROOM'  + numz + '</set></think>\n')
-
-                file.write('TRUE ' + str(local[3]))
 
                 file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numz + '</srai>\n')    
 
@@ -582,10 +576,9 @@ class Maze:
             file.write('<category>\n<pattern>' + z_input + '</pattern>\n')
             file.write('<template>')
             file.write(str(local[3]) + ' rev ' + str(local) + ' ' + str(z_input))
-            #file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
             
             if flag_revision:
-                print(z_input)
+                
                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
             file.write('<srai>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numx + '</srai>\n')
@@ -598,11 +591,10 @@ class Maze:
                 file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numx + '</pattern>\n')
                 file.write('<template>')
                 file.write(str(local[3]) + ' hop ' + str(local) + ' ' )            
-                #if local[3] == 0: local[3] = -1
+
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
                 file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
 
-                file.write('TRUE ' + str(local[3]))
                 file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')    
 
                 file.write('</condition>')
