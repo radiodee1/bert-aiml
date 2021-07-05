@@ -972,6 +972,7 @@ class Kernel:
                 if z is not None and len(z) > 0:
                     d['template_modified'] = z ## replace, not concatenate!
                     #print(self.depth, "< depth")
+                    local_text += ' ' + z
                     self.depth += 1
                     if self.depth < self.depth_limit:
                         self.index = 0
@@ -986,10 +987,11 @@ class Kernel:
 
             if present and x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
 
-        print('=', r, '=')
+        #print('=', r, '=')
         if present and r is not None and len(r.strip()) > 0: # and len(element.text) == 0:
             pass
-            return r
+            local_text += ' ' + r
+            #return r
 
         return local_text 
 
