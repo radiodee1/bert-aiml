@@ -84,11 +84,15 @@ class Maze:
         pass
     
     def room_factory(self, room=''):
+        flag_skip_output = False
+
         z = open(room, 'r')
         zz = z.readlines()
         zz = [x for x in zz if not x.startswith('#')]
         zz = self.strip_comments(zz)
         zz = ''.join( zz)
+        if len(zz.strip()) == 0:
+            flag_skip_output = True
         z.close()
         number = ''
         title = ''
@@ -150,6 +154,23 @@ class Maze:
         
         #print(moves)
         
+        if flag_skip_output: # len(zz) == 0:
+            x = {
+                'number': 0, #int(number.strip()),
+                'title': '',
+                'description': '',
+                'destination': '',
+                'phrases': {}
+            }
+
+            
+            y = {
+                'number': 0, # int(number.strip()),
+                'moves': [],
+                'active':  False 
+            }
+            return x, y
+
         destination = 0
         number = number.split()
         if len(number) > 1:
@@ -498,7 +519,7 @@ class Maze:
             y_out = 0# local[3] 
             revision = str(local[3])
             flag_revision = False
-            if  local[3] != 0: # == local[0]: 
+            if  local[3] != 0 and local[3]  == local[2]: 
                 revision = str(local[3])
                 y_out = local[3] % b_old
                 flag_revision = True
@@ -560,12 +581,12 @@ class Maze:
             revision = str(local[3]) 
             flag_revision = False
 
-            if local[3] != 0: # == local[0]: 
+            if local[3] != 0 and local[3] == local[2]: 
                 revision = str(local[3]  )
                 y_out = local[3] % b_old 
                 flag_revision = True
 
-            numx = '000' + str(local[2] % b )
+            numx = '000' + str(local[2] ) #% b )
             numx = numx[-2:]
             numy = '000' + str(local[2]  )
             numy = numy[-2:]
