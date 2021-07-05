@@ -464,7 +464,7 @@ class Maze:
         #################################
         xx = (len(self.revisions) -1 ) * (len(self.revisions) -1) -1
         b = len(format(xx,'b')) 
-        b_old = len(self.revisions) #format( len(self.revisions) ** 2, 'b'))
+        b_old = len(self.revisions) 
         print(b, xx, b_old)
 
         local_moves_simple = []
@@ -539,7 +539,6 @@ class Maze:
             file.write('<category>\n<pattern>' + z_input + '</pattern>\n')
             
             file.write('<template>')
-            #file.write(str(local[3]) + ' base rev ' + str(local))
             
             if flag_revision:
                 
@@ -554,7 +553,6 @@ class Maze:
             if flag_revision or True:
                 file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numz + '</pattern>\n')
                 file.write('<template>')
-                #file.write(str(local[3]) + ' hop base ' + str(local) + ' ' + str(z_input))
 
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
                 file.write('<think><set name="topic">ROOM'  + numz + '</set></think>\n')
@@ -594,7 +592,6 @@ class Maze:
 
             file.write('<category>\n<pattern>' + z_input + '</pattern>\n')
             file.write('<template>')
-            #file.write(str(local[3]) + ' rev ' + str(local) + ' ' + str(z_input))
             
             if flag_revision:
                 
@@ -609,7 +606,6 @@ class Maze:
             if flag_revision or True:
                 file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numx + '</pattern>\n')
                 file.write('<template>')
-                #file.write(str(local[3]) + ' hop ' + str(local) + ' ' )            
 
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
                 file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
