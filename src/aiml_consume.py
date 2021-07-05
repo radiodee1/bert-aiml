@@ -718,14 +718,16 @@ class Kernel:
         r = ''
         l = []
         local_text = ''
+        z = ''
         if element.text is not None:
             t = element.text.strip()
             #d['template_modified'] += t
             local_text += t
             #l.append(t)
         
+
         for x in element:
-            #print(x.tag, 'tag', local_text)
+            print(x.tag, 'tag', local_text)
             
             if x.tag == "srai" :
                 #d['template_modified'] = ''
@@ -777,30 +779,16 @@ class Kernel:
                 z = self.consume_condition(x, d)
                 if z is not None and len(z.strip()) > 0:
                     l.append(z)
-                    #d['template_modified'] =z #+= ' ' + z 
+                    #d['template_modified'] =z #+= ' ' + z
+                    local_text += ' ' + z.strip() 
                     pass
-
-        #print(l, '<<<')
-        if len(element) > 0 and element[0].tail is not None:
-            #print(element[0].tail, '<< tail')
-            t = element[0].tail
-            t = t.strip()
-            local_text += ' ' + t
-
-            #d['template_modified'] += ' ' + t
-
+            if x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
+        
+        
         if len(r) > 0:
             #d['template_modified'] += ' ' + r
             local_text += ' ' + r
-
         
-        if len(l) > 0:
-            l = [x.strip() for x in l if len(x.strip()) > 0]
-            
-            local_text  = ' ' + ' '.join(l)
-        
-
-        #print(d['template_modified'], '<<<')
         return local_text #'' # d['template_modified']
 
     def consume_srai(self, element, d):
@@ -831,11 +819,13 @@ class Kernel:
                     d['template_modified'] += " " + z
                     local_text += ' ' + z
 
+            if x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
+
         
 
-        if len(element) > 0 and element[0].tail is not None:
-            #print(element[0].tail, '<< tail')
-            local_text += ' ' + element[0].tail
+        #if len(element) > 0 and element[0].tail is not None:
+        #    #print(element[0].tail, '<< tail')
+        #    local_text += ' ' + element[0].tail
         
         #print('srai internal :', d['template_modified'])
 
@@ -864,6 +854,7 @@ class Kernel:
         if 'name' in element.attrib:
             #print(element.attrib,'attrib', self.memory)
             self.memory[element.attrib['name'].upper()] = z.upper().strip()
+
 
         return z.upper().strip()
 
@@ -993,7 +984,11 @@ class Kernel:
                             r = self.respond_bert(z) #d['template_modified'])  
                             self.srai_list.append(r)   
 
-        if len(r.strip()) > 0 and len(element.text) == 0:
+            if present and x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
+
+        print('=', r, '=')
+        if present and r is not None and len(r.strip()) > 0: # and len(element.text) == 0:
+            pass
             return r
 
         return local_text 

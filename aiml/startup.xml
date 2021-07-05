@@ -172,14 +172,16 @@
       <pattern> HOW ARE YOU FEELING TODAY </pattern>
       
       <template>
+         ok
          <think><set name = "state"> happy</set></think>
          <condition name = "state" value = "happy">
             I am happy!
          </condition>
-         
+            but
          <condition name = "state" value = "sad">
             I am sad!
          </condition>
+            maybe
       </template>
       
    </category>
