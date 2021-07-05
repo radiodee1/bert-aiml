@@ -509,7 +509,7 @@ class Maze:
         
         local_moves_combined += local_moves_revisions_out
 
-        print(local_moves_combined, 'combined')
+        #print(local_moves_combined, 'combined')
         
         #################################
         
@@ -539,7 +539,7 @@ class Maze:
             file.write('<category>\n<pattern>' + z_input + '</pattern>\n')
             
             file.write('<template>')
-            file.write(str(local[3]) + ' base rev ' + str(local))
+            #file.write(str(local[3]) + ' base rev ' + str(local))
             
             if flag_revision:
                 
@@ -554,7 +554,7 @@ class Maze:
             if flag_revision or True:
                 file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numz + '</pattern>\n')
                 file.write('<template>')
-                file.write(str(local[3]) + ' hop base ' + str(local) + ' ' + str(z_input))
+                #file.write(str(local[3]) + ' hop base ' + str(local) + ' ' + str(z_input))
 
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
                 file.write('<think><set name="topic">ROOM'  + numz + '</set></think>\n')
@@ -569,9 +569,7 @@ class Maze:
             n += 1
 
         
-        for g in range(len(local_moves_combined)): 
-
-            local = local_moves_combined[g]
+        for local in local_moves_combined: 
 
             if local in local_moves_simple_out:
                 continue
@@ -596,7 +594,7 @@ class Maze:
 
             file.write('<category>\n<pattern>' + z_input + '</pattern>\n')
             file.write('<template>')
-            file.write(str(local[3]) + ' rev ' + str(local) + ' ' + str(z_input))
+            #file.write(str(local[3]) + ' rev ' + str(local) + ' ' + str(z_input))
             
             if flag_revision:
                 
@@ -611,7 +609,7 @@ class Maze:
             if flag_revision or True:
                 file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numx + '</pattern>\n')
                 file.write('<template>')
-                file.write(str(local[3]) + ' hop ' + str(local) + ' ' )            
+                #file.write(str(local[3]) + ' hop ' + str(local) + ' ' )            
 
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
                 file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
