@@ -157,10 +157,10 @@
             INTERNALREJECT
             </pattern>
             <template>
-                <condition name="move" value="TRUE">
+                <!-- condition name="move" value="TRUE" -->
                 You cannot do that here.
                 <think><set name="move">FALSE</set></think>
-                </condition>
+                <!-- /condition -->
             </template>
             </category>
 
@@ -582,4 +582,340 @@ INTERNALLISTROOM05</pattern>
 <condition name="PIZZA" value="ROOM05" >PIZZA</condition>
 </template>
 </category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO NORTH</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO NORTH</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO NORTH</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO SOUTH</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO SOUTH</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO WEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO WEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO EAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO EAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO UP</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO UP</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO UP</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO UP</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO UP</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO UP</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO DOWN</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO DOWN</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO DOWN</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO DOWN</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO DOWN</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO DOWN</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO NORTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO NORTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO NORTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO NORTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO NORTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO SOUTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO SOUTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO SOUTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO SOUTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO SOUTHEAST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO NORTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO NORTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO NORTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO NORTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO NORTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO SOUTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO SOUTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO SOUTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO SOUTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO SOUTHWEST</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+</template></category>
 </aiml>

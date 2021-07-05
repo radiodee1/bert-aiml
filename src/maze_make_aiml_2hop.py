@@ -34,6 +34,9 @@ class Maze:
             'go southwest'
         ]
 
+        self.local_moves_simple_out = []
+        self.local_moves_combined = []
+
     def strip_comments(self, list_of_strings):
         z = []
         for i in list_of_strings:
@@ -76,10 +79,13 @@ class Maze:
         self.direction_statements(w)
         self.internal_reject(w)
         self.simple_look(w)
+
+        self.make_global_list()
+
         self.revision_list(w)
         self.item_statements(w)
         self.item_list(w)
-        #self.test_condition(w)
+        self.reject_list(w)
         w.write('</aiml>\n')
         pass
     
@@ -280,10 +286,10 @@ class Maze:
             INTERNALREJECT
             </pattern>
             <template>
-                <condition name="move" value="TRUE">
+                <!-- condition name="move" value="TRUE" -->
                 You cannot do that here.
                 <think><set name="move">FALSE</set></think>
-                </condition>
+                <!-- /condition -->
             </template>
             </category>\n\n''')
         pass
@@ -448,25 +454,7 @@ class Maze:
             file.write('</category>\n')
             pass
 
-    def revision_list(self, file):
-        nn = 0
-        for i in self.moves:
-            file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
-            file.write('<template>\n<!-- think><set name="move">TRUE</set></think -->\n<srai>\n')
-
-            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" /> ''' + i.upper()+ ' ' )
-            file.write('''<think><set name="move">FALSE</set></think>''')
-
-            file.write('</srai>\n</template></category>\n')
-            nn += 1
-        print(nn, "nn num")
-        
-        #################################
-        xx = (len(self.revisions) -1 ) * (len(self.revisions) -1) -1
-        b = len(format(xx,'b')) 
-        b_old = len(self.revisions) 
-        print(b, xx, b_old)
-
+    def make_global_list(self):
         local_moves_simple = []
         local_moves_revisions = []
         local_moves_combined = []
@@ -483,12 +471,6 @@ class Maze:
         for zzz in self.revisions:
             for move in zzz['moves']:
                 inner = inner_num
-                for g in range(len(local_moves_simple)): 
-                    simple_moves = local_moves_simple[g]
-                    if move[0] % b_old == simple_moves[0]: 
-                        #inner = 0 
-                        ## ^^ do not change
-                        pass
                 
                 if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
                     local_moves_revisions.append([move[0], move[1], move[2], inner])
@@ -510,11 +492,94 @@ class Maze:
         local_moves_combined += local_moves_revisions_out
 
         #print(local_moves_combined, 'combined')
+        self.local_moves_combined = local_moves_combined
+        self.local_moves_simple_out = local_moves_simple_out
+        #################################
+        pass
+
+    def reject_list(self, file):
+        nn = 0
+        for i in self.moves:
+            for j in self.rooms:
+                
+                num = '000' + str(j['number'])
+                num = num[-2:]
+                match = [local for local in self.local_moves_combined if local[2] == int(j['number']) and local[1].upper() == i.upper()]
+                print(match)
+                if len(match) == 0 : #and False:
+
+                    file.write('<category>\n<pattern>' + self.confuse_text + ''' INTERNALLOOK REVISION ROOM''' + num + ' ' + i.upper() + '</pattern>\n')
+                    file.write('<template>\n<think><set name="move">TRUE</set></think>\n<srai>\n')
+
+                    file.write( 'INTERNALREJECT' )
+                    file.write('''<think><set name="move">FALSE</set></think>''')
+
+                    file.write('</srai>\n</template></category>\n')
+                    nn += 1
+        pass
+
+    def revision_list(self, file):
+        nn = 0
+        for i in self.moves:
+            file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
+            file.write('<template>\n<!-- think><set name="move">TRUE</set></think -->\n<srai>\n')
+
+            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" /> ''' + i.upper()+ ' ' )
+            file.write('''<think><set name="move">FALSE</set></think>''')
+
+            file.write('</srai>\n</template></category>\n')
+            nn += 1
+        print(nn, "nn num")
         
+        #################################
+        xx = (len(self.revisions) -1 ) * (len(self.revisions) -1) -1
+        b = len(format(xx,'b')) 
+        b_old = len(self.revisions) 
+        print(b, xx, b_old)
+
+        '''
+        local_moves_simple = []
+        local_moves_revisions = []
+        local_moves_combined = []
+
+        for y in range(len(self.rooms)):
+            for k, v in self.rooms[y]['phrases'].items():
+                if True: 
+                    z = 0
+                    
+                    if [y,k,v,z] not in local_moves_simple:
+                        local_moves_simple.append([y,k,v,z])
+        
+        inner_num = 1
+        for zzz in self.revisions:
+            for move in zzz['moves']:
+                inner = inner_num
+                
+                if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
+                    local_moves_revisions.append([move[0], move[1], move[2], inner])
+                #print(local_moves_revisions[-1], 'last')
+                pass
+            inner_num += 1
+
+        ## move and rename lists ##
+        local_moves_combined = []
+        local_moves_simple_out = []
+        local_moves_revisions_out = []
+        
+        local_moves_simple_out = local_moves_simple
+        
+        local_moves_combined += local_moves_simple_out 
+        
+        local_moves_revisions_out += local_moves_revisions 
+        
+        local_moves_combined += local_moves_revisions_out
+
+        #print(local_moves_combined, 'combined')
+        '''
         #################################
         
         n = 0             
-        for local in local_moves_simple_out:
+        for local in self.local_moves_simple_out:
             
             y_out = 0# local[3] 
             revision = str(local[3])
@@ -567,9 +632,9 @@ class Maze:
             n += 1
 
         
-        for local in local_moves_combined: 
+        for local in self.local_moves_combined: 
 
-            if local in local_moves_simple_out:
+            if local in self.local_moves_simple_out:
                 continue
                 pass
             
