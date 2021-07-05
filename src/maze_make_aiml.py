@@ -505,7 +505,7 @@ class Maze:
                 num = '000' + str(j['number'])
                 num = num[-2:]
                 match = [local for local in self.local_moves_combined if local[2] == int(j['number']) and local[1].upper() == i.upper()]
-                print(match)
+                #print(match)
                 if len(match) == 0 : #and False:
 
                     file.write('<category>\n<pattern>' + self.confuse_text + ''' INTERNALLOOK REVISION ROOM''' + num + ' ' + i.upper() + '</pattern>\n')
