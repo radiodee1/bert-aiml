@@ -537,45 +537,6 @@ class Maze:
         b_old = len(self.revisions) 
         print(b, xx, b_old)
 
-        '''
-        local_moves_simple = []
-        local_moves_revisions = []
-        local_moves_combined = []
-
-        for y in range(len(self.rooms)):
-            for k, v in self.rooms[y]['phrases'].items():
-                if True: 
-                    z = 0
-                    
-                    if [y,k,v,z] not in local_moves_simple:
-                        local_moves_simple.append([y,k,v,z])
-        
-        inner_num = 1
-        for zzz in self.revisions:
-            for move in zzz['moves']:
-                inner = inner_num
-                
-                if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
-                    local_moves_revisions.append([move[0], move[1], move[2], inner])
-                #print(local_moves_revisions[-1], 'last')
-                pass
-            inner_num += 1
-
-        ## move and rename lists ##
-        local_moves_combined = []
-        local_moves_simple_out = []
-        local_moves_revisions_out = []
-        
-        local_moves_simple_out = local_moves_simple
-        
-        local_moves_combined += local_moves_simple_out 
-        
-        local_moves_revisions_out += local_moves_revisions 
-        
-        local_moves_combined += local_moves_revisions_out
-
-        #print(local_moves_combined, 'combined')
-        '''
         #################################
         
         n = 0             
