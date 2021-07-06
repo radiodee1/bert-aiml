@@ -755,11 +755,13 @@ class Kernel:
                         #d['srai_completion'] = True
                         if SRAI_LITERAL == 1:
                             r = self.respond_srai(z) 
-                            self.srai_list.append(r)
+                            if r not in self.srai_list:
+                                self.srai_list.append(r)
                             #d['template_modified'] = r
                         else:
                             r = self.respond_bert(z) 
-                            self.srai_list.append(r)
+                            if r not in self.srai_list:
+                                self.srai_list.append(r)
                         #l.append(r)
                         #print(r, '<<<r')
 
@@ -993,10 +995,12 @@ class Kernel:
                         #print('z:', z)
                         if SRAI_LITERAL == 1 :
                             r = self.respond_srai(z) 
-                            self.srai_list.append(r)
+                            if r not in self.srai_list:
+                                self.srai_list.append(r)
                         else:
                             r = self.respond_bert(z)   
-                            self.srai_list.append(r)   
+                            if r not in self.srai_list:
+                                self.srai_list.append(r)   
 
             if present and x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
 
