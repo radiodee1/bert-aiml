@@ -328,12 +328,14 @@ class Kernel:
 
         self.output = pre_output
         
+        '''
         m = [[self.l[x]['pattern'], self.score[x][0] - self.score[x][1]] for x in range(len(self.l))]
         #print(m[:15])
         def spec(x):
             return x[1]
         m.sort(reverse=True,key=spec)
         print(m[:15])
+        '''
 
         return self.output
 
@@ -791,7 +793,7 @@ class Kernel:
                     pass
             if x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
         
-            print(x.tag, 'tag', local_text)
+            #print(x.tag, 'tag', local_text)
         
         if len(r) > 0:
             local_text += ' ' + r
@@ -830,13 +832,7 @@ class Kernel:
 
             if x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
 
-        
-
-        #if len(element) > 0 and element[0].tail is not None:
-        #    #print(element[0].tail, '<< tail')
-        #    local_text += ' ' + element[0].tail
-        
-        print('srai internal :', local_text)
+        #print('srai internal :', local_text)
 
         return local_text # d['template_modified']
 
@@ -866,7 +862,6 @@ class Kernel:
         if 'name' in element.attrib:
             #print(element.attrib,'attrib', self.memory)
             self.memory[element.attrib['name'].upper()] = z.upper().strip()
-            print('---', z.upper().strip(), '---')
 
         return z.upper().strip()
 
@@ -989,13 +984,13 @@ class Kernel:
                 if z is not None and len(z) > 0:
                     d['template_modified'] = z ## replace, not concatenate!
                     #print(self.depth, "< depth")
-                    local_text += ' ' + z
+                    #local_text += ' ' + z
                     self.depth += 1
                     if self.depth < self.depth_limit:
                         self.index = 0
                         self.output = ''
                         self.incomplete = False
-                        print('z:', z)
+                        #print('z:', z)
                         if SRAI_LITERAL == 1 :
                             r = self.respond_srai(z) 
                             self.srai_list.append(r)
@@ -1009,7 +1004,7 @@ class Kernel:
             pass
             local_text += ' ' + r
             #return r
-        print('=', local_text, '=')
+        #print('=', local_text, '=')
 
         return local_text 
 
