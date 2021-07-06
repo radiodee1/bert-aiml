@@ -35,12 +35,12 @@
 
             <think><set name="PIZZA">ROOM01</set></think>
 
-            <srai>XYZABCCONFUSEME INTERNALLOOK <get name="topic" /></srai>
+            <srai>D4D8EFB81F48C9C INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
 <!-- ROOM00 -->
         <category>
-        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM00</pattern>
+        <pattern>D4D8EFB81F48C9C INTERNALLOOK ROOM00</pattern>
             <template>
                 <!--  -->
                 
@@ -59,7 +59,7 @@
         </category>
 <!-- ROOM01 -->
         <category>
-        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM01</pattern>
+        <pattern>D4D8EFB81F48C9C INTERNALLOOK ROOM01</pattern>
             <template>
                 <!-- Room 1 - East room -->
                 
@@ -78,7 +78,7 @@
         </category>
 <!-- ROOM02 -->
         <category>
-        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM02</pattern>
+        <pattern>D4D8EFB81F48C9C INTERNALLOOK ROOM02</pattern>
             <template>
                 <!-- Room 2 - west room -->
                 
@@ -97,7 +97,7 @@
         </category>
 <!-- ROOM03 -->
         <category>
-        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM03</pattern>
+        <pattern>D4D8EFB81F48C9C INTERNALLOOK ROOM03</pattern>
             <template>
                 <!-- Room 3 - South room -->
                 
@@ -116,7 +116,7 @@
         </category>
 <!-- ROOM04 -->
         <category>
-        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM04</pattern>
+        <pattern>D4D8EFB81F48C9C INTERNALLOOK ROOM04</pattern>
             <template>
                 <!-- Room 4 - Meta room  -->
                 
@@ -135,7 +135,7 @@
         </category>
 <!-- ROOM05 -->
         <category>
-        <pattern>XYZABCCONFUSEME INTERNALLOOK ROOM05</pattern>
+        <pattern>D4D8EFB81F48C9C INTERNALLOOK ROOM05</pattern>
             <template>
                 <!-- Room 5 - Start room  -->
                 
@@ -154,7 +154,7 @@
         </category>
 <category>
             <pattern>
-            INTERNALREJECT
+            INTERNALREJECT D4D8EFB81F48C9C
             </pattern>
             <template>
                 <!-- condition name="move" value="TRUE" -->
@@ -189,7 +189,7 @@
             <condition name="topic" value="ROOM05">
                 <think><set name="seen05">UNSEEN</set></think>
             </condition>
-            <srai>XYZABCCONFUSEME INTERNALLOOK <get name="topic" /></srai>
+            <srai>D4D8EFB81F48C9C INTERNALLOOK <get name="topic" /></srai>
             </template>
             </category>
 <category>
@@ -197,203 +197,203 @@
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO NORTH <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266 <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO SOUTH</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTH <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04 <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO WEST</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO WEST <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO EAST</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO EAST <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97 <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO UP</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO UP <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> B92A21DA4D21EFBED1303A5CF8B03509801122F8122A59EC09D6BB8A8B5E5954 <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO DOWN</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO DOWN <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 1B9C7A7EC8CD231B74A0FC237282E86D23FE181D0EB372D443B06556640A6089 <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO NORTHEAST</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO NORTHEAST <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> AA69CF744AF07C2BB878FC5D739D62F1C7759B486E58267F52EEA86FC799FC70 <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO SOUTHEAST</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTHEAST <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 63610ECC229FAE64A8C2352463E55A81112761AFCAB11F50556D12EB5BBAA700 <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO NORTHWEST</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO NORTHWEST <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 42E81B0D03FBD9F17CE5E10C938099AAD06038C8CC3244AFF89D36DA9B048C83 <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>GO SOUTHWEST</pattern>
 <template>
 <!-- think><set name="move">TRUE</set></think -->
 <srai>
-XYZABCCONFUSEME INTERNALLOOK REVISION <get name="topic" /> GO SOUTHWEST <think><set name="move">FALSE</set></think></srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO WEST</pattern>
-<template><srai>XYZABCCONFUSEME GO WEST INTERNALHOP ROOM05</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F</pattern>
+<template><srai>D4D8EFB81F48C9C BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F INTERNALHOP ROOM05</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO WEST INTERNALHOP ROOM05</pattern>
+<pattern>D4D8EFB81F48C9C BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F INTERNALHOP ROOM05</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM05</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM05</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM05</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO EAST</pattern>
-<template><srai>XYZABCCONFUSEME GO EAST INTERNALHOP ROOM05</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97</pattern>
+<template><srai>D4D8EFB81F48C9C 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97 INTERNALHOP ROOM05</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO EAST INTERNALHOP ROOM05</pattern>
+<pattern>D4D8EFB81F48C9C 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97 INTERNALHOP ROOM05</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM05</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM05</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM05</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTH</pattern>
-<template><srai>XYZABCCONFUSEME GO NORTH INTERNALHOP ROOM05</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266</pattern>
+<template><srai>D4D8EFB81F48C9C F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266 INTERNALHOP ROOM05</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO NORTH INTERNALHOP ROOM05</pattern>
+<pattern>D4D8EFB81F48C9C F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266 INTERNALHOP ROOM05</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM05</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM05</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM05</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO SOUTH</pattern>
-<template><srai>XYZABCCONFUSEME GO SOUTH INTERNALHOP ROOM04</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04</pattern>
+<template><srai>D4D8EFB81F48C9C F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04 INTERNALHOP ROOM04</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO SOUTH INTERNALHOP ROOM04</pattern>
+<pattern>D4D8EFB81F48C9C F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04 INTERNALHOP ROOM04</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM04</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM04</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM04</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO NORTH</pattern>
-<template><srai>XYZABCCONFUSEME GO NORTH INTERNALHOP ROOM03</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266</pattern>
+<template><srai>D4D8EFB81F48C9C F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266 INTERNALHOP ROOM03</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO NORTH INTERNALHOP ROOM03</pattern>
+<pattern>D4D8EFB81F48C9C F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266 INTERNALHOP ROOM03</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM03</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM03</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO EAST</pattern>
-<template><srai>XYZABCCONFUSEME GO EAST INTERNALHOP ROOM01</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97</pattern>
+<template><srai>D4D8EFB81F48C9C 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97 INTERNALHOP ROOM01</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO EAST INTERNALHOP ROOM01</pattern>
+<pattern>D4D8EFB81F48C9C 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97 INTERNALHOP ROOM01</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM01</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM01</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO WEST</pattern>
-<template><srai>XYZABCCONFUSEME GO WEST INTERNALHOP ROOM02</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F</pattern>
+<template><srai>D4D8EFB81F48C9C BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F INTERNALHOP ROOM02</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO WEST INTERNALHOP ROOM02</pattern>
+<pattern>D4D8EFB81F48C9C BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F INTERNALHOP ROOM02</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM02</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM02</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO SOUTH</pattern>
-<template><srai>XYZABCCONFUSEME GO SOUTH INTERNALHOP ROOM03</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04</pattern>
+<template><srai>D4D8EFB81F48C9C F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04 INTERNALHOP ROOM03</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO SOUTH INTERNALHOP ROOM03</pattern>
+<pattern>D4D8EFB81F48C9C F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04 INTERNALHOP ROOM03</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM03</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM03</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM03</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO EAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97</pattern>
 <template><think><set name="revision2">TRUE</set></think>
-<srai>XYZABCCONFUSEME GO EAST INTERNALHOP ROOM02</srai>
+<srai>D4D8EFB81F48C9C 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97 INTERNALHOP ROOM02</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO EAST INTERNALHOP ROOM02</pattern>
+<pattern>D4D8EFB81F48C9C 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97 INTERNALHOP ROOM02</pattern>
 <template><condition name="revision2" value="TRUE" ><think><set name="topic">ROOM02</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM02</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM02</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO WEST</pattern>
-<template><srai>XYZABCCONFUSEME GO WEST INTERNALHOP ROOM01</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F</pattern>
+<template><srai>D4D8EFB81F48C9C BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F INTERNALHOP ROOM01</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO WEST INTERNALHOP ROOM01</pattern>
+<pattern>D4D8EFB81F48C9C BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F INTERNALHOP ROOM01</pattern>
 <template><condition name="revision2" value="TRUE" ><think><set name="topic">ROOM01</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM01</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM01</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO SOUTH</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04</pattern>
 <template><think><set name="revision5">TRUE</set></think>
-<srai>XYZABCCONFUSEME GO SOUTH INTERNALHOP ROOM05</srai>
+<srai>D4D8EFB81F48C9C F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04 INTERNALHOP ROOM05</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO SOUTH INTERNALHOP ROOM05</pattern>
+<pattern>D4D8EFB81F48C9C F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04 INTERNALHOP ROOM05</pattern>
 <template><condition name="revision5" value="TRUE" ><think><set name="topic">ROOM05</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM05</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM05</srai>
 </condition></template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO NORTH</pattern>
-<template><srai>XYZABCCONFUSEME GO NORTH INTERNALHOP ROOM04</srai>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266</pattern>
+<template><srai>D4D8EFB81F48C9C F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266 INTERNALHOP ROOM04</srai>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME GO NORTH INTERNALHOP ROOM04</pattern>
+<pattern>D4D8EFB81F48C9C F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266 INTERNALHOP ROOM04</pattern>
 <template><condition name="revision5" value="TRUE" ><think><set name="topic">ROOM04</set></think>
-<srai>XYZABCCONFUSEME INTERNALLOOK ROOM04</srai>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM04</srai>
 </condition></template>
 </category>
 
@@ -404,12 +404,12 @@ GET LAMP
 </pattern>
 <template>
 GET LAMP
-<srai>XYZABCCONFUSEME INTERNALGETLAMP <get name="topic" /></srai>
+<srai>D4D8EFB81F48C9C INTERNALGETLAMP <get name="topic" /></srai>
 </template>
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETLAMP ROOM00
+D4D8EFB81F48C9C INTERNALGETLAMP ROOM00
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM00" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -417,7 +417,7 @@ XYZABCCONFUSEME INTERNALGETLAMP ROOM00
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETLAMP ROOM01
+D4D8EFB81F48C9C INTERNALGETLAMP ROOM01
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM01" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -425,7 +425,7 @@ XYZABCCONFUSEME INTERNALGETLAMP ROOM01
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETLAMP ROOM02
+D4D8EFB81F48C9C INTERNALGETLAMP ROOM02
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM02" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -433,7 +433,7 @@ XYZABCCONFUSEME INTERNALGETLAMP ROOM02
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETLAMP ROOM03
+D4D8EFB81F48C9C INTERNALGETLAMP ROOM03
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM03" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -441,7 +441,7 @@ XYZABCCONFUSEME INTERNALGETLAMP ROOM03
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETLAMP ROOM04
+D4D8EFB81F48C9C INTERNALGETLAMP ROOM04
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM04" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -449,7 +449,7 @@ XYZABCCONFUSEME INTERNALGETLAMP ROOM04
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETLAMP ROOM05
+D4D8EFB81F48C9C INTERNALGETLAMP ROOM05
 </pattern>
 <template>
 <condition name="LAMP" value="ROOM05" ><think><set name="LAMP">ROOM-1</set></think></condition>
@@ -461,12 +461,12 @@ GET PIZZA
 </pattern>
 <template>
 GET PIZZA
-<srai>XYZABCCONFUSEME INTERNALGETPIZZA <get name="topic" /></srai>
+<srai>D4D8EFB81F48C9C INTERNALGETPIZZA <get name="topic" /></srai>
 </template>
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETPIZZA ROOM00
+D4D8EFB81F48C9C INTERNALGETPIZZA ROOM00
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM00" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -474,7 +474,7 @@ XYZABCCONFUSEME INTERNALGETPIZZA ROOM00
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETPIZZA ROOM01
+D4D8EFB81F48C9C INTERNALGETPIZZA ROOM01
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM01" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -482,7 +482,7 @@ XYZABCCONFUSEME INTERNALGETPIZZA ROOM01
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETPIZZA ROOM02
+D4D8EFB81F48C9C INTERNALGETPIZZA ROOM02
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM02" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -490,7 +490,7 @@ XYZABCCONFUSEME INTERNALGETPIZZA ROOM02
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETPIZZA ROOM03
+D4D8EFB81F48C9C INTERNALGETPIZZA ROOM03
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM03" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -498,7 +498,7 @@ XYZABCCONFUSEME INTERNALGETPIZZA ROOM03
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETPIZZA ROOM04
+D4D8EFB81F48C9C INTERNALGETPIZZA ROOM04
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM04" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -506,7 +506,7 @@ XYZABCCONFUSEME INTERNALGETPIZZA ROOM04
 </category>
 
 <category><pattern>
-XYZABCCONFUSEME INTERNALGETPIZZA ROOM05
+D4D8EFB81F48C9C INTERNALGETPIZZA ROOM05
 </pattern>
 <template>
 <condition name="PIZZA" value="ROOM05" ><think><set name="PIZZA">ROOM-1</set></think></condition>
@@ -583,339 +583,339 @@ INTERNALLISTROOM05</pattern>
 </template>
 </category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO NORTH</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO NORTH</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO NORTH</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 F07AF17EF65EBD2D8B41973F80705788845A5C6F61CBCF60C478C224D9AD4266</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTH</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO SOUTH</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO SOUTH</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 F9A0E4404CF480D36A6A0C5B0AE230ED485BEB89BEC72B6926EE92D9F19DCD04</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO WEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO WEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO WEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO EAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO EAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO EAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO UP</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 B92A21DA4D21EFBED1303A5CF8B03509801122F8122A59EC09D6BB8A8B5E5954</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO UP</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 B92A21DA4D21EFBED1303A5CF8B03509801122F8122A59EC09D6BB8A8B5E5954</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO UP</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 B92A21DA4D21EFBED1303A5CF8B03509801122F8122A59EC09D6BB8A8B5E5954</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO UP</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 B92A21DA4D21EFBED1303A5CF8B03509801122F8122A59EC09D6BB8A8B5E5954</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO UP</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 B92A21DA4D21EFBED1303A5CF8B03509801122F8122A59EC09D6BB8A8B5E5954</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO UP</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 B92A21DA4D21EFBED1303A5CF8B03509801122F8122A59EC09D6BB8A8B5E5954</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO DOWN</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 1B9C7A7EC8CD231B74A0FC237282E86D23FE181D0EB372D443B06556640A6089</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO DOWN</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 1B9C7A7EC8CD231B74A0FC237282E86D23FE181D0EB372D443B06556640A6089</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO DOWN</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 1B9C7A7EC8CD231B74A0FC237282E86D23FE181D0EB372D443B06556640A6089</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO DOWN</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 1B9C7A7EC8CD231B74A0FC237282E86D23FE181D0EB372D443B06556640A6089</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO DOWN</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 1B9C7A7EC8CD231B74A0FC237282E86D23FE181D0EB372D443B06556640A6089</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO DOWN</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 1B9C7A7EC8CD231B74A0FC237282E86D23FE181D0EB372D443B06556640A6089</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO NORTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 AA69CF744AF07C2BB878FC5D739D62F1C7759B486E58267F52EEA86FC799FC70</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO NORTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 AA69CF744AF07C2BB878FC5D739D62F1C7759B486E58267F52EEA86FC799FC70</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO NORTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 AA69CF744AF07C2BB878FC5D739D62F1C7759B486E58267F52EEA86FC799FC70</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 AA69CF744AF07C2BB878FC5D739D62F1C7759B486E58267F52EEA86FC799FC70</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO NORTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 AA69CF744AF07C2BB878FC5D739D62F1C7759B486E58267F52EEA86FC799FC70</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO NORTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 AA69CF744AF07C2BB878FC5D739D62F1C7759B486E58267F52EEA86FC799FC70</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 63610ECC229FAE64A8C2352463E55A81112761AFCAB11F50556D12EB5BBAA700</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO SOUTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 63610ECC229FAE64A8C2352463E55A81112761AFCAB11F50556D12EB5BBAA700</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO SOUTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 63610ECC229FAE64A8C2352463E55A81112761AFCAB11F50556D12EB5BBAA700</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO SOUTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 63610ECC229FAE64A8C2352463E55A81112761AFCAB11F50556D12EB5BBAA700</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO SOUTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 63610ECC229FAE64A8C2352463E55A81112761AFCAB11F50556D12EB5BBAA700</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO SOUTHEAST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 63610ECC229FAE64A8C2352463E55A81112761AFCAB11F50556D12EB5BBAA700</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO NORTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 42E81B0D03FBD9F17CE5E10C938099AAD06038C8CC3244AFF89D36DA9B048C83</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO NORTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 42E81B0D03FBD9F17CE5E10C938099AAD06038C8CC3244AFF89D36DA9B048C83</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO NORTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 42E81B0D03FBD9F17CE5E10C938099AAD06038C8CC3244AFF89D36DA9B048C83</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO NORTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 42E81B0D03FBD9F17CE5E10C938099AAD06038C8CC3244AFF89D36DA9B048C83</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO NORTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 42E81B0D03FBD9F17CE5E10C938099AAD06038C8CC3244AFF89D36DA9B048C83</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO NORTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 42E81B0D03FBD9F17CE5E10C938099AAD06038C8CC3244AFF89D36DA9B048C83</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM00 GO SOUTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM01 GO SOUTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM02 GO SOUTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM03 GO SOUTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM04 GO SOUTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
-<pattern>XYZABCCONFUSEME INTERNALLOOK REVISION ROOM05 GO SOUTHWEST</pattern>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>
-INTERNALREJECT<think><set name="move">FALSE</set></think></srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 </aiml>

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
 from os import write
+from re import S
 import xml.etree.ElementTree as ET
 import glob
 import math
+import hashlib
 
 class Maze:
 
@@ -19,9 +21,13 @@ class Maze:
         self.out_aiml = 'generated.aiml'
         self.item_name = 'thing*.item'
         
-        self.confuse_text = "XYZABCCONFUSEME"
+        self.hide_words = True
 
-        self.moves = [
+        m = hashlib.sha256()
+        m.update(b"XYZABCCONFUSEME")
+        self.confuse_text = m.hexdigest()[:15].upper() 
+
+        self.raw_moves = [
             'go north',
             'go south',
             'go west',
@@ -33,6 +39,19 @@ class Maze:
             'go northwest',
             'go southwest'
         ]
+        if self.hide_words:
+            self.moves = [ x for x in self.raw_moves]
+            l = []
+            for x in self.moves:
+                m = hashlib.sha256()
+                m.update(x.encode('utf8'))
+                y = m.hexdigest()
+                l.append(y)
+            
+            self.moves = l
+            #print(self.moves)
+        else:
+            self.moves = [x for x in self.raw_moves]
 
         self.local_moves_simple_out = []
         self.local_moves_combined = []
@@ -242,7 +261,7 @@ class Maze:
         return x
 
     def entry_moves(self, file):
-        for i in self.moves:
+        for i in self.raw_moves:
             file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
             file.write('<template>\n')
             
@@ -260,7 +279,7 @@ class Maze:
                     pass
                 else:
                     file.write('''<think><set name="move">TRUE</set></think>
-                        <srai>INTERNALREJECT</srai>''')
+                        <srai>INTERNALREJECT ''' + self.confuse_text + '''</srai>''')
 
                     
                 file.write('</condition>\n')
@@ -283,7 +302,7 @@ class Maze:
     def internal_reject(self, file):
         file.write('''<category>
             <pattern>
-            INTERNALREJECT
+            INTERNALREJECT ''' + self.confuse_text + '''
             </pattern>
             <template>
                 <!-- condition name="move" value="TRUE" -->
@@ -499,7 +518,9 @@ class Maze:
 
     def reject_list(self, file):
         nn = 0
-        for i in self.moves:
+        for ix in range(len(self.moves)): # self.moves:
+            i = self.raw_moves[ix]
+            ii = self.moves[ix]
             for j in self.rooms:
                 
                 num = '000' + str(j['number'])
@@ -508,10 +529,10 @@ class Maze:
                 #print(match)
                 if len(match) == 0 : #and False:
 
-                    file.write('<category>\n<pattern>' + self.confuse_text + ''' INTERNALLOOK REVISION ROOM''' + num + ' ' + i.upper() + '</pattern>\n')
+                    file.write('<category>\n<pattern>' + self.confuse_text + ''' INTERNALLOOK REVISION ROOM''' + num + ' ' + ii.upper() + '</pattern>\n')
                     file.write('<template>\n<think><set name="move">TRUE</set></think>\n<srai>\n')
 
-                    file.write( 'INTERNALREJECT' )
+                    file.write( 'INTERNALREJECT ' + self.confuse_text )
                     file.write('''<think><set name="move">FALSE</set></think>''')
 
                     file.write('</srai>\n</template></category>\n')
@@ -520,11 +541,13 @@ class Maze:
 
     def revision_list(self, file):
         nn = 0
-        for i in self.moves:
+        for ix in range(len(self.moves)): # self.moves:
+            i = self.raw_moves[ix]
+            ii = self.moves[ix]
             file.write('<category>\n<pattern>' + i.upper() + '</pattern>\n')
             file.write('<template>\n<!-- think><set name="move">TRUE</set></think -->\n<srai>\n')
 
-            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" /> ''' + i.upper()+ ' ' )
+            file.write( self.confuse_text + ''' INTERNALLOOK REVISION <get name="topic" /> ''' + ii.upper()+ ' ' )
             file.write('''<think><set name="move">FALSE</set></think>''')
 
             file.write('</srai>\n</template></category>\n')
@@ -553,7 +576,7 @@ class Maze:
 
             num = '000' + str(local[0] ) # % b_old)
             num = num[-2:]
-            z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + local[1].upper().strip()
+            z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(num) + ' ' + self.convert_to_hash(local[1].upper().strip())
 
             numx = '000' + str(local[0])
             numx = numx[-2:]                            
@@ -570,14 +593,14 @@ class Maze:
                 
                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
-            file.write('<srai>' + self.confuse_text + ' ' + local[1].upper().strip() +  ' INTERNALHOP ROOM' + numz + '</srai>\n')
+            file.write('<srai>' + self.confuse_text + ' ' +self.convert_to_hash(local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numz + '</srai>\n')
             
             file.write('</template>\n')
             file.write('</category>\n')
 
             ##########################
             if flag_revision or True:
-                file.write('<category>\n<pattern>' + self.confuse_text + ' ' + local[1].upper().strip() +  ' INTERNALHOP ROOM' + numz + '</pattern>\n')
+                file.write('<category>\n<pattern>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numz + '</pattern>\n')
                 file.write('<template>')
 
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
@@ -614,7 +637,7 @@ class Maze:
             numy = numy[-2:]
             numz = '000' + str(local[0] % b_old )
             numz = numz[-2:]
-            z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + local[1].upper().strip()
+            z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + self.convert_to_hash( local[1].upper().strip())
 
             file.write('<category>\n<pattern>' + z_input + '</pattern>\n')
             file.write('<template>')
@@ -623,14 +646,14 @@ class Maze:
                 
                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
-            file.write('<srai>' + self.confuse_text + ' ' + local[1].upper().strip() +  ' INTERNALHOP ROOM' + numx + '</srai>\n')
+            file.write('<srai>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numx + '</srai>\n')
             
             file.write('</template>\n')
             file.write('</category>\n')
 
             ##########################
             if flag_revision or True:
-                file.write('<category>\n<pattern>' + self.confuse_text + ' ' + local[1].upper().strip() +  ' INTERNALHOP ROOM' + numx + '</pattern>\n')
+                file.write('<category>\n<pattern>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numx + '</pattern>\n')
                 file.write('<template>')
 
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
@@ -684,7 +707,11 @@ class Maze:
                 z += ' ' + 'TRUE'
         return z, l
         
-    
+    def convert_to_hash(self, direction):
+        for i in range(len(self.raw_moves)): # self.raw_moves:
+            if direction.upper().strip() == self.raw_moves[i].upper().strip():
+                return self.moves[i].strip().upper()
+        return ''
 
     def test_condition(self, file):
         z = self.entry_pattern.upper()

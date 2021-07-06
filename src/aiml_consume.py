@@ -88,7 +88,7 @@ class Kernel:
         self.memory = {}
         self.index = -1
         self.incomplete = False
-        self.depth_limit = 5
+        self.depth_limit = 10
         self.depth = 0
         self.files = []
         self.files_size = 0
@@ -285,9 +285,9 @@ class Kernel:
             i = self.score[num]
             #i = (i[0] - i[1])   
             if DOUBLE_COMPARE == 1:
-                i = (i[0] - i[1]) * WEIGHT_PATTERN + (i[2] - i[3]) * WEIGHT_TEMPLATE
+                i = abs ((i[0] - i[1]) * WEIGHT_PATTERN + (i[2] - i[3]) * WEIGHT_TEMPLATE)
             else:
-                i = (i[0] - i[1])
+                i = abs (i[0] - i[1])
             i = self.mod_that(self.l[num], input, i)
 
             if i > high:
@@ -322,11 +322,19 @@ class Kernel:
             self.answers.append(self.output.upper().strip())
 
         self.answers = self.answers[- self.answers_length:] ## last few
-        #print(self.answers)
+        #print(self.answers, '???')
+        
         if self.args.count: self.count_output(self.output)
 
         self.output = pre_output
- 
+        
+        m = [[self.l[x]['pattern'], self.score[x][0] - self.score[x][1]] for x in range(len(self.l))]
+        #print(m[:15])
+        def spec(x):
+            return x[1]
+        m.sort(reverse=True,key=spec)
+        print(m[:15])
+
         return self.output
 
     def choose_output(self, d):
@@ -727,7 +735,6 @@ class Kernel:
         
 
         for x in element:
-            print(x.tag, 'tag', local_text)
             
             if x.tag == "srai" :
                 #d['template_modified'] = ''
@@ -784,12 +791,12 @@ class Kernel:
                     pass
             if x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
         
+            print(x.tag, 'tag', local_text)
         
         if len(r) > 0:
-            #d['template_modified'] += ' ' + r
             local_text += ' ' + r
         
-        return local_text #'' # d['template_modified']
+        return local_text 
 
     def consume_srai(self, element, d):
         #print('srai :', element.text, element.tag, element.attrib, d['template_modified'])
@@ -818,6 +825,8 @@ class Kernel:
                 if z is not None:
                     d['template_modified'] += " " + z
                     local_text += ' ' + z
+            if x.tag == "think":
+                self.consume_think(x, d)
 
             if x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
 
@@ -827,7 +836,7 @@ class Kernel:
         #    #print(element[0].tail, '<< tail')
         #    local_text += ' ' + element[0].tail
         
-        #print('srai internal :', d['template_modified'])
+        print('srai internal :', local_text)
 
         return local_text # d['template_modified']
 
@@ -851,10 +860,13 @@ class Kernel:
                 #local_text += ' ' + z
                 #print(local_text)
 
+            #if x.tail is not None and len(x.tail) > 0: z += ' ' + x.tail.strip()
+
+
         if 'name' in element.attrib:
             #print(element.attrib,'attrib', self.memory)
             self.memory[element.attrib['name'].upper()] = z.upper().strip()
-
+            print('---', z.upper().strip(), '---')
 
         return z.upper().strip()
 
@@ -882,8 +894,10 @@ class Kernel:
 
     def consume_get(self, element, d):
         #print('get :', element.text, element.tag, element.attrib)
+        z = ''
         if element.text is not None:
             d['template_modified'] += ' ' + element.text
+            z += ' ' + element.text
         for xx in element.attrib:
             #print(xx)
             pass
@@ -894,11 +908,14 @@ class Kernel:
             #print(y)
             return y
 
-        z = ''
+        
         for x in element:
             
             if x.tag == "star" : 
                 z = self.consume_star_tag(x, d)
+
+            if x.tail is not None and len(x.tail) > 0: z += ' ' + x.tail.strip()
+
         return z
 
     def consume_star_tag(self, element, d):
@@ -925,7 +942,7 @@ class Kernel:
         return r
     
     def consume_think(self, element, d):
-        #print('think :', element.text, element.tag, element.attrib)
+
         d['encounter_think'] = True
 
         for x in element:
@@ -978,20 +995,21 @@ class Kernel:
                         self.index = 0
                         self.output = ''
                         self.incomplete = False
+                        print('z:', z)
                         if SRAI_LITERAL == 1 :
-                            r = self.respond_srai(z) #d['template_modified'])
+                            r = self.respond_srai(z) 
                             self.srai_list.append(r)
                         else:
-                            r = self.respond_bert(z) #d['template_modified'])  
+                            r = self.respond_bert(z)   
                             self.srai_list.append(r)   
 
             if present and x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
 
-        #print('=', r, '=')
-        if present and r is not None and len(r.strip()) > 0: # and len(element.text) == 0:
+        if present and r is not None and len(r.strip()) > 0: 
             pass
             local_text += ' ' + r
             #return r
+        print('=', local_text, '=')
 
         return local_text 
 
