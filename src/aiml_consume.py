@@ -140,7 +140,7 @@ class Kernel:
         if x not in self.srai_list:
             self.srai_list.append(x)
 
-        if len(self.srai_list) > 0:
+        if len(self.srai_list) > 1:
             self.srai_list.reverse()
             x = ' '.join(self.srai_list)
             #print(self.srai_list,'x')
@@ -789,13 +789,13 @@ class Kernel:
             if x.tag == "condition":
                 z = self.consume_condition(x, d)
                 if z is not None and len(z.strip()) > 0:
-                    l.append(z)
-                    #d['template_modified'] =z #+= ' ' + z
+                    if z not in l :
+                        l.append(z)
                     local_text += ' ' + z.strip() 
                     pass
             if x.tail is not None and len(x.tail) > 0: local_text += ' ' + x.tail.strip()
         
-            #print(x.tag, 'tag', local_text)
+            #print(x.tag, 'tag', local_text, '++')
         
         if len(r) > 0:
             local_text += ' ' + r
@@ -973,6 +973,7 @@ class Kernel:
         if present and element.text is not None and len(element.text) > 0:
             local_text += ' ' + element.text
             d['template_modified'] += ' '+ element.text
+            pass
 
         #if True:
         for x in element:
