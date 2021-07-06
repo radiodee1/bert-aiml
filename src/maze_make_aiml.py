@@ -609,14 +609,14 @@ class Maze:
                 
                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
-            file.write('<srai>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numz + '</srai>\n')
+            file.write('<srai>' + self.confuse_text + ' ' + local[1].upper().strip() +  ' INTERNALHOP ROOM' + numz + '</srai>\n')
             
             file.write('</template>\n')
             file.write('</category>\n')
 
             ##########################
             if flag_revision or True:
-                file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numz + '</pattern>\n')
+                file.write('<category>\n<pattern>' + self.confuse_text + ' ' + local[1].upper().strip() +  ' INTERNALHOP ROOM' + numz + '</pattern>\n')
                 file.write('<template>')
 
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
@@ -662,14 +662,14 @@ class Maze:
                 
                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
 
-            file.write('<srai>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numx + '</srai>\n')
+            file.write('<srai>' + self.confuse_text + ' ' + local[1].upper().strip() +  ' INTERNALHOP ROOM' + numx + '</srai>\n')
             
             file.write('</template>\n')
             file.write('</category>\n')
 
             ##########################
             if flag_revision or True:
-                file.write('<category>\n<pattern>' + local[1].upper().strip() +  ' INTERNALLOOK ROOM' + numx + '</pattern>\n')
+                file.write('<category>\n<pattern>' + self.confuse_text + ' ' + local[1].upper().strip() +  ' INTERNALHOP ROOM' + numx + '</pattern>\n')
                 file.write('<template>')
 
                 file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
