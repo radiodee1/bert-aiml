@@ -37,10 +37,40 @@ source $(which virtualenvwrapper.sh)
 mkvirtualenv chatbot36 --python $(which python3.6)
 ```
 
-## Environment File
-This file is called `.env` and the contents are below.
+## Environment File For Testing
+This is a version of the file called `.env` and the contents are below. These contents are especially important for testing using the input/output redirection.
 
 ```
 AIML_DIR=../data/aiml-en-us-foundation-alice/
-BATCH_SIZE=256
+AIML_FILE=./bot.aiml
+BATCH_SIZE=32
+WORD_FACTOR=-1
+MAX_LENGTH=32
+
+## SRAI_LITERAL can be 0 or 1 ##
+
+SRAI_LITERAL=1
+
+## DOUBLE_COMPARE can be 2, 1, or 0 ##
+
+# 2 == just do template comparison
+# 1 == do double comparison, include weights
+# 0 == just do pattern comparison
+
+DOUBLE_COMPARE=0
+
+## CUDA can be 0 or 1 ##
+
+CUDA=1
+
+## BERT_MODEL can be 0 or 1 ##
+
+# 0 == bert-base-uncased
+# 1 == bert-large-uncased
+
+BERT_MODEL=0
+
+WEIGHT_PATTERN=1.0
+
+WEIGHT_TEMPLATE=0.5
 ```
