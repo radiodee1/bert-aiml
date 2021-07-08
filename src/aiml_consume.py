@@ -142,7 +142,7 @@ class Kernel:
 
         if len(self.srai_list) > 1:
             self.srai_list.reverse()
-            x = ' '.join(self.srai_list)
+            #x = ' '.join(self.srai_list)
             #print(self.srai_list,'x')
             
         if len(self.srai_list) == 1:
