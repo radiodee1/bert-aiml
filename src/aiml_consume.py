@@ -395,6 +395,8 @@ class Kernel:
         pass
 
     def count_output(self, output):
+        if self.used_num % BATCH_SIZE == 0:
+            print(self.used_num, 'used', len(self.l), 'size in mem')
         self.used_num += 1
         if output not in self.used:
             self.used.append(output)
