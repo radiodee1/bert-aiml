@@ -874,9 +874,9 @@ class Kernel:
         if element.text is not None:
             d['template_modified'] += element.text
         
-        #x = element.text
+        if self.args.count == True:
+            return ''
 
-        #d['initial_learn'] = x.strip()
         x = ''
         if d['initial_learn'] is not None:
             x = d['initial_learn'].text.strip()
