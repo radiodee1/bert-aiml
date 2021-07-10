@@ -510,12 +510,18 @@ class Maze:
         for y in range(len(self.rooms)):
             for k, v in self.rooms[y]['phrases'].items():
                 if True: 
+                    g = int(self.rooms[int(y)]['destination'])
                     z = 0
-                    if len(self.revisions[y]['moves']) > 0: 
-                        #z = y
+                    print(g, 'g',v)
+                    if len(self.revisions[y]['moves']) > 0 : 
+                        
                         r = self.rooms[y]['destination']
                     else:
                         r = y
+
+                    if g != v:
+                        #z = y
+                        pass
                     if [y,k,v,z, r] not in local_moves_simple:
                         local_moves_simple.append([y,k,v,z, r])
                     print(local_moves_simple[-1], 'simple')
@@ -524,11 +530,12 @@ class Maze:
         for zzz in self.revisions:
             
             for move in zzz['moves']:
-                inner = inner_num
-                r = int(self.rooms[inner_num - 1]['destination']) 
+                inner = inner_num 
+                r = int(self.rooms[inner_num - 1 ]['destination']) 
+                print(inner_num, r, move, 'move...') 
                 if [move[0] ,move[1], move[2], inner, r] not in local_moves_revisions:
                     local_moves_revisions.append([move[0], move[1], move[2], inner, r])
-                print(local_moves_revisions[-1], 'last')
+                print(local_moves_revisions[-1], 'last\n')
                 pass
             inner_num += 1
 
@@ -669,7 +676,7 @@ class Maze:
             revision = str(local[3]) 
             flag_revision = False
 
-            if (local[3] != 0 and local[3] == local[2]): # or (local[4] == local[0] and local not in self.local_moves_simple_out): 
+            if local[3] != 0 and (local[3] == local[2] ):# or local[4] != 0): 
                 revision = str(local[3]  )
                 y_out = local[3] % b_old 
                 flag_revision = True

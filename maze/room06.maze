@@ -5,9 +5,10 @@ The door is open
 
 The door opens with a swoosh.
 
-@ noop;0
+@ noop;1
 
 * 1 @ go east; 2
 * 2 @ go west; 1
+* 6 @ go east; 6
 
 # hash is for comments.
