@@ -74,8 +74,8 @@ class Maze:
                 ii = key.strip().lower()
                 if ii not in self.raw_moves:
                     self.raw_moves.append(ii)
-
-            pass
+        print(self.raw_moves)
+            
 
     def strip_comments(self, list_of_strings):
         z = []
@@ -510,7 +510,7 @@ class Maze:
             for k, v in self.rooms[y]['phrases'].items():
                 if True: 
                     z = 0
-                    r = self.rooms[y]['destination']
+                    r = 0 # self.rooms[y]['destination']
                     if [y,k,v,z, r] not in local_moves_simple:
                         local_moves_simple.append([y,k,v,z, r])
         
@@ -519,7 +519,7 @@ class Maze:
             
             for move in zzz['moves']:
                 inner = inner_num
-                r = self.rooms[inner_num]['destination']
+                r = 0 #self.rooms[inner_num]['destination']
                 if [move[0] ,move[1], move[2], inner, r] not in local_moves_revisions:
                     local_moves_revisions.append([move[0], move[1], move[2], inner, r])
                 #print(local_moves_revisions[-1], 'last')
@@ -762,6 +762,6 @@ if __name__ == '__main__':
     #print(m.rooms)
     m.hide_word_list()
     m.write_xml()
-    print(str(m.revisions[0]))
+    #print(str(m.revisions[0]))
     
     
