@@ -263,6 +263,13 @@ D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 42E81B0D03FBD9F17CE5E
 D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E <think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
+<pattern>OPEN DOOR</pattern>
+<template>
+<!-- think><set name="move">TRUE</set></think -->
+<srai>
+D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD <think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
 <pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F</pattern>
 <template><srai>D4D8EFB81F48C9C BB06061088AE4E5888C67653819EEA40AD3618FB1A7286A297C7642D9B09154F INTERNALHOP ROOM05</srai>
 </template>
@@ -282,6 +289,17 @@ D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> 31AA5FC5514ED2F803EA8
 <pattern>D4D8EFB81F48C9C 7EAD5F6C76D3F9007B0FEF0586FF718F4D18E5B6C499E191EE88CE259E0D5C97 INTERNALHOP ROOM05</pattern>
 <template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM05</set></think>
 <srai>D4D8EFB81F48C9C INTERNALLOOK ROOM05</srai>
+</condition></template>
+</category>
+<category>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM02 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD</pattern>
+<template><srai>D4D8EFB81F48C9C 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD INTERNALHOP ROOM02</srai>
+</template>
+</category>
+<category>
+<pattern>D4D8EFB81F48C9C 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD INTERNALHOP ROOM02</pattern>
+<template><condition name="revision0" value="TRUE" ><think><set name="topic">ROOM02</set></think>
+<srai>D4D8EFB81F48C9C INTERNALLOOK ROOM02</srai>
 </condition></template>
 </category>
 <category>
@@ -913,6 +931,41 @@ INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
 </template></category>
 <category>
 <pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 31AA5FC5514ED2F803EA879840CFF4275FE33139C622662C60B704695E8A629E</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM00 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM03 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM04 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD</pattern>
+<template>
+<think><set name="move">TRUE</set></think>
+<srai>
+INTERNALREJECT D4D8EFB81F48C9C<think><set name="move">FALSE</set></think></srai>
+</template></category>
+<category>
+<pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM05 10C16BDF5984951388362B0A5424B2CFED777F2589512E2699DB2666DCA516DD</pattern>
 <template>
 <think><set name="move">TRUE</set></think>
 <srai>

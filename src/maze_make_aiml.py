@@ -27,6 +27,9 @@ class Maze:
         m.update(b"XYZABCCONFUSEME")
         self.confuse_text = m.hexdigest()[:15].upper() 
 
+        self.local_moves_simple_out = []
+        self.local_moves_combined = []
+
         self.raw_moves = [
             'go north',
             'go south',
@@ -39,6 +42,9 @@ class Maze:
             'go northwest',
             'go southwest'
         ]
+
+    def hide_word_list(self):
+
         if self.hide_words:
             self.moves = [ x for x in self.raw_moves]
             l = []
@@ -53,8 +59,23 @@ class Maze:
         else:
             self.moves = [x for x in self.raw_moves]
 
-        self.local_moves_simple_out = []
-        self.local_moves_combined = []
+    def add_raw_moves(self, moves):
+        if type(moves) is str:
+            moves = moves.strip().lower()
+            if moves not in self.raw_moves:
+                self.raw_moves.append(moves)
+        if type(moves) is list:
+            for i in moves:
+                ii = i[1].strip().lower()
+                if ii not in self.raw_moves:
+                    self.raw_moves.append(ii)
+        if type(moves) is dict:
+            for key in moves:
+                ii = key.strip().lower()
+                if ii not in self.raw_moves:
+                    self.raw_moves.append(ii)
+
+            pass
 
     def strip_comments(self, list_of_strings):
         z = []
@@ -221,6 +242,8 @@ class Maze:
         else:
             y = {}
 
+        self.add_raw_moves(moves)
+        self.add_raw_moves(phrases)
         return x, y
 
     def item_factory(self, item_file=''):
@@ -731,6 +754,7 @@ if __name__ == '__main__':
     m = Maze()
     m.read_files()
     #print(m.rooms)
+    m.hide_word_list()
     m.write_xml()
     print(str(m.revisions[0]))
     
