@@ -54,6 +54,7 @@
                 <srai> INTERNALLISTROOM00</srai>
 
                 <think><set name="seen00">SEEN</set></think>
+                <think><set name="topic">ROOM00</set></think>
             </template>
 
         </category>
@@ -73,6 +74,7 @@
                 <srai> INTERNALLISTROOM01</srai>
 
                 <think><set name="seen01">SEEN</set></think>
+                <think><set name="topic">ROOM01</set></think>
             </template>
 
         </category>
@@ -92,6 +94,7 @@
                 <srai> INTERNALLISTROOM02</srai>
 
                 <think><set name="seen02">SEEN</set></think>
+                <think><set name="topic">ROOM02</set></think>
             </template>
 
         </category>
@@ -111,6 +114,7 @@
                 <srai> INTERNALLISTROOM03</srai>
 
                 <think><set name="seen03">SEEN</set></think>
+                <think><set name="topic">ROOM03</set></think>
             </template>
 
         </category>
@@ -130,6 +134,7 @@
                 <srai> INTERNALLISTROOM04</srai>
 
                 <think><set name="seen04">SEEN</set></think>
+                <think><set name="topic">ROOM04</set></think>
             </template>
 
         </category>
@@ -149,6 +154,7 @@
                 <srai> INTERNALLISTROOM05</srai>
 
                 <think><set name="seen05">SEEN</set></think>
+                <think><set name="topic">ROOM05</set></think>
             </template>
 
         </category>

@@ -224,6 +224,7 @@ class Maze:
             number = str(number[0])
         else:
             number = str(number[0])
+            destination = str(number[0])
 
         x = {
             'number': int(number.strip()),
@@ -396,6 +397,9 @@ class Maze:
         numx = numx[-2:]
         long = self.rooms[num]['description']
         short = self.rooms[num]['title']
+        dest = self.rooms[num]['destination']
+        numy = '000' + str(dest)
+        numy = numy[-2:]
         file.write('''        <category>
         <pattern>''' + self.confuse_text + ''' INTERNALLOOK ROOM''' + numx + '''</pattern>
             <template>
@@ -411,6 +415,7 @@ class Maze:
                 <srai> INTERNALLISTROOM''' + numx + '''</srai>
 
                 <think><set name="seen''' + numx + '''">SEEN</set></think>
+                <think><set name="topic">ROOM''' + numy + '''</set></think>
             </template>
 
         </category>\n''')
@@ -505,17 +510,18 @@ class Maze:
             for k, v in self.rooms[y]['phrases'].items():
                 if True: 
                     z = 0
-                    
-                    if [y,k,v,z] not in local_moves_simple:
-                        local_moves_simple.append([y,k,v,z])
+                    r = self.rooms[y]['destination']
+                    if [y,k,v,z, r] not in local_moves_simple:
+                        local_moves_simple.append([y,k,v,z, r])
         
         inner_num = 1
         for zzz in self.revisions:
+            
             for move in zzz['moves']:
                 inner = inner_num
-                
-                if [move[0] ,move[1], move[2], inner] not in local_moves_revisions:
-                    local_moves_revisions.append([move[0], move[1], move[2], inner])
+                r = self.rooms[inner_num]['destination']
+                if [move[0] ,move[1], move[2], inner, r] not in local_moves_revisions:
+                    local_moves_revisions.append([move[0], move[1], move[2], inner, r])
                 #print(local_moves_revisions[-1], 'last')
                 pass
             inner_num += 1
