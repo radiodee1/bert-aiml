@@ -1,11 +1,11 @@
 6 1 # Internally saved room number. May not be different from filename.
 
-Room 6 - Door room 
+The door is open 
+## repeat message
 
 The door opens with a swoosh.
 
-@ Go west;5
-@ go east; 2
+@ noop;0
 
 * 1 @ go east; 2
 * 2 @ go west; 1

@@ -62,19 +62,19 @@ class Maze:
     def add_raw_moves(self, moves):
         if type(moves) is str:
             moves = moves.strip().lower()
-            if moves not in self.raw_moves:
+            if moves not in self.raw_moves and moves != 'noop':
                 self.raw_moves.append(moves)
         if type(moves) is list:
             for i in moves:
                 ii = i[1].strip().lower()
-                if ii not in self.raw_moves:
+                if ii not in self.raw_moves and ii != 'noop':
                     self.raw_moves.append(ii)
         if type(moves) is dict:
             for key in moves:
                 ii = key.strip().lower()
-                if ii not in self.raw_moves:
+                if ii not in self.raw_moves and ii != 'noop':
                     self.raw_moves.append(ii)
-        print(self.raw_moves)
+        #print(self.raw_moves)
             
 
     def strip_comments(self, list_of_strings):
@@ -293,8 +293,9 @@ class Maze:
                 num = '000' + str(ii['number'])
                 num = num[-2:]
                 file.write('<condition name="topic" value="ROOM'+ num +'">\n')
-                if i in ii['phrases'].keys():
+                if i in ii['phrases'].keys() :
                     z = ii['phrases'][i]
+                    #print(i,z, '<<')
                     numx = '000' + str(z)
                     numx = numx[-2:]
                     file.write('''<think><set name="move">TRUE</set></think>\n''')
@@ -510,19 +511,24 @@ class Maze:
             for k, v in self.rooms[y]['phrases'].items():
                 if True: 
                     z = 0
-                    r = 0 # self.rooms[y]['destination']
+                    if len(self.revisions[y]['moves']) > 0: 
+                        #z = y
+                        r = self.rooms[y]['destination']
+                    else:
+                        r = y
                     if [y,k,v,z, r] not in local_moves_simple:
                         local_moves_simple.append([y,k,v,z, r])
+                    print(local_moves_simple[-1], 'simple')
         
         inner_num = 1
         for zzz in self.revisions:
             
             for move in zzz['moves']:
                 inner = inner_num
-                r = 0 #self.rooms[inner_num]['destination']
+                r = int(self.rooms[inner_num - 1]['destination']) 
                 if [move[0] ,move[1], move[2], inner, r] not in local_moves_revisions:
                     local_moves_revisions.append([move[0], move[1], move[2], inner, r])
-                #print(local_moves_revisions[-1], 'last')
+                print(local_moves_revisions[-1], 'last')
                 pass
             inner_num += 1
 
@@ -550,12 +556,20 @@ class Maze:
         for ix in range(len(self.moves)): # self.moves:
             i = self.raw_moves[ix]
             ii = self.moves[ix]
+            #print(ix, i, '<<')
             for j in self.rooms:
                 
                 num = '000' + str(j['number'])
                 num = num[-2:]
-                match = [local for local in self.local_moves_combined if local[2] == int(j['number']) and local[1].upper() == i.upper()]
-                #print(match)
+
+                
+                match = [
+                    local for local in self.local_moves_combined 
+                    if int(local[0]) == int(j['number']) and 
+                    (local[1].upper().strip() == i.upper().strip())  
+                ]
+
+                #print(ix, i, match, j['phrases'], 'match', num)
                 if len(match) == 0 : #and False:
 
                     file.write('<category>\n<pattern>' + self.confuse_text + ''' INTERNALLOOK REVISION ROOM''' + num + ' ' + ii.upper() + '</pattern>\n')
@@ -593,7 +607,7 @@ class Maze:
         
         n = 0             
         for local in self.local_moves_simple_out:
-            
+            continue
             y_out = 0# local[3] 
             revision = str(local[3])
             flag_revision = False
@@ -628,19 +642,19 @@ class Maze:
             file.write('</category>\n')
 
             ##########################
-            if flag_revision or True:
-                file.write('<category>\n<pattern>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numz + '</pattern>\n')
-                file.write('<template>')
+            #if flag_revision or True:
+            file.write('<category>\n<pattern>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numz + '</pattern>\n')
+            file.write('<template>')
 
-                file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
-                file.write('<think><set name="topic">ROOM'  + numz + '</set></think>\n')
+            file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
+            file.write('<think><set name="topic">ROOM'  + numz + '</set></think>\n')
 
-                file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numz + '</srai>\n')    
+            file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numz + '</srai>\n')    
 
-                file.write('</condition>')
-                
-                file.write('</template>\n')
-                file.write('</category>\n')
+            file.write('</condition>')
+            
+            file.write('</template>\n')
+            file.write('</category>\n')
                 
             n += 1
 
@@ -648,14 +662,14 @@ class Maze:
         for local in self.local_moves_combined: 
 
             if local in self.local_moves_simple_out:
-                continue
+                #continue
                 pass
             
             y_out = 0# local[3] % b_old
             revision = str(local[3]) 
             flag_revision = False
 
-            if local[3] != 0 and local[3] == local[2]: 
+            if (local[3] != 0 and local[3] == local[2]): # or (local[4] == local[0] and local not in self.local_moves_simple_out): 
                 revision = str(local[3]  )
                 y_out = local[3] % b_old 
                 flag_revision = True
@@ -681,19 +695,19 @@ class Maze:
             file.write('</category>\n')
 
             ##########################
-            if flag_revision or True:
-                file.write('<category>\n<pattern>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numx + '</pattern>\n')
-                file.write('<template>')
+            #if flag_revision or True:
+            file.write('<category>\n<pattern>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numx + '</pattern>\n')
+            file.write('<template>')
 
-                file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
-                file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
+            file.write('<condition name="revision' + str(local[3]) + '" value="TRUE" >')
+            file.write('<think><set name="topic">ROOM'  + numx + '</set></think>\n')
 
-                file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')    
+            file.write('<srai>' + self.confuse_text + ' INTERNALLOOK ROOM' + numx + '</srai>\n')    
 
-                file.write('</condition>')
-                
-                file.write('</template>\n')
-                file.write('</category>\n')
+            file.write('</condition>')
+            
+            file.write('</template>\n')
+            file.write('</category>\n')
 
             ##########################
 
