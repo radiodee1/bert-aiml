@@ -583,7 +583,6 @@ class Maze:
                 num = '000' + str(j['number'])
                 num = num[-2:]
 
-                
                 match = [
                     local for local in self.local_moves_combined 
                     if int(local[0]) == int(j['number']) and 
