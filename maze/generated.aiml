@@ -438,13 +438,13 @@ D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> OPEN DOOR <think><set
 </category>
 <category>
 <pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 GO EAST</pattern>
-<template><think><set name="revision6">TRUE</set></think>
+<template><think><set name="revision1">TRUE</set></think>
 <srai>D4D8EFB81F48C9C GO EAST INTERNALHOP ROOM02</srai>
 </template>
 </category>
 <category>
 <pattern>D4D8EFB81F48C9C GO EAST INTERNALHOP ROOM02</pattern>
-<template><condition name="revision6" value="TRUE" ><think><set name="topic">ROOM02</set></think>
+<template><condition name="revision1" value="TRUE" ><think><set name="topic">ROOM02</set></think>
 <srai>D4D8EFB81F48C9C INTERNALLOOK ROOM02</srai>
 </condition></template>
 </category>
@@ -455,7 +455,7 @@ D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> OPEN DOOR <think><set
 </category>
 <category>
 <pattern>D4D8EFB81F48C9C GO WEST INTERNALHOP ROOM01</pattern>
-<template><condition name="revision6" value="TRUE" ><think><set name="topic">ROOM01</set></think>
+<template><condition name="revision1" value="TRUE" ><think><set name="topic">ROOM01</set></think>
 <srai>D4D8EFB81F48C9C INTERNALLOOK ROOM01</srai>
 </condition></template>
 </category>

@@ -536,15 +536,16 @@ class Maze:
                 g = int(self.rooms[inner_num -1 ]['number'])
                 inner = g
 
-                if [move[0] ,move[1], move[2], inner, r,0] not in local_moves_revisions:
-                    local_moves_revisions.append([move[0], move[1], move[2], inner, r, 0])
-                print(local_moves_revisions[-1], 'last\n')
+                if r == g:
+                    if [move[0] ,move[1], move[2], inner, r,0] not in local_moves_revisions:
+                        local_moves_revisions.append([move[0], move[1], move[2], inner, r, 0])
+                    print(local_moves_revisions[-1], 'last\n')
 
-                if r != g and False:
+                if r != g:
                     a = move[0]
                     b = move[1]
                     c = move[2]
-                    d = g
+                    d = r
                     e = r
                     f = r
                     if [a, b, c, d, e, f] not in local_moves_revisions:
@@ -627,18 +628,15 @@ class Maze:
         n = 0             
         
         for local in self.local_moves_combined: 
-
-            #if local in self.local_moves_simple_out:
-            #    #continue
-            #    pass
             
             revision = str(local[3]) 
             flag_revision = False
 
-            if (local[3] != 0 and local[4] == local[0]): 
+            if local[3] != 0 and (local[4] == local[0]):# or local[3] == local[4]): 
                 revision = str(local[3])
                 print(local, end=' -- ')
                 #local[0] = local[3]
+                #local[2] = local[3]
                 print(local)
                 flag_revision = True
 
@@ -649,7 +647,7 @@ class Maze:
             numz = '000' + str(local[0] % b_old )
             numz = numz[-2:]
 
-            numn = '000' + str(local[3] % b_old)
+            numn = '000' + str(local[3] % b_old )
             numn = numn[-2:]
 
             z_input = self.confuse_text + ' INTERNALLOOK REVISION ROOM' + str(numz) + ' ' + self.convert_to_hash( local[1].upper().strip()) ## numz
