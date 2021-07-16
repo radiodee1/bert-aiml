@@ -546,7 +546,7 @@ class Maze:
                     b = move[1]
                     c = move[2]
                     d = r
-                    e = r
+                    e = g
                     f = r
                     if [a, b, c, d, e, f] not in local_moves_revisions:
                         local_moves_revisions.append([a, b, c, d, e, f])
@@ -632,7 +632,7 @@ class Maze:
             revision = str(local[3]) 
             flag_revision = False
 
-            if local[3] != 0 and (local[4] == local[0]):# or local[3] == local[4]): 
+            if local[3] != 0 and (local[4] == local[0] and local[3] == local[4]): 
                 revision = str(local[3])
                 print(local, end=' -- ')
                 #local[0] = local[3]
@@ -658,7 +658,8 @@ class Maze:
             if flag_revision:
                 
                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
-
+                #file.write('revision' + revision + ' ')
+                
             file.write('<srai>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numx + '</srai>\n')
             
             file.write('</template>\n')

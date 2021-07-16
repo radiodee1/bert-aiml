@@ -438,8 +438,7 @@ D4D8EFB81F48C9C INTERNALLOOK REVISION <get name="topic" /> OPEN DOOR <think><set
 </category>
 <category>
 <pattern>D4D8EFB81F48C9C INTERNALLOOK REVISION ROOM01 GO EAST</pattern>
-<template><think><set name="revision1">TRUE</set></think>
-<srai>D4D8EFB81F48C9C GO EAST INTERNALHOP ROOM02</srai>
+<template><srai>D4D8EFB81F48C9C GO EAST INTERNALHOP ROOM02</srai>
 </template>
 </category>
 <category>
