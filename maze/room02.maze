@@ -2,7 +2,7 @@
 
 Room 2 - west room
 
-Go east. Go west if passage is unlocked. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+Go east. Go west if passage is unlocked. 
 @ Go east;5
 
 # hash is for comments.

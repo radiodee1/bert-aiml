@@ -2,7 +2,7 @@
 
 Room 1 - East room
 
-Go west. Go East. Meta Room B. There is a door here on the east wall. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+Go west. Go East. Meta Room B. There is a door here on the east wall.
 @ Go west;5
 @ open door;6
 

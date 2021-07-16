@@ -2,7 +2,7 @@
 
 Room 4 - Meta room 
 
-Go south or north. Meta Room A. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+Go south or north. Meta Room A. 
 @ Go north;3
 * 4 @ go south; 5
 * 5 @ go north; 4
