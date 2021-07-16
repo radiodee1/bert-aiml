@@ -107,8 +107,8 @@ class Maze:
         g.sort()
         for i in g:
             self.items.append(self.item_factory(item_file=i))
-        print(self.items)
-        print(self.revisions)
+        #print(self.items)
+        #print(self.revisions)
         pass
 
     def write_xml(self):
@@ -525,7 +525,7 @@ class Maze:
                         pass
                     if [yy,k,v,z, r,0] not in local_moves_simple:
                         local_moves_simple.append([yy,k,v,z, r,0])
-                    print(local_moves_simple[-1], 'simple\n')
+                    #print(local_moves_simple[-1], 'simple\n')
         
         inner_num = 1
         for zzz in self.revisions:
@@ -539,7 +539,7 @@ class Maze:
                 if r == g:
                     if [move[0] ,move[1], move[2], inner, r,0] not in local_moves_revisions:
                         local_moves_revisions.append([move[0], move[1], move[2], inner, r, 0])
-                    print(local_moves_revisions[-1], 'last\n')
+                    #print(local_moves_revisions[-1], 'last\n')
 
                 if r != g:
                     a = move[0]
@@ -550,7 +550,7 @@ class Maze:
                     f = r
                     if [a, b, c, d, e, f] not in local_moves_revisions:
                         local_moves_revisions.append([a, b, c, d, e, f])
-                        print(local_moves_revisions[-1], 'last x\n')
+                        #print(local_moves_revisions[-1], 'last x\n')
                 pass
             inner_num += 1
 
@@ -634,10 +634,10 @@ class Maze:
 
             if local[3] != 0 and (local[4] == local[0] and local[3] == local[4]): 
                 revision = str(local[3])
-                print(local, end=' -- ')
+                #print(local, end=' -- ')
                 #local[0] = local[3]
                 #local[2] = local[3]
-                print(local)
+                #print(local)
                 flag_revision = True
 
             numx = '000' + str(local[2] ) 
@@ -685,7 +685,7 @@ class Maze:
             n += 1
                         
                             
-        print(n, 'n num')
+        print(n, 'n')
 
     def string_from_int(self, input, largest, starting_str='', const_for_slice=-1, reverse=False, set_symbol=1, mult_input=1):
         zz = ''
