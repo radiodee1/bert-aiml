@@ -21,7 +21,7 @@ class Maze:
         self.out_aiml = 'generated.aiml'
         self.item_name = 'thing*.item'
         
-        self.hide_words = False
+        self.hide_words = True
 
         m = hashlib.sha256()
         m.update(b"XYZABCCONFUSEME")
@@ -659,7 +659,7 @@ class Maze:
                 
                 file.write('<think><set name="revision'+ revision +'">TRUE</set></think>\n')
                 #file.write('revision' + revision + ' ')
-                
+
             file.write('<srai>' + self.confuse_text + ' ' + self.convert_to_hash( local[1].upper().strip()) +  ' INTERNALHOP ROOM' + numx + '</srai>\n')
             
             file.write('</template>\n')
