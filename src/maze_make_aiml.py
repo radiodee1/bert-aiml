@@ -97,8 +97,11 @@ class Maze:
         g = glob.glob(self.dir + self.name)
         g.sort()
         
-        for i in g:
-            x, y = self.room_factory(room=i)
+        for i in range(0, len(g)):
+            room_txt = g[i]
+            if room_txt == self.dir + 'room00.maze':
+                room_txt = ''
+            x, y = self.room_factory(room=room_txt)
             self.rooms.append(x)
             #if i != g[0]:
             self.revisions.append(y)
@@ -131,15 +134,20 @@ class Maze:
     
     def room_factory(self, room=''):
         flag_skip_output = False
-
-        z = open(room, 'r')
-        zz = z.readlines()
-        zz = [x for x in zz if not x.startswith('#')]
-        zz = self.strip_comments(zz)
-        zz = ''.join( zz)
-        if len(zz.strip()) == 0:
+        if len(room) == 0: 
             flag_skip_output = True
-        z.close()
+            zz = ''
+        else:
+            z = open(room, 'r')
+            zz = z.readlines()
+            zz = [x for x in zz if not x.startswith('#')]
+            zz = self.strip_comments(zz)
+            zz = ''.join( zz)
+            z.close()
+            if len(zz.strip()) == 0:
+                flag_skip_output = True
+                zz = ''
+
         number = ''
         title = ''
         description = ''

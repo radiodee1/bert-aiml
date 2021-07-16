@@ -69,7 +69,7 @@
                 <!-- Room 1 - East room -->
                 
                 <condition name="seen01" value="UNSEEN">
-                    Go west. Go East. Meta Room B. There is a door here on the east wall. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+                    Go west. Go East. Meta Room B. There is a door here on the east wall.
                 </condition>
 
                 <condition name="seen01" value="SEEN">
@@ -89,7 +89,7 @@
                 <!-- Room 2 - west room -->
                 
                 <condition name="seen02" value="UNSEEN">
-                    Go east. Go west if passage is unlocked. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+                    Go east. Go west if passage is unlocked. 
                 </condition>
 
                 <condition name="seen02" value="SEEN">
@@ -109,7 +109,7 @@
                 <!-- Room 3 - South room -->
                 
                 <condition name="seen03" value="UNSEEN">
-                    go north. go south to Meta room. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+                    go north. go south to Meta room. 
                 </condition>
 
                 <condition name="seen03" value="SEEN">
@@ -129,7 +129,7 @@
                 <!-- Room 4 - Meta room  -->
                 
                 <condition name="seen04" value="UNSEEN">
-                    Go south or north. Meta Room A. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+                    Go south or north. Meta Room A. 
                 </condition>
 
                 <condition name="seen04" value="SEEN">
@@ -149,7 +149,7 @@
                 <!-- Room 5 - Start room  -->
                 
                 <condition name="seen05" value="UNSEEN">
-                    Go east, west, or south. If you have visited the Meta room, you can go north. This is the longer text that fills the screen when the room is visited for the first time. It may contain several sentences.
+                    Go east, west, or south. If you have visited the Meta room, you can go north. 
                 </condition>
 
                 <condition name="seen05" value="SEEN">
