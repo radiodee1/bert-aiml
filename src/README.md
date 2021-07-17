@@ -8,3 +8,11 @@
 
 * `.env` - This file is used by the `aiml_consume.py` file to configure several BERT options.
 
+# Usage
+
+* cd into `./virtualenv/`
+* source file with `. ./do_make_virtualenv_setup36.sh` (notice that there is a leading period before the shell script name!)
+* cd into `../src`
+* execute `./aiml_consume.py --raw-pattern`
+* split output.txt file with `split -l500 output.txt output.` (notice that there is a trailing period!)
+* count outputs with `./aiml_consume.py --count < output.aa`
