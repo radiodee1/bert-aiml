@@ -16,3 +16,4 @@
 * execute `./aiml_consume.py --raw-pattern`
 * split output.txt file with `split -l500 output.txt output.` (notice that there is a trailing period!)
 * count outputs with `./aiml_consume.py --count < output.aa`
+* remember to rename the output file so that it is not overwritten. The output file is one of `ratio.pat.txt`, `ratio.pat.tem.txt`, or `ratio.tem.txt`. 
