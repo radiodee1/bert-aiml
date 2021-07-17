@@ -669,7 +669,7 @@ class Kernel:
                 else:
                     t = d['star_list_mem'][0]
                 pass
-            else:
+            elif set is not None and set.text is not None:
                 t = set.text.strip()
 
         self.memory[set.attrib['name'].upper()] = t
