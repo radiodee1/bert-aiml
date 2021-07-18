@@ -110,7 +110,7 @@ class Kernel:
 
         #print(self.args)
 
-        name = [ 'bert-base-uncased', 'bert-large-uncased' ]
+        name = [ 'bert-base-uncased', 'bert-large-uncased', 'google/bert_uncased_L-8_H-512_A-8' ]
         index = BERT_MODEL
         self.tokenizer = BertTokenizer.from_pretrained(name[index])
         self.model = BertForNextSentencePrediction.from_pretrained(name[index])
