@@ -95,6 +95,7 @@ class Kernel:
         self.input = None
         self.used = []
         self.used_num = 0
+        self.output_dict = {}
         self.answers = []
         self.answers_length = 5
         self.time1 = None
@@ -104,7 +105,10 @@ class Kernel:
         parser = argparse.ArgumentParser(description="Bert Aiml", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
         parser.add_argument('--raw-pattern', action='store_true', help='output all raw patterns.')
         parser.add_argument('--count', action='store_true', help='count number of responses.')
+        parser.add_argument('--name', default='calculate', help='name for "count" operation output files.')
         self.args = parser.parse_args()
+
+        #print(self.args)
 
         name = [ 'bert-base-uncased', 'bert-large-uncased' ]
         index = BERT_MODEL
@@ -395,11 +399,18 @@ class Kernel:
         pass
 
     def count_output(self, output):
+        output = output.strip()
+
         if self.used_num % BATCH_SIZE == 0:
             print(self.used_num, 'used', len(self.l), 'size in mem')
         self.used_num += 1
         if output not in self.used:
             self.used.append(output)
+        
+        if output in self.output_dict:
+            self.output_dict[output] += 1
+        else:
+            self.output_dict[output] = 1
         pass
 
     def pattern_factory(self, category, topic=None):
@@ -1047,11 +1058,25 @@ if __name__ == '__main__':
             if DOUBLE_COMPARE == 1: name = '.pat.tem'
             if DOUBLE_COMPARE == 2: name = '.tem'
             print(len(k.z), len(k.used), 'used', k.used_num, 'attempts')
-            z = open('ratio' + name + '.txt', 'w')
+            z = open( k.args.name + '.ratio' + name + '.txt', 'w')
             z.write(str(len(k.z)) + ' total categories\n' )
             z.write(str(len(k.used)) + ' total used\n')
             z.write(str(k.used_num) + ' total number of attempts\n')
             z.close()
+            l = []
+            
+            for key in k.output_dict:
+                l.append([key, k.output_dict[key]])
+            ####
+            def func(i):
+                return i[1]
+            ####
+            l.sort(key=func, reverse=True)
+            z = open( k.args.name + '.tab' + name + '.txt', 'w')
+            for a in l:
+                z.write(a[0] + '\t' + str(a[1]) + '\n')
+            z.close()
+
             exit()    
         x = ''
         if len(x.strip()) == 0 : 

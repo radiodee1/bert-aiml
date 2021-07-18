@@ -3,3 +3,4 @@ test
 *.txt
 output.*
 ratio.*
+calculate.ratio.*
