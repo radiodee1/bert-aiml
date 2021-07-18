@@ -106,6 +106,7 @@ class Kernel:
         parser.add_argument('--raw-pattern', action='store_true', help='output all raw patterns.')
         parser.add_argument('--count', action='store_true', help='count number of responses.')
         parser.add_argument('--name', default='calculate', help='name for "count" operation output files.')
+        parser.add_argument('--enable-ok', action='store_true', help='enable ok operation for BERT output.')
         self.args = parser.parse_args()
 
         #print(self.args)
@@ -138,8 +139,8 @@ class Kernel:
 
         self.pattern_factory_topic(root)
 
-    def respond(self, input):
-        x = self.respond_bert(input)
+    def respond(self, inputx):
+        x = self.respond_bert(inputx)
 
         if x not in self.srai_list:
             self.srai_list.append(x)
@@ -151,6 +152,7 @@ class Kernel:
             
         if len(self.srai_list) == 1:
             self.srai_list = []
+        
         self.output = x
         return self.output
         
@@ -285,27 +287,39 @@ class Kernel:
         high = 0
         num = 0
         index = -1
-        for _ in self.score:
-            i = self.score[num]
-            #i = (i[0] - i[1])   
-            if DOUBLE_COMPARE == 1:
-                i = abs ((i[0] - i[1]) * WEIGHT_PATTERN + (i[2] - i[3]) * WEIGHT_TEMPLATE)
-            else:
-                i = abs (i[0] - i[1])
-            i = self.mod_that(self.l[num], input, i)
+        inputx = ''
+        while inputx.strip() == '':
+            ## find highest entry ##
+            high = 0
+            num = 0
+            index = -1
+            for _ in self.score:
+                i = self.score[num]
+                #i = (i[0] - i[1])   
+                if DOUBLE_COMPARE == 1:
+                    i = abs ((i[0] - i[1]) * WEIGHT_PATTERN + (i[2] - i[3]) * WEIGHT_TEMPLATE)
+                else:
+                    i = abs (i[0] - i[1])
+                i = self.mod_that(self.l[num], input, i)
 
-            if i > high:
-                high = i
-                index = num
-            num += 1
-        return self.update_dictionary(index, input)
+                if i > high:
+                    high = i
+                    index = num
+                num += 1
         
-    def update_dictionary(self, index, input):
+            inputx = self.check_ok(input, index) ## <-- needs work
+            if inputx == '': 
+                if DOUBLE_COMPARE == 1: self.score[index] = (10, 0, 10, 0)
+                else: self.score[index] = (10, 0)
+
+        return self.update_dictionary(index, inputx)
+        
+    def update_dictionary(self, index, inputx):
         ## update dictionary ##
         
-        d = self.mod_respond_dict(self.l[index], input)
+        d = self.mod_respond_dict(self.l[index], inputx)
         
-        z = self.mod_template_out(self.l[index], input) ## includes srai output
+        z = self.mod_template_out(self.l[index], inputx) ## includes srai output
         
         self.index = index
         
@@ -342,6 +356,17 @@ class Kernel:
         '''
 
         return self.output
+
+    def check_ok(self, inputx, index):
+        output = inputx
+        if self.args.enable_ok:
+            print(self.l[index]['pattern'],"(Y/n):", end=' ')
+            n = input()
+            if n.strip().lower() not in ['y', 'yes', '\n']:
+                output = ''
+        else:
+            output = inputx
+        return output
 
     def choose_output(self, d):
         if len(d['random_list']) > 0:
@@ -1081,6 +1106,7 @@ if __name__ == '__main__':
         x = ''
         if len(x.strip()) == 0 : 
             r = k.respond(y) 
+            
             print(r)
         else:
             print(x)
