@@ -309,8 +309,8 @@ class Kernel:
         
             inputx = self.check_ok(input, index) ## <-- needs work
             if inputx == '': 
-                if DOUBLE_COMPARE == 1: self.score[index] = (10, 0, 10, 0)
-                else: self.score[index] = (10, 0)
+                if DOUBLE_COMPARE == 1: self.score[index] = (0, 0, 0, 0)
+                else: self.score[index] = (0, 0)
 
         return self.update_dictionary(index, inputx)
         
@@ -362,7 +362,7 @@ class Kernel:
         if self.args.enable_ok:
             print(self.l[index]['pattern'],"(Y/n):", end=' ')
             n = input()
-            if n.strip().lower() not in ['y', 'yes', '\n']:
+            if n.strip().lower() not in ['y', 'yes', '']:
                 output = ''
         else:
             output = inputx
