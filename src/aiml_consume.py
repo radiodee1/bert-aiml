@@ -307,7 +307,7 @@ class Kernel:
                     index = num
                 num += 1
         
-            inputx = self.check_ok(input, index) ## <-- needs work
+            inputx = self.check_ok(input, index) 
             if inputx == '': 
                 if DOUBLE_COMPARE == 1: self.score[index] = (0, 0, 0, 0)
                 else: self.score[index] = (0, 0)
