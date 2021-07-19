@@ -97,7 +97,7 @@
                 <!-- Room 2 - west room -->
                 
                 <condition name="seen02" value="UNSEEN">
-                    Go east. Go west if passage is unlocked. Go southeast.
+                    West room. Go east. Go west if passage is unlocked. Go southeast.
                 </condition>
 
                 <condition name="seen02" value="SEEN">

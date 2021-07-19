@@ -2,7 +2,7 @@
 
 Room 2 - west room
 
-Go east. Go west if passage is unlocked. Go southeast.
+West room. Go east. Go west if passage is unlocked. Go southeast.
 @ Go east;5
 @ go southeast; 4
 
