@@ -1,0 +1,8 @@
+8 # Internally saved room number. May not be different from filename.
+
+Room 8 - southeast room 
+
+Go east, west, or south. If you have visited the Meta room, you can go north. 
+@ Go northwest;2
+
+# hash is for comments.

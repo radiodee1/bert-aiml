@@ -1,9 +1,13 @@
 4 # Internally saved room number. May be different from filename.
 
-Room 4 - Meta room 
+Room 4 - Meta room A
 
-Go south or north. Meta Room A. 
+Go south or north. Go northeast, northwest, southeast, or southwest. Meta Room A. Entering this room enables south passage to the start room.
 @ Go north;3
+@ go northeast; 1
+@ go northwest; 2
+@ go southwest; 7
+@ go southeast; 8
 * 4 @ go south; 5
 * 5 @ go north; 4
 

@@ -2,7 +2,8 @@
 
 Room 1 - East room
 
-Go west. Go East. Meta Room B. There is a door here on the east wall.
+Go west. Go East. Meta Room B. There is a door here on the east wall. You can also go southwest.
+@ go southwest; 4
 @ Go west;5
 @ open door;6
 
