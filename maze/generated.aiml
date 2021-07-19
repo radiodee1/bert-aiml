@@ -194,14 +194,14 @@
         <category>
         <pattern>D4D8EFB81F48C9C INTERNALLOOK ROOM07</pattern>
             <template>
-                <!-- Room 7 - southwest room  -->
+                <!-- Room 7 - southwest corner room  -->
                 
                 <condition name="seen07" value="UNSEEN">
-                    Go east, west, or south. If you have visited the Meta room, you can go north. 
+                    Go east, or northeast. Southwest corner room. 
                 </condition>
 
                 <condition name="seen07" value="SEEN">
-                    Room 7 - southwest room 
+                    Room 7 - southwest corner room 
                 </condition >
                 <srai> INTERNALLISTROOM07</srai>
 
@@ -214,14 +214,14 @@
         <category>
         <pattern>D4D8EFB81F48C9C INTERNALLOOK ROOM08</pattern>
             <template>
-                <!-- Room 8 - southeast room  -->
+                <!-- Room 8 - southeast corner room  -->
                 
                 <condition name="seen08" value="UNSEEN">
-                    Go east, west, or south. If you have visited the Meta room, you can go north. 
+                    Go northwest. 
                 </condition>
 
                 <condition name="seen08" value="SEEN">
-                    Room 8 - southeast room 
+                    Room 8 - southeast corner room 
                 </condition >
                 <srai> INTERNALLISTROOM08</srai>
 
