@@ -2,8 +2,8 @@
 
 Room 7 - southwest corner room 
 
-Go east, or northeast. Southwest corner room. 
-@ Go east;8
+Go east, or northeast. Southwest corner room. There is a passage to the east.
+@ Go east;9
 @ Go northeast;4
 
 

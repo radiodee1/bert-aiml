@@ -2,7 +2,8 @@
 
 Room 8 - southeast corner room 
 
-Go northwest. 
+Go northwest or west. There is a passage to the west.
 @ Go northwest;2
+@ go west; 10
 
 # hash is for comments.
