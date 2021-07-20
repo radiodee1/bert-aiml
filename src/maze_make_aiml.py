@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 import glob
 import math
 import hashlib
+import argparse
 
 class Maze:
 
@@ -42,6 +43,15 @@ class Maze:
             'go northwest',
             'go southwest'
         ]
+
+        parser = argparse.ArgumentParser(description="Maze For Aiml", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+        parser.add_argument('--no-moves', action='store_true', help='disable default move list.')
+        parser.add_argument('--dir', default='./../maze/', help='name for working directory.')
+        self.args = parser.parse_args()
+
+        if self.args.no_moves:
+            self.raw_moves = []
+        self.dir = self.args.dir
 
     def hide_word_list(self):
 
