@@ -685,6 +685,12 @@ class Maze:
 
             file.write('</condition>')
             
+            file.write('<condition name="revision' + str(local[3]) + '" value="FALSE" >')
+
+            file.write('<srai>INTERNALREJECT '  + self.confuse_text + '</srai>\n')    
+
+            file.write('</condition>')
+
             file.write('</template>\n')
             file.write('</category>\n')
 
