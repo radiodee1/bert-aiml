@@ -106,7 +106,7 @@ class Kernel:
         parser.add_argument('--raw-pattern', action='store_true', help='output all raw patterns.')
         parser.add_argument('--count', action='store_true', help='count number of responses.')
         parser.add_argument('--name', default='calculate', help='name for "count" operation output files.')
-        parser.add_argument('--enable-ok', action='store_true', help='enable ok operation for BERT output.')
+        parser.add_argument('--disable-ok', action='store_true', help='disable "ok" operation for BERT output.')
         self.args = parser.parse_args()
 
         #print(self.args)
@@ -359,7 +359,7 @@ class Kernel:
 
     def check_ok(self, inputx, index):
         output = inputx
-        if self.args.enable_ok:
+        if not self.args.disable_ok:
             print(self.l[index]['pattern'],"(Y/n):", end=' ')
             n = input()
             if n.strip().lower() not in ['y', 'yes', '']:
