@@ -45,7 +45,7 @@ class Maze:
         ]
 
         parser = argparse.ArgumentParser(description="Maze For Aiml", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-        parser.add_argument('--no-moves', action='store_true', help='disable default move list.')
+        parser.add_argument('--no-moves', action='store_true', help='disable default move list. (north, south, east, west, etc.)')
         parser.add_argument('--dir', default='./../maze/', help='name for working directory.')
         self.args = parser.parse_args()
 
