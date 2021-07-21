@@ -54,9 +54,12 @@ class Maze:
 
         self.args = parser.parse_args()
 
+        if not self.args.dir.endswith('/'):
+            print('need directory that ends with slash ("/")')
+            exit()
         if self.args.no_moves:
             self.raw_moves = []
-        self.dir = self.args.dir #+ '/'
+        self.dir = self.args.dir 
         self.entry_pattern = self.args.entry_pattern
         self.look_word = self.args.look_word
         self.entry_room_num = self.args.entry_num
