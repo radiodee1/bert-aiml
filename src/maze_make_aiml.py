@@ -21,6 +21,7 @@ class Maze:
         self.entry_room_num = 5
         self.out_aiml = 'generated.aiml'
         self.item_name = 'thing*.item'
+        self.look_word = 'look'
         
         self.hide_words = True
 
@@ -48,12 +49,15 @@ class Maze:
         parser.add_argument('--no-moves', action='store_true', help='disable default move list. (north, south, east, west, etc.)')
         parser.add_argument('--dir', default='./../maze/', help='name for working directory.')
         parser.add_argument('--entry-pattern', default='maze', help='string for initial pattern.')
+        parser.add_argument('--look-word', default='look', help='string for "look" pattern.')
+
         self.args = parser.parse_args()
 
         if self.args.no_moves:
             self.raw_moves = []
         self.dir = self.args.dir
         self.entry_pattern = self.args.entry_pattern
+        self.look_word = self.args.look_word
 
     def hide_word_list(self):
 
@@ -446,7 +450,7 @@ class Maze:
         file.write('''<!-- simple look command -->\n''')
         file.write('''        <category>
         <pattern>
-            LOOK
+           ''' + self.look_word.upper() + ''' 
         </pattern>
         <template>
             <!-- one condition block for every room -->\n''')

@@ -293,7 +293,7 @@
 <!-- simple look command -->
         <category>
         <pattern>
-            LOOK
+           LOOK 
         </pattern>
         <template>
             <!-- one condition block for every room -->
