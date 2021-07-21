@@ -49,6 +49,7 @@ class Maze:
         parser.add_argument('--no-moves', action='store_true', help='disable default move list. (north, south, east, west, etc.)')
         parser.add_argument('--dir', default='./../maze/', help='name for working directory.')
         parser.add_argument('--entry-pattern', default='maze', help='string for initial pattern.')
+        parser.add_argument('--entry-num', default=1, help='index number for starting room.')
         parser.add_argument('--look-word', default='look', help='string for "look" pattern.')
 
         self.args = parser.parse_args()
@@ -58,6 +59,10 @@ class Maze:
         self.dir = self.args.dir
         self.entry_pattern = self.args.entry_pattern
         self.look_word = self.args.look_word
+        self.entry_room_num = self.args.entry_num
+
+        if self.args.dir == './../maze/':
+            self.entry_room_num = 5
 
     def hide_word_list(self):
 

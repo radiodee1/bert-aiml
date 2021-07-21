@@ -1,8 +1,8 @@
 2 # Internally saved room number. May not be different from filename.
 
-Room 2 - room 
+Part 2 - remove power 
 
-Go east, west, or south. If you have visited the Meta room, you can go north. 
+Disconnect the power plug from the wall. Also disconnect the other end of the power cord from the laptop.  
 #@ ok continue;3
 #@ ok;3
 #@ got it; 3
