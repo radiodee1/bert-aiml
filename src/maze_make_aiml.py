@@ -111,8 +111,11 @@ class Maze:
 
     def read_files(self):
         g = glob.glob(self.dir + self.name)
-        g.sort()
         
+        if self.dir + 'room00.maze' not in g:
+            g.append(self.dir + 'room00.maze')
+        g.sort()
+
         for i in range(0, len(g)):
             room_txt = g[i]
             if room_txt == self.dir + 'room00.maze':

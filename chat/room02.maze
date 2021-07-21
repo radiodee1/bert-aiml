@@ -1,0 +1,13 @@
+2 # Internally saved room number. May not be different from filename.
+
+Room 2 - room 
+
+Go east, west, or south. If you have visited the Meta room, you can go north. 
+#@ ok continue;3
+#@ ok;3
+#@ got it; 3
+@ go back; 1
+@ wait go back; 1
+@ repeat that; 1
+
+# hash is for comments.
