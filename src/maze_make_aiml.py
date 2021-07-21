@@ -56,12 +56,12 @@ class Maze:
 
         if self.args.no_moves:
             self.raw_moves = []
-        self.dir = self.args.dir
+        self.dir = self.args.dir #+ '/'
         self.entry_pattern = self.args.entry_pattern
         self.look_word = self.args.look_word
         self.entry_room_num = self.args.entry_num
 
-        if self.args.dir == './../maze/':
+        if self.dir.startswith('./../maze/'):
             self.entry_room_num = 5
 
     def hide_word_list(self):
@@ -262,7 +262,7 @@ class Maze:
             'number': int(number.strip()),
             'title': title,
             'description': description,
-            'destination': destination,
+            'destination': int(destination),
             'phrases': phrases
         }
         
@@ -541,6 +541,7 @@ class Maze:
 
         for y in range(len(self.rooms)):
             for k, v in self.rooms[y]['phrases'].items():
+                #print(type(y) , y ,type(k), k ,type(v), v)
                 if True: 
                     
                     g = int(self.rooms[int(v)]['destination'])

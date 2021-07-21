@@ -69,7 +69,7 @@
                 <!-- Part 2 - remove power  -->
                 
                 <condition name="seen02" value="UNSEEN">
-                    Disconnect the power plug from the wall. Also disconnect the other end of the power cord from the laptop.  
+                    Turn off the laptop. Disconnect the power plug from the wall. Also disconnect the other end of the power cord from the laptop.  
                 </condition>
 
                 <condition name="seen02" value="SEEN">
