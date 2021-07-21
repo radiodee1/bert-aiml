@@ -43,7 +43,8 @@
     <category>
       <pattern>LEARN B</pattern>
       <template>
-         <learn>../../maze/generated.aiml </learn>
+         <learn>../../maze/generated.aiml</learn>
+         <srai>MAZE</srai>
       </template>
    </category>
 

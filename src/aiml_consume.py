@@ -805,7 +805,7 @@ class Kernel:
 
             if x.tag == "learn" : 
                 self.consume_learn(x, d)
-                return ''
+                local_text = ''
             if x.tag == "get" : 
                 z = self.consume_get(x, d)
                 #d['template_modified'] += " " + z

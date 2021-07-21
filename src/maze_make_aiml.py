@@ -47,11 +47,13 @@ class Maze:
         parser = argparse.ArgumentParser(description="Maze For Aiml", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
         parser.add_argument('--no-moves', action='store_true', help='disable default move list. (north, south, east, west, etc.)')
         parser.add_argument('--dir', default='./../maze/', help='name for working directory.')
+        parser.add_argument('--entry-pattern', default='maze', help='string for initial pattern.')
         self.args = parser.parse_args()
 
         if self.args.no_moves:
             self.raw_moves = []
         self.dir = self.args.dir
+        self.entry_pattern = self.args.entry_pattern
 
     def hide_word_list(self):
 
