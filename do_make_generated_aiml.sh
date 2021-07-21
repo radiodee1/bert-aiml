@@ -8,5 +8,5 @@ cd src
 ./maze_make_aiml.py 
 echo generate maze
 
-./maze_make_aiml.py --dir ./../chat/
+./maze_make_aiml.py --dir ./../chat/ --no-moves --look-word "what was that"
 echo generate how-to
