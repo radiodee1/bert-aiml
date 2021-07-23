@@ -3,9 +3,9 @@
 Part 2 - remove power 
 
 Turn off the laptop. Disconnect the power plug from the wall. Also disconnect the other end of the power cord from the laptop.  
-#@ ok continue;3
-#@ ok;3
-#@ got it; 3
+@ ok continue;3
+@ ok;3
+@ got it; 3
 @ go back; 1
 @ wait go back; 1
 @ repeat that; 1

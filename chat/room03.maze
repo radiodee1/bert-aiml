@@ -1,0 +1,13 @@
+3 # Internally saved room number. May not be different from filename.
+
+Part 3 - flip laptop 
+
+Turn the laptop over so that the bottom is facing up.  
+@ ok continue;4
+@ ok;4
+@ got it; 4
+@ go back; 2
+@ wait go back; 2
+@ repeat that; 2
+
+# hash is for comments.
