@@ -11,7 +11,10 @@ import random
 from dotenv import load_dotenv
 import math
 import argparse
-
+import subprocess
+import shutil
+from pathlib import Path
+from urllib.parse import urlparse
 
 load_dotenv()
 
@@ -109,6 +112,7 @@ class Kernel:
         parser.add_argument('--disable-ok', action='store_true', help='disable "ok" operation for BERT output.')
         parser.add_argument('--pic-cmd', default='xdg-open', help='define slideshow-type png viewing command.')
         parser.add_argument('--slideshow', action='store_true', help='enable slideshow presentation.')
+        parser.add_argument('--pic-tmp', default='temp.png', help='name for temp slideshow pic.')
         self.args = parser.parse_args()
 
         #print(self.args)
@@ -119,7 +123,11 @@ class Kernel:
         self.model = BertForNextSentencePrediction.from_pretrained(name[index])
         if CUDA == 1:
             self.model = self.model.to('cuda')
-        #print(self.model.config)
+        
+        if not self.args.pic_tmp.startswith('/') :
+                self.args.pic_tmp = os.getcwd() + '/' + '../pic/' + self.args.pic_tmp
+                pass
+        self.slideshow()
 
     def verbose(self, isverbose):
         #print(isverbose)
@@ -155,6 +163,9 @@ class Kernel:
         if len(self.srai_list) == 1:
             self.srai_list = []
         
+        for i in x.split():
+            self.slide_change(i)
+
         self.output = x
         return self.output
         
@@ -369,6 +380,30 @@ class Kernel:
         else:
             output = inputx
         return output
+
+    def slideshow(self):
+        if self.args.slideshow:
+            if not os.path.isfile(self.args.pic_tmp):
+                Path(self.args.pic_tmp).touch
+            subprocess.run([self.args.pic_cmd , self.args.pic_tmp])
+        pass
+
+    def slide_change(self, name):
+        if self.args.slideshow:
+            n = urlparse(name)
+            if n.scheme != 'file' or len(n.path) == 0:
+                return
+            name = n.path
+            if not name.startswith('/'):
+                name = os.getcwd() + '/' + '../pic/' + name
+            try:
+                if not os.path.isfile(name):
+                    return
+                shutil.copy(name, self.args.pic_tmp)
+            except:
+                print('filename', name)
+                pass
+        pass
 
     def choose_output(self, d):
         if len(d['random_list']) > 0:
