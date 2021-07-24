@@ -391,9 +391,9 @@ class Kernel:
     def slide_change(self, name):
         if self.args.slideshow:
             n = urlparse(name)
-            if n.scheme != 'file' or len(n.path) == 0:
+            if n.scheme != 'file' or len(n.netloc) == 0:
                 return
-            name = n.path
+            name = n.netloc
             if not name.startswith('/'):
                 name = os.getcwd() + '/' + '../pic/' + name
             try:

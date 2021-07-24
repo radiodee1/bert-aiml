@@ -47,7 +47,12 @@
          <srai>MAZE</srai>
       </template>
    </category>
-
+   <category>
+      <pattern>SHOW BOARD PNG</pattern>
+      <template>
+         file://board.png
+      </template>
+   </category>
    <category>
       <pattern>ME </pattern>
       <template>
