@@ -107,6 +107,8 @@ class Kernel:
         parser.add_argument('--count', action='store_true', help='count number of responses.')
         parser.add_argument('--name', default='calculate', help='name for "count" operation output files.')
         parser.add_argument('--disable-ok', action='store_true', help='disable "ok" operation for BERT output.')
+        parser.add_argument('--pic-cmd', default='xdg-open', help='define slideshow-type png viewing command.')
+        parser.add_argument('--slideshow', action='store_true', help='enable slideshow presentation.')
         self.args = parser.parse_args()
 
         #print(self.args)
